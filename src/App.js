@@ -22,9 +22,7 @@ function App() {
     return pmt;
   };
 
-  const [averageWeeksPerMonth, setAverageWeeksPerMonth] = useState(
-    Number(52 / 12).toFixed(2) // [HELPER] Average weeks per month (52/12)
-  );
+  const averageWeeksPerMonth = Number(52 / 12).toFixed(2); // [HELPER] Average weeks per month (52/12)
   const [mowingMonthly, setMowingMonthly] = useState(65.0); // Converting mowing frequency to monthly
   const [lengthOffSeason, setLengthOffSeason] = useState(2.0); // [HELPER] Length of off-season (12 - lengthMowingSeason)
 
@@ -107,10 +105,6 @@ function App() {
     }
   }, [customerInputs.mowingHours, customerInputs.numberNGBRUnits]);
 
-  // useEffect(() => {
-  //   console.log("requiredEquipment", requiredEquipment);
-  // }, [requiredEquipment]);
-
   const handleStateChange = (event) => {
     let inputValue;
     if (isNaN(event.target.value)) {
@@ -125,26 +119,18 @@ function App() {
     });
   };
 
-  const [powerProgramCosts, setPowerProgramCosts] = useState({
+  const powerProgramCosts = {
     battery: 1986,
     charger: 999,
-  });
-
-  // const [powerCosts, setPowerCosts] = useState({
-  //   monthlyPaasPowerCostNGBR: 59,
-  // });
+  };
 
   const [pricing, setPricing] = useState({
     totalCashPrice:
       requiredEquipment.totalBateries * powerProgramCosts.battery +
       requiredEquipment.totalChargers * powerProgramCosts.charger,
-    // priceMo36: 0,
-    // priceMo48: 0,
-    // targetPaasMonthlyPrice: 0,
   });
 
   useEffect(() => {
-    //console.log("pricing", pricing);
     setPricing({
       totalCashPrice:
         requiredEquipment.totalBateries * powerProgramCosts.battery +
@@ -160,19 +146,27 @@ function App() {
     });
   }, [
     requiredEquipment,
-    powerProgramCosts,
+    powerProgramCosts.battery,
+    powerProgramCosts.charger,
     pricing.totalCashPrice,
     pricing.priceMo48,
     pricing.targetPaasMonthlyPrice,
     lengthOffSeason,
   ]);
 
-  let dollarUSLocale = Intl.NumberFormat("en-US");
+  const dollarUSLocale = Intl.NumberFormat("en-US");
+  const NGBRBatteryCapacity = 5;
+  const latestAvgPowerPrice = 0.1004;
+  const lastestMonth = "Oct 2021";
+
+  // useEffect(() => {
+  //   console.log("requiredEquipment", requiredEquipment);
+  // }, [requiredEquipment]);
 
   return (
     <div className="App">
       <form>
-        <ul>
+        <ul className="hide">
           <li>
             <span>
               <label>Converting mowing frequency to monthly</label>
@@ -351,7 +345,7 @@ function App() {
               <label>Geography / location</label>
             </span>
             <span>
-              <input id="" value="" readOnly />
+              <input id="" value={customerInputs.location} readOnly />
             </span>
           </li>
           <li>
@@ -359,7 +353,7 @@ function App() {
               <label>Latest average monthly power price</label>
             </span>
             <span>
-              <input id="" value="" readOnly />
+              <input id="" value={latestAvgPowerPrice} readOnly />
             </span>
           </li>
           <li>
@@ -367,7 +361,7 @@ function App() {
               <label>[HELPER] Latest month</label>
             </span>
             <span>
-              <input id="" value="" readOnly />
+              <input id="" value={lastestMonth} readOnly />
             </span>
           </li>
           <li>
@@ -375,7 +369,7 @@ function App() {
               <label>Power consumption rate per NGBR</label>
             </span>
             <span>
-              <input id="" value="" readOnly />
+              <input id="" value={NGBRBatteryCapacity} readOnly />
             </span>
           </li>
         </ul>
