@@ -8,11 +8,32 @@
 form {
   ul {
     list-style: none;
-    padding: 0;
-    margin: 40px 0;
+    margin: 20px 0;
+    position: relative;
+
+    &.hide {
+      height: 20px;
+      overflow: hidden;
+
+      button {
+        position: relative;
+
+        &:before {
+          content: "+";
+        }
+      }
+    }
   }
 }
 
-.hide {
-  display: none;
+button {
+  width: 100%;
+  border: 1px solid #333;
+  background: lightblue;
+  color: #333;
+  border-radius: 3px;
+
+  &:before {
+    content: "-";
+  }
 }

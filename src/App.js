@@ -23,7 +23,7 @@ function App() {
   };
 
   const averageWeeksPerMonth = Number(52 / 12).toFixed(2); // [HELPER] Average weeks per month (52/12)
-  const [mowingMonthly, setMowingMonthly] = useState(65.0); // Converting mowing frequency to monthly
+  const [mowingMonthly, setMowingMonthly] = useState(108); // Converting mowing frequency to monthly
   const [lengthOffSeason, setLengthOffSeason] = useState(2.0); // [HELPER] Length of off-season (12 - lengthMowingSeason)
 
   const [customerInputs, setCustomerInputs] = useState({
@@ -43,7 +43,10 @@ function App() {
       )
     );
     setLengthOffSeason(12 - customerInputs.lengthMowingSeason);
-  }, [customerInputs, averageWeeksPerMonth]);
+    setMonthlyPaaSPowerCostNGBR(
+      Math.round(latestAvgPowerPrice * NGBRBatteryCapacity * mowingMonthly)
+    );
+  }, [customerInputs, averageWeeksPerMonth, mowingMonthly]);
 
   const [requiredEquipment, setRequiredEquipment] = useState({
     bateries: 7,
@@ -159,14 +162,26 @@ function App() {
   const latestAvgPowerPrice = 0.1004;
   const lastestMonth = "Oct 2021";
 
+  const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(
+    Math.round(latestAvgPowerPrice * NGBRBatteryCapacity * mowingMonthly)
+  );
+
   // useEffect(() => {
-  //   console.log("requiredEquipment", requiredEquipment);
-  // }, [requiredEquipment]);
+  //   console.log("mowingMonthly", mowingMonthly);
+  // }, [monthlyPaaSPowerCostNGBR]);
+
+  const hideShow = (e) => {
+    e.preventDefault();
+    e.target.closest("ul").classList.toggle("hide");
+  };
 
   return (
     <div className="App">
       <form>
         <ul className="hide">
+          <li>
+            <button onClick={hideShow}></button>
+          </li>
           <li>
             <span>
               <label>Converting mowing frequency to monthly</label>
@@ -200,7 +215,11 @@ function App() {
             </span>
           </li>
         </ul>
-        <ul>
+
+        <ul className="hide">
+          <li>
+            <button onClick={hideShow}></button>
+          </li>
           <li>
             <span>
               <label>Total number of batteries</label>
@@ -219,7 +238,10 @@ function App() {
           </li>
         </ul>
 
-        <ul>
+        <ul className="hide">
+          <li>
+            <button onClick={hideShow}></button>
+          </li>
           <li>
             <span>
               <label>Total Cash Price</label>
@@ -325,6 +347,9 @@ function App() {
 
         <ul>
           <li>
+            <button onClick={hideShow}></button>
+          </li>
+          <li>
             <span>
               <label>Total monthly PaaS power cost</label>
             </span>
@@ -337,7 +362,11 @@ function App() {
               <label>Monthly PaaS power cost NGBR</label>
             </span>
             <span>
-              <input id="" value="" readOnly />
+              <input
+                id=""
+                value={Math.round(monthlyPaaSPowerCostNGBR)}
+                readOnly
+              />
             </span>
           </li>
           <li>
@@ -375,6 +404,9 @@ function App() {
         </ul>
 
         <ul>
+          <li>
+            <button onClick={hideShow}></button>
+          </li>
           <li>
             <span>
               <label id="location">Which state do you operate in?</label>
