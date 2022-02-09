@@ -96,7 +96,7 @@ function App() {
   const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
   useEffect(() => {
     const fetchData = async () => {
-      let url = `http://api.eia.gov/series/?api_key=${eiaKey}&series_id=PET.EMM_EPMRU_PTE_R10_DPG.W`;
+      let url = `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=PET.EMM_EPMRU_PTE_R10_DPG.W`;
 
       const data = await fetch(url).then((r) => r.json());
       //console.log("data", data.series[0].data[0][1]);
