@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./scss/App.css";
 
 function App() {
+  const eiaKey = process.env.REACT_APP_EIA_KEY;
+
   const hideShow = (e) => {
     e.preventDefault();
     e.target.closest("ul").classList.toggle("hide");
@@ -66,23 +68,42 @@ function App() {
     battery: 1986,
     charger: 999,
   };
-  const [pricing, setPricing] = useState(0);
   const dollarUSLocale = Intl.NumberFormat("en-US");
   const NGBRBatteryCapacity = 5;
   const latestAvgPowerPrice = 0.1004;
   const lastestMonth = "Oct 2021";
   const averageHourlyMaintenanceCost = 1.05;
   const PADDRegion = "PADD 2";
-  const latestFuelWeeklyPrice = 3.108;
   const lastestWeek = "Jan 10, 2022";
   const fuelConsumptionRate = 1.7;
   const electricMaintenanceCostGas = 0.07;
+
+  const [pricing, setPricing] = useState(0);
   const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(0);
   const [monthlyMaintenanceCostPerZTR, setMonthlyMaintenanceCostPerZTR] =
     useState(0);
   const [monthlyFuelCostPerZTR, setMonthlyFuelCostPerZTR] = useState(0);
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
+
+  // API - Get latest fuel pricing
+  // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD 1
+  // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD 2
+  // PET.EMM_EPMRU_PTE_R30_DPG.W - PADD 3
+  // PET.EMM_EPMRU_PTE_R40_DPG.W - PADD 4
+  // PET.EMM_EPMRU_PTE_R50_DPG.W - PADD 5
+
+  const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
+  useEffect(() => {
+    const fetchData = async () => {
+      let url = `http://api.eia.gov/series/?api_key=${eiaKey}&series_id=PET.EMM_EPMRU_PTE_R10_DPG.W`;
+
+      const data = await fetch(url).then((r) => r.json());
+      //console.log("data", data.series[0].data[0][1]);
+      setLatestFuelWeeklyPrice(data.series[0].data[0][1]);
+    };
+    fetchData();
+  }, [latestFuelWeeklyPrice, eiaKey]);
 
   useEffect(() => {
     setMowingMonthly(
@@ -164,12 +185,8 @@ function App() {
     averageWeeksPerMonth,
     mowingMonthly,
     monthlyMaintenanceCostPerZTR,
+    latestFuelWeeklyPrice,
   ]);
-
-  // useEffect(() => {}, [
-  //   customerInputs.mowingHours,
-  //   customerInputs.numberNGBRUnits,
-  // ]);
 
   useEffect(() => {
     setPricing({
@@ -358,6 +375,7 @@ function App() {
             </span>
           </li>
         </ul>
+
         <ul>
           <li>
             <span>
@@ -380,7 +398,7 @@ function App() {
 
       <button onClick={hideShowSection}>View main Fields</button>
 
-      <form id="output" className="hide hide-section">
+      <form id="output" className="">
         <ul>
           <li className="button-hide">
             <button onClick={hideShow}>Hide</button>
