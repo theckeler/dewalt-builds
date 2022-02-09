@@ -1,39 +1,146 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+}
+
 * {
   box-sizing: border-box;
 }
 .App {
-  padding: 30px;
+  padding: 10px;
+}
+
+button {
+  border: 1px solid #333;
+  background: lightblue;
+  color: #333;
+  border-radius: 3px;
+  padding: 4px 60px;
+  text-transform: uppercase;
 }
 
 form {
+  display: flex;
+  flex-wrap: wrap;
+
   ul {
+    flex-basis: 100%;
     list-style: none;
-    margin: 20px 0;
+    margin: 10px 0;
+    padding: 6px;
     position: relative;
+    border: 1px solid #e4e4e4;
 
     &.hide {
-      height: 20px;
+      //height: 24px;
       overflow: hidden;
+
+      li:not(.button-hide) {
+        display: none;
+      }
 
       button {
         position: relative;
 
         &:before {
-          content: "+";
+          content: "Show";
         }
       }
+    }
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 4px 8px;
+
+      span {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  select,
+  input {
+    width: 100%;
+    padding: 10px;
+  }
+
+  input {
+    &:read-only {
+      background: rgb(229, 235, 157);
+      border: 0;
+    }
+  }
+
+  label {
+    display: block;
+    padding: 10px;
+  }
+}
+
+.hide-section {
+  display: none;
+}
+
+.button-hide {
+  button {
+    font-size: 0;
+
+    &:before {
+      content: "Hide";
+      font-size: 14px;
+      font-weight: 700;
     }
   }
 }
 
-button {
-  width: 100%;
-  border: 1px solid #333;
-  background: lightblue;
-  color: #333;
-  border-radius: 3px;
+@media only screen and (max-width: 600px) {
+}
 
-  &:before {
-    content: "-";
+@media only screen and (min-width: 600px) {
+}
+
+@media only screen and (min-width: 768px) {
+  form ul li {
+    flex-direction: row;
+
+    span:nth-child(1) {
+      text-align: right;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .button-hide {
+    display: none;
+  }
+
+  form {
+    ul {
+      flex-basis: 50%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  form {
+    ul {
+      flex-basis: 33%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  form {
+    ul {
+      flex-basis: 25%;
+    }
   }
 }
