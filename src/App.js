@@ -76,7 +76,11 @@ function App() {
     battery: 1986,
     charger: 999,
   };
-  const dollarUSLocale = Intl.NumberFormat("en-US");
+  const dollarUSLocale = new Intl.NumberFormat("en-US", {
+    currency: "USD",
+    style: "currency",
+    minimumFractionDigits: 2,
+  });
   const NGBRBatteryCapacity = 5;
   const latestAvgPowerPrice = 0.1004;
   const lastestMonth = "Oct 2021";
@@ -447,7 +451,7 @@ function App() {
             <span>
               <input
                 id=""
-                value={"$" + dollarUSLocale.format(pricing.priceMo36)}
+                value={dollarUSLocale.format(pricing.priceMo36)}
                 readOnly
               />
             </span>
@@ -459,7 +463,7 @@ function App() {
             <span>
               <input
                 id=""
-                value={"$" + dollarUSLocale.format(pricing.priceMo48)}
+                value={dollarUSLocale.format(pricing.priceMo48)}
                 readOnly
               />
             </span>
@@ -475,10 +479,9 @@ function App() {
           <li>
             <span>Battery Charging</span>
             <span>
-              {"$" +
-                dollarUSLocale.format(
-                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
-                )}
+              {dollarUSLocale.format(
+                monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+              )}
             </span>
             <span>-</span>
           </li>
@@ -486,52 +489,44 @@ function App() {
             <span>Fuel</span>
             <span>-</span>
             <span>
-              {"$" +
-                dollarUSLocale.format(
-                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
-                )}
+              {dollarUSLocale.format(
+                monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+              )}
             </span>
           </li>
           <li>
             <span>Maintenance</span>
             <span>
-              {"$" +
-                dollarUSLocale.format(
-                  monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
-                )}
+              {dollarUSLocale.format(
+                monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
+              )}
             </span>
             <span>
-              {"$" +
-                dollarUSLocale.format(
-                  monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
-                )}
+              {dollarUSLocale.format(
+                monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+              )}
             </span>
           </li>
           <li>
             <span>Subscription (PaaS)</span>
-            <span>
-              {"$" + dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
-            </span>
+            <span>{dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}</span>
             <span>-</span>
           </li>
           <li>
             <span>Total</span>
             <span>
-              {"$" +
-                dollarUSLocale.format(
-                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits +
-                    monthlyMaintenanceCostPerNGBR *
-                      customerInputs.numberNGBRUnits +
-                    pricing.targetPaasMonthlyPrice
-                )}
+              {dollarUSLocale.format(
+                monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits +
+                  monthlyMaintenanceCostPerNGBR *
+                    customerInputs.numberNGBRUnits +
+                  pricing.targetPaasMonthlyPrice
+              )}
             </span>
             <span>
-              {"$" +
-                dollarUSLocale.format(
-                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits +
-                    monthlyMaintenanceCostPerZTR *
-                      customerInputs.numberNGBRUnits
-                )}
+              {dollarUSLocale.format(
+                monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits +
+                  monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+              )}
             </span>
           </li>
         </ul>
@@ -611,7 +606,7 @@ function App() {
             <span>
               <input
                 id=""
-                value={"$" + dollarUSLocale.format(pricing.totalCashPrice)}
+                value={dollarUSLocale.format(pricing.totalCashPrice)}
                 readOnly
               />
             </span>
@@ -623,7 +618,7 @@ function App() {
             <span>
               <input
                 id=""
-                value={"$" + dollarUSLocale.format(pricing.priceMo36)}
+                value={dollarUSLocale.format(pricing.priceMo36)}
                 readOnly
               />
             </span>
@@ -635,7 +630,7 @@ function App() {
             <span>
               <input
                 id=""
-                value={"$" + dollarUSLocale.format(pricing.priceMo48)}
+                value={dollarUSLocale.format(pricing.priceMo48)}
                 readOnly
               />
             </span>
@@ -647,9 +642,7 @@ function App() {
             <span>
               <input
                 id=""
-                value={
-                  "$" + dollarUSLocale.format(pricing.targetPaasMonthlyPrice)
-                }
+                value={dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
                 readOnly
               />
             </span>
@@ -661,10 +654,9 @@ function App() {
             <span>
               <input
                 id=""
-                value={
-                  "$" +
-                  dollarUSLocale.format(pricing.targetPaasMonthlyPrice * 12)
-                }
+                value={dollarUSLocale.format(
+                  pricing.targetPaasMonthlyPrice * 12
+                )}
                 readOnly
               />
             </span>
@@ -679,7 +671,7 @@ function App() {
                 value={
                   lengthOffSeason > 6
                     ? "-"
-                    : "$" + dollarUSLocale.format(pricing.annualRebateOffSeason)
+                    : dollarUSLocale.format(pricing.annualRebateOffSeason)
                 }
                 readOnly
               />
@@ -694,8 +686,7 @@ function App() {
                 id=""
                 value={
                   pricing.annualRebateOffSeason
-                    ? "$" +
-                      dollarUSLocale.format(
+                    ? dollarUSLocale.format(
                         pricing.targetPaasMonthlyPrice * 12 -
                           pricing.annualRebateOffSeason
                       )
@@ -814,12 +805,9 @@ function App() {
             <span>
               <input
                 id="totalFuelCostZTR"
-                value={
-                  "$" +
-                  dollarUSLocale.format(
-                    monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
-                  )
-                }
+                value={dollarUSLocale.format(
+                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+                )}
                 readOnly
               />
             </span>
@@ -831,7 +819,7 @@ function App() {
             <span>
               <input
                 id="monthlyFuelCostPerZTR"
-                value={"$" + dollarUSLocale.format(monthlyFuelCostPerZTR)}
+                value={dollarUSLocale.format(monthlyFuelCostPerZTR)}
                 readOnly
               />
             </span>
