@@ -24,6 +24,34 @@ button {
   text-transform: uppercase;
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+
+  li {
+    flex-basis: 20%;
+    padding: 10px 2px;
+
+    button {
+      background: #333;
+      color: #fff;
+      padding: 10px 4px;
+      width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.active {
+        background: #0375ff;
+      }
+    }
+  }
+}
+
 form {
   display: flex;
   flex-wrap: wrap;
@@ -58,6 +86,10 @@ form {
       flex-direction: column;
       align-items: flex-start;
       padding: 4px 8px;
+
+      &.column {
+        flex-direction: column;
+      }
 
       span {
         display: block;

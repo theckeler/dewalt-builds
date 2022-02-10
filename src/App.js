@@ -14,18 +14,26 @@ function App() {
     document.querySelector("#output").classList.toggle("hide-section");
   };
 
-  const handleStateChange = (event) => {
+  const handleChange = (e) => {
     let inputValue;
-    if (isNaN(event.target.value)) {
-      inputValue = event.target.value;
+    if (isNaN(e.target.value)) {
+      inputValue = e.target.value;
     } else {
-      inputValue = Number(event.target.value);
+      inputValue = Number(e.target.value);
     }
 
     setCustomerInputs({
       ...customerInputs,
-      [event.target.getAttribute("for")]: inputValue,
+      [e.target.getAttribute("for")]: inputValue,
     });
+  };
+
+  const buttonClick = (e) => {
+    e.preventDefault();
+    document.querySelectorAll("button").forEach(function (button) {
+      button.classList.remove("active");
+    });
+    e.target.classList.add("active");
   };
 
   const PMT = (ir, np, pv, fv, type) => {
@@ -216,7 +224,7 @@ function App() {
     <div className="App">
       <form>
         <ul>
-          <li>
+          <li className="column">
             <span>
               <label id="location">Which state do you operate in?</label>
             </span>
@@ -225,7 +233,7 @@ function App() {
                 id="location"
                 htmlFor="location"
                 value={customerInputs.location}
-                onChange={handleStateChange}
+                onChange={handleChange}
                 placeholder="Select"
                 disabled
               >
@@ -283,95 +291,134 @@ function App() {
               </select>
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label id="daysMowedPerWeek">
                 How many days do you mow per week?
               </label>
             </span>
             <span>
-              <select
-                htmlFor="daysMowedPerWeek"
+              <input
+                type="range"
+                min="1"
+                max="7"
+                step="1"
                 value={customerInputs.daysMowedPerWeek}
-                onChange={handleStateChange}
-                placeholder="Select"
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-              </select>
+                id="daysMowedPerWeek"
+                onChange={handleChange}
+                htmlFor="daysMowedPerWeek"
+              />
+              <input value={customerInputs.daysMowedPerWeek} readOnly />
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label id="numberNGBRUnits">
                 How many NGBRs do you plan to operate?
               </label>
             </span>
             <span>
-              <select
-                htmlFor="numberNGBRUnits"
+              <input
+                type="range"
+                min="1"
+                max="10"
+                step="1"
                 value={customerInputs.numberNGBRUnits}
-                onChange={handleStateChange}
-                placeholder="Select"
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-              </select>
+                id="numberNGBRUnits"
+                onChange={handleChange}
+                htmlFor="numberNGBRUnits"
+              />
+              <input value={customerInputs.numberNGBRUnits} readOnly />
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label id="mowingHours">How many hours do you mow per day?</label>
             </span>
             <span>
-              <select
-                htmlFor="mowingHours"
-                value={customerInputs.mowingHours}
-                onChange={handleStateChange}
-                placeholder="Select"
-              >
-                <option value="1">&#60;2</option>
-                <option value="3">2-4</option>
-                <option value="5">4-6</option>
-                <option value="7">6-8</option>
-                <option value="9">8+</option>
-              </select>
+              <ul className="buttons">
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="1"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    &#60;2
+                  </button>
+                </li>
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="3"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    2-4
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="active"
+                    htmlFor="mowingHours"
+                    value="5"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    4-6
+                  </button>
+                </li>
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="7"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    6-8
+                  </button>
+                </li>
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="9"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    8+
+                  </button>
+                </li>
+              </ul>
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label id="lengthMowingSeason">
                 How long is your mowing season per year?
               </label>
             </span>
             <span>
-              <select
-                htmlFor="lengthMowingSeason"
+              <input
+                type="range"
+                min="6"
+                max="12"
+                step="1"
                 value={customerInputs.lengthMowingSeason}
-                onChange={handleStateChange}
-                placeholder="Select"
-              >
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </select>
+                id="lengthMowingSeason"
+                onChange={handleChange}
+                htmlFor="lengthMowingSeason"
+              />
+              <input value={customerInputs.lengthMowingSeason} readOnly />
             </span>
           </li>
         </ul>
