@@ -201,6 +201,10 @@ form label {
   padding: 10px;
 }
 
+.range__tick {
+  fill: #ffc20f;
+}
+
 .hide-section {
   display: none;
 }

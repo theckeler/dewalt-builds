@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./scss/App.css";
+import "./scss/App.min.css";
 import statesJSON from "./data/states.json";
 
 const App = (props) => {
@@ -116,11 +116,13 @@ const App = (props) => {
       PADD4: "PET.EMM_EPMRU_PTE_R40_DPG.W",
       PADD5: "PET.EMM_EPMRU_PTE_R50_DPG.W",
     };
-    //console.log("customerInputs", customerInputs.location);
-    // console.log("PADDRegion", padds[PADDRegion]);
     const eiaKey = process.env.REACT_APP_EIA_KEY;
     const fetchData = async (updateWhat, url) => {
-      const data = await fetch(url).then((r) => r.json());
+      const data = await fetch(url)
+        .then((r) => r.json())
+        .catch((error) => {
+          console.error("There has been an error:", error);
+        });
       updateWhat === "fuel"
         ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
         : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
@@ -296,7 +298,17 @@ const App = (props) => {
                 id="daysMowedPerWeek"
                 onChange={handleChange}
                 htmlFor="daysMowedPerWeek"
+                list="daysMowedPerWeek-ticks"
               />
+              <datalist id="daysMowedPerWeek-ticks">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+              </datalist>
               <span>{customerInputs.daysMowedPerWeek}</span>
             </span>
           </li>
