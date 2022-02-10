@@ -10,11 +10,6 @@
     "padd": 5
   },
   {
-    "name": "American Samoa",
-    "abbr": "AS",
-    "padd": 7
-  },
-  {
     "name": "Arizona",
     "abbr": "AZ",
     "padd": 5
@@ -58,11 +53,6 @@
     "name": "Georgia",
     "abbr": "GA",
     "padd": 1
-  },
-  {
-    "name": "Guam",
-    "abbr": "GU",
-    "padd": 7
   },
   {
     "name": "Hawaii",
@@ -185,11 +175,6 @@
     "padd": 2
   },
   {
-    "name": "Northern Mariana Islands",
-    "abbr": "MP",
-    "padd": 7
-  },
-  {
     "name": "Ohio",
     "abbr": "OH",
     "padd": 2
@@ -208,11 +193,6 @@
     "name": "Pennsylvania",
     "abbr": "PA",
     "padd": 1
-  },
-  {
-    "name": "Puerto Rico",
-    "abbr": "PR",
-    "padd": 6
   },
   {
     "name": "Rhode Island",
@@ -248,11 +228,6 @@
     "name": "Vermont",
     "abbr": "VT",
     "padd": 1
-  },
-  {
-    "name": "Virgin Islands",
-    "abbr": "VI",
-    "padd": 6
   },
   {
     "name": "Virginia",

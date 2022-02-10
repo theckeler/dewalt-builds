@@ -139,6 +139,7 @@ form select,
 form input {
   width: 100%;
   padding: 10px;
+  background: #ffc20f;
 }
 form input:-moz-read-only {
   background: #e5eb9d;

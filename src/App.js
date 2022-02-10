@@ -115,8 +115,6 @@ const App = (props) => {
       PADD3: "PET.EMM_EPMRU_PTE_R30_DPG.W",
       PADD4: "PET.EMM_EPMRU_PTE_R40_DPG.W",
       PADD5: "PET.EMM_EPMRU_PTE_R50_DPG.W",
-      PADD6: "PET.EMM_EPMRU_PTE_R60_DPG.W",
-      PADD7: "PET.EMM_EPMRU_PTE_R70_DPG.W",
     };
     //console.log("customerInputs", customerInputs.location);
     // console.log("PADDRegion", padds[PADDRegion]);
