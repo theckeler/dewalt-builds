@@ -164,7 +164,27 @@ form input[type=range]::-webkit-slider-runnable-track, form input[type=range]:fo
   border-radius: 5px;
   border: 1px solid #000000;
 }
+form input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  box-shadow: 0;
+  background: #afafaf;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
 form input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0;
+  border: 0;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: #ffc20f;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
+}
+form input[type=range]::-moz-range-thumb {
   box-shadow: 0;
   border: 0;
   height: 30px;

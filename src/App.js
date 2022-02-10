@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./scss/App.css";
+import statesJSON from "./data/states.json";
 
-function App() {
-  const eiaKey = process.env.REACT_APP_EIA_KEY;
+const App = (props) => {
+  let states = JSON.parse(JSON.stringify(statesJSON));
 
   const hideShow = (e) => {
     e.preventDefault();
@@ -82,10 +83,10 @@ function App() {
     minimumFractionDigits: 2,
   });
   const NGBRBatteryCapacity = 5;
-  const latestAvgPowerPrice = 0.1004;
   const lastestMonth = "Oct 2021";
   const averageHourlyMaintenanceCost = 1.05;
-  const PADDRegion = "PADD 2";
+  const [PADDRegion, setPADDRegion] = useState("PADD2");
+
   const lastestWeek = "Jan 10, 2022";
   const fuelConsumptionRate = 1.7;
   const electricMaintenanceCostGas = 0.07;
@@ -99,23 +100,47 @@ function App() {
     useState(0);
 
   // API - Get latest fuel pricing
-  // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD 1
-  // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD 2
-  // PET.EMM_EPMRU_PTE_R30_DPG.W - PADD 3
-  // PET.EMM_EPMRU_PTE_R40_DPG.W - PADD 4
-  // PET.EMM_EPMRU_PTE_R50_DPG.W - PADD 5
+  // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD1
+  // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD2
+  // PET.EMM_EPMRU_PTE_R30_DPG.W - PADD3
+  // PET.EMM_EPMRU_PTE_R40_DPG.W - PADD4
+  // PET.EMM_EPMRU_PTE_R50_DPG.W - PADD5
 
   const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
+  const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(0.1004);
   useEffect(() => {
-    const fetchData = async () => {
-      let url = `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=PET.EMM_EPMRU_PTE_R10_DPG.W`;
-
-      const data = await fetch(url).then((r) => r.json());
-      //console.log("data", data.series[0].data[0][1]);
-      setLatestFuelWeeklyPrice(data.series[0].data[0][1]);
+    const padds = {
+      PADD1: "PET.EMM_EPMRU_PTE_R10_DPG.W",
+      PADD2: "PET.EMM_EPMRU_PTE_R20_DPG.W",
+      PADD3: "PET.EMM_EPMRU_PTE_R30_DPG.W",
+      PADD4: "PET.EMM_EPMRU_PTE_R40_DPG.W",
+      PADD5: "PET.EMM_EPMRU_PTE_R50_DPG.W",
+      PADD6: "PET.EMM_EPMRU_PTE_R60_DPG.W",
+      PADD7: "PET.EMM_EPMRU_PTE_R70_DPG.W",
     };
-    fetchData();
-  }, [latestFuelWeeklyPrice, eiaKey]);
+    //console.log("customerInputs", customerInputs.location);
+    // console.log("PADDRegion", padds[PADDRegion]);
+    const eiaKey = process.env.REACT_APP_EIA_KEY;
+    const fetchData = async (updateWhat, url) => {
+      const data = await fetch(url).then((r) => r.json());
+      updateWhat === "fuel"
+        ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
+        : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
+    };
+    fetchData(
+      "fuel",
+      `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=${padds[PADDRegion]}`
+    );
+    fetchData(
+      "power",
+      `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=ELEC.PRICE.${customerInputs.location}-ALL.M`
+    );
+  }, [
+    latestFuelWeeklyPrice,
+    latestAvgPowerPrice,
+    PADDRegion,
+    customerInputs.location,
+  ]);
 
   useEffect(() => {
     setMowingMonthly(
@@ -198,6 +223,7 @@ function App() {
     mowingMonthly,
     monthlyMaintenanceCostPerZTR,
     latestFuelWeeklyPrice,
+    latestAvgPowerPrice,
   ]);
 
   useEffect(() => {
@@ -237,61 +263,22 @@ function App() {
                 id="location"
                 htmlFor="location"
                 value={customerInputs.location}
-                onChange={handleChange}
-                placeholder="Select"
-                disabled
+                onChange={(e) => {
+                  handleChange(e);
+                  const newState = states.find(
+                    (state) => state.abbr === e.target.value
+                  );
+                  setPADDRegion(`PADD${newState.padd}`);
+                }}
               >
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District Of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
+                {states.map((state) => {
+                  // console.log("state", state);
+                  return (
+                    <option key={state.abbr} value={state.abbr}>
+                      {state.name} - PADD {state.padd}
+                    </option>
+                  );
+                })}
               </select>
             </span>
           </li>
@@ -920,6 +907,6 @@ function App() {
       </form>
     </div>
   );
-}
+};
 
 export default App;
