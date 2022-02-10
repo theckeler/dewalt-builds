@@ -62,7 +62,7 @@ function App() {
   const [customerInputs, setCustomerInputs] = useState({
     location: "OH", // Geography / location
     daysMowedPerWeek: 5, // Days mowed per week
-    numberNGBRUnits: 5, // # Number of NGBR units
+    numberNGBRUnits: 1, // # Number of NGBR units
     mowingHours: 5, //    [HELPER] Mowing hours for calculation,
     lengthMowingSeason: 10, // Length of mowing season
   });
@@ -222,8 +222,8 @@ function App() {
 
   return (
     <div className="App">
-      <form>
-        <ul>
+      <form className="main">
+        <ul className="inputs">
           <li className="column">
             <span>
               <label id="location">Which state do you operate in?</label>
@@ -291,13 +291,13 @@ function App() {
               </select>
             </span>
           </li>
-          <li className="column">
+          <li className="column range">
             <span>
               <label id="daysMowedPerWeek">
                 How many days do you mow per week?
               </label>
             </span>
-            <span>
+            <span className="input">
               <input
                 type="range"
                 min="1"
@@ -308,16 +308,16 @@ function App() {
                 onChange={handleChange}
                 htmlFor="daysMowedPerWeek"
               />
-              <input value={customerInputs.daysMowedPerWeek} readOnly />
+              <span>{customerInputs.daysMowedPerWeek}</span>
             </span>
           </li>
-          <li className="column">
+          <li className="column range">
             <span>
               <label id="numberNGBRUnits">
                 How many NGBRs do you plan to operate?
               </label>
             </span>
-            <span>
+            <span className="input">
               <input
                 type="range"
                 min="1"
@@ -328,7 +328,7 @@ function App() {
                 onChange={handleChange}
                 htmlFor="numberNGBRUnits"
               />
-              <input value={customerInputs.numberNGBRUnits} readOnly />
+              <span>{customerInputs.numberNGBRUnits}</span>
             </span>
           </li>
           <li className="column">
@@ -401,13 +401,13 @@ function App() {
               </ul>
             </span>
           </li>
-          <li className="column">
+          <li className="column range">
             <span>
               <label id="lengthMowingSeason">
                 How long is your mowing season per year?
               </label>
             </span>
-            <span>
+            <span className="input">
               <input
                 type="range"
                 min="6"
@@ -418,13 +418,13 @@ function App() {
                 onChange={handleChange}
                 htmlFor="lengthMowingSeason"
               />
-              <input value={customerInputs.lengthMowingSeason} readOnly />
+              <span>{customerInputs.lengthMowingSeason}</span>
             </span>
           </li>
         </ul>
 
-        <ul>
-          <li>
+        <ul className="outputs">
+          <li className="column">
             <span>
               <label>Total number of batteries</label>
             </span>
@@ -432,7 +432,7 @@ function App() {
               <input id="" value={requiredEquipment.totalBateries} readOnly />
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label>Total number of chargers</label>
             </span>
@@ -440,12 +440,106 @@ function App() {
               <input id="" value={requiredEquipment.totalChargers} readOnly />
             </span>
           </li>
+          <li className="column">
+            <span>
+              <label>Price/mo at 36 mos. 3.99%</label>
+            </span>
+            <span>
+              <input
+                id=""
+                value={"$" + dollarUSLocale.format(pricing.priceMo36)}
+                readOnly
+              />
+            </span>
+          </li>
+          <li className="column">
+            <span>
+              <label>Price/mo at 48 mos. 4.99%</label>
+            </span>
+            <span>
+              <input
+                id=""
+                value={"$" + dollarUSLocale.format(pricing.priceMo48)}
+                readOnly
+              />
+            </span>
+          </li>
+        </ul>
+
+        <ul className="outputs three">
+          <li>
+            <span></span>
+            <span className="bg-yellow">PaaS OpEx ($/mo)</span>
+            <span className="bg-yellow">Gas ZTR OpEx ($/mo)</span>
+          </li>
+          <li>
+            <span>Battery Charging</span>
+            <span>
+              {"$" +
+                dollarUSLocale.format(
+                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+                )}
+            </span>
+            <span>-</span>
+          </li>
+          <li>
+            <span>Fuel</span>
+            <span>-</span>
+            <span>
+              {"$" +
+                dollarUSLocale.format(
+                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+                )}
+            </span>
+          </li>
+          <li>
+            <span>Maintenance</span>
+            <span>
+              {"$" +
+                dollarUSLocale.format(
+                  monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
+                )}
+            </span>
+            <span>
+              {"$" +
+                dollarUSLocale.format(
+                  monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+                )}
+            </span>
+          </li>
+          <li>
+            <span>Subscription (PaaS)</span>
+            <span>
+              {"$" + dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
+            </span>
+            <span>-</span>
+          </li>
+          <li>
+            <span>Total</span>
+            <span>
+              {"$" +
+                dollarUSLocale.format(
+                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits +
+                    monthlyMaintenanceCostPerNGBR *
+                      customerInputs.numberNGBRUnits +
+                    pricing.targetPaasMonthlyPrice
+                )}
+            </span>
+            <span>
+              {"$" +
+                dollarUSLocale.format(
+                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits +
+                    monthlyMaintenanceCostPerZTR *
+                      customerInputs.numberNGBRUnits
+                )}
+            </span>
+          </li>
         </ul>
       </form>
 
       <button onClick={hideShowSection}>View main Fields</button>
 
-      <form id="output" className="">
+      <form id="output" className="hide-section">
         <ul>
           <li className="button-hide">
             <button onClick={hideShow}>Hide</button>

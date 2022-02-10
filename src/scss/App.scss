@@ -36,7 +36,7 @@ button {
     padding: 10px 2px;
 
     button {
-      background: #333;
+      background: rgb(116, 116, 116);
       color: #fff;
       padding: 10px 4px;
       width: 100%;
@@ -46,7 +46,8 @@ button {
       }
 
       &.active {
-        background: #0375ff;
+        background: #ffc20f;
+        color: #000;
       }
     }
   }
@@ -56,6 +57,12 @@ form {
   display: flex;
   flex-wrap: wrap;
 
+  &.main {
+    ul {
+      // flex-basis: 33%;
+    }
+  }
+
   ul {
     flex-basis: 100%;
     list-style: none;
@@ -63,6 +70,55 @@ form {
     padding: 6px;
     position: relative;
     border: 1px solid #e4e4e4;
+
+    &.inputs,
+    &.outputs {
+      background: rgb(4, 4, 14);
+      font-weight: 700;
+
+      // input:read-only {
+      //   background: rgb(140, 187, 240);
+      // }
+    }
+
+    &.inputs {
+      color: #fff;
+    }
+
+    &.outputs {
+      background: #ececec;
+
+      input,
+      input:read-only {
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        background: #ffc20f;
+      }
+    }
+
+    &.three {
+      li {
+        span {
+          padding: 10px;
+          flex-basis: 33%;
+          // font-size: 12px;
+
+          &:not(:empty) {
+            background: #f8f8f8;
+          }
+
+          &.bg-yellow {
+            background: #ffc20f;
+          }
+
+          &:nth-child(2),
+          &:nth-child(3) {
+            text-align: center;
+          }
+        }
+      }
+    }
 
     &.hide {
       //height: 24px;
@@ -84,11 +140,30 @@ form {
     li {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       padding: 4px 8px;
 
       &.column {
         flex-direction: column;
+        font-size: 16px;
+
+        label {
+          text-align: center;
+        }
+      }
+
+      &.range {
+        .input {
+          display: flex;
+          align-items: center;
+
+          span {
+            text-align: center;
+            max-width: 20px;
+            padding: 4px;
+            background: #333;
+          }
+        }
       }
 
       span {
@@ -108,6 +183,37 @@ form {
     &:read-only {
       background: rgb(229, 235, 157);
       border: 0;
+    }
+  }
+
+  input[type="range"] {
+    background: transparent;
+    height: 38px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+
+    &::-webkit-slider-runnable-track,
+    &:focus::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      box-shadow: 0;
+      background: #afafaf;
+      border-radius: 5px;
+      border: 1px solid #000000;
+    }
+
+    &::-webkit-slider-thumb {
+      box-shadow: 0;
+      border: 0;
+      height: 30px;
+      width: 15px;
+      border-radius: 5px;
+      background: #ffc20f;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -11px;
     }
   }
 
@@ -162,7 +268,8 @@ form {
 }
 
 @media only screen and (min-width: 1200px) {
-  form {
+  form,
+  form.main {
     ul {
       flex-basis: 33%;
     }

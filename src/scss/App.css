@@ -35,7 +35,7 @@ button {
   padding: 10px 2px;
 }
 .buttons li button {
-  background: #333;
+  background: #747474;
   color: #fff;
   padding: 10px 4px;
   width: 100%;
@@ -44,7 +44,8 @@ button {
   cursor: pointer;
 }
 .buttons li button.active {
-  background: #0375ff;
+  background: #ffc20f;
+  color: #000;
 }
 
 form {
@@ -58,6 +59,42 @@ form ul {
   padding: 6px;
   position: relative;
   border: 1px solid #e4e4e4;
+}
+form ul.inputs, form ul.outputs {
+  background: #04040e;
+  font-weight: 700;
+}
+form ul.inputs {
+  color: #fff;
+}
+form ul.outputs {
+  background: #ececec;
+}
+form ul.outputs input:-moz-read-only {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  background: #ffc20f;
+}
+form ul.outputs input,
+form ul.outputs input:read-only {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  background: #ffc20f;
+}
+form ul.three li span {
+  padding: 10px;
+  flex-basis: 33%;
+}
+form ul.three li span:not(:empty) {
+  background: #f8f8f8;
+}
+form ul.three li span.bg-yellow {
+  background: #ffc20f;
+}
+form ul.three li span:nth-child(2), form ul.three li span:nth-child(3) {
+  text-align: center;
 }
 form ul.hide {
   overflow: hidden;
@@ -74,11 +111,25 @@ form ul.hide button:before {
 form ul li {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 4px 8px;
 }
 form ul li.column {
   flex-direction: column;
+  font-size: 16px;
+}
+form ul li.column label {
+  text-align: center;
+}
+form ul li.range .input {
+  display: flex;
+  align-items: center;
+}
+form ul li.range .input span {
+  text-align: center;
+  max-width: 20px;
+  padding: 4px;
+  background: #333;
 }
 form ul li span {
   display: block;
@@ -96,6 +147,33 @@ form input:-moz-read-only {
 form input:read-only {
   background: #e5eb9d;
   border: 0;
+}
+form input[type=range] {
+  background: transparent;
+  height: 38px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+form input[type=range]::-webkit-slider-runnable-track, form input[type=range]:focus::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  box-shadow: 0;
+  background: #afafaf;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+form input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0;
+  border: 0;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: #ffc20f;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
 }
 form label {
   display: block;
@@ -133,7 +211,8 @@ form label {
   }
 }
 @media only screen and (min-width: 1200px) {
-  form ul {
+  form ul,
+form.main ul {
     flex-basis: 33%;
   }
 }
