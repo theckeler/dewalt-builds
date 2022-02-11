@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../scss/App.min.css";
+import "../scss/paas-calculator.min.css";
 import statesJSON from "../data/states.json";
 
 const PaasCalculator = (props) => {
@@ -115,12 +115,14 @@ const PaasCalculator = (props) => {
     const fetchData = async (updateWhat, url) => {
       const data = await fetch(url)
         .then((r) => {
+          // setLoading(false);
           r.json();
-          setLoading(false);
         })
         .catch((error) => {
           console.error("There has been an error:", error);
         });
+      setLoading(false);
+
       updateWhat === "fuel"
         ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
         : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
