@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import PaasCalculator from "./components/PaasCalculator";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PaasCalculator />
   </React.StrictMode>,
   document.getElementById("root")
 );
