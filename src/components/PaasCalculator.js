@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../scss/paas-calculator.min.css";
 import statesJSON from "../data/states.json";
+import { ReactComponent as Logo } from "../images/cc-logo.svg";
 
 const PaasCalculator = (props) => {
   const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
@@ -115,7 +116,6 @@ const PaasCalculator = (props) => {
     const fetchData = async (updateWhat, url) => {
       const data = await fetch(url)
         .then((r) => {
-          // setLoading(false);
           r.json();
         })
         .catch((error) => {
@@ -253,7 +253,9 @@ const PaasCalculator = (props) => {
   return (
     <div className="paas-calculator">
       {loading === true ? (
-        <div className="loading">LOADING</div>
+        <div className="loading">
+          <Logo />
+        </div>
       ) : (
         <form className="main">
           <ul className="inputs">
