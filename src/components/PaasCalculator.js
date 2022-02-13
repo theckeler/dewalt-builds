@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "../scss/paas-calculator.min.css";
+import "../scss/paas-calculator.scss";
 import statesJSON from "../data/states.json";
-import { ReactComponent as Logo } from "../images/cc-logo.svg";
+import { ReactComponent as Logo } from "../images/DeWalt_Logo.svg";
 
 const PaasCalculator = (props) => {
   const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
@@ -114,18 +114,18 @@ const PaasCalculator = (props) => {
     };
     const eiaKey = process.env.REACT_APP_EIA_KEY;
     const fetchData = async (updateWhat, url) => {
-      const data = await fetch(url)
-        .then((r) => {
-          r.json();
+      await fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          updateWhat === "fuel"
+            ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
+            : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
+          setLoading(false);
         })
         .catch((error) => {
+          setLoading(false);
           console.error("There has been an error:", error);
         });
-      setLoading(false);
-
-      updateWhat === "fuel"
-        ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
-        : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
     };
     fetchData(
       "fuel",

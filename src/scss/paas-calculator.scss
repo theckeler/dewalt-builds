@@ -48,7 +48,7 @@ button {
       }
 
       &.active {
-        background: #ffc20f;
+        background: #febd17;
         color: #000;
       }
     }
@@ -95,7 +95,7 @@ form {
         font-size: 16px;
         font-weight: 700;
         text-align: center;
-        background: #ffc20f;
+        background: #febd17;
       }
     }
 
@@ -111,7 +111,7 @@ form {
           }
 
           &.bg-yellow {
-            background: #ffc20f;
+            background: #febd17;
           }
 
           &:nth-child(2),
@@ -179,7 +179,7 @@ form {
   input {
     width: 100%;
     padding: 10px;
-    background: #ffc20f;
+    background: #febd17;
   }
 
   input {
@@ -223,7 +223,7 @@ form {
       height: 30px;
       width: 15px;
       border-radius: 5px;
-      background: #ffc20f;
+      background: #febd17;
       cursor: pointer;
       -webkit-appearance: none;
       margin-top: -11px;
@@ -235,7 +235,7 @@ form {
       height: 30px;
       width: 15px;
       border-radius: 5px;
-      background: #ffc20f;
+      background: #febd17;
       cursor: pointer;
       -webkit-appearance: none;
       margin-top: -11px;
@@ -249,7 +249,7 @@ form {
 }
 
 .range__tick {
-  fill: #ffc20f;
+  fill: #febd17;
 }
 
 .hide-section {
@@ -270,11 +270,12 @@ form {
 
 .loading {
   position: absolute;
+  z-index: 10001;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(#ffc20f, 0.8);
+  background: rgba(#febd17, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;

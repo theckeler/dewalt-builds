@@ -46,7 +46,7 @@ button {
   cursor: pointer;
 }
 .buttons li button.active {
-  background: #ffc20f;
+  background: #febd17;
   color: #000;
 }
 
@@ -76,14 +76,14 @@ form ul.outputs input:-moz-read-only {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
-  background: #ffc20f;
+  background: #febd17;
 }
 form ul.outputs input,
 form ul.outputs input:read-only {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
-  background: #ffc20f;
+  background: #febd17;
 }
 form ul.three li span {
   padding: 10px;
@@ -93,7 +93,7 @@ form ul.three li span:not(:empty) {
   background: #f8f8f8;
 }
 form ul.three li span.bg-yellow {
-  background: #ffc20f;
+  background: #febd17;
 }
 form ul.three li span:nth-child(2), form ul.three li span:nth-child(3) {
   text-align: center;
@@ -141,7 +141,7 @@ form select,
 form input {
   width: 100%;
   padding: 10px;
-  background: #ffc20f;
+  background: #febd17;
 }
 form input:-moz-read-only {
   background: #e5eb9d;
@@ -182,7 +182,7 @@ form input[type=range]::-webkit-slider-thumb {
   height: 30px;
   width: 15px;
   border-radius: 5px;
-  background: #ffc20f;
+  background: #febd17;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11px;
@@ -193,7 +193,7 @@ form input[type=range]::-moz-range-thumb {
   height: 30px;
   width: 15px;
   border-radius: 5px;
-  background: #ffc20f;
+  background: #febd17;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11px;
@@ -204,7 +204,7 @@ form label {
 }
 
 .range__tick {
-  fill: #ffc20f;
+  fill: #febd17;
 }
 
 .hide-section {
@@ -222,11 +222,12 @@ form label {
 
 .loading {
   position: absolute;
+  z-index: 10001;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 194, 15, 0.8);
+  background: rgba(254, 189, 23, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
