@@ -3,7 +3,7 @@ import "../scss/paas-calculator.scss";
 import statesJSON from "../data/states.json";
 import { ReactComponent as Logo } from "../images/DeWalt_Logo.svg";
 
-const PaasCalculator = (props) => {
+const PaasCalculator = () => {
   const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
 
   let states = JSON.parse(JSON.stringify(statesJSON));
@@ -251,7 +251,7 @@ const PaasCalculator = (props) => {
   ]);
 
   return (
-    <div className="paas-calculator">
+    <>
       {loading === true ? (
         <div className="loading">
           <Logo />
@@ -552,7 +552,14 @@ const PaasCalculator = (props) => {
               <label>Converting mowing frequency to monthly</label>
             </span>
             <span>
-              <input id="" value={mowingMonthly} readOnly />
+              <input
+                id="mowingMonthly"
+                type="number"
+                value={mowingMonthly}
+                onChange={(e) => {
+                  console.log("test");
+                }}
+              />
             </span>
           </li>
           <li>
@@ -926,7 +933,7 @@ const PaasCalculator = (props) => {
           </li>
         </ul>
       </form>
-    </div>
+    </>
   );
 };
 
