@@ -11,7 +11,7 @@ const Footer = () => {
           >
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/products/power-tools">Power Tools</a>
+                <a href="#top">Power Tools</a>
               </strong>
 
               <ul
@@ -19,162 +19,102 @@ const Footer = () => {
                 data-triggerdata="footerNav_0285f0c9ff0444d5ab7d810963ca206c"
               >
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/shop-by-cordless-platform"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Cordless Power Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/drills"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Power Drills
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/combo-kits"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Cordless Power Tool Combo Kits
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/impact-drivers-and-wrenches"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Impact Drivers &amp; Wrenches
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/grinders"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Grinders
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/saws"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Saws
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/nailers-and-staplers"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Nailers &amp; Staplers
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/air-compressors"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Air Compressors
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/air-tools"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Air Tools &amp; Pneumatic Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/cable-cutting-and-crimping"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Cordless Cable Cutters &amp; Crimping Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/connected-products"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Bluetooth Connected Tools and Products
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/cutout-tools"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Cutout Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/dust-management"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Dust Management
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/screwdrivers-and-screwguns"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Screwdrivers &amp; Screwguns
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/lasers-and-instruments"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Lasers &amp; Instruments
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/oscillating-tools"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Oscillating Multi-Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/polishers-shears-and-nibblers"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Polishers, Shears, &amp; Nibblers
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/rotary-and-demolition-hammers"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Rotary &amp; Demolition Hammers
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/routers-planers-and-joiners"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Routers, Planers, &amp; Joiners
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/power-tools/sanders"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Sanders
                   </a>
                 </li>
@@ -182,7 +122,7 @@ const Footer = () => {
             </div>
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/products/accessories">Accessories</a>
+                <a href="#top">Accessories</a>
               </strong>
 
               <ul
@@ -190,139 +130,87 @@ const Footer = () => {
                 data-triggerdata="footerNav_aeedad2f99d74496ab4e7d90a2fb5a36"
               >
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/abrasives"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Abrasives
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/anchors-and-fasteners"
-                    className="footer-nav__link"
-                    target=""
-                  >
+                  <a href="#top" className="footer-nav__link" target="">
                     Anchors &amp; Fasteners
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/batteries-and-chargers"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Batteries &amp; Chargers
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/band-saw-blades"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Band Saw Blades
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/circular-saw-blades"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Circular Saw Blades
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/concrete-and-masonry-accessories"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Concrete &amp; Masonry Accessories
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/fastening-and-screwdriving-bits"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Fastening &amp; Screwdriving Bits
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/hole-saws-and-mandrels"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Hole Saws &amp; Mandrels
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/companion-apps-and-software"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Companion Apps &amp; Software
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/jig-saw-blades"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Jig Saw Blades
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/metal-and-wood-drill-bits"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Drill Bits
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/miscellaneous-accessories"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Miscellaneous Accessories
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/nails-and-staples"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Nails &amp; Staples
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/oscillating-accessories"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Oscillating Accessories
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/reciprocating-saw-blades"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Reciprocating Saw Blades
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/tile-drill-bits"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Tile Drill Bits
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/accessories/tool-accessories"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Tool Accessories
                   </a>
                 </li>
@@ -330,7 +218,7 @@ const Footer = () => {
             </div>
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/products/hand-tools">Hand Tools</a>
+                <a href="#top">Hand Tools</a>
               </strong>
 
               <ul
@@ -338,139 +226,87 @@ const Footer = () => {
                 data-triggerdata="footerNav_cb3a556c814a4e5abafb604277d3493e"
               >
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/hammers-and-pry-bars"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Axes, Hammers &amp; Pry Bars
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/measuring-and-layout-tools"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Measuring &amp; Layout Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/mechanics-tools-sets"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Mechanics Tool Sets
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/knives-and-blades"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Knives &amp; Blades
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/impact-sockets"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Impact Sockets &amp; Sets
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/screwdrivers-and-hex-keys"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Screwdrivers &amp; Hex Keys
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/hand-saws"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Hand Saws
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/pliers-and-snips"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Pliers &amp; Snips
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/sockets-and-ratchets"
-                    className="footer-nav__link"
-                    target=""
-                  >
+                  <a href="#top" className="footer-nav__link" target="">
                     Sockets &amp; Ratchets
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/trigger-clamps"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Bar Clamps &amp; Trigger Clamps
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/wood-chisels"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Wood Chisels
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/wrenches-and-wrench-sets"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Wrenches &amp; Wrench Sets
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/multitools"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Multi-Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/manual-fasteners"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Manual Fastening Tools
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/marking"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Marking
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/nail-sets"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Nail Sets
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/hand-tools/products-made-in-the-usa-hand-tools"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Hand Tools
                   </a>
                 </li>
@@ -478,7 +314,7 @@ const Footer = () => {
             </div>
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/products/storage-and-gear">Outdoor &amp; Equipment</a>
+                <a href="#top">Outdoor &amp; Equipment</a>
               </strong>
 
               <ul
@@ -486,82 +322,52 @@ const Footer = () => {
                 data-triggerdata="footerNav_29668b89790843ce9f95597d2a2f0708"
               >
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/air-compressors"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Air Compressors
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/jobsite-lighting-and-flashlights"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Jobsite Lighting &amp; Flashlights
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/tool-storage"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Tool Storage
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/ladders"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Ladders
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/outdoor/pressure-washers"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Pressure Washers
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/jobsite-radios"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Jobsite Radios
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/safety-and-protective-workwear"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Safety &amp; Protective Workwear
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/construction-heaters"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Heaters &amp; Fans
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/generators-and-portable-power"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Generators &amp; Portable Power
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/products/storage-and-gear/sawhorses"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Sawhorses &amp; Workbenches
                   </a>
                 </li>
@@ -569,7 +375,7 @@ const Footer = () => {
             </div>
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/support">Service &amp; Support</a>
+                <a href="#top">Service &amp; Support</a>
               </strong>
 
               <ul
@@ -577,57 +383,37 @@ const Footer = () => {
                 data-triggerdata="footerNav_6a69ba6824f04804a03ce15510dee37d"
               >
                 <li className="footer-nav__item">
-                  <a
-                    href="/support/find-a-retailer"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Find A Retailer
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/support/find-a-service-center"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Find A Service Center
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/support/product-registration"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Product Registration
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/support/parts-and-documentation"
-                    className="footer-nav__link"
-                    target="_blank"
-                  >
+                  <a href="#top" className="footer-nav__link" target="_blank">
                     Parts and Documentation
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/legal/warranty/general-warranty-information"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Warranty Information
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a href="/support/shop-safe" className="footer-nav__link">
+                  <a href="#top" className="footer-nav__link">
                     Shop Safe
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/support/submit-a-vulnerability"
-                    className="footer-nav__link"
-                    target="_blank"
-                  >
+                  <a href="#top" className="footer-nav__link" target="_blank">
                     Submit a Vulnerability
                   </a>
                 </li>
@@ -635,7 +421,7 @@ const Footer = () => {
             </div>
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/dewalt-dna">DEWALT DNA</a>
+                <a href="#top">DEWALT DNA</a>
               </strong>
 
               <ul
@@ -643,47 +429,32 @@ const Footer = () => {
                 data-triggerdata="footerNav_74f589d3a1ef4661b2462dd46cb629b7"
               >
                 <li className="footer-nav__item">
-                  <a href="/dewalt-dna/events" className="footer-nav__link">
+                  <a href="#top" className="footer-nav__link">
                     Events
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/dewalt-dna/american-pride"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Join The Salute
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/dewalt-dna/innovation-technology"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Innovation &amp; Technology
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/dewalt-dna/trade-solutions"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Trade Solutions
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/dewalt-dna/featured-articles"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Featured Articles
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/dewalt-dna/made-in-the-usa-with-global-materials"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Select Products are Made In The USA with Global Materials
                   </a>
                 </li>
@@ -697,45 +468,28 @@ const Footer = () => {
                 data-triggerdata="footerNav_784c2ea7f0ec408894c41dbfb853f9e6"
               >
                 <li className="footer-nav__item">
-                  <a
-                    href="/jobsite-solutions/jobsite-wifi-system"
-                    className="footer-nav__link"
-                    target=""
-                  >
+                  <a href="#top" className="footer-nav__link" target="">
                     Jobsite WiFi System
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/jobsite-solutions/tool-connect"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Tool Connect
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/jobsite-solutions/perform-and-protect"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     PERFORM &amp; PROTECT™
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/jobsite-solutions/toughsystem"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     ToughSystem<sup>®</sup> Mobile Storage
                   </a>
                 </li>
 
                 <li className="footer-nav__item">
-                  <a
-                    href="/jobsite-solutions/mobile-lock"
-                    className="footer-nav__link"
-                    target=""
-                  >
+                  <a href="#top" className="footer-nav__link" target="">
                     MOBILELOCK™
                   </a>
                 </li>
@@ -743,7 +497,7 @@ const Footer = () => {
             </div>
             <div className="footer-nav__column">
               <strong className="footer-nav__title">
-                <a href="/company-info">Company Information</a>
+                <a href="#top">Company Information</a>
               </strong>
 
               <ul
@@ -751,64 +505,42 @@ const Footer = () => {
                 data-triggerdata="footerNav_34e7811cff374d09b4754c4ccb242d6e"
               >
                 <li className="footer-nav__item">
-                  <a href="/total-trade-solutions" className="footer-nav__link">
+                  <a href="#top" className="footer-nav__link">
                     Total Trade Solutions
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/company-info/milestones"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Our History
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/company-info/dewalt-awards"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Awards
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/company-info/sustainability"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Sustainability
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/dewalt-dna/sponsorships"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     Sponsorships
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/company-info/news-and-press"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     News and Press
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/company-info/careers"
-                    className="footer-nav__link"
-                    target="_blank"
-                  >
+                  <a href="#top" className="footer-nav__link" target="_blank">
                     Careers
                   </a>
                 </li>
                 <li className="footer-nav__item">
-                  <a
-                    href="/support/catalogs/2019-catalogs"
-                    className="footer-nav__link"
-                  >
+                  <a href="#top" className="footer-nav__link">
                     2019 Catalog
                   </a>
                 </li>
@@ -951,17 +683,11 @@ const Footer = () => {
                       By signing up you agree to receive emails from DEWALT ®
                       with news, special offers, promotions and other
                       information. You can unsubscribe at any time. See
-                      <a
-                        href="https://www.stanleyblackanddecker.com/privacy-policy"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href="#top" target="_blank" rel="noreferrer">
                         Updated Privacy Policy
                       </a>
                       or Contact Us at
-                      <a href="mailto:support.dewalt@sbdinc.com">
-                        support.dewalt@sbdinc.com
-                      </a>
+                      <a href="#top">support.dewalt@sbdinc.com</a>
                       or 701 E. Joppa Road, Towson, Maryland 21286, for more
                       information.
                     </small>
@@ -1009,7 +735,7 @@ const Footer = () => {
             >
               <li className="social-network-listing__item">
                 <a
-                  href="https://www.facebook.com/dewalt"
+                  href="#top"
                   className="social-network-listing__link"
                   target="_blank"
                   rel="noreferrer"
@@ -1022,7 +748,7 @@ const Footer = () => {
               </li>
               <li className="social-network-listing__item">
                 <a
-                  href="https://www.linkedin.com/showcase/dewalt/"
+                  href="#top"
                   className="social-network-listing__link"
                   target="_blank"
                   rel="noreferrer"
@@ -1034,10 +760,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="social-network-listing__item">
-                <a
-                  href="https://www.youtube.com/user/dewalttv"
-                  className="social-network-listing__link"
-                >
+                <a href="#top" className="social-network-listing__link">
                   <img
                     src="https://www.dewalt.com/~/media/dewalt/images/global/icons/yt.png?h=38&amp;w=43&amp;la=en-US"
                     alt="YT"
@@ -1045,10 +768,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="social-network-listing__item">
-                <a
-                  href="https://www.instagram.com/dewalttough/"
-                  className="social-network-listing__link"
-                >
+                <a href="#top" className="social-network-listing__link">
                   <img
                     src="https://www.dewalt.com/~/media/dewalt/images/global/icons/instagram.png?h=38&amp;w=43&amp;la=en-US"
                     alt="Instagram"
@@ -1073,7 +793,7 @@ const Footer = () => {
           <ul className="footer-utility-links">
             <li className="footer-utility-links__item">
               <a
-                href="/legal/privacy-policy"
+                href="#top"
                 className="footer-utility-links__link"
                 target="_blank"
               >
@@ -1081,24 +801,18 @@ const Footer = () => {
               </a>
             </li>
             <li className="footer-utility-links__item">
-              <a
-                href="/legal/terms-of-use"
-                className="footer-utility-links__link"
-              >
+              <a href="#top" className="footer-utility-links__link">
                 Terms of Use
               </a>
             </li>
             <li className="footer-utility-links__item">
-              <a
-                href="/support/safety-notices-and-recalls"
-                className="footer-utility-links__link"
-              >
+              <a href="#top" className="footer-utility-links__link">
                 Safety Notices and Recalls
               </a>
             </li>
             <li className="footer-utility-links__item">
               <a
-                href="/legal/power-tools-institute"
+                href="#top"
                 className="footer-utility-links__link"
                 target="_blank"
               >
@@ -1107,7 +821,7 @@ const Footer = () => {
             </li>
             <li className="footer-utility-links__item">
               <a
-                href="/legal/travel-safety-with-cordless-tools"
+                href="#top"
                 className="footer-utility-links__link"
                 target="_blank"
               >
@@ -1115,24 +829,18 @@ const Footer = () => {
               </a>
             </li>
             <li className="footer-utility-links__item">
-              <a
-                href="/legal/dewalt-patent-information"
-                className="footer-utility-links__link"
-              >
+              <a href="#top" className="footer-utility-links__link">
                 DEWALT Patent Information
               </a>
             </li>
             <li className="footer-utility-links__item">
-              <a
-                href="/support/shop-safe"
-                className="footer-utility-links__link"
-              >
+              <a href="#top" className="footer-utility-links__link">
                 Shop Safe
               </a>
             </li>
           </ul>
 
-          <a href="/" className="footer__copyright-logo-wrapper">
+          <a href="#top" className="footer__copyright-logo-wrapper">
             <img
               src="https://www.dewalt.com/~/media/dewalt/images/global/footer-logo.png?h=59&amp;w=124&amp;la=en-US"
               alt="DEWALT Guaranteed Tough Logo Tagline"

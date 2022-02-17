@@ -3,7 +3,7 @@ import "../scss/paas-calculator.scss";
 import statesJSON from "../data/states.json";
 import { ReactComponent as Logo } from "../images/DeWalt_Logo.svg";
 
-const PaasCalculator = () => {
+const PaasCalculator = (props) => {
   const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
 
   let states = JSON.parse(JSON.stringify(statesJSON));
@@ -15,7 +15,9 @@ const PaasCalculator = () => {
 
   const hideShowSection = (e) => {
     e.preventDefault();
-    document.querySelector("#output").classList.toggle("hide-section");
+    document.querySelector("#output").classList.toggle("active");
+    //  document.querySelector(".overlay").classList.toggle("active");
+    document.querySelector("body").classList.toggle("active");
   };
 
   const handleChange = (e) => {
@@ -250,6 +252,27 @@ const PaasCalculator = () => {
     lengthOffSeason,
   ]);
 
+  const [checkObserve, setCheckObserve] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          console.log("I see it");
+          setCheckObserve(true);
+        } else {
+          console.log("I dont see it");
+          setCheckObserve(false);
+        }
+      },
+      {
+        root: null,
+        //   rootMargin: "0px",
+        threshold: 0.7,
+      }
+    );
+    observer.observe(document.querySelector("#outputs"));
+  }, [checkObserve]);
+
   return (
     <>
       {loading === true ? (
@@ -257,342 +280,182 @@ const PaasCalculator = () => {
           <Logo />
         </div>
       ) : (
-        <form className="main">
-          <ul className="inputs">
-            <li className="column">
-              <span>
-                <label id="location">Which state do you operate in?</label>
-              </span>
-              <span>
-                <select
-                  id="location"
-                  htmlFor="location"
-                  value={customerInputs.location}
-                  onChange={(e) => {
-                    handleChange(e);
-                    const newState = states.find(
-                      (state) => state.abbr === e.target.value
-                    );
-                    setPADDRegion(`PADD${newState.padd}`);
-                  }}
-                >
-                  {states.map((state) => {
-                    // console.log("state", state);
-                    return (
-                      <option key={state.abbr} value={state.abbr}>
-                        {state.name} - PADD {state.padd}
-                      </option>
-                    );
-                  })}
-                </select>
-              </span>
-            </li>
-            <li className="column range">
-              <span>
-                <label id="daysMowedPerWeek">
-                  How many days do you mow per week?
-                </label>
-              </span>
-              <span className="input">
-                <input
-                  type="range"
-                  min="1"
-                  max="7"
-                  step="1"
-                  value={customerInputs.daysMowedPerWeek}
-                  id="daysMowedPerWeek"
-                  onChange={handleChange}
-                  htmlFor="daysMowedPerWeek"
-                  list="daysMowedPerWeek-ticks"
-                />
-                <datalist id="daysMowedPerWeek-ticks">
-                  <option value="1"></option>
-                  <option value="2"></option>
-                  <option value="3"></option>
-                  <option value="4"></option>
-                  <option value="5"></option>
-                  <option value="6"></option>
-                  <option value="7"></option>
-                </datalist>
-                <span>{customerInputs.daysMowedPerWeek}</span>
-              </span>
-            </li>
-            <li className="column range">
-              <span>
-                <label id="numberNGBRUnits">
-                  How many NGBRs do you plan to operate?
-                </label>
-              </span>
-              <span className="input">
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  step="1"
-                  value={customerInputs.numberNGBRUnits}
-                  id="numberNGBRUnits"
-                  onChange={handleChange}
-                  htmlFor="numberNGBRUnits"
-                />
-                <span>{customerInputs.numberNGBRUnits}</span>
-              </span>
-            </li>
-            <li className="column">
-              <span>
-                <label id="mowingHours">
-                  How many hours do you mow per day?
-                </label>
-              </span>
-              <span>
-                <ul className="buttons">
-                  <li>
-                    <button
-                      htmlFor="mowingHours"
-                      value="1"
-                      onClick={(e) => {
-                        buttonClick(e);
-                        handleChange(e);
-                      }}
-                    >
-                      &#60;2
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      htmlFor="mowingHours"
-                      value="3"
-                      onClick={(e) => {
-                        buttonClick(e);
-                        handleChange(e);
-                      }}
-                    >
-                      2-4
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="active"
-                      htmlFor="mowingHours"
-                      value="5"
-                      onClick={(e) => {
-                        buttonClick(e);
-                        handleChange(e);
-                      }}
-                    >
-                      4-6
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      htmlFor="mowingHours"
-                      value="7"
-                      onClick={(e) => {
-                        buttonClick(e);
-                        handleChange(e);
-                      }}
-                    >
-                      6-8
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      htmlFor="mowingHours"
-                      value="9"
-                      onClick={(e) => {
-                        buttonClick(e);
-                        handleChange(e);
-                      }}
-                    >
-                      8+
-                    </button>
-                  </li>
-                </ul>
-              </span>
-            </li>
-            <li className="column range">
-              <span>
-                <label id="lengthMowingSeason">
-                  How long is your mowing season per year?
-                </label>
-              </span>
-              <span className="input">
-                <input
-                  type="range"
-                  min="6"
-                  max="12"
-                  step="1"
-                  value={customerInputs.lengthMowingSeason}
-                  id="lengthMowingSeason"
-                  onChange={handleChange}
-                  htmlFor="lengthMowingSeason"
-                />
-                <span>{customerInputs.lengthMowingSeason}</span>
-              </span>
-            </li>
-          </ul>
-
-          <ul className="outputs">
-            <li className="column">
-              <span>
-                <label>Total number of batteries</label>
-              </span>
-              <span>
-                <input id="" value={requiredEquipment.totalBateries} readOnly />
-              </span>
-            </li>
-            <li className="column">
-              <span>
-                <label>Total number of chargers</label>
-              </span>
-              <span>
-                <input id="" value={requiredEquipment.totalChargers} readOnly />
-              </span>
-            </li>
-            <li className="column">
-              <span>
-                <label>Price/mo at 36 mos. 3.99%</label>
-              </span>
-              <span>
-                <input
-                  id=""
-                  value={dollarUSLocale.format(pricing.priceMo36)}
-                  readOnly
-                />
-              </span>
-            </li>
-            <li className="column">
-              <span>
-                <label>Price/mo at 48 mos. 4.99%</label>
-              </span>
-              <span>
-                <input
-                  id=""
-                  value={dollarUSLocale.format(pricing.priceMo48)}
-                  readOnly
-                />
-              </span>
-            </li>
-          </ul>
-
-          <ul className="outputs three">
-            <li>
-              <span></span>
-              <span className="bg-yellow">PaaS OpEx ($/mo)</span>
-              <span className="bg-yellow">Gas ZTR OpEx ($/mo)</span>
-            </li>
-            <li>
-              <span>Battery Charging</span>
-              <span>
-                {dollarUSLocale.format(
-                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
-                )}
-              </span>
-              <span>-</span>
-            </li>
-            <li>
-              <span>Fuel</span>
-              <span>-</span>
-              <span>
-                {dollarUSLocale.format(
-                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
-                )}
-              </span>
-            </li>
-            <li>
-              <span>Maintenance</span>
-              <span>
-                {dollarUSLocale.format(
-                  monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
-                )}
-              </span>
-              <span>
-                {dollarUSLocale.format(
-                  monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
-                )}
-              </span>
-            </li>
-            <li>
-              <span>Subscription (PaaS)</span>
-              <span>
-                {dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
-              </span>
-              <span>-</span>
-            </li>
-            <li>
-              <span>Total</span>
-              <span>
-                {dollarUSLocale.format(
-                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits +
-                    monthlyMaintenanceCostPerNGBR *
-                      customerInputs.numberNGBRUnits +
-                    pricing.targetPaasMonthlyPrice
-                )}
-              </span>
-              <span>
-                {dollarUSLocale.format(
-                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits +
-                    monthlyMaintenanceCostPerZTR *
-                      customerInputs.numberNGBRUnits
-                )}
-              </span>
-            </li>
-          </ul>
-        </form>
+        ""
       )}
-
-      <button onClick={hideShowSection}>View main Fields</button>
-
-      <form id="output" className="hide-section">
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
-          </li>
-          <li>
+      <form className="main" id="outputs">
+        <ul className="inputs">
+          <li className="column">
             <span>
-              <label>Converting mowing frequency to monthly</label>
+              <label id="location">Which state do you operate in?</label>
             </span>
             <span>
-              <input
-                id="mowingMonthly"
-                type="number"
-                value={mowingMonthly}
+              <select
+                id="location"
+                htmlFor="location"
+                value={customerInputs.location}
                 onChange={(e) => {
-                  console.log("test");
+                  handleChange(e);
+                  const newState = states.find(
+                    (state) => state.abbr === e.target.value
+                  );
+                  setPADDRegion(`PADD${newState.padd}`);
                 }}
+              >
+                {states.map((state) => {
+                  // console.log("state", state);
+                  return (
+                    <option key={state.abbr} value={state.abbr}>
+                      {state.name} - PADD {state.padd}
+                    </option>
+                  );
+                })}
+              </select>
+            </span>
+          </li>
+          <li className="column range">
+            <span>
+              <label id="daysMowedPerWeek">
+                How many days do you mow per week?
+              </label>
+            </span>
+            <span className="input">
+              <input
+                type="range"
+                min="1"
+                max="7"
+                step="1"
+                value={customerInputs.daysMowedPerWeek}
+                id="daysMowedPerWeek"
+                onChange={handleChange}
+                htmlFor="daysMowedPerWeek"
+                list="daysMowedPerWeek-ticks"
               />
+              <datalist id="daysMowedPerWeek-ticks">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+              </datalist>
+              <span>{customerInputs.daysMowedPerWeek}</span>
             </span>
           </li>
-          <li>
+          <li className="column range">
             <span>
-              <label>Length of off-season</label>
+              <label id="numberNGBRUnits">
+                How many NGBRs do you plan to operate?
+              </label>
             </span>
-            <span>
-              <input id="" value={lengthOffSeason} readOnly />
+            <span className="input">
+              <input
+                type="range"
+                min="1"
+                max="10"
+                step="1"
+                value={customerInputs.numberNGBRUnits}
+                id="numberNGBRUnits"
+                onChange={handleChange}
+                htmlFor="numberNGBRUnits"
+              />
+              <span>{customerInputs.numberNGBRUnits}</span>
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
-              <label>Number of batteries per NGBR</label>
+              <label id="mowingHours">How many hours do you mow per day?</label>
             </span>
             <span>
-              <input id="" value={requiredEquipment.bateries} readOnly />
+              <ul className="buttons">
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="1"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    &#60;2
+                  </button>
+                </li>
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="3"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    2-4
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="active"
+                    htmlFor="mowingHours"
+                    value="5"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    4-6
+                  </button>
+                </li>
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="7"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    6-8
+                  </button>
+                </li>
+                <li>
+                  <button
+                    htmlFor="mowingHours"
+                    value="9"
+                    onClick={(e) => {
+                      buttonClick(e);
+                      handleChange(e);
+                    }}
+                  >
+                    8+
+                  </button>
+                </li>
+              </ul>
             </span>
           </li>
-          <li>
+          <li className="column range">
             <span>
-              <label>Number of chargers per NGBR</label>
+              <label id="lengthMowingSeason">
+                How long is your mowing season per year?
+              </label>
             </span>
-            <span>
-              <input id="" value={requiredEquipment.chargers} readOnly />
+            <span className="input">
+              <input
+                type="range"
+                min="6"
+                max="12"
+                step="1"
+                value={customerInputs.lengthMowingSeason}
+                id="lengthMowingSeason"
+                onChange={handleChange}
+                htmlFor="lengthMowingSeason"
+              />
+              <span>{customerInputs.lengthMowingSeason}</span>
             </span>
           </li>
         </ul>
 
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
-          </li>
-          <li>
+        <ul className="outputs">
+          <li className="column">
             <span>
               <label>Total number of batteries</label>
             </span>
@@ -600,7 +463,7 @@ const PaasCalculator = () => {
               <input id="" value={requiredEquipment.totalBateries} readOnly />
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label>Total number of chargers</label>
             </span>
@@ -608,25 +471,7 @@ const PaasCalculator = () => {
               <input id="" value={requiredEquipment.totalChargers} readOnly />
             </span>
           </li>
-        </ul>
-
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
-          </li>
-          <li>
-            <span>
-              <label>Total Cash Price</label>
-            </span>
-            <span>
-              <input
-                id=""
-                value={dollarUSLocale.format(pricing.totalCashPrice)}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
+          <li className="column">
             <span>
               <label>Price/mo at 36 mos. 3.99%</label>
             </span>
@@ -638,7 +483,7 @@ const PaasCalculator = () => {
               />
             </span>
           </li>
-          <li>
+          <li className="column">
             <span>
               <label>Price/mo at 48 mos. 4.99%</label>
             </span>
@@ -650,289 +495,477 @@ const PaasCalculator = () => {
               />
             </span>
           </li>
-          <li>
-            <span>
-              <label>Target PaaS Monthly Price</label>
-            </span>
-            <span>
-              <input
-                id=""
-                value={dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Annualized PaaS Price</label>
-            </span>
-            <span>
-              <input
-                id=""
-                value={dollarUSLocale.format(
-                  pricing.targetPaasMonthlyPrice * 12
-                )}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Annual rebate from off-season</label>
-            </span>
-            <span>
-              <input
-                id=""
-                value={
-                  lengthOffSeason > 6
-                    ? "-"
-                    : dollarUSLocale.format(pricing.annualRebateOffSeason)
-                }
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Annualized PaaS Price (with off-season)</label>
-            </span>
-            <span>
-              <input
-                id=""
-                value={
-                  pricing.annualRebateOffSeason
-                    ? dollarUSLocale.format(
-                        pricing.targetPaasMonthlyPrice * 12 -
-                          pricing.annualRebateOffSeason
-                      )
-                    : "-"
-                }
-                readOnly
-              />
-            </span>
-          </li>
         </ul>
 
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
+        <ul className="outputs three">
+          <li>
+            <span></span>
+            <span className="bg-yellow">PaaS OpEx ($/mo)</span>
+            <span className="bg-yellow">Gas ZTR OpEx ($/mo)</span>
           </li>
           <li>
+            <span>Battery Charging</span>
             <span>
-              <label>Total monthly PaaS power cost</label>
+              {dollarUSLocale.format(
+                monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+              )}
             </span>
-            <span>
-              <input
-                id=""
-                value={
-                  monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
-                }
-                readOnly
-              />
-            </span>
+            <span>-</span>
           </li>
           <li>
+            <span>Fuel</span>
+            <span>-</span>
             <span>
-              <label>Monthly PaaS power cost NGBR</label>
-            </span>
-            <span>
-              <input id="" value={monthlyPaaSPowerCostNGBR} readOnly />
+              {dollarUSLocale.format(
+                monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+              )}
             </span>
           </li>
           <li>
+            <span>Maintenance</span>
             <span>
-              <label>Geography / location</label>
+              {dollarUSLocale.format(
+                monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
+              )}
             </span>
             <span>
-              <input id="" value={customerInputs.location} readOnly />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Latest average monthly power price</label>
-            </span>
-            <span>
-              <input id="" value={latestAvgPowerPrice} readOnly />
+              {dollarUSLocale.format(
+                monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+              )}
             </span>
           </li>
           <li>
-            <span>
-              <label>[HELPER] Latest month</label>
-            </span>
-            <span>
-              <input id="" value={lastestMonth} readOnly />
-            </span>
+            <span>Subscription (PaaS)</span>
+            <span>{dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}</span>
+            <span>-</span>
           </li>
           <li>
+            <span>Total</span>
             <span>
-              <label>Power consumption rate per NGBR</label>
+              {dollarUSLocale.format(
+                monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits +
+                  monthlyMaintenanceCostPerNGBR *
+                    customerInputs.numberNGBRUnits +
+                  pricing.targetPaasMonthlyPrice
+              )}
             </span>
             <span>
-              <input id="" value={NGBRBatteryCapacity} readOnly />
-            </span>
-          </li>
-        </ul>
-
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
-          </li>
-          <li>
-            <span>
-              <label>Total monthly PaaS maintenance cost</label>
-            </span>
-            <span>
-              <input
-                id=""
-                value={
-                  monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
-                }
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Monthly maintenance cost per NGBR</label>
-            </span>
-            <span>
-              <input id="" value={monthlyMaintenanceCostPerNGBR} readOnly />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Electric maintenance cost as % of gas</label>
-            </span>
-            <span>
-              <input id="" value={electricMaintenanceCostGas} readOnly />
-            </span>
-          </li>
-        </ul>
-
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
-          </li>
-          <li>
-            <span>
-              <label>Total monthly ZTR fuel cost</label>
-            </span>
-            <span>
-              <input
-                id="totalFuelCostZTR"
-                value={dollarUSLocale.format(
-                  monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
-                )}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Monthly fuel cost per ZTR</label>
-            </span>
-            <span>
-              <input
-                id="monthlyFuelCostPerZTR"
-                value={dollarUSLocale.format(monthlyFuelCostPerZTR)}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Geography / location</label>
-            </span>
-            <span>
-              <input id="location" value={customerInputs.location} readOnly />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>PADD region</label>
-            </span>
-            <span>
-              <input id="PADDRegion" value={PADDRegion} readOnly />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Latest fuel weekly price</label>
-            </span>
-            <span>
-              <input
-                id="latestFuelWeeklyPrice"
-                value={latestFuelWeeklyPrice}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label> [HELPER] Latest week</label>
-            </span>
-            <span>
-              <input id="lastestWeek" value={lastestWeek} readOnly />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Fuel consumption rate</label>
-            </span>
-            <span>
-              <input
-                id="fuelConsumptionRate"
-                value={fuelConsumptionRate}
-                readOnly
-              />
-            </span>
-          </li>
-        </ul>
-
-        <ul>
-          <li className="button-hide">
-            <button onClick={hideShow}>Hide</button>
-          </li>
-          <li>
-            <span>
-              <label>Total monthly ZTR maintenance cost</label>
-            </span>
-            <span>
-              <input
-                id="totalMonthlyZTRMaintenanceCost"
-                value={
+              {dollarUSLocale.format(
+                monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits +
                   monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
-                }
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Monthly maintenance cost per ZTR</label>
-            </span>
-            <span>
-              <input
-                id="monthlyMaintenanceCostPerZTR"
-                value={monthlyMaintenanceCostPerZTR}
-                readOnly
-              />
-            </span>
-          </li>
-          <li>
-            <span>
-              <label>Average hourly maintenance cost</label>
-            </span>
-            <span>
-              <input
-                id="averageHourlyMaintenanceCost"
-                value={averageHourlyMaintenanceCost}
-                readOnly
-              />
+              )}
             </span>
           </li>
         </ul>
       </form>
+
+      <form
+        id="output"
+        className={`main-output ${checkObserve ? "on-screen" : ""}`}
+      >
+        <button onClick={hideShowSection}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M3 18h13v-2H3v2zm0-5h10v-2H3v2zm0-7v2h13V6H3zm18 9.59L17.42 12 21 8.41 19.59 7l-5 5 5 5L21 15.59z" />
+          </svg>
+        </button>
+        <div className="overflow">
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Converting mowing frequency to monthly</label>
+              </span>
+              <span>
+                <input
+                  id="mowingMonthly"
+                  type="number"
+                  value={mowingMonthly}
+                  onChange={(e) => {
+                    console.log("test");
+                  }}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Length of off-season</label>
+              </span>
+              <span>
+                <input id="" value={lengthOffSeason} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Number of batteries per NGBR</label>
+              </span>
+              <span>
+                <input id="" value={requiredEquipment.bateries} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Number of chargers per NGBR</label>
+              </span>
+              <span>
+                <input id="" value={requiredEquipment.chargers} readOnly />
+              </span>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Total number of batteries</label>
+              </span>
+              <span>
+                <input id="" value={requiredEquipment.totalBateries} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Total number of chargers</label>
+              </span>
+              <span>
+                <input id="" value={requiredEquipment.totalChargers} readOnly />
+              </span>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Total Cash Price</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={dollarUSLocale.format(pricing.totalCashPrice)}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Price/mo at 36 mos. 3.99%</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={dollarUSLocale.format(pricing.priceMo36)}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Price/mo at 48 mos. 4.99%</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={dollarUSLocale.format(pricing.priceMo48)}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Target PaaS Monthly Price</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Annualized PaaS Price</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={dollarUSLocale.format(
+                    pricing.targetPaasMonthlyPrice * 12
+                  )}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Annual rebate from off-season</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={
+                    lengthOffSeason > 6
+                      ? "-"
+                      : dollarUSLocale.format(pricing.annualRebateOffSeason)
+                  }
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Annualized PaaS Price (with off-season)</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={
+                    pricing.annualRebateOffSeason
+                      ? dollarUSLocale.format(
+                          pricing.targetPaasMonthlyPrice * 12 -
+                            pricing.annualRebateOffSeason
+                        )
+                      : "-"
+                  }
+                  readOnly
+                />
+              </span>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Total monthly PaaS power cost</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={
+                    monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+                  }
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Monthly PaaS power cost NGBR</label>
+              </span>
+              <span>
+                <input id="" value={monthlyPaaSPowerCostNGBR} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Geography / location</label>
+              </span>
+              <span>
+                <input id="" value={customerInputs.location} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Latest average monthly power price</label>
+              </span>
+              <span>
+                <input id="" value={latestAvgPowerPrice} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>[HELPER] Latest month</label>
+              </span>
+              <span>
+                <input id="" value={lastestMonth} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Power consumption rate per NGBR</label>
+              </span>
+              <span>
+                <input id="" value={NGBRBatteryCapacity} readOnly />
+              </span>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Total monthly PaaS maintenance cost</label>
+              </span>
+              <span>
+                <input
+                  id=""
+                  value={
+                    monthlyMaintenanceCostPerNGBR *
+                    customerInputs.numberNGBRUnits
+                  }
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Monthly maintenance cost per NGBR</label>
+              </span>
+              <span>
+                <input id="" value={monthlyMaintenanceCostPerNGBR} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Electric maintenance cost as % of gas</label>
+              </span>
+              <span>
+                <input id="" value={electricMaintenanceCostGas} readOnly />
+              </span>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Total monthly ZTR fuel cost</label>
+              </span>
+              <span>
+                <input
+                  id="totalFuelCostZTR"
+                  value={dollarUSLocale.format(
+                    monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+                  )}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Monthly fuel cost per ZTR</label>
+              </span>
+              <span>
+                <input
+                  id="monthlyFuelCostPerZTR"
+                  value={dollarUSLocale.format(monthlyFuelCostPerZTR)}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Geography / location</label>
+              </span>
+              <span>
+                <input id="location" value={customerInputs.location} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>PADD region</label>
+              </span>
+              <span>
+                <input id="PADDRegion" value={PADDRegion} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Latest fuel weekly price</label>
+              </span>
+              <span>
+                <input
+                  id="latestFuelWeeklyPrice"
+                  value={latestFuelWeeklyPrice}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label> [HELPER] Latest week</label>
+              </span>
+              <span>
+                <input id="lastestWeek" value={lastestWeek} readOnly />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Fuel consumption rate</label>
+              </span>
+              <span>
+                <input
+                  id="fuelConsumptionRate"
+                  value={fuelConsumptionRate}
+                  readOnly
+                />
+              </span>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="button-hide">
+              <button onClick={hideShow}>Hide</button>
+            </li>
+            <li>
+              <span>
+                <label>Total monthly ZTR maintenance cost</label>
+              </span>
+              <span>
+                <input
+                  id="totalMonthlyZTRMaintenanceCost"
+                  value={
+                    monthlyMaintenanceCostPerZTR *
+                    customerInputs.numberNGBRUnits
+                  }
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Monthly maintenance cost per ZTR</label>
+              </span>
+              <span>
+                <input
+                  id="monthlyMaintenanceCostPerZTR"
+                  value={monthlyMaintenanceCostPerZTR}
+                  readOnly
+                />
+              </span>
+            </li>
+            <li>
+              <span>
+                <label>Average hourly maintenance cost</label>
+              </span>
+              <span>
+                <input
+                  id="averageHourlyMaintenanceCost"
+                  value={averageHourlyMaintenanceCost}
+                  readOnly
+                />
+              </span>
+            </li>
+          </ul>
+        </div>
+      </form>
+
+      <div className="loading overlay"></div>
     </>
   );
 };

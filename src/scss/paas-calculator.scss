@@ -1,6 +1,11 @@
+body.active {
+  overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
 }
+
 .paas-calculator {
   position: relative;
   padding: 10px;
@@ -47,6 +52,46 @@
   form {
     display: flex;
     flex-wrap: wrap;
+
+    &.main-output {
+      position: fixed;
+      top: 0;
+      right: -100px;
+      background: #ffffff;
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: right 0.3s ease-in-out;
+
+      &.on-screen {
+        right: 0;
+      }
+
+      &.active {
+        right: 0;
+        transform: translateX(0);
+      }
+
+      > button {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-100%, -50%);
+        padding: 10px;
+        background: red;
+        border: 0;
+        border-radius: 0;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        box-shadow: 0 0 10px rgba(#000, 0.5);
+      }
+
+      .overflow {
+        padding: 20px;
+        overflow-y: auto;
+        max-height: 100vh;
+        box-shadow: 0 0 10px rgba(#000, 0.5);
+      }
+    }
 
     ul {
       flex-basis: 100%;
@@ -260,6 +305,16 @@
     svg {
       max-width: 240px;
     }
+
+    &.overlay {
+      position: fixed;
+      z-index: 254;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
   }
 }
 
@@ -270,40 +325,48 @@
 }
 
 @media only screen and (min-width: 768px) {
-  form ul li {
-    flex-direction: row;
+  .paas-calculator {
+    form ul li {
+      flex-direction: row;
 
-    span:nth-child(1) {
-      text-align: right;
+      span:nth-child(1) {
+        text-align: right;
+      }
     }
   }
 }
 
 @media only screen and (min-width: 992px) {
-  .button-hide {
-    display: none;
-  }
+  .paas-calculator {
+    .button-hide {
+      display: none;
+    }
 
-  form {
-    ul {
-      flex-basis: 50%;
+    form {
+      ul {
+        flex-basis: 50%;
+      }
     }
   }
 }
 
 @media only screen and (min-width: 1200px) {
-  form,
-  form.main {
-    ul {
-      flex-basis: 33%;
+  .paas-calculator {
+    form,
+    form.main {
+      ul {
+        flex-basis: 33%;
+      }
     }
   }
 }
 
 @media only screen and (min-width: 1600px) {
-  form {
-    ul {
-      flex-basis: 25%;
+  .paas-calculator {
+    form {
+      ul {
+        flex-basis: 25%;
+      }
     }
   }
 }

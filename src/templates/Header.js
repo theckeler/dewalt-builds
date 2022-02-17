@@ -46,20 +46,17 @@ const Header = () => {
         <div className="header__utility-items-wrapper">
           <ul className="utility-nav clear">
             <li className="utility-nav__item">
-              <a href="/support/find-a-retailer" className="utility-nav__link">
+              <a href="#top" className="utility-nav__link">
                 Find A Retailer
               </a>
             </li>
             <li className="utility-nav__item">
-              <a
-                href="/support/product-registration"
-                className="utility-nav__link"
-              >
+              <a href="#top" className="utility-nav__link">
                 Product Registration
               </a>
             </li>
             <li className="utility-nav__item">
-              <a href="/support" className="utility-nav__link">
+              <a href="#top" className="utility-nav__link">
                 Support
               </a>
             </li>
@@ -106,9 +103,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_37805c64-8163-4515-97be-1f14d60fb3a6"
-                data-triggerdata-data="expanded"
-                href="/products/power-tools"
+                href="#top"
               >
                 Power Tools
               </a>
@@ -116,9 +111,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper primary-nav__submenu-trigger-wrapper--is-light">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_47ced1a5-f5fc-4a3d-ac04-699d5c025a82"
-                data-triggerdata-data="expanded"
-                href="http://anchors.dewalt.com/anchors/"
+                href="#top"
               >
                 Anchors
               </a>
@@ -126,9 +119,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_11b4d84b-6531-48a4-83a2-2ae99b15603e"
-                data-triggerdata-data="expanded"
-                href="/products/accessories"
+                href="#top"
               >
                 Accessories
               </a>
@@ -136,9 +127,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_542561eb-c01d-4041-9192-e43542f5393c"
-                data-triggerdata-data="expanded"
-                href="/products/hand-tools"
+                href="#top"
               >
                 Hand Tools
               </a>
@@ -146,9 +135,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_5a91c127-35ee-4d34-b548-5d90bef1d8be"
-                data-triggerdata-data="expanded"
-                href="/products/outdoor"
+                href="#top"
               >
                 Outdoor
               </a>
@@ -156,9 +143,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_a16941df-e149-4c37-a0df-d05a1b730480"
-                data-triggerdata-data="expanded"
-                href="/products/storage-and-gear"
+                href="#top"
               >
                 Gear &amp; Storage
               </a>
@@ -166,9 +151,7 @@ const Header = () => {
             <li className="primary-nav__submenu-trigger-wrapper">
               <a
                 className="header__submenu-trigger--tier-1 primary-nav__submenu-trigger--tier-1 primary-nav__trigger"
-                data-triggerdata="nav_235e5c1b-b6a6-4549-b335-5fccf09edf7d"
-                data-triggerdata-data="expanded"
-                href="/total-trade-solutions"
+                href="#top"
               >
                 Total Trade Solutions
               </a>
@@ -176,20 +159,17 @@ const Header = () => {
           </ul>
           <ul className="utility-nav clear">
             <li className="utility-nav__item">
-              <a href="/support/find-a-retailer" className="utility-nav__link">
+              <a href="#top" className="utility-nav__link">
                 Find A Retailer
               </a>
             </li>
             <li className="utility-nav__item">
-              <a
-                href="/support/product-registration"
-                className="utility-nav__link"
-              >
+              <a href="#top" className="utility-nav__link">
                 Product Registration
               </a>
             </li>
             <li className="utility-nav__item">
-              <a href="/support" className="utility-nav__link">
+              <a href="#top" className="utility-nav__link">
                 Support
               </a>
             </li>
