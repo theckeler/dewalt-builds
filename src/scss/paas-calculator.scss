@@ -1,5 +1,7 @@
 body.active {
   overflow: hidden;
+  margin: 0;
+  height: 100%;
 }
 
 * {
@@ -11,14 +13,14 @@ body.active {
   padding: 10px;
   min-height: 400px;
 
-  button {
-    border: 1px solid #333;
-    background: lightblue;
-    color: #333;
-    border-radius: 3px;
-    padding: 4px 60px;
-    text-transform: uppercase;
-  }
+  // button {
+  //   border: 1px solid #333;
+  //   background: lightblue;
+  //   color: #333;
+  //   border-radius: 3px;
+  //   padding: 4px 60px;
+  //   text-transform: uppercase;
+  // }
 
   .buttons {
     display: flex;
@@ -32,7 +34,7 @@ body.active {
       padding: 10px 2px;
 
       button {
-        background: rgb(116, 116, 116);
+        background: #747474;
         color: #fff;
         padding: 10px 4px;
         width: 100%;
@@ -57,7 +59,7 @@ body.active {
       position: fixed;
       top: 0;
       right: -100px;
-      background: #ffffff;
+      background: #fff;
       z-index: 1001;
       transform: translateX(100%);
       transition: right 0.3s ease-in-out;
@@ -69,6 +71,14 @@ body.active {
       &.active {
         right: 0;
         transform: translateX(0);
+
+        button {
+          background: red;
+
+          svg {
+            transform: rotate(180deg);
+          }
+        }
       }
 
       > button {
@@ -77,12 +87,16 @@ body.active {
         top: 50%;
         transform: translate(-100%, -50%);
         padding: 10px;
-        background: red;
+        background: #febd17;
         border: 0;
         border-radius: 0;
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
         box-shadow: 0 0 10px rgba(#000, 0.5);
+
+        svg {
+          transition: all 0.3s ease-in-out;
+        }
       }
 
       .overflow {
@@ -103,7 +117,7 @@ body.active {
 
       &.inputs,
       &.outputs {
-        background: rgb(4, 4, 14);
+        background: #04040e;
         font-weight: 700;
       }
 
@@ -193,6 +207,60 @@ body.active {
         span {
           display: block;
           width: 100%;
+
+          &.help {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .tooltip {
+              position: relative;
+
+              .tip {
+                position: absolute;
+                bottom: 140%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #000;
+                padding: 8px;
+                color: #fff;
+                font-size: 12px;
+                font-weight: normal;
+                width: 400px;
+                text-align: center;
+                box-shadow: 0 0 10px rgba(#000, 0.5);
+                z-index: 1002;
+                display: none;
+
+                &.active {
+                  display: block;
+                }
+
+                &:after {
+                  content: "";
+                  top: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  border: solid transparent;
+                  height: 0;
+                  width: 0;
+                  position: absolute;
+                  pointer-events: none;
+                  border-color: rgba(#000, 0);
+                  border-top-color: #000;
+                  border-width: 10px;
+                }
+              }
+
+              button {
+              }
+
+              svg {
+                max-width: 20px;
+                width: 100%;
+              }
+            }
+          }
         }
       }
     }
@@ -206,7 +274,7 @@ body.active {
 
     input {
       &:read-only {
-        background: rgb(229, 235, 157);
+        background: #dfdfdf;
         border: 0;
       }
     }
@@ -226,7 +294,7 @@ body.active {
         box-shadow: 0;
         background: #afafaf;
         border-radius: 5px;
-        border: 1px solid #000000;
+        border: 1px solid #000;
       }
 
       &::-moz-range-track {
@@ -236,7 +304,7 @@ body.active {
         box-shadow: 0;
         background: #afafaf;
         border-radius: 5px;
-        border: 1px solid #000000;
+        border: 1px solid #000;
       }
 
       &::-webkit-slider-thumb {

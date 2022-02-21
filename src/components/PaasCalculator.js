@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../scss/paas-calculator.scss";
 import statesJSON from "../data/states.json";
 import { ReactComponent as Logo } from "../images/DeWalt_Logo.svg";
+import HelpButton from "./Help";
 
-const PaasCalculator = (props) => {
+const PaasCalculator = () => {
   const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
 
   let states = JSON.parse(JSON.stringify(statesJSON));
@@ -257,10 +258,10 @@ const PaasCalculator = (props) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          console.log("I see it");
+          //  console.log("I see it");
           setCheckObserve(true);
         } else {
-          console.log("I dont see it");
+          //console.log("I dont see it");
           setCheckObserve(false);
         }
       },
@@ -456,8 +457,13 @@ const PaasCalculator = (props) => {
 
         <ul className="outputs">
           <li className="column">
-            <span>
+            <span className="help">
               <label>Total number of batteries</label>
+              <HelpButton
+                tip="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a augue ornare, tempus leo in, viverra lacus. Praesent quis pretium augue. Sed ac ipsum a risus posuere venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec et malesuada neque. Ut lectus magna, pretium vitae lorem sed, dapibus elementum dolor. Quisque auctor massa quis congue rutrum. Integer aliquet neque erat, nec congue tellus bibendum a.
+
+"
+              />
             </span>
             <span>
               <input id="" value={requiredEquipment.totalBateries} readOnly />
