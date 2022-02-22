@@ -1,11 +1,18 @@
-const HelpButton = ({ tip }) => {
+//import React, { useState, useEffect } from "react";
+
+const ToolTip = ({ tip }) => {
   const buttonClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    e.currentTarget
-      .closest(".tooltip")
-      .querySelector(".tip")
-      .classList.toggle("active");
+    const thisTip = e.currentTarget.closest(".tooltip").querySelector(".tip");
+    if (thisTip.classList.contains("active")) {
+      thisTip.classList.remove("active");
+    } else {
+      document.querySelectorAll(".tip").forEach((tip) => {
+        tip.classList.remove("active");
+      });
+      thisTip.classList.add("active");
+    }
   };
 
   return (
@@ -26,4 +33,4 @@ const HelpButton = ({ tip }) => {
   );
 };
 
-export default HelpButton;
+export default ToolTip;
