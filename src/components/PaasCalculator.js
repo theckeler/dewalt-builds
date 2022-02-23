@@ -56,7 +56,7 @@ const PaasCalculator = () => {
     return pmt;
   };
 
-  const averageWeeksPerMonth = Number(52 / 12).toFixed(2); // [HELPER] Average weeks per month (52/12)
+  const averageWeeksPerMonth = Number(52 / 12).toFixed(4); // [HELPER] Average weeks per month (52/12)
   const [mowingMonthly, setMowingMonthly] = useState(151.67); // Converting mowing frequency to monthly
   const [lengthOffSeason, setLengthOffSeason] = useState(2.0); // [HELPER] Length of off-season (12 - lengthMowingSeason)
   const [customerInputs, setCustomerInputs] = useState({
@@ -598,7 +598,7 @@ const PaasCalculator = () => {
 
       <form
         id="output"
-        className={`main-output active ${checkObserve ? "on-screen" : ""}`}
+        className={`main-output ${checkObserve ? "on-screen" : ""}`}
       >
         <button onClick={hideShowSection}>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
