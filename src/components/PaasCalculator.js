@@ -822,19 +822,57 @@ const PaasCalculator = () => {
             <li className="title">Breakeven</li>
             <li>
               <label>Breakeven: Outright purchase - With resale</label>
-              <input value="" readOnly />
+              <input
+                value={
+                  breakeven.breakevenFPPNoResale
+                    ? (
+                        breakeven.breakevenOutrightPurchaseNoResale -
+                        reductionFromNGBRResale.cashPurchase
+                      ).toFixed(1)
+                    : ""
+                }
+                readOnly
+              />
             </li>
             <li>
               <label>Breakeven: FPP - With resale</label>
-              <input value="" readOnly />
+              <input
+                value={
+                  breakeven.breakevenFPPNoResale
+                    ? (
+                        breakeven.breakevenFPPNoResale -
+                        reductionFromNGBRResale.FPP
+                      ).toFixed(1)
+                    : ""
+                }
+                readOnly
+              />
             </li>
             <li>
               <label>Breakeven: 3-year financing - With resale</label>
-              <input value="" readOnly />
+              <input
+                value={
+                  reductionFromNGBRResale.financing36
+                    ? (
+                        breakeven.breakeven3yearFinancingNoResale -
+                        reductionFromNGBRResale.financing36
+                      ).toFixed(1)
+                    : ""
+                }
+                readOnly
+              />
             </li>
             <li>
               <label>Breakeven: 4-year financing - With resale</label>
-              <input value="" readOnly />
+              <input
+                value={
+                  reductionFromNGBRResale.financing48
+                    ? breakeven.breakeven4yearFinancingNoResale -
+                      reductionFromNGBRResale.financing48
+                    : ""
+                }
+                readOnly
+              />
             </li>
             <li>
               <label>Breakeven: Outright purchase - No resale</label>
