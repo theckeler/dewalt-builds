@@ -610,19 +610,19 @@ const PaasCalculator = () => {
         <div className="overflow">
           <ul>
             <li className="title">Customer-provided inputs for reference</li>
-            <li>
+            <li className="green">
               <label>Geography / location</label>
               <input value={customerInputs.location} readOnly />
             </li>
-            <li>
+            <li className="green">
               <label>Days mowed per week</label>
               <input value={customerInputs.daysMowedPerWeek} readOnly />
             </li>
-            <li>
+            <li className="green">
               <label>Number of NGBR units</label>
               <input value={customerInputs.numberNGBRUnits} readOnly />
             </li>
-            <li>
+            <li className="green">
               <label>[HELPER] Mowing hours for calculation</label>
               <input value={customerInputs.mowingHours} readOnly />
             </li>
@@ -636,7 +636,7 @@ const PaasCalculator = () => {
               </label>
               <input value={mowingMonthly} readOnly />
             </li>
-            <li>
+            <li className="green">
               <label>Length of mowing season</label>
               <input value={customerInputs.lengthMowingSeason} readOnly />
             </li>
@@ -662,11 +662,11 @@ const PaasCalculator = () => {
             <li className="title">
               Hardware: Number of required batteries and chargers
             </li>
-            <li>
+            <li className="gold">
               <label>Total number of batteries</label>
               <input value={requiredEquipment.totalBateries} readOnly />
             </li>
-            <li>
+            <li className="gold">
               <label>Total number of chargers</label>
               <input value={requiredEquipment.totalChargers} readOnly />
             </li>
@@ -697,19 +697,19 @@ const PaasCalculator = () => {
               <label>Single battery cost</label>
               <input value={powerProgramCosts.battery} readOnly />
             </li>
-            <li>
+            <li className="gold">
               <label>Total Cash Price</label>
               <input value={pricing.totalCashPrice} readOnly />
             </li>
-            <li>
+            <li className="gold">
               <label>Price/mo at 36 mos. 3.99%</label>
               <input value={pricing.priceMo36} readOnly />
             </li>
-            <li>
+            <li className="gold">
               <label>Price/mo at 48 mos. 4.99%</label>
               <input value={pricing.priceMo48} readOnly />
             </li>
-            <li>
+            <li className="gold">
               <label>Target PaaS Monthly Price</label>
               <input value={pricing.targetPaasMonthlyPrice} readOnly />
             </li>
@@ -717,7 +717,7 @@ const PaasCalculator = () => {
               <label className="red">Annualized PaaS Price</label>
               <input value={pricing.annualizedPaaSPrice} readOnly />
             </li>
-            <li>
+            <li className="gold">
               <label className="red">Annual rebate from off-season</label>
               <input value={pricing.annualRebateOffSeason} readOnly />
             </li>
@@ -738,7 +738,7 @@ const PaasCalculator = () => {
 
           <ul>
             <li className="title">Power cost</li>
-            <li className="red">
+            <li className="gold red">
               <label>Total monthly PaaS power cost</label>
               <input value={totalMonthlyPaaSPowerCost} readOnly />
             </li>
@@ -746,7 +746,7 @@ const PaasCalculator = () => {
               <label>Monthly PaaS power cost NGBR</label>
               <input value={monthlyPaaSPowerCostNGBR} readOnly />
             </li>
-            <li>
+            <li className="green">
               <label>Latest average monthly power price</label>
               <input value={latestAvgPowerPrice} readOnly />
             </li>
@@ -755,7 +755,7 @@ const PaasCalculator = () => {
               <input value={NGBRBatteryCapacity} readOnly />
             </li>
             <li className="title">Maintenance cost</li>
-            <li>
+            <li className="gold">
               <label>Total monthly PaaS maintenance cost</label>
               <input value={totalMonthlyPaaSMaintenanceCost} readOnly />
             </li>
@@ -775,7 +775,7 @@ const PaasCalculator = () => {
 
           <ul>
             <li className="title">Fuel cost</li>
-            <li>
+            <li className="gold">
               <label>Total monthly ZTR fuel cost</label>
               <input value={totalMonthlyZTRFuelCost} readOnly />
             </li>
@@ -820,7 +820,7 @@ const PaasCalculator = () => {
 
           <ul>
             <li className="title">Breakeven</li>
-            <li>
+            <li className="gold">
               <label>Breakeven: Outright purchase - With resale</label>
               <input
                 value={
@@ -834,7 +834,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>Breakeven: FPP - With resale</label>
               <input
                 value={
@@ -848,7 +848,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>Breakeven: 3-year financing - With resale</label>
               <input
                 value={
@@ -862,7 +862,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>Breakeven: 4-year financing - With resale</label>
               <input
                 value={
@@ -1053,7 +1053,7 @@ const PaasCalculator = () => {
 
           <ul>
             <li className="title">Gas ZTR</li>
-            <li>
+            <li className="gold">
               <label>TCO of gas ZTR</label>
               <input value={gasZTR.TCOofGasZTR} readOnly />
             </li>
@@ -1082,7 +1082,7 @@ const PaasCalculator = () => {
             <li className="title">
               Cash purchase (NGBR + batteries & chargers)
             </li>
-            <li>
+            <li className="gold">
               <label>TCO of NGBR + batteries & chargers</label>
               <input value={cashPurchase.TCOofNGBR} readOnly />
             </li>
@@ -1111,7 +1111,7 @@ const PaasCalculator = () => {
             <li className="title">
               NGBR with Flexible Power Program, and 3- and 4-year financing
             </li>
-            <li>
+            <li className="gold">
               <label>TCO of NGBR with FPP</label>
               <input
                 value={
@@ -1123,7 +1123,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>TCO of NGBR with 36-month financing</label>
               <input
                 value={
@@ -1135,7 +1135,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>TCO of NGBR with 48-month financing</label>
               <input
                 value={
@@ -1181,7 +1181,7 @@ const PaasCalculator = () => {
 
           <ul>
             <li className="title">Environmental benefits</li>
-            <li>
+            <li className="gold">
               <label>Equivalent miles driven in a car</label>
               <input
                 value={(
@@ -1191,7 +1191,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>Trees to plant to avoid equivalent CO2</label>
               <input
                 value={(
@@ -1201,7 +1201,7 @@ const PaasCalculator = () => {
                 readOnly
               />
             </li>
-            <li>
+            <li className="gold">
               <label>Pounds of CO2 avoided</label>
               <input value={poundsOfCO2Avoided.toFixed(2)} readOnly />
             </li>
@@ -1238,7 +1238,7 @@ const PaasCalculator = () => {
             <li className="title">
               Reduced ZTR downtime with NGBR from lower maintenance needs
             </li>
-            <li>
+            <li className="gold">
               <label>Time saved from reduced maintenance</label>
               <input
                 value={

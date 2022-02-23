@@ -30,6 +30,23 @@ body.active {
     color: red;
   }
 
+  .gold {
+    input,
+    input:read-only {
+      background: #febd17;
+      font-weight: 700;
+    }
+  }
+
+  .green {
+    input,
+    input:read-only {
+      color: green;
+      background: #fff;
+      border: 1px solid #333;
+    }
+  }
+
   .title {
     font-size: rem(14px);
     font-weight: 700;
@@ -293,6 +310,7 @@ body.active {
       &:read-only {
         background: #dfdfdf;
         border: 0;
+        text-align: center;
       }
     }
 
