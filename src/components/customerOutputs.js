@@ -43,18 +43,6 @@ const CustomerOutputs = ({
             />
           </span>
         </li>
-        <li className="column">
-          <span>
-            <label>Price/mo at 48 mos. 4.99%</label>
-          </span>
-          <span>
-            <input
-              id=""
-              value={dollarUSLocale.format(pricing.priceMo48)}
-              readOnly
-            />
-          </span>
-        </li>
       </ul>
 
       <ul className="outputs three">

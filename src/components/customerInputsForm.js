@@ -12,11 +12,25 @@ const CustomerInputsForm = ({
     <ul className="inputs">
       <li className="column">
         <span>
+          <label id="gasZTRPrice">
+            What's the price of a new, commercial-grade gas ZTR?
+          </label>
+        </span>
+        <span>
+          <input
+            type="number"
+            value={customerInputs.gasZTRPrice}
+            htmlFor="gasZTRPrice"
+            onChange={handleChange}
+          />
+        </span>
+      </li>
+      <li className="column">
+        <span>
           <label id="location">Which state do you operate in?</label>
         </span>
         <span>
           <select
-            id="location"
             htmlFor="location"
             value={customerInputs.location}
             onChange={(e) => {
@@ -47,19 +61,15 @@ const CustomerInputsForm = ({
         <span className="input">
           <input
             type="range"
-            min="1"
+            min="4"
             max="7"
             step="1"
             value={customerInputs.daysMowedPerWeek}
-            id="daysMowedPerWeek"
             onChange={handleChange}
             htmlFor="daysMowedPerWeek"
             list="daysMowedPerWeek-ticks"
           />
           <datalist id="daysMowedPerWeek-ticks">
-            <option value="1"></option>
-            <option value="2"></option>
-            <option value="3"></option>
             <option value="4"></option>
             <option value="5"></option>
             <option value="6"></option>
@@ -81,7 +91,6 @@ const CustomerInputsForm = ({
             max="10"
             step="1"
             value={customerInputs.numberNGBRUnits}
-            id="numberNGBRUnits"
             onChange={handleChange}
             htmlFor="numberNGBRUnits"
           />
@@ -97,30 +106,17 @@ const CustomerInputsForm = ({
             <li>
               <button
                 htmlFor="mowingHours"
-                value="1"
-                onClick={(e) => {
-                  buttonClick(e);
-                  handleChange(e);
-                }}
-              >
-                &#60;2
-              </button>
-            </li>
-            <li>
-              <button
-                htmlFor="mowingHours"
                 value="3"
                 onClick={(e) => {
                   buttonClick(e);
                   handleChange(e);
                 }}
               >
-                2-4
+                &#60;4
               </button>
             </li>
             <li>
               <button
-                className="active"
                 htmlFor="mowingHours"
                 value="5"
                 onClick={(e) => {
@@ -133,6 +129,7 @@ const CustomerInputsForm = ({
             </li>
             <li>
               <button
+                className="active"
                 htmlFor="mowingHours"
                 value="7"
                 onClick={(e) => {
@@ -171,7 +168,6 @@ const CustomerInputsForm = ({
             max="12"
             step="1"
             value={customerInputs.lengthMowingSeason}
-            id="lengthMowingSeason"
             onChange={handleChange}
             htmlFor="lengthMowingSeason"
           />

@@ -18,18 +18,44 @@ const CustomerOutputs = ({
   fuelConsumptionRate,
   monthlyMaintenanceCostPerZTR,
   averageHourlyMaintenanceCost,
+  depreciationGasZTR,
 }) => {
-  const hideShow = (e) => {
-    e.preventDefault();
-    e.target.closest("ul").classList.toggle("hide");
-  };
+  // const hideShow = (e) => {
+  //   e.preventDefault();
+  //   e.target.closest("ul").classList.toggle("hide");
+  // };
 
   return (
     <div className="overflow">
       <ul>
-        <li className="button-hide">
-          <button onClick={hideShow}>Hide</button>
+        <li>
+          <span>
+            <label>TCO of gas ZTR</label>
+          </span>
+          <span>
+            <input value={mowingMonthly} readOnly />
+          </span>
         </li>
+        <li>
+          <span>
+            <label>Depreciation of gas ZTR</label>
+          </span>
+          <span>
+            <input value={lengthOffSeason} readOnly />
+          </span>
+        </li>
+        <li>
+          <span>
+            <label>Gas ZTR depreciation rate</label>
+          </span>
+          <span>
+            <input value={requiredEquipment.bateries} readOnly />
+          </span>
+        </li>
+        
+      </ul>
+
+      <ul>
         <li>
           <span>
             <label>Converting mowing frequency to monthly</label>
@@ -39,9 +65,6 @@ const CustomerOutputs = ({
               id="mowingMonthly"
               type="number"
               value={mowingMonthly}
-              onChange={(e) => {
-                console.log("test");
-              }}
               readOnly
             />
           </span>
@@ -51,7 +74,7 @@ const CustomerOutputs = ({
             <label>Length of off-season</label>
           </span>
           <span>
-            <input id="" value={lengthOffSeason} readOnly />
+            <input value={lengthOffSeason} readOnly />
           </span>
         </li>
         <li>
@@ -59,7 +82,7 @@ const CustomerOutputs = ({
             <label>Number of batteries per NGBR</label>
           </span>
           <span>
-            <input id="" value={requiredEquipment.bateries} readOnly />
+            <input value={requiredEquipment.bateries} readOnly />
           </span>
         </li>
         <li>
@@ -67,21 +90,18 @@ const CustomerOutputs = ({
             <label>Number of chargers per NGBR</label>
           </span>
           <span>
-            <input id="" value={requiredEquipment.chargers} readOnly />
+            <input value={requiredEquipment.chargers} readOnly />
           </span>
         </li>
       </ul>
 
       <ul>
-        <li className="button-hide">
-          <button onClick={hideShow}>Hide</button>
-        </li>
         <li>
           <span>
             <label>Total number of batteries</label>
           </span>
           <span>
-            <input id="" value={requiredEquipment.totalBateries} readOnly />
+            <input value={requiredEquipment.totalBateries} readOnly />
           </span>
         </li>
         <li>
@@ -89,22 +109,18 @@ const CustomerOutputs = ({
             <label>Total number of chargers</label>
           </span>
           <span>
-            <input id="" value={requiredEquipment.totalChargers} readOnly />
+            <input value={requiredEquipment.totalChargers} readOnly />
           </span>
         </li>
       </ul>
 
       <ul>
-        <li className="button-hide">
-          <button onClick={hideShow}>Hide</button>
-        </li>
         <li>
           <span>
             <label>Total Cash Price</label>
           </span>
           <span>
             <input
-              id=""
               value={dollarUSLocale.format(pricing.totalCashPrice)}
               readOnly
             />
@@ -115,11 +131,7 @@ const CustomerOutputs = ({
             <label>Price/mo at 36 mos. 3.99%</label>
           </span>
           <span>
-            <input
-              id=""
-              value={dollarUSLocale.format(pricing.priceMo36)}
-              readOnly
-            />
+            <input value={dollarUSLocale.format(pricing.priceMo36)} readOnly />
           </span>
         </li>
         <li>
@@ -127,11 +139,7 @@ const CustomerOutputs = ({
             <label>Price/mo at 48 mos. 4.99%</label>
           </span>
           <span>
-            <input
-              id=""
-              value={dollarUSLocale.format(pricing.priceMo48)}
-              readOnly
-            />
+            <input value={dollarUSLocale.format(pricing.priceMo48)} readOnly />
           </span>
         </li>
         <li>
@@ -140,7 +148,6 @@ const CustomerOutputs = ({
           </span>
           <span>
             <input
-              id=""
               value={dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}
               readOnly
             />
@@ -152,7 +159,6 @@ const CustomerOutputs = ({
           </span>
           <span>
             <input
-              id=""
               value={dollarUSLocale.format(pricing.targetPaasMonthlyPrice * 12)}
               readOnly
             />
@@ -164,7 +170,6 @@ const CustomerOutputs = ({
           </span>
           <span>
             <input
-              id=""
               value={
                 lengthOffSeason > 6
                   ? "-"
@@ -180,7 +185,6 @@ const CustomerOutputs = ({
           </span>
           <span>
             <input
-              id=""
               value={
                 pricing.annualRebateOffSeason
                   ? dollarUSLocale.format(
@@ -196,16 +200,12 @@ const CustomerOutputs = ({
       </ul>
 
       <ul>
-        <li className="button-hide">
-          <button onClick={hideShow}>Hide</button>
-        </li>
         <li>
           <span>
             <label>Total monthly PaaS power cost</label>
           </span>
           <span>
             <input
-              id=""
               value={monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits}
               readOnly
             />
@@ -216,7 +216,7 @@ const CustomerOutputs = ({
             <label>Monthly PaaS power cost NGBR</label>
           </span>
           <span>
-            <input id="" value={monthlyPaaSPowerCostNGBR} readOnly />
+            <input value={monthlyPaaSPowerCostNGBR} readOnly />
           </span>
         </li>
         <li>
@@ -224,7 +224,7 @@ const CustomerOutputs = ({
             <label>Geography / location</label>
           </span>
           <span>
-            <input id="" value={customerInputs.location} readOnly />
+            <input value={customerInputs.location} readOnly />
           </span>
         </li>
         <li>
@@ -232,7 +232,7 @@ const CustomerOutputs = ({
             <label>Latest average monthly power price</label>
           </span>
           <span>
-            <input id="" value={latestAvgPowerPrice} readOnly />
+            <input value={latestAvgPowerPrice} readOnly />
           </span>
         </li>
         <li>
@@ -240,7 +240,7 @@ const CustomerOutputs = ({
             <label>[HELPER] Latest month</label>
           </span>
           <span>
-            <input id="" value={lastestMonth} readOnly />
+            <input value={lastestMonth} readOnly />
           </span>
         </li>
         <li>
@@ -248,22 +248,18 @@ const CustomerOutputs = ({
             <label>Power consumption rate per NGBR</label>
           </span>
           <span>
-            <input id="" value={NGBRBatteryCapacity} readOnly />
+            <input value={NGBRBatteryCapacity} readOnly />
           </span>
         </li>
       </ul>
 
       <ul>
-        <li className="button-hide">
-          <button onClick={hideShow}>Hide</button>
-        </li>
         <li>
           <span>
             <label>Total monthly PaaS maintenance cost</label>
           </span>
           <span>
             <input
-              id=""
               value={
                 monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
               }
@@ -276,7 +272,7 @@ const CustomerOutputs = ({
             <label>Monthly maintenance cost per NGBR</label>
           </span>
           <span>
-            <input id="" value={monthlyMaintenanceCostPerNGBR} readOnly />
+            <input value={monthlyMaintenanceCostPerNGBR} readOnly />
           </span>
         </li>
         <li>
@@ -284,15 +280,15 @@ const CustomerOutputs = ({
             <label>Electric maintenance cost as % of gas</label>
           </span>
           <span>
-            <input id="" value={electricMaintenanceCostGas} readOnly />
+            <input value={electricMaintenanceCostGas} readOnly />
           </span>
         </li>
       </ul>
 
       <ul>
-        <li className="button-hide">
+        {/* <li className="button-hide">
           <button onClick={hideShow}>Hide</button>
-        </li>
+        </li> */}
         <li>
           <span>
             <label>Total monthly ZTR fuel cost</label>
@@ -370,9 +366,6 @@ const CustomerOutputs = ({
       </ul>
 
       <ul>
-        <li className="button-hide">
-          <button onClick={hideShow}>Hide</button>
-        </li>
         <li>
           <span>
             <label>Total monthly ZTR maintenance cost</label>

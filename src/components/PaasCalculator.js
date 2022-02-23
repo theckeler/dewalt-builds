@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../scss/paas-calculator.scss";
 import CustomerInputsForm from "./customerInputsForm";
 import CustomerOutputs from "./customerOutputs";
-import MainOutput from "./mainOutput";
+//import MainOutput from "./mainOutput";
 
 const PaasCalculator = () => {
   const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
@@ -14,6 +14,7 @@ const PaasCalculator = () => {
   };
 
   const handleChange = (e) => {
+    console.log(e.target.getAttribute("for"), e.target.value);
     let inputValue;
     if (isNaN(e.target.value)) {
       inputValue = e.target.value;
@@ -56,19 +57,21 @@ const PaasCalculator = () => {
   };
 
   const averageWeeksPerMonth = Number(52 / 12).toFixed(2); // [HELPER] Average weeks per month (52/12)
-  const [mowingMonthly, setMowingMonthly] = useState(108); // Converting mowing frequency to monthly
+  const [mowingMonthly, setMowingMonthly] = useState(151.67); // Converting mowing frequency to monthly
   const [lengthOffSeason, setLengthOffSeason] = useState(2.0); // [HELPER] Length of off-season (12 - lengthMowingSeason)
   const [customerInputs, setCustomerInputs] = useState({
     location: "OH", // Geography / location
     daysMowedPerWeek: 5, // Days mowed per week
     numberNGBRUnits: 1, // # Number of NGBR units
-    mowingHours: 5, //    [HELPER] Mowing hours for calculation,
+    mowingHours: 7, //    [HELPER] Mowing hours for calculation,
     lengthMowingSeason: 10, // Length of mowing season
+    gasZTRPrice: 11000, // Price of gas ZTR
   });
+
   const [requiredEquipment, setRequiredEquipment] = useState({
-    bateries: 7,
+    bateries: 10,
     chargers: 2,
-    totalBateries: 7,
+    totalBateries: 10,
     totalChargers: 2,
   });
   const powerProgramCosts = {
@@ -81,73 +84,141 @@ const PaasCalculator = () => {
     minimumFractionDigits: 2,
   });
   const NGBRBatteryCapacity = 5;
-  const lastestMonth = "Oct 2021";
+  //const lastestMonth = "Oct 2021";
   const averageHourlyMaintenanceCost = 1.05;
-  const lastestWeek = "Jan 10, 2022";
-  const fuelConsumptionRate = 1.7;
+  //const lastestWeek = "Jan 10, 2022";
+  const fuelConsumptionRate = 1.9;
   const electricMaintenanceCostGas = 0.07;
   const [PADDRegion, setPADDRegion] = useState("PADD2");
-  const [pricing, setPricing] = useState(0);
-  const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(0);
+  const [pricing, setPricing] = useState({
+    totalCashPrice: 21858,
+    priceMo36: 645,
+    priceMo48: 503,
+    targetPaasMonthlyPrice: 554,
+    annualizedPaaSPrice: 6643,
+    annualRebateOffSeason: 5536,
+  });
+  const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(76);
+  const [totalMonthlyPaaSPowerCost, setTotalMonthlyPaaSPowerCost] =
+    useState(76);
   const [monthlyMaintenanceCostPerZTR, setMonthlyMaintenanceCostPerZTR] =
     useState(0);
+
   const [monthlyFuelCostPerZTR, setMonthlyFuelCostPerZTR] = useState(0);
+
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
   const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
   const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(0.1004);
+  const [totalMonthlyZTRFuelCost, setTotalMonthlyZTRFuelCost] = useState(0);
+  const [totalMonthlyZTRMaintenanceCost, setTotalMonthlyZTRMaintenanceCost] =
+    useState(0);
 
-  useEffect(() => {
-    const padds = {
-      PADD1: "PET.EMM_EPMRU_PTE_R10_DPG.W", // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD1
-      PADD2: "PET.EMM_EPMRU_PTE_R20_DPG.W", // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD2
-      PADD3: "PET.EMM_EPMRU_PTE_R30_DPG.W", // PET.EMM_EPMRU_PTE_R30_DPG.W - PADD3
-      PADD4: "PET.EMM_EPMRU_PTE_R40_DPG.W", // PET.EMM_EPMRU_PTE_R40_DPG.W - PADD4
-      PADD5: "PET.EMM_EPMRU_PTE_R50_DPG.W", // PET.EMM_EPMRU_PTE_R50_DPG.W - PADD5
-    };
-    const eiaKey = process.env.REACT_APP_EIA_KEY;
-    const fetchData = async (updateWhat, url) => {
-      await fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          updateWhat === "fuel"
-            ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
-            : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-          console.error("There has been an error:", error);
-        });
-    };
-    fetchData(
-      "fuel",
-      `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=${padds[PADDRegion]}`
-    );
-    fetchData(
-      "power",
-      `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=ELEC.PRICE.${customerInputs.location}-ALL.M`
-    );
-  }, [
-    latestFuelWeeklyPrice,
-    latestAvgPowerPrice,
-    PADDRegion,
-    customerInputs.location,
-  ]);
+  const depreciationInputs = {
+    typicalOwnershipTimelineZTRs: 2,
+    typicalHoursMowedPerYear: 1612,
+    typicalHoursMowedPerYearHigh: 2184,
+    typicalHoursMowedPerYearLow: 1040,
+    resalePremiumElectricVsGasZTRs: 0.15,
+    gasZTRDepreciationRate: 0.78,
+    electricZTRDepreciationRate: 0.63,
+  };
+  const totalHoursMowedTCOAnalysis =
+    Math.round(
+      (depreciationInputs.typicalOwnershipTimelineZTRs *
+        depreciationInputs.typicalHoursMowedPerYear) /
+        1000
+    ) * 1000;
+  const lengthMowingOperationsTCO = (
+    totalHoursMowedTCOAnalysis /
+    (mowingMonthly * customerInputs.lengthMowingSeason)
+  ).toFixed(2); // Length of mowing operations for TCO
+  const paaSPremiumOverFourYearFinancing = 0.1;
+  const [totalMonthlyPaaSMaintenanceCost, setTotalMonthlyPaaSMaintenanceCost] =
+    useState(0);
+  const [NGBROpEx, setNGBROpEx] = useState(0);
+  const [gasZTROpEx, setGasZTROpEx] = useState(0);
+  const [totalGasZTRPurchasePrice, setTotalGasZTRPurchasePrice] = useState(0);
+  const BareNGBR = 19500;
+  const [totalNGBRCostBare, setTotalNGBRCostBare] = useState(0);
+  const [costofChargers, setCostofChargers] = useState(0);
+  const [costofBateries, setCostofBateries] = useState(0);
+  const [totalNGBRCostWith, setTotalNGBRCostWith] = useState(0);
+  const [savingsWith4yearFinancing, setSavingsWith4yearFinancing] = useState(0);
+  const [savingsWith3yearFinancing, setSavingsWith3yearFinancing] = useState(0);
+  const [savingsWithFPP, setSavingsWithFPP] = useState(0);
+  const [savingsWithNGBRCashPurchase, setSavingsWithNGBRCashPurchase] =
+    useState(0);
+  const [breakeven, setBreakeven] = useState({
+    breakeven4yearFinancingNoResale: 0,
+    breakeven3yearFinancingNoResale: 0,
+    breakevenFPPNoResale: 0,
+    breakevenOutrightPurchaseNoResale: 0,
+  });
+  const [NGBRResalePriceBareNGBR, setNGBRResalePriceBareNGBR] = useState(0);
+  const [NGBRResalePriceNGBR, setNGBRResalePriceNGBR] = useState(0);
+  const [gasZTRResalePrice, setGasZTRResalePrice] = useState(0);
+  const [eZTRResalePremiumBareNGBR, setEZTRResalePremiumBareNGBR] = useState(0);
+  const [eZTRResalePremiumCashPurchase, setEZTRResalePremiumCashPurchase] =
+    useState(0);
+  const [gasZTR, setGasZTR] = useState({
+    TCOofGasZTR: 0,
+    depreciationofGasZTR: 0,
+    fuel: 0,
+    maintenance: 0,
+  });
+  const [cashPurchase, setCashPurchase] = useState({
+    TCOofNGBR: 0,
+    depreciationofGasZTR: 0,
+    power: 0,
+    maintenance: 0,
+  });
+  const [NGBRWithFlexiblePowerProgram, setNGBRWithFlexiblePowerProgram] =
+    useState({
+      depreciationOfBareNGBR: 0,
+      flexiblePowerProgramSubscription: 0,
+      financingFee36: 0,
+      financingFee48: 0,
+    });
+  const [enviromentalBenefits, setEnviromentalBenefits] = useState({
+    gallonsOfFuelConsumedOverPerYear: 2882,
+    convertingGallonsOfGasolineToCO2: 19,
+    poundsCO2SequesteredPerUrbanTreePlanted: 132,
+    poundsCO2EmittedPerMileDrivenInACar: 1.1,
+  });
+  const [
+    gallonsOfFuelConsumedOverPerYear,
+    setGallonsOfFuelConsumedOverPerYear,
+  ] = useState(2882);
+  const [poundsOfCO2Avoided, setPoundsOfCO2Avoided] = useState(53994);
+
+  const averageFrequencyPerZTRServicing = 100;
+  const averageCommuteToFromServicingDealer = 0.5;
+  const averageTimeForServicing = 2;
+  const averageTotalTimeForServicing =
+    averageTimeForServicing + averageCommuteToFromServicingDealer;
+  const [numberOfMaintenanceJobsPerYear, setNumberOfMaintenanceJobsPerYear] =
+    useState(15.2);
+  const [reductionFromNGBRResale, setReductionFromNGBRResale] = useState({
+    cashPurchase: 11,
+    FPP: 12,
+    financing36: 15,
+    financing48: 10,
+  });
 
   useEffect(() => {
     setMowingMonthly(
-      Math.round(
-        customerInputs.mowingHours *
-          customerInputs.daysMowedPerWeek *
-          averageWeeksPerMonth
-      )
+      customerInputs.mowingHours *
+        customerInputs.daysMowedPerWeek *
+        averageWeeksPerMonth
     );
     setLengthOffSeason(12 - customerInputs.lengthMowingSeason);
     setMonthlyPaaSPowerCostNGBR(
       Math.round(latestAvgPowerPrice * NGBRBatteryCapacity * mowingMonthly)
     );
-
+    setTotalMonthlyPaaSPowerCost(
+      monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+    );
     switch (customerInputs.mowingHours) {
       case 1:
         setRequiredEquipment({
@@ -198,18 +269,160 @@ const PaasCalculator = () => {
         });
         break;
     }
-
     setMonthlyMaintenanceCostPerZTR(
       Math.round(averageHourlyMaintenanceCost * mowingMonthly)
     );
-
     setMonthlyFuelCostPerZTR(
       Math.round(latestFuelWeeklyPrice * fuelConsumptionRate * mowingMonthly)
     );
-
     setMonthlyMaintenanceCostPerNGBR(
       Math.round(monthlyMaintenanceCostPerZTR * electricMaintenanceCostGas)
     );
+    setTotalMonthlyPaaSMaintenanceCost(
+      monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
+    );
+    setNGBROpEx(totalMonthlyPaaSPowerCost + totalMonthlyPaaSMaintenanceCost);
+    setTotalMonthlyZTRFuelCost(
+      monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+    );
+    setTotalMonthlyZTRMaintenanceCost(
+      monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+    );
+    setGasZTROpEx(totalMonthlyZTRFuelCost + totalMonthlyZTRMaintenanceCost);
+    setTotalGasZTRPurchasePrice(
+      customerInputs.gasZTRPrice * customerInputs.numberNGBRUnits
+    );
+    setTotalNGBRCostBare(BareNGBR * customerInputs.numberNGBRUnits);
+    setCostofChargers(
+      powerProgramCosts.charger * requiredEquipment.totalChargers
+    );
+    setCostofBateries(
+      powerProgramCosts.battery * requiredEquipment.totalBateries
+    );
+    setTotalNGBRCostWith(costofBateries + costofChargers + totalNGBRCostBare);
+    setSavingsWith4yearFinancing(gasZTROpEx - (NGBROpEx + pricing.priceMo48));
+    setSavingsWith3yearFinancing(gasZTROpEx - (NGBROpEx + pricing.priceMo36));
+    setSavingsWithFPP(gasZTROpEx - (NGBROpEx + pricing.targetPaasMonthlyPrice));
+    setSavingsWithNGBRCashPurchase(gasZTROpEx - NGBROpEx);
+
+    setBreakeven({
+      breakevenOutrightPurchaseNoResale: (
+        (totalNGBRCostWith - totalGasZTRPurchasePrice) /
+        savingsWithNGBRCashPurchase
+      ).toFixed(1),
+      breakevenFPPNoResale: (
+        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
+        savingsWithFPP
+      ).toFixed(1),
+      breakeven3yearFinancingNoResale: (
+        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
+        savingsWith3yearFinancing
+      ).toFixed(1),
+      breakeven4yearFinancingNoResale: (
+        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
+        savingsWith4yearFinancing
+      ).toFixed(1),
+    });
+    setNGBRResalePriceBareNGBR(
+      (
+        totalNGBRCostBare *
+        (1 - depreciationInputs.electricZTRDepreciationRate)
+      ).toFixed(2)
+    );
+    setNGBRResalePriceNGBR(
+      (
+        totalNGBRCostWith *
+        (1 - depreciationInputs.electricZTRDepreciationRate)
+      ).toFixed(2)
+    );
+    setGasZTRResalePrice(
+      (
+        totalGasZTRPurchasePrice *
+        (1 - depreciationInputs.gasZTRDepreciationRate)
+      ).toFixed(2)
+    );
+    setEZTRResalePremiumBareNGBR(NGBRResalePriceBareNGBR - gasZTRResalePrice);
+    setEZTRResalePremiumCashPurchase(
+      NGBRResalePriceNGBR - eZTRResalePremiumBareNGBR
+    );
+    setGasZTR({
+      TCOofGasZTR:
+        gasZTR.depreciationofGasZTR + gasZTR.fuel + gasZTR.maintenance,
+      depreciationofGasZTR:
+        customerInputs.gasZTRPrice *
+        depreciationInputs.gasZTRDepreciationRate *
+        customerInputs.numberNGBRUnits,
+      fuel:
+        totalMonthlyZTRFuelCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      maintenance:
+        totalMonthlyZTRMaintenanceCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+    });
+    setCashPurchase({
+      TCOofNGBR:
+        cashPurchase.depreciationofGasZTR +
+        cashPurchase.power +
+        cashPurchase.maintenance,
+      depreciationofGasZTR:
+        totalNGBRCostWith * depreciationInputs.electricZTRDepreciationRate,
+      power:
+        totalMonthlyPaaSPowerCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      maintenance:
+        totalMonthlyPaaSMaintenanceCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+    });
+    setNGBRWithFlexiblePowerProgram({
+      depreciationOfBareNGBR:
+        totalNGBRCostBare * depreciationInputs.electricZTRDepreciationRate,
+      flexiblePowerProgramSubscription:
+        pricing.targetPaasMonthlyPrice *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      financingFee36:
+        pricing.priceMo36 *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      financingFee48:
+        pricing.priceMo48 *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+    });
+    setGallonsOfFuelConsumedOverPerYear(
+      fuelConsumptionRate *
+        mowingMonthly *
+        customerInputs.lengthMowingSeason *
+        customerInputs.numberNGBRUnits
+    );
+    setPoundsOfCO2Avoided(
+      gallonsOfFuelConsumedOverPerYear *
+        enviromentalBenefits.convertingGallonsOfGasolineToCO2
+    );
+    setNumberOfMaintenanceJobsPerYear(
+      (
+        (mowingMonthly *
+          customerInputs.lengthMowingSeason *
+          customerInputs.numberNGBRUnits) /
+        averageFrequencyPerZTRServicing
+      ).toFixed(1)
+    );
+    setReductionFromNGBRResale({
+      cashPurchase: Math.round(
+        eZTRResalePremiumCashPurchase / savingsWithNGBRCashPurchase
+      ),
+      FPP: Math.round(eZTRResalePremiumBareNGBR / savingsWithFPP),
+      financing36: Math.round(
+        eZTRResalePremiumBareNGBR / savingsWith3yearFinancing
+      ),
+      financing48: Math.round(
+        eZTRResalePremiumBareNGBR / savingsWith4yearFinancing
+      ),
+    });
   }, [
     customerInputs,
     averageWeeksPerMonth,
@@ -217,6 +430,48 @@ const PaasCalculator = () => {
     monthlyMaintenanceCostPerZTR,
     latestFuelWeeklyPrice,
     latestAvgPowerPrice,
+    monthlyPaaSPowerCostNGBR,
+    monthlyMaintenanceCostPerNGBR,
+    setNGBROpEx,
+    totalMonthlyPaaSPowerCost,
+    totalMonthlyPaaSMaintenanceCost,
+    monthlyFuelCostPerZTR,
+    totalMonthlyZTRFuelCost,
+    powerProgramCosts.charger,
+    requiredEquipment.totalChargers,
+    costofBateries,
+    totalNGBRCostBare,
+    gasZTROpEx,
+    NGBROpEx,
+    pricing.priceMo48,
+    pricing.priceMo36,
+    pricing.targetPaasMonthlyPrice,
+    totalGasZTRPurchasePrice,
+    savingsWithFPP,
+    savingsWith3yearFinancing,
+    totalNGBRCostWith,
+    savingsWithNGBRCashPurchase,
+    powerProgramCosts.battery,
+    requiredEquipment.totalBateries,
+    savingsWith4yearFinancing,
+    totalMonthlyZTRMaintenanceCost,
+    costofChargers,
+    depreciationInputs.electricZTRDepreciationRate,
+    depreciationInputs.gasZTRDepreciationRate,
+    NGBRResalePriceBareNGBR,
+    gasZTRResalePrice,
+    NGBRResalePriceNGBR,
+    eZTRResalePremiumBareNGBR,
+    lengthMowingOperationsTCO,
+    gasZTR.depreciationofGasZTR,
+    gasZTR.fuel,
+    gasZTR.maintenance,
+    cashPurchase.depreciationofGasZTR,
+    cashPurchase.power,
+    cashPurchase.maintenance,
+    enviromentalBenefits,
+    gallonsOfFuelConsumedOverPerYear,
+    eZTRResalePremiumCashPurchase,
   ]);
 
   useEffect(() => {
@@ -230,7 +485,10 @@ const PaasCalculator = () => {
       priceMo48: Math.round(
         PMT(0.0499 / 12, 48, -pricing.totalCashPrice, 0, 0)
       ),
-      targetPaasMonthlyPrice: pricing.priceMo48 + (pricing.priceMo48 * 0.1 + 1),
+      targetPaasMonthlyPrice: Math.round(
+        pricing.priceMo48 + (pricing.priceMo48 * 0.1 + 1)
+      ),
+      annualizedPaaSPrice: Math.round(pricing.targetPaasMonthlyPrice * 12),
       annualRebateOffSeason: lengthOffSeason * pricing.targetPaasMonthlyPrice,
     });
   }, [
@@ -243,6 +501,7 @@ const PaasCalculator = () => {
     lengthOffSeason,
   ]);
 
+  // OBSERVE
   const [checkObserve, setCheckObserve] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -263,6 +522,46 @@ const PaasCalculator = () => {
     );
     observer.observe(document.querySelector("#outputs"));
   }, [checkObserve]);
+
+  // Get Fuel & Electric Prices
+  useEffect(() => {
+    setLoading(false);
+    // const padds = {
+    //   PADD1: "PET.EMM_EPMRU_PTE_R10_DPG.W", // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD1
+    //   PADD2: "PET.EMM_EPMRU_PTE_R20_DPG.W", // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD2
+    //   PADD3: "PET.EMM_EPMRU_PTE_R30_DPG.W", // PET.EMM_EPMRU_PTE_R30_DPG.W - PADD3
+    //   PADD4: "PET.EMM_EPMRU_PTE_R40_DPG.W", // PET.EMM_EPMRU_PTE_R40_DPG.W - PADD4
+    //   PADD5: "PET.EMM_EPMRU_PTE_R50_DPG.W", // PET.EMM_EPMRU_PTE_R50_DPG.W - PADD5
+    // };
+    // const eiaKey = process.env.REACT_APP_EIA_KEY;
+    // const fetchData = async (updateWhat, url) => {
+    //   await fetch(url)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       updateWhat === "fuel"
+    //         ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
+    //         : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
+    //       setLoading(false);
+    //     })
+    //     .catch((error) => {
+    //       setLoading(false);
+    //       console.error("There has been an error:", error);
+    //     });
+    // };
+    // fetchData(
+    //   "fuel",
+    //   `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=${padds[PADDRegion]}`
+    // );
+    // fetchData(
+    //   "power",
+    //   `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=ELEC.PRICE.${customerInputs.location}-ALL.M`
+    // );
+  }, [
+    latestFuelWeeklyPrice,
+    latestAvgPowerPrice,
+    PADDRegion,
+    customerInputs.location,
+  ]);
 
   return (
     <>
@@ -297,7 +596,7 @@ const PaasCalculator = () => {
 
       <form
         id="output"
-        className={`main-output ${checkObserve ? "on-screen" : ""}`}
+        className={`main-output active ${checkObserve ? "on-screen" : ""}`}
       >
         <button onClick={hideShowSection}>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
@@ -306,27 +605,687 @@ const PaasCalculator = () => {
           </svg>
         </button>
 
-        <MainOutput
-          mowingMonthly={mowingMonthly}
-          lengthOffSeason={lengthOffSeason}
-          requiredEquipment={requiredEquipment}
-          dollarUSLocale={dollarUSLocale}
-          pricing={pricing}
-          monthlyPaaSPowerCostNGBR={monthlyPaaSPowerCostNGBR}
-          customerInputs={customerInputs}
-          latestAvgPowerPrice={latestAvgPowerPrice}
-          lastestMonth={lastestMonth}
-          NGBRBatteryCapacity={NGBRBatteryCapacity}
-          monthlyMaintenanceCostPerNGBR={monthlyMaintenanceCostPerNGBR}
-          electricMaintenanceCostGas={electricMaintenanceCostGas}
-          monthlyFuelCostPerZTR={monthlyFuelCostPerZTR}
-          PADDRegion={PADDRegion}
-          latestFuelWeeklyPrice={latestFuelWeeklyPrice}
-          lastestWeek={lastestWeek}
-          fuelConsumptionRate={fuelConsumptionRate}
-          monthlyMaintenanceCostPerZTR={monthlyMaintenanceCostPerZTR}
-          averageHourlyMaintenanceCost={averageHourlyMaintenanceCost}
-        />
+        <div className="overflow">
+          <ul>
+            <li className="title">Customer-provided inputs for reference</li>
+            <li>
+              <label>Geography / location</label>
+              <input value={customerInputs.location} readOnly />
+            </li>
+            <li>
+              <label>Days mowed per week</label>
+              <input value={customerInputs.daysMowedPerWeek} readOnly />
+            </li>
+            <li>
+              <label>Number of NGBR units</label>
+              <input value={customerInputs.numberNGBRUnits} readOnly />
+            </li>
+            <li>
+              <label>[HELPER] Mowing hours for calculation</label>
+              <input value={customerInputs.mowingHours} readOnly />
+            </li>
+            <li>
+              <label>[HELPER] Average weeks per month</label>
+              <input value={averageWeeksPerMonth} readOnly />
+            </li>
+            <li>
+              <label className="red">
+                Converting mowing frequency to monthly
+              </label>
+              <input value={mowingMonthly} readOnly />
+            </li>
+            <li>
+              <label>Length of mowing season</label>
+              <input value={customerInputs.lengthMowingSeason} readOnly />
+            </li>
+            <li>
+              <label>[HELPER] Length of off-season</label>
+              <input value={lengthOffSeason} readOnly />
+            </li>
+            <li>
+              <label>Price of gas ZTR</label>
+              <input value={customerInputs.gasZTRPrice} readOnly />
+            </li>
+            <li>
+              <label>Length of mowing operations for TCO</label>
+              <input value={lengthMowingOperationsTCO} readOnly />
+            </li>
+            <li>
+              <label>Total mowing hours for TCO</label>
+              <input value={totalHoursMowedTCOAnalysis} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">
+              Hardware: Number of required batteries and chargers
+            </li>
+            <li>
+              <label>Total number of batteries</label>
+              <input value={requiredEquipment.totalBateries} readOnly />
+            </li>
+            <li>
+              <label>Total number of chargers</label>
+              <input value={requiredEquipment.totalChargers} readOnly />
+            </li>
+            <li>
+              <label>Number of batteries per NGBR</label>
+              <input value={requiredEquipment.bateries} readOnly />
+            </li>
+            <li>
+              <label>Number of chargers per NGBR</label>
+              <input value={requiredEquipment.chargers} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">
+              Pricing: Flexible Power Program, 3- and 4-year financing, and cash
+              buyout
+            </li>
+            <li>
+              <label>PaaS premium over 4-year financing</label>
+              <input value={paaSPremiumOverFourYearFinancing} readOnly />
+            </li>
+            <li>
+              <label>Single charger cost</label>
+              <input value={powerProgramCosts.charger} readOnly />
+            </li>
+            <li>
+              <label>Single battery cost</label>
+              <input value={powerProgramCosts.battery} readOnly />
+            </li>
+            <li>
+              <label>Total Cash Price</label>
+              <input value={pricing.totalCashPrice} readOnly />
+            </li>
+            <li>
+              <label>Price/mo at 36 mos. 3.99%</label>
+              <input value={pricing.priceMo36} readOnly />
+            </li>
+            <li>
+              <label>Price/mo at 48 mos. 4.99%</label>
+              <input value={pricing.priceMo48} readOnly />
+            </li>
+            <li>
+              <label>Target PaaS Monthly Price</label>
+              <input value={pricing.targetPaasMonthlyPrice} readOnly />
+            </li>
+            <li>
+              <label className="red">Annualized PaaS Price</label>
+              <input value={pricing.annualizedPaaSPrice} readOnly />
+            </li>
+            <li>
+              <label className="red">Annual rebate from off-season</label>
+              <input value={pricing.annualRebateOffSeason} readOnly />
+            </li>
+            <li className="red">
+              <label>Annualized PaaS Price (with off-season)</label>
+              <input
+                value={
+                  pricing.annualizedPaaSPrice - pricing.annualRebateOffSeason
+                }
+                readOnly
+              />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">OpEx cost benchmarking: PaaS vs gas ZTRs</li>
+          </ul>
+
+          <ul>
+            <li className="title">Power cost</li>
+            <li className="red">
+              <label>Total monthly PaaS power cost</label>
+              <input value={totalMonthlyPaaSPowerCost} readOnly />
+            </li>
+            <li className="red">
+              <label>Monthly PaaS power cost NGBR</label>
+              <input value={monthlyPaaSPowerCostNGBR} readOnly />
+            </li>
+            <li>
+              <label>Latest average monthly power price</label>
+              <input value={latestAvgPowerPrice} readOnly />
+            </li>
+            <li>
+              <label>Power consumption rate per NGBR</label>
+              <input value={NGBRBatteryCapacity} readOnly />
+            </li>
+            <li className="title">Maintenance cost</li>
+            <li>
+              <label>Total monthly PaaS maintenance cost</label>
+              <input value={totalMonthlyPaaSMaintenanceCost} readOnly />
+            </li>
+            <li>
+              <label>Monthly maintenance cost per NGBR</label>
+              <input value={monthlyMaintenanceCostPerNGBR} readOnly />
+            </li>
+            <li>
+              <label>Electric maintenance cost as % of gas</label>
+              <input value={electricMaintenanceCostGas} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">Gas ZTR OpEx</li>
+          </ul>
+
+          <ul>
+            <li className="title">Fuel cost</li>
+            <li>
+              <label>Total monthly ZTR fuel cost</label>
+              <input value={totalMonthlyZTRFuelCost} readOnly />
+            </li>
+            <li>
+              <label>Monthly fuel cost per ZTR</label>
+              <input value={monthlyFuelCostPerZTR} readOnly />
+            </li>
+            <li>
+              <label>Geography / location</label>
+              <input value={customerInputs.location} readOnly />
+            </li>
+            <li>
+              <label>PADD region</label>
+              <input value={PADDRegion} readOnly />
+            </li>
+            <li>
+              <label>Latest fuel weekly price</label>
+              <input value={latestFuelWeeklyPrice} readOnly />
+            </li>
+            <li>
+              <label>Fuel consumption rate</label>
+              <input value={fuelConsumptionRate} readOnly />
+            </li>
+            <li className="title">Maintenance cost</li>
+            <li>
+              <label>Total monthly ZTR maintenance cost</label>
+              <input value={totalMonthlyZTRMaintenanceCost} readOnly />
+            </li>
+            <li>
+              <label>Monthly maintenance cost per ZTR</label>
+              <input value={monthlyMaintenanceCostPerZTR} readOnly />
+            </li>
+            <li>
+              <label>Average hourly maintenance cost</label>
+              <input value={averageHourlyMaintenanceCost} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">Breakeven calculations</li>
+          </ul>
+
+          <ul>
+            <li className="title">Breakeven</li>
+            <li>
+              <label>Breakeven: Outright purchase - With resale</label>
+              <input value="" readOnly />
+            </li>
+            <li>
+              <label>Breakeven: FPP - With resale</label>
+              <input value="" readOnly />
+            </li>
+            <li>
+              <label>Breakeven: 3-year financing - With resale</label>
+              <input value="" readOnly />
+            </li>
+            <li>
+              <label>Breakeven: 4-year financing - With resale</label>
+              <input value="" readOnly />
+            </li>
+            <li>
+              <label>Breakeven: Outright purchase - No resale</label>
+              <input
+                value={breakeven.breakevenOutrightPurchaseNoResale}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Breakeven: FPP - No resale</label>
+              <input value={breakeven.breakevenFPPNoResale} readOnly />
+            </li>
+            <li>
+              <label>Breakeven: 3-year financing - No resale</label>
+              <input
+                value={breakeven.breakeven3yearFinancingNoResale}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Breakeven: 4-year financing - No resale</label>
+              <input
+                value={breakeven.breakeven4yearFinancingNoResale}
+                readOnly
+              />
+            </li>
+            <li className="title">OpEx savings</li>
+            <li>
+              <label>Savings with NGBR cash purchase</label>
+              <input value={savingsWithNGBRCashPurchase} readOnly />
+            </li>
+            <li>
+              <label>Savings with FPP</label>
+              <input value={savingsWithFPP} readOnly />
+            </li>
+            <li>
+              <label>Savings with 3-year financing</label>
+              <input value={savingsWith3yearFinancing} readOnly />
+            </li>
+            <li>
+              <label>Savings with 4-year financing</label>
+              <input value={savingsWith4yearFinancing} readOnly />
+            </li>
+            <li>
+              <label>Total NGBR cost (with batteries & chargers)</label>
+              <input value={totalNGBRCostWith} readOnly />
+            </li>
+            <li>
+              <label>Cost of batteries</label>
+              <input value={costofBateries} readOnly />
+            </li>
+            <li>
+              <label>Cost of chargers</label>
+              <input value={costofChargers} readOnly />
+            </li>
+            <li>
+              <label>Total NGBR cost (bare NGBR, no batteries)</label>
+              <input value={totalNGBRCostBare} readOnly />
+            </li>
+            <li>
+              <label>Bare NGBR (no batteries)</label>
+              <input value={BareNGBR} readOnly />
+            </li>
+            <li>
+              <label>Total Gas ZTR purchase price</label>
+              <input
+                value={totalGasZTRPurchasePrice ? totalGasZTRPurchasePrice : ""}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Gas ZTR purchase price</label>
+              <input value={customerInputs.gasZTRPrice} readOnly />
+            </li>
+            <li>
+              <label>Gas ZTR OpEx</label>
+              <input value={gasZTROpEx} readOnly />
+            </li>
+            <li>
+              <label>NGBR OpEx</label>
+              <input value={NGBROpEx} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">Reduction in breakeven from NGBR resale</li>
+            <li>
+              <label>Reduction from NGBR resale (cash purchase)</label>
+              <input
+                value={
+                  reductionFromNGBRResale.cashPurchase
+                    ? reductionFromNGBRResale.cashPurchase
+                    : ""
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Reduction from NGBR resale (FPP)</label>
+              <input
+                value={
+                  reductionFromNGBRResale.FPP ? reductionFromNGBRResale.FPP : ""
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Reduction from NGBR resale (3-year financing)</label>
+              <input
+                value={
+                  reductionFromNGBRResale.financing36
+                    ? reductionFromNGBRResale.financing36
+                    : ""
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Reduction from NGBR resale (4-year financing)</label>
+              <input
+                value={
+                  reductionFromNGBRResale.financing48
+                    ? reductionFromNGBRResale.financing48
+                    : ""
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>eZTR resale premium (cash purchase)</label>
+              <input
+                value={
+                  eZTRResalePremiumCashPurchase
+                    ? eZTRResalePremiumCashPurchase
+                    : ""
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>eZTR resale premium (bare NGBR)</label>
+              <input
+                value={
+                  eZTRResalePremiumBareNGBR ? eZTRResalePremiumBareNGBR : ""
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Gas ZTR resale price</label>
+              <input
+                value={gasZTRResalePrice ? gasZTRResalePrice : ""}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>NGBR resale price (NGBR + batteries & chargers)</label>
+              <input
+                value={NGBRResalePriceNGBR ? NGBRResalePriceNGBR : ""}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>NGBR resale price (bare NGBR)</label>
+              <input
+                value={NGBRResalePriceBareNGBR ? NGBRResalePriceBareNGBR : ""}
+                readOnly
+              />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">
+              Total Cost of Ownership (TCO) calculations for 3K hours of mowing
+              operations
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">Gas ZTR</li>
+            <li>
+              <label>TCO of gas ZTR</label>
+              <input value={gasZTR.TCOofGasZTR} readOnly />
+            </li>
+            <li>
+              <label>Depreciation of gas ZTR</label>
+              <input value={gasZTR.depreciationofGasZTR} readOnly />
+            </li>
+            <li>
+              <label>Gas ZTR depreciation rate</label>
+              <input
+                value={depreciationInputs.gasZTRDepreciationRate}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Fuel</label>
+              <input value={gasZTR.fuel} readOnly />
+            </li>
+            <li>
+              <label>Maintenance</label>
+              <input value={gasZTR.maintenance} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">
+              Cash purchase (NGBR + batteries & chargers)
+            </li>
+            <li>
+              <label>TCO of NGBR + batteries & chargers</label>
+              <input value={cashPurchase.TCOofNGBR} readOnly />
+            </li>
+            <li>
+              <label>Depreciation of NGBR + batteries & chargers</label>
+              <input value={cashPurchase.depreciationofGasZTR} readOnly />
+            </li>
+            <li>
+              <label>eZTR depreciation rate</label>
+              <input
+                value={depreciationInputs.electricZTRDepreciationRate}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Power</label>
+              <input value={cashPurchase.power} readOnly />
+            </li>
+            <li>
+              <label>Maintenance</label>
+              <input value={cashPurchase.maintenance} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">
+              NGBR with Flexible Power Program, and 3- and 4-year financing
+            </li>
+            <li>
+              <label>TCO of NGBR with FPP</label>
+              <input
+                value={
+                  NGBRWithFlexiblePowerProgram.depreciationOfBareNGBR +
+                  NGBRWithFlexiblePowerProgram.flexiblePowerProgramSubscription +
+                  cashPurchase.power +
+                  cashPurchase.maintenance
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>TCO of NGBR with 36-month financing</label>
+              <input
+                value={
+                  NGBRWithFlexiblePowerProgram.depreciationOfBareNGBR +
+                  NGBRWithFlexiblePowerProgram.financingFee36 +
+                  cashPurchase.power +
+                  cashPurchase.maintenance
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>TCO of NGBR with 48-month financing</label>
+              <input
+                value={
+                  NGBRWithFlexiblePowerProgram.depreciationOfBareNGBR +
+                  NGBRWithFlexiblePowerProgram.financingFee48 +
+                  cashPurchase.power +
+                  cashPurchase.maintenance
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Depreciation of bare NGBR (no batteries/chargers)</label>
+              <input
+                value={NGBRWithFlexiblePowerProgram.depreciationOfBareNGBR}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Flexible Power Program subscription</label>
+              <input
+                value={
+                  NGBRWithFlexiblePowerProgram.flexiblePowerProgramSubscription
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>36-month financing fee</label>
+              <input
+                value={NGBRWithFlexiblePowerProgram.financingFee36}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>48-month financing fee</label>
+              <input
+                value={NGBRWithFlexiblePowerProgram.financingFee48}
+                readOnly
+              />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">Environmental benefits</li>
+            <li>
+              <label>Equivalent miles driven in a car</label>
+              <input
+                value={(
+                  enviromentalBenefits.poundsCO2EmittedPerMileDrivenInACar *
+                  poundsOfCO2Avoided
+                ).toFixed(2)}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Trees to plant to avoid equivalent CO2</label>
+              <input
+                value={(
+                  poundsOfCO2Avoided /
+                  enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted
+                ).toFixed(2)}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Pounds of CO2 avoided</label>
+              <input value={poundsOfCO2Avoided.toFixed(2)} readOnly />
+            </li>
+            <li>
+              <label>Gallons of fuel consumed over per year</label>
+              <input value={gallonsOfFuelConsumedOverPerYear} readOnly />
+            </li>
+            <li>
+              <label>Converting gallons of gasoline to CO2</label>
+              <input
+                value={enviromentalBenefits.convertingGallonsOfGasolineToCO2}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Pounds CO2 sequestered per urban tree planted</label>
+              <input
+                value={
+                  enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Pounds CO2 emitted per mile driven in a car</label>
+              <input
+                value={enviromentalBenefits.poundsCO2EmittedPerMileDrivenInACar}
+                readOnly
+              />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">
+              Reduced ZTR downtime with NGBR from lower maintenance needs
+            </li>
+            <li>
+              <label>Time saved from reduced maintenance</label>
+              <input
+                value={
+                  numberOfMaintenanceJobsPerYear * averageTotalTimeForServicing
+                }
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Number of maintenance jobs per year</label>
+              <input value={numberOfMaintenanceJobsPerYear} readOnly />
+            </li>
+            <li>
+              <label>Average total time for servicing</label>
+              <input value={averageTotalTimeForServicing} readOnly />
+            </li>
+            <li>
+              <label>Average time for servicing</label>
+              <input value={averageTimeForServicing} readOnly />
+            </li>
+            <li>
+              <label>Average commute to & from servicing dealer</label>
+              <input value={averageCommuteToFromServicingDealer} readOnly />
+            </li>
+            <li>
+              <label>Average frequency (hours) per ZTR servicing</label>
+              <input value={averageFrequencyPerZTRServicing} readOnly />
+            </li>
+          </ul>
+
+          <ul>
+            <li className="title">Depreciation</li>
+            <li>
+              <label>Electric ZTR depreciation after 2 years</label>
+              <input
+                value={depreciationInputs.electricZTRDepreciationRate}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Gas ZTR depreciation after 2 years</label>
+              <input
+                value={depreciationInputs.gasZTRDepreciationRate}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Total hours mowed for TCO analysis</label>
+              <input value={totalHoursMowedTCOAnalysis} readOnly />
+            </li>
+            <li>
+              <label>Resale premium of electric vs gas ZTRs</label>
+              <input
+                value={depreciationInputs.resalePremiumElectricVsGasZTRs}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Typical ownership timeline of ZTRs</label>
+              <input
+                value={depreciationInputs.typicalOwnershipTimelineZTRs}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Typical hours mowed per year</label>
+              <input
+                value={depreciationInputs.typicalHoursMowedPerYear}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Typical hours mowed per year (high estimate)</label>
+              <input
+                value={depreciationInputs.typicalHoursMowedPerYearHigh}
+                readOnly
+              />
+            </li>
+            <li>
+              <label>Typical hours mowed per year (low estimate)</label>
+              <input
+                value={depreciationInputs.typicalHoursMowedPerYearLow}
+                readOnly
+              />
+            </li>
+          </ul>
+        </div>
       </form>
     </>
   );
