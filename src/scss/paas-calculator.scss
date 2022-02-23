@@ -137,6 +137,7 @@ body.active {
         overflow-y: auto;
         max-height: 100vh;
         box-shadow: 0 0 em(10px) rgba(#000, 0.5);
+        min-width: 50vw;
 
         ul li {
           flex-direction: column;
