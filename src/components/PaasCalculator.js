@@ -108,8 +108,10 @@ const PaasCalculator = () => {
 
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
-  const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
-  const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(0.1004);
+  // const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
+  // const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(0.1004);
+  const latestFuelWeeklyPrice = 3.108;
+  const latestAvgPowerPrice = 0.1004;
   const [totalMonthlyZTRFuelCost, setTotalMonthlyZTRFuelCost] = useState(0);
   const [totalMonthlyZTRMaintenanceCost, setTotalMonthlyZTRMaintenanceCost] =
     useState(0);
@@ -180,12 +182,12 @@ const PaasCalculator = () => {
       financingFee36: 0,
       financingFee48: 0,
     });
-  const [enviromentalBenefits, setEnviromentalBenefits] = useState({
+  const enviromentalBenefits = {
     gallonsOfFuelConsumedOverPerYear: 2882,
     convertingGallonsOfGasolineToCO2: 19,
     poundsCO2SequesteredPerUrbanTreePlanted: 132,
     poundsCO2EmittedPerMileDrivenInACar: 1.1,
-  });
+  };
   const [
     gallonsOfFuelConsumedOverPerYear,
     setGallonsOfFuelConsumedOverPerYear,
@@ -469,9 +471,9 @@ const PaasCalculator = () => {
     cashPurchase.depreciationofGasZTR,
     cashPurchase.power,
     cashPurchase.maintenance,
-    enviromentalBenefits,
     gallonsOfFuelConsumedOverPerYear,
     eZTRResalePremiumCashPurchase,
+    enviromentalBenefits.convertingGallonsOfGasolineToCO2,
   ]);
 
   useEffect(() => {
