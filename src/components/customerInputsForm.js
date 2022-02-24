@@ -10,32 +10,6 @@ const CustomerInputsForm = ({
 
   return (
     <ul className="inputs">
-      <li className="column range">
-        <span>
-          <label id="gasZTRPrice">
-            What's the price of a new, commercial-grade gas ZTR?
-          </label>
-        </span>
-        <span className="input">
-          <input
-            type="range"
-            min="9000"
-            max="16000"
-            step="1"
-            value={customerInputs.gasZTRPrice}
-            onChange={handleChange}
-            htmlFor="gasZTRPrice"
-            list="gasZTRPrice-ticks"
-          />
-          <datalist id="gasZTRPrice-ticks">
-            <option value="4"></option>
-            <option value="5"></option>
-            <option value="6"></option>
-            <option value="7"></option>
-          </datalist>
-          <span>{customerInputs.gasZTRPrice}</span>
-        </span>
-      </li>
       <li className="column">
         <span>
           <label id="location">Which state do you operate in?</label>
@@ -61,6 +35,32 @@ const CustomerInputsForm = ({
               );
             })}
           </select>
+        </span>
+      </li>
+      <li className="column range">
+        <span>
+          <label id="gasZTRPrice">
+            What's the price of a new, commercial-grade gas ZTR?
+          </label>
+        </span>
+        <span className="input">
+          <input
+            type="range"
+            min="9000"
+            max="16000"
+            step="1"
+            value={customerInputs.gasZTRPrice}
+            onChange={handleChange}
+            htmlFor="gasZTRPrice"
+            list="gasZTRPrice-ticks"
+          />
+          <datalist id="gasZTRPrice-ticks">
+            <option value="4"></option>
+            <option value="5"></option>
+            <option value="6"></option>
+            <option value="7"></option>
+          </datalist>
+          <span>{customerInputs.gasZTRPrice}</span>
         </span>
       </li>
       <li className="column range">

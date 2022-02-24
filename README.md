@@ -1,5 +1,7 @@
 # PaaS Calculator
 
+Needs a big clean up of the code.
+
 ## Scripts
 
 In the project directory, you can run:

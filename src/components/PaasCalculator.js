@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import paasCal from "../data/paas-cal.json";
 import "../scss/paas-calculator.scss";
 import CustomerInputsForm from "./customerInputsForm";
 import CustomerOutputs from "./customerOutputs";
 //import MainOutput from "./mainOutput";
 
 const PaasCalculator = () => {
-  const [loading, setLoading] = useState(true); // Converting mowing frequency to monthly
-
+  // FUNCTIONS
   const hideShowSection = (e) => {
     e.preventDefault();
     document.querySelector("#output").classList.toggle("active");
@@ -14,7 +14,7 @@ const PaasCalculator = () => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.getAttribute("for"), e.target.value);
+    //console.log(e.target.getAttribute("for"), e.target.value);
     let inputValue;
     if (isNaN(e.target.value)) {
       inputValue = e.target.value;
@@ -56,75 +56,56 @@ const PaasCalculator = () => {
     return pmt;
   };
 
-  const averageWeeksPerMonth = Number(52 / 12).toFixed(4); // [HELPER] Average weeks per month (52/12)
-  const [mowingMonthly, setMowingMonthly] = useState(151.67); // Converting mowing frequency to monthly
-  const [lengthOffSeason, setLengthOffSeason] = useState(2.0); // [HELPER] Length of off-season (12 - lengthMowingSeason)
-  const [customerInputs, setCustomerInputs] = useState({
-    location: "OH", // Geography / location
-    daysMowedPerWeek: 5, // Days mowed per week
-    numberNGBRUnits: 1, // # Number of NGBR units
-    mowingHours: 7, //    [HELPER] Mowing hours for calculation,
-    lengthMowingSeason: 10, // Length of mowing season
-    gasZTRPrice: 11000, // Price of gas ZTR
-  });
-
-  const [requiredEquipment, setRequiredEquipment] = useState({
-    bateries: 10,
-    chargers: 2,
-    totalBateries: 10,
-    totalChargers: 2,
-  });
-  const powerProgramCosts = {
-    battery: 1986,
-    charger: 999,
-  };
   const dollarUSLocale = new Intl.NumberFormat("en-US", {
     currency: "USD",
     style: "currency",
     minimumFractionDigits: 2,
   });
-  const NGBRBatteryCapacity = 5;
-  //const lastestMonth = "Oct 2021";
-  const averageHourlyMaintenanceCost = 1.05;
-  //const lastestWeek = "Jan 10, 2022";
-  const fuelConsumptionRate = 1.9;
-  const electricMaintenanceCostGas = 0.07;
-  const [PADDRegion, setPADDRegion] = useState("PADD2");
-  const [pricing, setPricing] = useState({
-    totalCashPrice: 21858,
-    priceMo36: 645,
-    priceMo48: 503,
-    targetPaasMonthlyPrice: 554,
-    annualizedPaaSPrice: 6643,
-    annualRebateOffSeason: 5536,
+  // SETUP
+  const [loading, setLoading] = useState(true);
+  const averageWeeksPerMonth = Number(
+    paasCal.averageWeeksPerMonth / 12
+  ).toFixed(4);
+  const [mowingMonthly, setMowingMonthly] = useState(paasCal.mowingMonthly);
+  const [lengthOffSeason, setLengthOffSeason] = useState(
+    paasCal.lengthOffSeason
+  );
+  const [customerInputs, setCustomerInputs] = useState({
+    ...paasCal.customerInputs,
   });
-  const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(76);
-  const [totalMonthlyPaaSPowerCost, setTotalMonthlyPaaSPowerCost] =
-    useState(76);
+  const [requiredEquipment, setRequiredEquipment] = useState({
+    ...paasCal.equipment.deault,
+  });
+  const powerProgramCosts = { ...paasCal.equipment.pricing };
+  const NGBRBatteryCapacity = paasCal.NGBRBatteryCapacity;
+  const averageHourlyMaintenanceCost = paasCal.averageHourlyMaintenanceCost;
+  const fuelConsumptionRate = paasCal.fuelConsumptionRate;
+  const electricMaintenanceCostGas = paasCal.electricMaintenanceCostGas;
+  const [PADDRegion, setPADDRegion] = useState(paasCal.PADDRegion);
+  const [pricing, setPricing] = useState({ ...paasCal.pricing });
+  const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(
+    paasCal.monthlyPaaSPowerCostNGBR
+  );
+  const [totalMonthlyPaaSPowerCost, setTotalMonthlyPaaSPowerCost] = useState(
+    paasCal.monthlyPaaSPowerCostNGBR
+  );
   const [monthlyMaintenanceCostPerZTR, setMonthlyMaintenanceCostPerZTR] =
     useState(0);
-
   const [monthlyFuelCostPerZTR, setMonthlyFuelCostPerZTR] = useState(0);
-
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
-  // const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(3.108);
-  // const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(0.1004);
-  const latestFuelWeeklyPrice = 3.108;
-  const latestAvgPowerPrice = 0.1004;
+
+  // UNCOMMENT TO TURN ON API:
+  // const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(paasCal.latestFuelWeeklyPrice);
+  // const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(paasCal.latestAvgPowerPrice);
+  // COMMENT TO TURN ON API:
+  const latestFuelWeeklyPrice = paasCal.latestFuelWeeklyPrice;
+  const latestAvgPowerPrice = paasCal.latestAvgPowerPrice;
+  //
   const [totalMonthlyZTRFuelCost, setTotalMonthlyZTRFuelCost] = useState(0);
   const [totalMonthlyZTRMaintenanceCost, setTotalMonthlyZTRMaintenanceCost] =
     useState(0);
-
-  const depreciationInputs = {
-    typicalOwnershipTimelineZTRs: 2,
-    typicalHoursMowedPerYear: 1612,
-    typicalHoursMowedPerYearHigh: 2184,
-    typicalHoursMowedPerYearLow: 1040,
-    resalePremiumElectricVsGasZTRs: 0.15,
-    gasZTRDepreciationRate: 0.78,
-    electricZTRDepreciationRate: 0.63,
-  };
+  const depreciationInputs = { ...paasCal.depreciationInputs };
   const totalHoursMowedTCOAnalysis =
     Math.round(
       (depreciationInputs.typicalOwnershipTimelineZTRs *
@@ -135,13 +116,14 @@ const PaasCalculator = () => {
     totalHoursMowedTCOAnalysis /
     (mowingMonthly * customerInputs.lengthMowingSeason)
   ).toFixed(2); // Length of mowing operations for TCO
-  const paaSPremiumOverFourYearFinancing = 0.1;
+  const paaSPremiumOverFourYearFinancing =
+    paasCal.paaSPremiumOverFourYearFinancing;
   const [totalMonthlyPaaSMaintenanceCost, setTotalMonthlyPaaSMaintenanceCost] =
     useState(0);
   const [NGBROpEx, setNGBROpEx] = useState(0);
   const [gasZTROpEx, setGasZTROpEx] = useState(0);
   const [totalGasZTRPurchasePrice, setTotalGasZTRPurchasePrice] = useState(0);
-  const BareNGBR = 19500;
+  const BareNGBR = paasCal.BareNGBR;
   const [totalNGBRCostBare, setTotalNGBRCostBare] = useState(0);
   const [costofChargers, setCostofChargers] = useState(0);
   const [costofBateries, setCostofBateries] = useState(0);
@@ -182,30 +164,25 @@ const PaasCalculator = () => {
       financingFee36: 0,
       financingFee48: 0,
     });
-  const enviromentalBenefits = {
-    gallonsOfFuelConsumedOverPerYear: 2882,
-    convertingGallonsOfGasolineToCO2: 19,
-    poundsCO2SequesteredPerUrbanTreePlanted: 132,
-    poundsCO2EmittedPerMileDrivenInACar: 1.1,
-  };
+  const enviromentalBenefits = { ...paasCal.enviromentalBenefits };
   const [
     gallonsOfFuelConsumedOverPerYear,
     setGallonsOfFuelConsumedOverPerYear,
-  ] = useState(2882);
-  const [poundsOfCO2Avoided, setPoundsOfCO2Avoided] = useState(53994);
-
-  const averageFrequencyPerZTRServicing = 100;
-  const averageCommuteToFromServicingDealer = 0.5;
-  const averageTimeForServicing = 2;
+  ] = useState(paasCal.gallonsOfFuelConsumedOverPerYear);
+  const [poundsOfCO2Avoided, setPoundsOfCO2Avoided] = useState(
+    paasCal.poundsOfCO2Avoided
+  );
+  const averageFrequencyPerZTRServicing =
+    paasCal.averageFrequencyPerZTRServicing;
+  const averageCommuteToFromServicingDealer =
+    paasCal.averageCommuteToFromServicingDealer;
+  const averageTimeForServicing = paasCal.averageTimeForServicing;
   const averageTotalTimeForServicing =
     averageTimeForServicing + averageCommuteToFromServicingDealer;
   const [numberOfMaintenanceJobsPerYear, setNumberOfMaintenanceJobsPerYear] =
-    useState(15.2);
+    useState(paasCal.numberOfMaintenanceJobsPerYear);
   const [reductionFromNGBRResale, setReductionFromNGBRResale] = useState({
-    cashPurchase: 11,
-    FPP: 12,
-    financing36: 15,
-    financing48: 10,
+    ...paasCal.reductionFromNGBRResale,
   });
 
   useEffect(() => {
@@ -221,56 +198,14 @@ const PaasCalculator = () => {
     setTotalMonthlyPaaSPowerCost(
       monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
     );
-    switch (customerInputs.mowingHours) {
-      case 1:
-        setRequiredEquipment({
-          bateries: 5,
-          chargers: 1,
-          totalBateries: 5 * customerInputs.numberNGBRUnits,
-          totalChargers: 1 * customerInputs.numberNGBRUnits,
-        });
-        break;
-      case 3:
-        setRequiredEquipment({
-          bateries: 5,
-          chargers: 1,
-          totalBateries: 5 * customerInputs.numberNGBRUnits,
-          totalChargers: 1 * customerInputs.numberNGBRUnits,
-        });
-        break;
-      case 5:
-        setRequiredEquipment({
-          bateries: 7,
-          chargers: 2,
-          totalBateries: 7 * customerInputs.numberNGBRUnits,
-          totalChargers: 2 * customerInputs.numberNGBRUnits,
-        });
-        break;
-      case 7:
-        setRequiredEquipment({
-          bateries: 10,
-          chargers: 2,
-          totalBateries: 10 * customerInputs.numberNGBRUnits,
-          totalChargers: 2 * customerInputs.numberNGBRUnits,
-        });
-        break;
-      case 9:
-        setRequiredEquipment({
-          bateries: 12,
-          chargers: 3,
-          totalBateries: 12 * customerInputs.numberNGBRUnits,
-          totalChargers: 3 * customerInputs.numberNGBRUnits,
-        });
-        break;
-      default:
-        setRequiredEquipment({
-          bateries: 7,
-          chargers: 2,
-          totalBateries: 7 * customerInputs.numberNGBRUnits,
-          totalChargers: 2 * customerInputs.numberNGBRUnits,
-        });
-        break;
-    }
+    setRequiredEquipment({
+      bateries: paasCal.equipment.deault.bateries,
+      chargers: paasCal.equipment.deault.chargers,
+      totalBateries:
+        paasCal.equipment.deault.bateries * customerInputs.numberNGBRUnits,
+      totalChargers:
+        paasCal.equipment.deault.chargers * customerInputs.numberNGBRUnits,
+    });
     setMonthlyMaintenanceCostPerZTR(
       Math.round(averageHourlyMaintenanceCost * mowingMonthly)
     );
@@ -474,6 +409,10 @@ const PaasCalculator = () => {
     gallonsOfFuelConsumedOverPerYear,
     eZTRResalePremiumCashPurchase,
     enviromentalBenefits.convertingGallonsOfGasolineToCO2,
+    NGBRBatteryCapacity,
+    averageHourlyMaintenanceCost,
+    fuelConsumptionRate,
+    electricMaintenanceCostGas,
   ]);
 
   useEffect(() => {
@@ -527,7 +466,9 @@ const PaasCalculator = () => {
 
   // Get Fuel & Electric Prices
   useEffect(() => {
+    /// REMOVE setLoading
     setLoading(false);
+    // UNCOMMENT:
     // const padds = {
     //   PADD1: "PET.EMM_EPMRU_PTE_R10_DPG.W", // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD1
     //   PADD2: "PET.EMM_EPMRU_PTE_R20_DPG.W", // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD2
