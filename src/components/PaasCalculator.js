@@ -1,34 +1,15 @@
 import React, { useState, useEffect } from "react";
 import paasCal from "../data/paas-cal.json";
+import PMT from "../utils/pmt";
 import "../scss/paas-calculator.scss";
 import CustomerInputs from "./customerInputs";
 import CustomerOutputs from "./customerOutputs";
 //import MainOutput from "./mainOutput";
 
 const PaasCalculator = () => {
-  // -----------------> FUNCTIONS <-----------------
-  const PMT = (ir, np, pv, fv, type) => {
-    /*
-     * ir   - Required. The interest rate for the loan.
-     * np   - Required. The total number of payments for the loan.
-     * pv   - Required. The present value, or the total amount that a series of future payments is worth now; also known as the principal.
-     * fv   - Optional. The future value, or a cash balance you want to attain after the last payment is made. If fv is omitted, it is assumed to be 0 (zero), that is, the future value of a loan is 0.
-     * type - Optional. The number 0 (zero) or 1 and indicates when payments are due:
-     *        0: end of the period, e.g. end of month (default)
-     *        1: beginning of period
-     */
-    var pmt, pvif;
-    fv || (fv = 0);
-    type || (type = 0);
-    if (ir === 0) return -(pv + fv) / np;
-    pvif = Math.pow(1 + ir, np);
-    pmt = (-ir * (pv * pvif + fv)) / (pvif - 1);
-    if (type === 1) pmt /= 1 + ir;
-    return pmt;
-  };
-
   // -----------------> SETUP <-----------------
   const [loading, setLoading] = useState(true);
+  const [checkObserve, setCheckObserve] = useState(false);
   const averageWeeksPerMonth = Number(
     paasCal.averageWeeksPerMonth / 12
   ).toFixed(4);
@@ -153,7 +134,6 @@ const PaasCalculator = () => {
   // -----------------> useEffects <-----------------:
 
   // OBSERVER:
-  const [checkObserve, setCheckObserve] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -573,21 +553,31 @@ const PaasCalculator = () => {
   }, [customerInputs.mowingHours, customerInputs.numberNGBRUnits]);
 
   useEffect(() => {
+    let financing;
+    paasCal.financingOptions.forEach((financingOption) => {
+      financing = {
+        ...financing,
+        [`priceMo${financingOption.presentValue}`]: Math.round(
+          PMT(
+            financingOption.interestRate / financingOption.totalNumberPayments,
+            financingOption.presentValue,
+            -pricing.totalCashPrice
+          )
+        ),
+      };
+    });
+    console.log(financing);
+
     setPricing({
       totalCashPrice:
         requiredEquipment.totalBateries * powerProgramCosts.battery +
         requiredEquipment.totalChargers * powerProgramCosts.charger,
-      priceMo36: Math.round(
-        PMT(0.0399 / 12, 36, -pricing.totalCashPrice, 0, 0)
-      ),
-      priceMo48: Math.round(
-        PMT(0.0499 / 12, 48, -pricing.totalCashPrice, 0, 0)
-      ),
       targetPaasMonthlyPrice: Math.round(
         pricing.priceMo48 + (pricing.priceMo48 * 0.1 + 1)
       ),
       annualizedPaaSPrice: Math.round(pricing.targetPaasMonthlyPrice * 12),
       annualRebateOffSeason: lengthOffSeason * pricing.targetPaasMonthlyPrice,
+      ...financing,
     });
   }, [
     requiredEquipment,

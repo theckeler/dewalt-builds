@@ -50,6 +50,18 @@
       }
     }
   },
+  "financingOptions": [
+    {
+      "presentValue": 36,
+      "interestRate": 0.0399,
+      "totalNumberPayments": 12
+    },
+    {
+      "presentValue": 48,
+      "interestRate": 0.0499,
+      "totalNumberPayments": 12
+    }
+  ],
   "depreciationInputs": {
     "typicalOwnershipTimelineZTRs": 2,
     "typicalHoursMowedPerYear": 1612,
