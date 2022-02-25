@@ -1,11 +1,33 @@
 import statesJSON from "../data/states.json";
 
 const CustomerInputsForm = ({
-  handleChange,
   setPADDRegion,
-  buttonClick,
   customerInputs,
+  setCustomerInputs,
 }) => {
+  const handleChange = (e) => {
+    //console.log(e.target.getAttribute("for"), e.target.value);
+    let inputValue;
+    if (isNaN(e.target.value)) {
+      inputValue = e.target.value;
+    } else {
+      inputValue = Number(e.target.value);
+    }
+
+    setCustomerInputs({
+      ...customerInputs,
+      [e.target.getAttribute("for")]: inputValue,
+    });
+  };
+
+  const buttonClick = (e) => {
+    e.preventDefault();
+    document.querySelectorAll("button").forEach(function (button) {
+      button.classList.remove("active");
+    });
+    e.target.classList.add("active");
+  };
+
   let states = JSON.parse(JSON.stringify(statesJSON));
 
   return (

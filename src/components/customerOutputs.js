@@ -1,15 +1,7 @@
 import ToolTip from "./toolTip";
+import dollarUSLocale from "../utils/dollarUSLocale";
 
-const CustomerOutputs = ({
-  requiredEquipment,
-  dollarUSLocale,
-  pricing,
-  customerInputs,
-  monthlyPaaSPowerCostNGBR,
-  monthlyFuelCostPerZTR,
-  monthlyMaintenanceCostPerNGBR,
-  monthlyMaintenanceCostPerZTR,
-}) => {
+const CustomerOutputs = (customerOutputsProps) => {
   return (
     <>
       <ul className="outputs">
@@ -19,7 +11,11 @@ const CustomerOutputs = ({
             <ToolTip tip="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a augue ornare, tempus leo in, viverra lacus. Praesent quis pretium augue. Sed ac ipsum a risus posuere venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec et malesuada neque. Ut lectus magna, pretium vitae lorem sed, dapibus elementum dolor. Quisque auctor massa quis congue rutrum. Integer aliquet neque erat, nec congue tellus bibendum a." />
           </span>
           <span>
-            <input id="" value={requiredEquipment.totalBateries} readOnly />
+            <input
+              id=""
+              value={customerOutputsProps.requiredEquipment.totalBateries}
+              readOnly
+            />
           </span>
         </li>
         <li className="column">
@@ -28,7 +24,11 @@ const CustomerOutputs = ({
             <ToolTip tip="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a augue ornare, tempus leo in, viverra lacus. Praesent quis pretium augue. Sed ac ipsum a risus posuere venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec et malesuada neque. Ut lectus magna, pretium vitae lorem sed, dapibus elementum dolor. Quisque auctor massa quis congue rutrum. Integer aliquet neque erat, nec congue tellus bibendum a." />
           </span>
           <span>
-            <input id="" value={requiredEquipment.totalChargers} readOnly />
+            <input
+              id=""
+              value={customerOutputsProps.requiredEquipment.totalChargers}
+              readOnly
+            />
           </span>
         </li>
         <li className="column">
@@ -38,7 +38,9 @@ const CustomerOutputs = ({
           <span>
             <input
               id=""
-              value={dollarUSLocale.format(pricing.priceMo36)}
+              value={dollarUSLocale.format(
+                customerOutputsProps.pricing.priceMo36
+              )}
               readOnly
             />
           </span>
@@ -55,7 +57,8 @@ const CustomerOutputs = ({
           <span>Battery Charging</span>
           <span>
             {dollarUSLocale.format(
-              monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+              customerOutputsProps.monthlyPaaSPowerCostNGBR *
+                customerOutputsProps.customerInputs.numberNGBRUnits
             )}
           </span>
           <span>-</span>
@@ -65,7 +68,8 @@ const CustomerOutputs = ({
           <span>-</span>
           <span>
             {dollarUSLocale.format(
-              monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+              customerOutputsProps.monthlyFuelCostPerZTR *
+                customerOutputsProps.customerInputs.numberNGBRUnits
             )}
           </span>
         </li>
@@ -73,33 +77,43 @@ const CustomerOutputs = ({
           <span>Maintenance</span>
           <span>
             {dollarUSLocale.format(
-              monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
+              customerOutputsProps.monthlyMaintenanceCostPerNGBR *
+                customerOutputsProps.customerInputs.numberNGBRUnits
             )}
           </span>
           <span>
             {dollarUSLocale.format(
-              monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+              customerOutputsProps.monthlyMaintenanceCostPerZTR *
+                customerOutputsProps.customerInputs.numberNGBRUnits
             )}
           </span>
         </li>
         <li>
           <span>Subscription (PaaS)</span>
-          <span>{dollarUSLocale.format(pricing.targetPaasMonthlyPrice)}</span>
+          <span>
+            {dollarUSLocale.format(
+              customerOutputsProps.pricing.targetPaasMonthlyPrice
+            )}
+          </span>
           <span>-</span>
         </li>
         <li>
           <span>Total</span>
           <span>
             {dollarUSLocale.format(
-              monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits +
-                monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits +
-                pricing.targetPaasMonthlyPrice
+              customerOutputsProps.monthlyPaaSPowerCostNGBR *
+                customerOutputsProps.customerInputs.numberNGBRUnits +
+                customerOutputsProps.monthlyMaintenanceCostPerNGBR *
+                  customerOutputsProps.customerInputs.numberNGBRUnits +
+                customerOutputsProps.pricing.targetPaasMonthlyPrice
             )}
           </span>
           <span>
             {dollarUSLocale.format(
-              monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits +
-                monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+              customerOutputsProps.monthlyFuelCostPerZTR *
+                customerOutputsProps.customerInputs.numberNGBRUnits +
+                customerOutputsProps.monthlyMaintenanceCostPerZTR *
+                  customerOutputsProps.customerInputs.numberNGBRUnits
             )}
           </span>
         </li>

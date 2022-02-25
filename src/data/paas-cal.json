@@ -25,6 +25,29 @@
     "pricing": {
       "battery": 1986,
       "charger": 999
+    },
+    "_comment": "Equipent required for each mowing hour",
+    "requiredEquipment": {
+      "1": {
+        "bateries": 5,
+        "chargers": 1
+      },
+      "3": {
+        "bateries": 5,
+        "chargers": 1
+      },
+      "5": {
+        "bateries": 7,
+        "chargers": 1
+      },
+      "7": {
+        "bateries": 10,
+        "chargers": 2
+      },
+      "9": {
+        "bateries": 12,
+        "chargers": 3
+      }
     }
   },
   "depreciationInputs": {
@@ -42,7 +65,7 @@
     "poundsCO2SequesteredPerUrbanTreePlanted": 132,
     "poundsCO2EmittedPerMileDrivenInACar": 1.1
   },
-  "reductionFromNGBRResale":{
+  "reductionFromNGBRResale": {
     "cashPurchase": 11,
     "FPP": 12,
     "financing36": 15,

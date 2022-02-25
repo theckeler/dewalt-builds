@@ -1,12 +1,38 @@
 import React, { useState, useEffect } from "react";
 import paasCal from "../data/paas-cal.json";
 import "../scss/paas-calculator.scss";
-import CustomerInputs from "./customerInputs";
+import CustomerInputsForm from "./customerInputsForm";
 import CustomerOutputs from "./customerOutputs";
 //import MainOutput from "./mainOutput";
 
 const PaasCalculator = () => {
-  // -----------------> FUNCTIONS <-----------------
+  // FUNCTIONS
+  const hideShowSection = (e) => {
+    e.preventDefault();
+    document.querySelector("#output").classList.toggle("active");
+    document.querySelector("body").classList.toggle("active");
+  };
+  const handleChange = (e) => {
+    //console.log(e.target.getAttribute("for"), e.target.value);
+    let inputValue;
+    if (isNaN(e.target.value)) {
+      inputValue = e.target.value;
+    } else {
+      inputValue = Number(e.target.value);
+    }
+
+    setCustomerInputs({
+      ...customerInputs,
+      [e.target.getAttribute("for")]: inputValue,
+    });
+  };
+  const buttonClick = (e) => {
+    e.preventDefault();
+    document.querySelectorAll("button").forEach(function (button) {
+      button.classList.remove("active");
+    });
+    e.target.classList.add("active");
+  };
   const PMT = (ir, np, pv, fv, type) => {
     /*
      * ir   - Required. The interest rate for the loan.
@@ -26,8 +52,12 @@ const PaasCalculator = () => {
     if (type === 1) pmt /= 1 + ir;
     return pmt;
   };
-
-  // -----------------> SETUP <-----------------
+  const dollarUSLocale = new Intl.NumberFormat("en-US", {
+    currency: "USD",
+    style: "currency",
+    minimumFractionDigits: 2,
+  });
+  // SETUP
   const [loading, setLoading] = useState(true);
   const averageWeeksPerMonth = Number(
     paasCal.averageWeeksPerMonth / 12
@@ -60,6 +90,7 @@ const PaasCalculator = () => {
   const [monthlyFuelCostPerZTR, setMonthlyFuelCostPerZTR] = useState(0);
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
+
   // UNCOMMENT TO TURN ON API:
   // const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(paasCal.latestFuelWeeklyPrice);
   // const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(paasCal.latestAvgPowerPrice);
@@ -73,14 +104,14 @@ const PaasCalculator = () => {
   const depreciationInputs = { ...paasCal.depreciationInputs };
   const totalHoursMowedTCOAnalysis =
     Math.round(
-      (paasCal.depreciationInputs.typicalOwnershipTimelineZTRs *
-        paasCal.depreciationInputs.typicalHoursMowedPerYear) /
+      (depreciationInputs.typicalOwnershipTimelineZTRs *
+        depreciationInputs.typicalHoursMowedPerYear) /
         1000
     ) * 1000;
   const lengthMowingOperationsTCO = (
     totalHoursMowedTCOAnalysis /
-    (paasCal.mowingMonthly * paasCal.customerInputs.lengthMowingSeason)
-  ).toFixed(4);
+    (mowingMonthly * customerInputs.lengthMowingSeason)
+  ).toFixed(2); // Length of mowing operations for TCO
   const paaSPremiumOverFourYearFinancing =
     paasCal.paaSPremiumOverFourYearFinancing;
   const [totalMonthlyPaaSMaintenanceCost, setTotalMonthlyPaaSMaintenanceCost] =
@@ -150,9 +181,286 @@ const PaasCalculator = () => {
     ...paasCal.reductionFromNGBRResale,
   });
 
-  // -----------------> useEffects <-----------------:
+  useEffect(() => {
+    setMowingMonthly(
+      customerInputs.mowingHours *
+        customerInputs.daysMowedPerWeek *
+        averageWeeksPerMonth
+    );
+    setLengthOffSeason(12 - customerInputs.lengthMowingSeason);
+    setMonthlyPaaSPowerCostNGBR(
+      Math.round(latestAvgPowerPrice * NGBRBatteryCapacity * mowingMonthly)
+    );
+    setTotalMonthlyPaaSPowerCost(
+      monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
+    );
+    setRequiredEquipment({
+      bateries: paasCal.equipment.deault.bateries,
+      chargers: paasCal.equipment.deault.chargers,
+      totalBateries:
+        paasCal.equipment.deault.bateries * customerInputs.numberNGBRUnits,
+      totalChargers:
+        paasCal.equipment.deault.chargers * customerInputs.numberNGBRUnits,
+    });
+    setMonthlyMaintenanceCostPerZTR(
+      Math.round(averageHourlyMaintenanceCost * mowingMonthly)
+    );
+    setMonthlyFuelCostPerZTR(
+      Math.round(latestFuelWeeklyPrice * fuelConsumptionRate * mowingMonthly)
+    );
+    setMonthlyMaintenanceCostPerNGBR(
+      Math.round(monthlyMaintenanceCostPerZTR * electricMaintenanceCostGas)
+    );
+    setTotalMonthlyPaaSMaintenanceCost(
+      monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
+    );
+    setNGBROpEx(totalMonthlyPaaSPowerCost + totalMonthlyPaaSMaintenanceCost);
+    setTotalMonthlyZTRFuelCost(
+      monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
+    );
+    setTotalMonthlyZTRMaintenanceCost(
+      monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
+    );
+    setGasZTROpEx(totalMonthlyZTRFuelCost + totalMonthlyZTRMaintenanceCost);
+    setTotalGasZTRPurchasePrice(
+      customerInputs.gasZTRPrice * customerInputs.numberNGBRUnits
+    );
+    setTotalNGBRCostBare(BareNGBR * customerInputs.numberNGBRUnits);
+    setCostofChargers(
+      powerProgramCosts.charger * requiredEquipment.totalChargers
+    );
+    setCostofBateries(
+      powerProgramCosts.battery * requiredEquipment.totalBateries
+    );
+    setTotalNGBRCostWith(costofBateries + costofChargers + totalNGBRCostBare);
+    setSavingsWith4yearFinancing(gasZTROpEx - (NGBROpEx + pricing.priceMo48));
+    setSavingsWith3yearFinancing(gasZTROpEx - (NGBROpEx + pricing.priceMo36));
+    setSavingsWithFPP(gasZTROpEx - (NGBROpEx + pricing.targetPaasMonthlyPrice));
+    setSavingsWithNGBRCashPurchase(gasZTROpEx - NGBROpEx);
+    setBreakeven({
+      breakevenOutrightPurchaseNoResale: (
+        (totalNGBRCostWith - totalGasZTRPurchasePrice) /
+        savingsWithNGBRCashPurchase
+      ).toFixed(1),
+      breakevenFPPNoResale: (
+        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
+        savingsWithFPP
+      ).toFixed(1),
+      breakeven3yearFinancingNoResale: (
+        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
+        savingsWith3yearFinancing
+      ).toFixed(1),
+      breakeven4yearFinancingNoResale: (
+        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
+        savingsWith4yearFinancing
+      ).toFixed(1),
+    });
+    setNGBRResalePriceBareNGBR(
+      (
+        totalNGBRCostBare *
+        (1 - depreciationInputs.electricZTRDepreciationRate)
+      ).toFixed(2)
+    );
+    setNGBRResalePriceNGBR(
+      (
+        totalNGBRCostWith *
+        (1 - depreciationInputs.electricZTRDepreciationRate)
+      ).toFixed(2)
+    );
+    setGasZTRResalePrice(
+      (
+        totalGasZTRPurchasePrice *
+        (1 - depreciationInputs.gasZTRDepreciationRate)
+      ).toFixed(2)
+    );
+    setEZTRResalePremiumBareNGBR(NGBRResalePriceBareNGBR - gasZTRResalePrice);
+    setEZTRResalePremiumCashPurchase(
+      NGBRResalePriceNGBR - eZTRResalePremiumBareNGBR
+    );
+    setGasZTR({
+      TCOofGasZTR:
+        gasZTR.depreciationofGasZTR + gasZTR.fuel + gasZTR.maintenance,
+      depreciationofGasZTR:
+        customerInputs.gasZTRPrice *
+        depreciationInputs.gasZTRDepreciationRate *
+        customerInputs.numberNGBRUnits,
+      fuel:
+        totalMonthlyZTRFuelCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      maintenance:
+        totalMonthlyZTRMaintenanceCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+    });
+    setCashPurchase({
+      TCOofNGBR:
+        cashPurchase.depreciationofGasZTR +
+        cashPurchase.power +
+        cashPurchase.maintenance,
+      depreciationofGasZTR:
+        totalNGBRCostWith * depreciationInputs.electricZTRDepreciationRate,
+      power:
+        totalMonthlyPaaSPowerCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      maintenance:
+        totalMonthlyPaaSMaintenanceCost *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+    });
+    setNGBRWithFlexiblePowerProgram({
+      depreciationOfBareNGBR:
+        totalNGBRCostBare * depreciationInputs.electricZTRDepreciationRate,
+      flexiblePowerProgramSubscription:
+        pricing.targetPaasMonthlyPrice *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      financingFee36:
+        pricing.priceMo36 *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+      financingFee48:
+        pricing.priceMo48 *
+        customerInputs.lengthMowingSeason *
+        lengthMowingOperationsTCO,
+    });
+    setGallonsOfFuelConsumedOverPerYear(
+      fuelConsumptionRate *
+        mowingMonthly *
+        customerInputs.lengthMowingSeason *
+        customerInputs.numberNGBRUnits
+    );
+    setPoundsOfCO2Avoided(
+      gallonsOfFuelConsumedOverPerYear *
+        enviromentalBenefits.convertingGallonsOfGasolineToCO2
+    );
+    setNumberOfMaintenanceJobsPerYear(
+      (
+        (mowingMonthly *
+          customerInputs.lengthMowingSeason *
+          customerInputs.numberNGBRUnits) /
+        averageFrequencyPerZTRServicing
+      ).toFixed(1)
+    );
+    setReductionFromNGBRResale({
+      cashPurchase: Math.round(
+        eZTRResalePremiumCashPurchase / savingsWithNGBRCashPurchase
+      ),
+      FPP: Math.round(eZTRResalePremiumBareNGBR / savingsWithFPP),
+      financing36: Math.round(
+        eZTRResalePremiumBareNGBR / savingsWith3yearFinancing
+      ),
+      financing48: Math.round(
+        eZTRResalePremiumBareNGBR / savingsWith4yearFinancing
+      ),
+    });
+    setRequiredEquipment({
+      bateries:
+        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
+          .bateries,
+      chargers:
+        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
+          .chargers,
+      totalBateries:
+        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
+          .bateries * customerInputs.numberNGBRUnits,
+      totalChargers:
+        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
+          .chargers * customerInputs.numberNGBRUnits,
+    });
+  }, [
+    // NEW
+    customerInputs,
 
-  // OBSERVER:
+    // OLD
+    BareNGBR,
+    NGBRBatteryCapacity,
+    NGBROpEx,
+    NGBRResalePriceBareNGBR,
+    NGBRResalePriceNGBR,
+    averageFrequencyPerZTRServicing,
+    averageHourlyMaintenanceCost,
+    averageWeeksPerMonth,
+    cashPurchase.depreciationofGasZTR,
+    cashPurchase.maintenance,
+    cashPurchase.power,
+    costofBateries,
+    costofChargers,
+    // customerInputs.daysMowedPerWeek,
+    // customerInputs.gasZTRPrice,
+    // customerInputs.lengthMowingSeason,
+    // customerInputs.mowingHours,
+    // customerInputs.numberNGBRUnits,
+    depreciationInputs.electricZTRDepreciationRate,
+    depreciationInputs.gasZTRDepreciationRate,
+    eZTRResalePremiumBareNGBR,
+    eZTRResalePremiumCashPurchase,
+    electricMaintenanceCostGas,
+    enviromentalBenefits.convertingGallonsOfGasolineToCO2,
+    fuelConsumptionRate,
+    gallonsOfFuelConsumedOverPerYear,
+    gasZTR.depreciationofGasZTR,
+    gasZTR.fuel,
+    gasZTR.maintenance,
+    gasZTROpEx,
+    gasZTRResalePrice,
+    latestAvgPowerPrice,
+    latestFuelWeeklyPrice,
+    lengthMowingOperationsTCO,
+    monthlyFuelCostPerZTR,
+    monthlyMaintenanceCostPerNGBR,
+    monthlyMaintenanceCostPerZTR,
+    monthlyPaaSPowerCostNGBR,
+    mowingMonthly,
+    powerProgramCosts.battery,
+    powerProgramCosts.charger,
+    pricing.priceMo36,
+    pricing.priceMo48,
+    pricing.targetPaasMonthlyPrice,
+    requiredEquipment.totalBateries,
+    requiredEquipment.totalChargers,
+    savingsWith3yearFinancing,
+    savingsWith4yearFinancing,
+    savingsWithFPP,
+    savingsWithNGBRCashPurchase,
+    totalGasZTRPurchasePrice,
+    totalMonthlyPaaSMaintenanceCost,
+    totalMonthlyPaaSPowerCost,
+    totalMonthlyZTRFuelCost,
+    totalMonthlyZTRMaintenanceCost,
+    totalNGBRCostBare,
+    totalNGBRCostWith,
+  ]);
+
+  useEffect(() => {
+    setPricing({
+      totalCashPrice:
+        requiredEquipment.totalBateries * powerProgramCosts.battery +
+        requiredEquipment.totalChargers * powerProgramCosts.charger,
+      priceMo36: Math.round(
+        PMT(0.0399 / 12, 36, -pricing.totalCashPrice, 0, 0)
+      ),
+      priceMo48: Math.round(
+        PMT(0.0499 / 12, 48, -pricing.totalCashPrice, 0, 0)
+      ),
+      targetPaasMonthlyPrice: Math.round(
+        pricing.priceMo48 + (pricing.priceMo48 * 0.1 + 1)
+      ),
+      annualizedPaaSPrice: Math.round(pricing.targetPaasMonthlyPrice * 12),
+      annualRebateOffSeason: lengthOffSeason * pricing.targetPaasMonthlyPrice,
+    });
+  }, [
+    requiredEquipment,
+    powerProgramCosts.battery,
+    powerProgramCosts.charger,
+    pricing.totalCashPrice,
+    pricing.priceMo48,
+    pricing.targetPaasMonthlyPrice,
+    lengthOffSeason,
+  ]);
+
+  // OBSERVE
   const [checkObserve, setCheckObserve] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -216,399 +524,6 @@ const PaasCalculator = () => {
     customerInputs.location,
   ]);
 
-  useEffect(() => {
-    setMowingMonthly(
-      customerInputs.mowingHours *
-        customerInputs.daysMowedPerWeek *
-        averageWeeksPerMonth
-    );
-  }, [
-    averageWeeksPerMonth,
-    customerInputs.daysMowedPerWeek,
-    customerInputs.mowingHours,
-  ]);
-
-  useEffect(() => {
-    setLengthOffSeason(12 - customerInputs.lengthMowingSeason);
-  }, [customerInputs.lengthMowingSeason]);
-
-  useEffect(() => {
-    setMonthlyPaaSPowerCostNGBR(
-      Math.round(latestAvgPowerPrice * NGBRBatteryCapacity * mowingMonthly)
-    );
-  }, [NGBRBatteryCapacity, latestAvgPowerPrice, mowingMonthly]);
-
-  useEffect(() => {
-    setTotalMonthlyPaaSPowerCost(
-      monthlyPaaSPowerCostNGBR * customerInputs.numberNGBRUnits
-    );
-  }, [customerInputs.numberNGBRUnits, monthlyPaaSPowerCostNGBR]);
-
-  useEffect(() => {
-    setRequiredEquipment({
-      bateries: paasCal.equipment.deault.bateries,
-      chargers: paasCal.equipment.deault.chargers,
-      totalBateries:
-        paasCal.equipment.deault.bateries * customerInputs.numberNGBRUnits,
-      totalChargers:
-        paasCal.equipment.deault.chargers * customerInputs.numberNGBRUnits,
-    });
-  }, [customerInputs.numberNGBRUnits]);
-
-  useEffect(() => {
-    setMonthlyMaintenanceCostPerZTR(
-      Math.round(averageHourlyMaintenanceCost * mowingMonthly)
-    );
-  }, [averageHourlyMaintenanceCost, mowingMonthly]);
-
-  useEffect(() => {
-    setMonthlyFuelCostPerZTR(
-      Math.round(latestFuelWeeklyPrice * fuelConsumptionRate * mowingMonthly)
-    );
-  }, [fuelConsumptionRate, latestFuelWeeklyPrice, mowingMonthly]);
-
-  useEffect(() => {
-    setMonthlyMaintenanceCostPerNGBR(
-      Math.round(monthlyMaintenanceCostPerZTR * electricMaintenanceCostGas)
-    );
-  }, [electricMaintenanceCostGas, monthlyMaintenanceCostPerZTR]);
-
-  useEffect(() => {
-    setTotalMonthlyPaaSMaintenanceCost(
-      monthlyMaintenanceCostPerNGBR * customerInputs.numberNGBRUnits
-    );
-  }, [customerInputs.numberNGBRUnits, monthlyMaintenanceCostPerNGBR]);
-
-  useEffect(() => {
-    setNGBROpEx(totalMonthlyPaaSPowerCost + totalMonthlyPaaSMaintenanceCost);
-  }, [totalMonthlyPaaSMaintenanceCost, totalMonthlyPaaSPowerCost]);
-
-  useEffect(() => {
-    setTotalMonthlyZTRFuelCost(
-      monthlyFuelCostPerZTR * customerInputs.numberNGBRUnits
-    );
-  }, [customerInputs.numberNGBRUnits, monthlyFuelCostPerZTR]);
-
-  useEffect(() => {
-    setTotalMonthlyZTRMaintenanceCost(
-      monthlyMaintenanceCostPerZTR * customerInputs.numberNGBRUnits
-    );
-  }, [customerInputs.numberNGBRUnits, monthlyMaintenanceCostPerZTR]);
-
-  useEffect(() => {
-    setGasZTROpEx(totalMonthlyZTRFuelCost + totalMonthlyZTRMaintenanceCost);
-  }, [totalMonthlyZTRFuelCost, totalMonthlyZTRMaintenanceCost]);
-
-  useEffect(() => {
-    setTotalGasZTRPurchasePrice(
-      customerInputs.gasZTRPrice * customerInputs.numberNGBRUnits
-    );
-  }, [customerInputs.gasZTRPrice, customerInputs.numberNGBRUnits]);
-
-  useEffect(() => {
-    setTotalNGBRCostBare(BareNGBR * customerInputs.numberNGBRUnits);
-  }, [BareNGBR, customerInputs.numberNGBRUnits]);
-
-  useEffect(() => {
-    setCostofChargers(
-      powerProgramCosts.charger * requiredEquipment.totalChargers
-    );
-  }, [powerProgramCosts.charger, requiredEquipment.totalChargers]);
-
-  useEffect(() => {
-    setCostofBateries(
-      powerProgramCosts.battery * requiredEquipment.totalBateries
-    );
-  }, [powerProgramCosts.battery, requiredEquipment.totalBateries]);
-
-  useEffect(() => {
-    setTotalNGBRCostWith(costofBateries + costofChargers + totalNGBRCostBare);
-  }, [costofBateries, costofChargers, totalNGBRCostBare]);
-
-  useEffect(() => {
-    setSavingsWith4yearFinancing(gasZTROpEx - (NGBROpEx + pricing.priceMo48));
-  }, [NGBROpEx, gasZTROpEx, pricing.priceMo48]);
-
-  useEffect(() => {
-    setSavingsWith3yearFinancing(gasZTROpEx - (NGBROpEx + pricing.priceMo36));
-  }, [NGBROpEx, gasZTROpEx, pricing.priceMo36]);
-
-  useEffect(() => {
-    setSavingsWithFPP(gasZTROpEx - (NGBROpEx + pricing.targetPaasMonthlyPrice));
-  }, [NGBROpEx, gasZTROpEx, pricing.targetPaasMonthlyPrice]);
-
-  useEffect(() => {
-    setSavingsWithNGBRCashPurchase(gasZTROpEx - NGBROpEx);
-  }, [NGBROpEx, gasZTROpEx]);
-
-  useEffect(() => {
-    setBreakeven({
-      breakevenOutrightPurchaseNoResale: (
-        (totalNGBRCostWith - totalGasZTRPurchasePrice) /
-        savingsWithNGBRCashPurchase
-      ).toFixed(1),
-      breakevenFPPNoResale: (
-        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
-        savingsWithFPP
-      ).toFixed(1),
-      breakeven3yearFinancingNoResale: (
-        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
-        savingsWith3yearFinancing
-      ).toFixed(1),
-      breakeven4yearFinancingNoResale: (
-        (totalNGBRCostBare - totalGasZTRPurchasePrice) /
-        savingsWith4yearFinancing
-      ).toFixed(1),
-    });
-  }, [
-    savingsWith3yearFinancing,
-    savingsWith4yearFinancing,
-    savingsWithFPP,
-    savingsWithNGBRCashPurchase,
-    totalGasZTRPurchasePrice,
-    totalNGBRCostBare,
-    totalNGBRCostWith,
-  ]);
-
-  useEffect(() => {
-    setNGBRResalePriceBareNGBR(
-      (
-        totalNGBRCostBare *
-        (1 - depreciationInputs.electricZTRDepreciationRate)
-      ).toFixed(2)
-    );
-  }, [depreciationInputs.electricZTRDepreciationRate, totalNGBRCostBare]);
-
-  useEffect(() => {
-    setNGBRResalePriceNGBR(
-      (
-        totalNGBRCostWith *
-        (1 - depreciationInputs.electricZTRDepreciationRate)
-      ).toFixed(2)
-    );
-  }, [depreciationInputs.electricZTRDepreciationRate, totalNGBRCostWith]);
-
-  useEffect(() => {
-    setGasZTRResalePrice(
-      (
-        totalGasZTRPurchasePrice *
-        (1 - depreciationInputs.gasZTRDepreciationRate)
-      ).toFixed(2)
-    );
-  }, [depreciationInputs.gasZTRDepreciationRate, totalGasZTRPurchasePrice]);
-
-  useEffect(() => {
-    setEZTRResalePremiumBareNGBR(NGBRResalePriceBareNGBR - gasZTRResalePrice);
-  }, [NGBRResalePriceBareNGBR, gasZTRResalePrice]);
-
-  useEffect(() => {
-    setEZTRResalePremiumCashPurchase(
-      NGBRResalePriceNGBR - eZTRResalePremiumBareNGBR
-    );
-  }, [NGBRResalePriceNGBR, eZTRResalePremiumBareNGBR]);
-
-  useEffect(() => {
-    setGasZTR({
-      TCOofGasZTR:
-        gasZTR.depreciationofGasZTR + gasZTR.fuel + gasZTR.maintenance,
-      depreciationofGasZTR:
-        customerInputs.gasZTRPrice *
-        depreciationInputs.gasZTRDepreciationRate *
-        customerInputs.numberNGBRUnits,
-      fuel:
-        totalMonthlyZTRFuelCost *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-      maintenance:
-        totalMonthlyZTRMaintenanceCost *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-    });
-  }, [
-    customerInputs.gasZTRPrice,
-    customerInputs.lengthMowingSeason,
-    customerInputs.numberNGBRUnits,
-    depreciationInputs.gasZTRDepreciationRate,
-    gasZTR.depreciationofGasZTR,
-    gasZTR.fuel,
-    gasZTR.maintenance,
-    lengthMowingOperationsTCO,
-    totalMonthlyZTRFuelCost,
-    totalMonthlyZTRMaintenanceCost,
-  ]);
-
-  useEffect(() => {
-    setCashPurchase({
-      TCOofNGBR:
-        cashPurchase.depreciationofGasZTR +
-        cashPurchase.power +
-        cashPurchase.maintenance,
-      depreciationofGasZTR:
-        totalNGBRCostWith * depreciationInputs.electricZTRDepreciationRate,
-      power:
-        totalMonthlyPaaSPowerCost *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-      maintenance:
-        totalMonthlyPaaSMaintenanceCost *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-    });
-  }, [
-    cashPurchase.depreciationofGasZTR,
-    cashPurchase.maintenance,
-    cashPurchase.power,
-    customerInputs.lengthMowingSeason,
-    depreciationInputs.electricZTRDepreciationRate,
-    lengthMowingOperationsTCO,
-    totalMonthlyPaaSMaintenanceCost,
-    totalMonthlyPaaSPowerCost,
-    totalNGBRCostWith,
-  ]);
-
-  useEffect(() => {
-    setNGBRWithFlexiblePowerProgram({
-      depreciationOfBareNGBR:
-        totalNGBRCostBare * depreciationInputs.electricZTRDepreciationRate,
-      flexiblePowerProgramSubscription:
-        pricing.targetPaasMonthlyPrice *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-      financingFee36:
-        pricing.priceMo36 *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-      financingFee48:
-        pricing.priceMo48 *
-        customerInputs.lengthMowingSeason *
-        lengthMowingOperationsTCO,
-    });
-  }, [
-    customerInputs.lengthMowingSeason,
-    depreciationInputs.electricZTRDepreciationRate,
-    lengthMowingOperationsTCO,
-    pricing.priceMo36,
-    pricing.priceMo48,
-    pricing.targetPaasMonthlyPrice,
-    totalNGBRCostBare,
-  ]);
-
-  useEffect(() => {
-    setGallonsOfFuelConsumedOverPerYear(
-      fuelConsumptionRate *
-        mowingMonthly *
-        customerInputs.lengthMowingSeason *
-        customerInputs.numberNGBRUnits
-    );
-  }, [
-    customerInputs.lengthMowingSeason,
-    customerInputs.numberNGBRUnits,
-    fuelConsumptionRate,
-    mowingMonthly,
-  ]);
-
-  useEffect(() => {
-    setPoundsOfCO2Avoided(
-      gallonsOfFuelConsumedOverPerYear *
-        enviromentalBenefits.convertingGallonsOfGasolineToCO2
-    );
-  }, [
-    enviromentalBenefits.convertingGallonsOfGasolineToCO2,
-    gallonsOfFuelConsumedOverPerYear,
-  ]);
-
-  useEffect(() => {
-    setNumberOfMaintenanceJobsPerYear(
-      (
-        (mowingMonthly *
-          customerInputs.lengthMowingSeason *
-          customerInputs.numberNGBRUnits) /
-        averageFrequencyPerZTRServicing
-      ).toFixed(1)
-    );
-  }, [
-    averageFrequencyPerZTRServicing,
-    customerInputs.lengthMowingSeason,
-    customerInputs.numberNGBRUnits,
-    mowingMonthly,
-  ]);
-
-  useEffect(() => {
-    setReductionFromNGBRResale({
-      cashPurchase: Math.round(
-        eZTRResalePremiumCashPurchase / savingsWithNGBRCashPurchase
-      ),
-      FPP: Math.round(eZTRResalePremiumBareNGBR / savingsWithFPP),
-      financing36: Math.round(
-        eZTRResalePremiumBareNGBR / savingsWith3yearFinancing
-      ),
-      financing48: Math.round(
-        eZTRResalePremiumBareNGBR / savingsWith4yearFinancing
-      ),
-    });
-  }, [
-    eZTRResalePremiumBareNGBR,
-    eZTRResalePremiumCashPurchase,
-    savingsWith3yearFinancing,
-    savingsWith4yearFinancing,
-    savingsWithFPP,
-    savingsWithNGBRCashPurchase,
-  ]);
-
-  useEffect(() => {
-    setRequiredEquipment({
-      bateries:
-        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
-          .bateries,
-      chargers:
-        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
-          .chargers,
-      totalBateries:
-        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
-          .bateries * customerInputs.numberNGBRUnits,
-      totalChargers:
-        paasCal.equipment.requiredEquipment[customerInputs.mowingHours]
-          .chargers * customerInputs.numberNGBRUnits,
-    });
-  }, [customerInputs.mowingHours, customerInputs.numberNGBRUnits]);
-
-  useEffect(() => {
-    setPricing({
-      totalCashPrice:
-        requiredEquipment.totalBateries * powerProgramCosts.battery +
-        requiredEquipment.totalChargers * powerProgramCosts.charger,
-      priceMo36: Math.round(
-        PMT(0.0399 / 12, 36, -pricing.totalCashPrice, 0, 0)
-      ),
-      priceMo48: Math.round(
-        PMT(0.0499 / 12, 48, -pricing.totalCashPrice, 0, 0)
-      ),
-      targetPaasMonthlyPrice: Math.round(
-        pricing.priceMo48 + (pricing.priceMo48 * 0.1 + 1)
-      ),
-      annualizedPaaSPrice: Math.round(pricing.targetPaasMonthlyPrice * 12),
-      annualRebateOffSeason: lengthOffSeason * pricing.targetPaasMonthlyPrice,
-    });
-  }, [
-    requiredEquipment,
-    powerProgramCosts.battery,
-    powerProgramCosts.charger,
-    pricing.totalCashPrice,
-    pricing.priceMo48,
-    pricing.targetPaasMonthlyPrice,
-    lengthOffSeason,
-  ]);
-
-  const customerOutputsProps = {
-    requiredEquipment: { ...requiredEquipment },
-    pricing: { ...pricing },
-    customerInputs: { ...customerInputs },
-    monthlyPaaSPowerCostNGBR: monthlyPaaSPowerCostNGBR,
-    monthlyFuelCostPerZTR: monthlyFuelCostPerZTR,
-    monthlyMaintenanceCostPerNGBR: monthlyMaintenanceCostPerNGBR,
-    monthlyMaintenanceCostPerZTR: monthlyMaintenanceCostPerZTR,
-  };
-
   return (
     <>
       {loading === true ? (
@@ -621,26 +536,30 @@ const PaasCalculator = () => {
         ""
       )}
       <form className="main" id="outputs">
-        <CustomerInputs
+        <CustomerInputsForm
+          handleChange={handleChange}
           setPADDRegion={setPADDRegion}
+          buttonClick={buttonClick}
           customerInputs={customerInputs}
-          setCustomerInputs={setCustomerInputs}
         />
 
-        <CustomerOutputs {...customerOutputsProps} />
+        <CustomerOutputs
+          requiredEquipment={requiredEquipment}
+          dollarUSLocale={dollarUSLocale}
+          pricing={pricing}
+          customerInputs={customerInputs}
+          monthlyPaaSPowerCostNGBR={monthlyPaaSPowerCostNGBR}
+          monthlyFuelCostPerZTR={monthlyFuelCostPerZTR}
+          monthlyMaintenanceCostPerNGBR={monthlyMaintenanceCostPerNGBR}
+          monthlyMaintenanceCostPerZTR={monthlyMaintenanceCostPerZTR}
+        />
       </form>
 
       <form
         id="output"
         className={`main-output ${checkObserve ? "on-screen" : ""}`}
       >
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            document.querySelector("#output").classList.toggle("active");
-            document.querySelector("body").classList.toggle("active");
-          }}
-        >
+        <button onClick={hideShowSection}>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M3 18h13v-2H3v2zm0-5h10v-2H3v2zm0-7v2h13V6H3zm18 9.59L17.42 12 21 8.41 19.59 7l-5 5 5 5L21 15.59z" />

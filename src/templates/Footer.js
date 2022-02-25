@@ -549,23 +549,7 @@ const Footer = () => {
           </nav>
         </div>
         <div className="cols__col_stay_connected cols--two-col--main-left__col--right">
-          <form
-            action="/api/sitecore/SharedCallouts/EmailSubscriptionCalloutSF"
-            className="form"
-            method="post"
-          >
-            <input
-              id="footerMailingListId"
-              name="mailingListId"
-              type="hidden"
-              value="54ab8d45-7b4c-4aeb-bde0-edda22231126"
-            />
-            <input
-              id="isJoinOurMailingList"
-              name="isJoinOurMailingList"
-              type="hidden"
-              value="true"
-            />
+          <form>
             <div className="stay-connected-casl-base-container">
               <div className="stay-connected-casl-container">
                 <div className="stay-connected-casl-header">EMAIL SIGNUP</div>
