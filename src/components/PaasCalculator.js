@@ -360,59 +360,114 @@ const PaasCalculator = () => {
         eZTRResalePremiumBareNGBR / savingsWith4yearFinancing
       ),
     });
+    switch (customerInputs.mowingHours) {
+      case 1:
+        setRequiredEquipment({
+          bateries: 5,
+          chargers: 1,
+          totalBateries: 5 * customerInputs.numberNGBRUnits,
+          totalChargers: 1 * customerInputs.numberNGBRUnits,
+        });
+        break;
+      case 3:
+        setRequiredEquipment({
+          bateries: 5,
+          chargers: 1,
+          totalBateries: 5 * customerInputs.numberNGBRUnits,
+          totalChargers: 1 * customerInputs.numberNGBRUnits,
+        });
+        break;
+      case 5:
+        setRequiredEquipment({
+          bateries: 7,
+          chargers: 2,
+          totalBateries: 7 * customerInputs.numberNGBRUnits,
+          totalChargers: 2 * customerInputs.numberNGBRUnits,
+        });
+        break;
+      case 7:
+        setRequiredEquipment({
+          bateries: 10,
+          chargers: 2,
+          totalBateries: 10 * customerInputs.numberNGBRUnits,
+          totalChargers: 2 * customerInputs.numberNGBRUnits,
+        });
+        break;
+      case 9:
+        setRequiredEquipment({
+          bateries: 12,
+          chargers: 3,
+          totalBateries: 12 * customerInputs.numberNGBRUnits,
+          totalChargers: 3 * customerInputs.numberNGBRUnits,
+        });
+        break;
+      default:
+        setRequiredEquipment({
+          bateries: 7,
+          chargers: 2,
+          totalBateries: 7 * customerInputs.numberNGBRUnits,
+          totalChargers: 2 * customerInputs.numberNGBRUnits,
+        });
+        break;
+    }
   }, [
-    customerInputs,
-    averageWeeksPerMonth,
-    mowingMonthly,
-    monthlyMaintenanceCostPerZTR,
-    latestFuelWeeklyPrice,
-    latestAvgPowerPrice,
-    monthlyPaaSPowerCostNGBR,
-    monthlyMaintenanceCostPerNGBR,
-    setNGBROpEx,
-    totalMonthlyPaaSPowerCost,
-    totalMonthlyPaaSMaintenanceCost,
-    monthlyFuelCostPerZTR,
-    totalMonthlyZTRFuelCost,
-    powerProgramCosts.charger,
-    requiredEquipment.totalChargers,
-    costofBateries,
-    totalNGBRCostBare,
-    gasZTROpEx,
+    BareNGBR,
+    NGBRBatteryCapacity,
     NGBROpEx,
-    pricing.priceMo48,
-    pricing.priceMo36,
-    pricing.targetPaasMonthlyPrice,
-    totalGasZTRPurchasePrice,
-    savingsWithFPP,
-    savingsWith3yearFinancing,
-    totalNGBRCostWith,
-    savingsWithNGBRCashPurchase,
-    powerProgramCosts.battery,
-    requiredEquipment.totalBateries,
-    savingsWith4yearFinancing,
-    totalMonthlyZTRMaintenanceCost,
+    NGBRResalePriceBareNGBR,
+    NGBRResalePriceNGBR,
+    averageFrequencyPerZTRServicing,
+    averageHourlyMaintenanceCost,
+    averageWeeksPerMonth,
+    cashPurchase.depreciationofGasZTR,
+    cashPurchase.maintenance,
+    cashPurchase.power,
+    costofBateries,
     costofChargers,
+    customerInputs.daysMowedPerWeek,
+    customerInputs.gasZTRPrice,
+    customerInputs.lengthMowingSeason,
+    customerInputs.mowingHours,
+    customerInputs.numberNGBRUnits,
     depreciationInputs.electricZTRDepreciationRate,
     depreciationInputs.gasZTRDepreciationRate,
-    NGBRResalePriceBareNGBR,
-    gasZTRResalePrice,
-    NGBRResalePriceNGBR,
     eZTRResalePremiumBareNGBR,
-    lengthMowingOperationsTCO,
+    eZTRResalePremiumCashPurchase,
+    electricMaintenanceCostGas,
+    enviromentalBenefits.convertingGallonsOfGasolineToCO2,
+    fuelConsumptionRate,
+    gallonsOfFuelConsumedOverPerYear,
     gasZTR.depreciationofGasZTR,
     gasZTR.fuel,
     gasZTR.maintenance,
-    cashPurchase.depreciationofGasZTR,
-    cashPurchase.power,
-    cashPurchase.maintenance,
-    gallonsOfFuelConsumedOverPerYear,
-    eZTRResalePremiumCashPurchase,
-    enviromentalBenefits.convertingGallonsOfGasolineToCO2,
-    NGBRBatteryCapacity,
-    averageHourlyMaintenanceCost,
-    fuelConsumptionRate,
-    electricMaintenanceCostGas,
+    gasZTROpEx,
+    gasZTRResalePrice,
+    latestAvgPowerPrice,
+    latestFuelWeeklyPrice,
+    lengthMowingOperationsTCO,
+    monthlyFuelCostPerZTR,
+    monthlyMaintenanceCostPerNGBR,
+    monthlyMaintenanceCostPerZTR,
+    monthlyPaaSPowerCostNGBR,
+    mowingMonthly,
+    powerProgramCosts.battery,
+    powerProgramCosts.charger,
+    pricing.priceMo36,
+    pricing.priceMo48,
+    pricing.targetPaasMonthlyPrice,
+    requiredEquipment.totalBateries,
+    requiredEquipment.totalChargers,
+    savingsWith3yearFinancing,
+    savingsWith4yearFinancing,
+    savingsWithFPP,
+    savingsWithNGBRCashPurchase,
+    totalGasZTRPurchasePrice,
+    totalMonthlyPaaSMaintenanceCost,
+    totalMonthlyPaaSPowerCost,
+    totalMonthlyZTRFuelCost,
+    totalMonthlyZTRMaintenanceCost,
+    totalNGBRCostBare,
+    totalNGBRCostWith,
   ]);
 
   useEffect(() => {
