@@ -1,3 +1,5 @@
+import dollarUSLocale from "../../utils/dollarUSLocale";
+
 const Breakeven = ({ breakeven, reductionFromNGBRResale }) => {
   const financing3YearWResale =
     breakeven.breakeven3yearFinancingNoResale -
@@ -15,12 +17,12 @@ const Breakeven = ({ breakeven, reductionFromNGBRResale }) => {
       <li className="title">Breakeven</li>
       <li>
         <span>Breakeven: Outright purchase - With resale</span>
-        <span>{OutrightPurchaseWResale.toFixed(2)}</span>
+        <span>{dollarUSLocale.format(OutrightPurchaseWResale)}</span>
       </li>
       {fPPWResale ? (
         <li>
           <span>Breakeven: FPP - With resale</span>
-          <span>{fPPWResale.toFixed(2)}</span>
+          <span>{dollarUSLocale.format(fPPWResale)}</span>
         </li>
       ) : (
         ""
@@ -29,7 +31,7 @@ const Breakeven = ({ breakeven, reductionFromNGBRResale }) => {
       {financing3YearWResale ? (
         <li>
           <span>Breakeven: 3-year financing - With resale</span>
-          <span>{financing3YearWResale.toFixed(2)}</span>
+          <span>{dollarUSLocale.format(financing3YearWResale)}</span>
         </li>
       ) : (
         ""
