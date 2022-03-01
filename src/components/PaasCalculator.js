@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import paasCal from "../data/paas-cal.json";
 import PMT from "../utils/pmt";
-import CustomerInputs from "./CustomerInputs";
+import CustomerForm from "./CustomerForm";
 // -----------------> customerOutputs <-----------------
 import TotalCashPrice from "./outputs/TotalCashPrice";
 import OpExCost from "./outputs/OpExCost";
@@ -610,7 +610,7 @@ const PaasCalculator = () => {
       )}
       <ul className="main" id="outputs">
         <li className="column container-input">
-          <CustomerInputs
+          <CustomerForm
             setPADDRegion={setPADDRegion}
             customerInputs={customerInputs}
             setCustomerInputs={setCustomerInputs}
