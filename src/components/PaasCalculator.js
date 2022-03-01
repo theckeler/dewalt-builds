@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import paasCal from "../data/paas-cal.json";
 import PMT from "../utils/pmt";
-import "../scss/paas-calculator.scss";
-import CustomerInputs from "./customerInputs";
-import CustomerOutputs from "./customerOutputs";
+import CustomerInputs from "./CustomerInputs";
+// -----------------> customerOutputs <-----------------
+import TotalCashPrice from "./outputs/TotalCashPrice";
+import OpExCost from "./outputs/OpExCost";
+import Hardware from "./outputs/Hardware";
+import Breakeven from "./outputs/Breakeven";
+import FinancingNGBR from "./outputs/FinancingNGBR";
+import Environmental from "./outputs/Environmental";
+import Maintenance from "./outputs/Maintenance";
+import Compare from "./outputs/Compare";
+
 //import MainOutput from "./mainOutput";
+import "../scss/paas-calculator.scss";
 
 const PaasCalculator = () => {
   // -----------------> SETUP <-----------------
@@ -566,7 +575,7 @@ const PaasCalculator = () => {
         ),
       };
     });
-    console.log(financing);
+    // console.log(financing);
 
     setPricing({
       totalCashPrice:
@@ -588,17 +597,6 @@ const PaasCalculator = () => {
     pricing.targetPaasMonthlyPrice,
     lengthOffSeason,
   ]);
-
-  const customerOutputsProps = {
-    requiredEquipment: { ...requiredEquipment },
-    pricing: { ...pricing },
-    customerInputs: { ...customerInputs },
-    monthlyPaaSPowerCostNGBR: monthlyPaaSPowerCostNGBR,
-    monthlyFuelCostPerZTR: monthlyFuelCostPerZTR,
-    monthlyMaintenanceCostPerNGBR: monthlyMaintenanceCostPerNGBR,
-    monthlyMaintenanceCostPerZTR: monthlyMaintenanceCostPerZTR,
-  };
-
   return (
     <>
       {loading === true ? (
@@ -610,19 +608,50 @@ const PaasCalculator = () => {
       ) : (
         ""
       )}
-      <form className="main" id="outputs">
-        <CustomerInputs
-          setPADDRegion={setPADDRegion}
-          customerInputs={customerInputs}
-          setCustomerInputs={setCustomerInputs}
-        />
-
-        <CustomerOutputs {...customerOutputsProps} />
-      </form>
+      <ul className="main" id="outputs">
+        <li className="column container-input">
+          <CustomerInputs
+            setPADDRegion={setPADDRegion}
+            customerInputs={customerInputs}
+            setCustomerInputs={setCustomerInputs}
+          />
+        </li>
+        <li className="column container-output">
+          <TotalCashPrice {...{ pricing }} />
+          <OpExCost
+            {...{
+              totalMonthlyPaaSPowerCost,
+              totalMonthlyPaaSMaintenanceCost,
+            }}
+          />
+          <Hardware {...{ requiredEquipment }} />
+          <Breakeven {...{ breakeven, reductionFromNGBRResale }} />
+          <FinancingNGBR
+            {...{ gasZTR, cashPurchase, NGBRWithFlexiblePowerProgram }}
+          />
+          <Environmental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />
+          <Maintenance
+            {...{
+              numberOfMaintenanceJobsPerYear,
+              averageTotalTimeForServicing,
+            }}
+          />
+          <Compare
+            {...{
+              monthlyPaaSPowerCostNGBR,
+              customerInputs,
+              monthlyFuelCostPerZTR,
+              monthlyMaintenanceCostPerNGBR,
+              monthlyMaintenanceCostPerZTR,
+              pricing,
+            }}
+          />
+        </li>
+      </ul>
 
       <form
         id="output"
-        className={`main-output ${checkObserve ? "on-screen" : ""}`}
+        className={`main main-output ${checkObserve ? "on-screen" : ""}`}
       >
         <button
           onClick={(e) => {
@@ -872,7 +901,7 @@ const PaasCalculator = () => {
                     ? (
                         breakeven.breakevenFPPNoResale -
                         reductionFromNGBRResale.FPP
-                      ).toFixed(1)
+                      ).toFixed(4)
                     : ""
                 }
                 readOnly
@@ -886,7 +915,7 @@ const PaasCalculator = () => {
                     ? (
                         breakeven.breakeven3yearFinancingNoResale -
                         reductionFromNGBRResale.financing36
-                      ).toFixed(1)
+                      ).toFixed(4)
                     : ""
                 }
                 readOnly
@@ -897,8 +926,10 @@ const PaasCalculator = () => {
               <input
                 value={
                   reductionFromNGBRResale.financing48
-                    ? breakeven.breakeven4yearFinancingNoResale -
-                      reductionFromNGBRResale.financing48
+                    ? (
+                        breakeven.breakeven4yearFinancingNoResale -
+                        reductionFromNGBRResale.financing48
+                      ).toFixed(4)
                     : ""
                 }
                 readOnly

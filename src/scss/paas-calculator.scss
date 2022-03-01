@@ -26,34 +26,6 @@ body.active {
   padding: em(10px);
   min-height: em(400px);
 
-  .red {
-    color: red;
-  }
-
-  .gold {
-    input,
-    input:read-only {
-      background: #febd17;
-      font-weight: 700;
-    }
-  }
-
-  .green {
-    input,
-    input:read-only {
-      color: green;
-      background: #fff;
-      border: 1px solid #333;
-    }
-  }
-
-  .title {
-    font-size: rem(14px);
-    font-weight: 700;
-    background: #747474;
-    color: #fff;
-  }
-
   .buttons {
     display: flex;
     align-items: center;
@@ -83,9 +55,54 @@ body.active {
     }
   }
 
-  form {
+  .tooltip {
+    position: relative;
+
+    .tip {
+      position: absolute;
+      bottom: 140%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      padding: em(8px);
+      color: #fff;
+      font-size: rem(12px);
+      font-weight: normal;
+      width: em(400px);
+      text-align: center;
+      box-shadow: 0 0 em(10px) rgba(#000, 0.5);
+      z-index: 1002;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+      &:after {
+        content: "";
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: solid transparent;
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(#000, 0);
+        border-top-color: #000;
+        border-width: em(10px);
+      }
+    }
+
+    svg {
+      max-width: em(20px);
+      width: 100%;
+    }
+  }
+
+  .main {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
 
     &.main-output {
       position: fixed;
@@ -145,13 +162,43 @@ body.active {
       }
     }
 
+    .column {
+      display: flex;
+      flex-wrap: wrap;
+
+      .outputs {
+        flex-basis: 100%;
+
+        li {
+          padding: em(1px);
+
+          span {
+            display: block;
+            padding: em(10px);
+
+            &:nth-child(2) {
+              // background: #e7e7e7;
+            }
+          }
+
+          &.title {
+            // font-size: rem(13px);
+            font-weight: 700;
+            background: #febd17;
+            padding: em(10px);
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
     ul {
       flex-basis: 100%;
       list-style: none;
       margin: em(10px) 0;
-      padding: em(6px);
+      // padding: em(6px);
       position: relative;
-      border: em(1px) solid #e4e4e4;
+      // border: em(1px) solid #e4e4e4;
 
       &.inputs,
       &.outputs {
@@ -164,15 +211,8 @@ body.active {
       }
 
       &.outputs {
-        background: #ececec;
-
-        input,
-        input:read-only {
-          font-size: rem(16px);
-          font-weight: 700;
-          text-align: center;
-          background: #febd17;
-        }
+        background: #fff;
+        padding: 0 em(6px);
       }
 
       &.three {
@@ -193,22 +233,6 @@ body.active {
             &:nth-child(3) {
               text-align: center;
             }
-          }
-        }
-      }
-
-      &.hide {
-        overflow: hidden;
-
-        li:not(.button-hide) {
-          display: none;
-        }
-
-        button {
-          position: relative;
-
-          &:before {
-            content: "Show";
           }
         }
       }
@@ -250,51 +274,6 @@ body.active {
             display: flex;
             flex-direction: row;
             align-items: center;
-
-            .tooltip {
-              position: relative;
-
-              .tip {
-                position: absolute;
-                bottom: 140%;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #000;
-                padding: em(8px);
-                color: #fff;
-                font-size: rem(12px);
-                font-weight: normal;
-                width: em(400px);
-                text-align: center;
-                box-shadow: 0 0 em(10px) rgba(#000, 0.5);
-                z-index: 1002;
-                display: none;
-
-                &.active {
-                  display: block;
-                }
-
-                &:after {
-                  content: "";
-                  top: 100%;
-                  left: 50%;
-                  transform: translateX(-50%);
-                  border: solid transparent;
-                  height: 0;
-                  width: 0;
-                  position: absolute;
-                  pointer-events: none;
-                  border-color: rgba(#000, 0);
-                  border-top-color: #000;
-                  border-width: em(10px);
-                }
-              }
-
-              svg {
-                max-width: em(20px);
-                width: 100%;
-              }
-            }
           }
         }
       }
@@ -430,7 +409,7 @@ body.active {
 
 @media only screen and (min-width: 768px) {
   .paas-calculator {
-    form ul li {
+    .main ul li {
       flex-direction: row;
 
       span:nth-child(1) {
@@ -446,9 +425,18 @@ body.active {
       display: none;
     }
 
-    form {
-      ul {
-        flex-basis: 50%;
+    .main {
+      .column {
+        &.container-input {
+          width: 33.3333334%;
+        }
+
+        &.container-output {
+          width: 66.6666667%;
+        }
+        .outputs {
+          flex-basis: 50%;
+        }
       }
     }
   }
@@ -456,10 +444,12 @@ body.active {
 
 @media only screen and (min-width: 1200px) {
   .paas-calculator {
-    form,
-    form.main {
-      ul {
-        flex-basis: 33%;
+    .main {
+      .column {
+        //flex-basis: 33%;
+        .outputs {
+          //flex-basis: 50%;
+        }
       }
     }
   }
@@ -467,9 +457,9 @@ body.active {
 
 @media only screen and (min-width: 1600px) {
   .paas-calculator {
-    form {
-      ul {
-        flex-basis: 25%;
+    .main {
+      .column {
+        // flex-basis: 25%;
       }
     }
   }
