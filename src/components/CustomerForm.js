@@ -6,7 +6,6 @@ const CustomerInputsForm = ({
   setCustomerInputs,
 }) => {
   const handleChange = (e) => {
-    //console.log(e.target.getAttribute("for"), e.target.value);
     let inputValue;
     if (isNaN(e.target.value)) {
       inputValue = e.target.value;
@@ -49,7 +48,6 @@ const CustomerInputsForm = ({
             }}
           >
             {states.map((state) => {
-              // console.log("state", state);
               return (
                 <option key={state.abbr} value={state.abbr}>
                   {state.name} - PADD {state.padd}
