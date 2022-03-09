@@ -70,7 +70,7 @@ const PaasCalculator = () => {
   const lengthMowingOperationsTCO = (
     totalHoursMowedTCOAnalysis /
     (paasCal.mowingMonthly * paasCal.customerInputs.lengthMowingSeason)
-  ).toFixed(4);
+  ).toFixed(2);
   const paaSPremiumOverFourYearFinancing =
     paasCal.paaSPremiumOverFourYearFinancing;
   const [totalMonthlyPaaSMaintenanceCost, setTotalMonthlyPaaSMaintenanceCost] =
@@ -207,9 +207,11 @@ const PaasCalculator = () => {
 
   useEffect(() => {
     setMowingMonthly(
-      customerInputs.mowingHours *
+      (
+        customerInputs.mowingHours *
         customerInputs.daysMowedPerWeek *
         averageWeeksPerMonth
+      ).toFixed(2)
     );
   }, [
     averageWeeksPerMonth,

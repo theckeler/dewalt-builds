@@ -25,6 +25,7 @@ body.active {
   position: relative;
   padding: em(10px);
   min-height: em(400px);
+  font-size: rem(12px);
 
   .buttons {
     display: flex;
