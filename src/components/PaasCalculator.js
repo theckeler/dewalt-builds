@@ -50,27 +50,56 @@ const PaasCalculator = () => {
   const [monthlyFuelCostPerZTR, setMonthlyFuelCostPerZTR] = useState(0);
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
+  // --------------------------------------------------------
   // UNCOMMENT TO TURN ON API:
   // const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(paasCal.latestFuelWeeklyPrice);
   // const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(paasCal.latestAvgPowerPrice);
   // COMMENT TO TURN ON API:
   const latestFuelWeeklyPrice = paasCal.latestFuelWeeklyPrice;
   const latestAvgPowerPrice = paasCal.latestAvgPowerPrice;
-  //
+  // --------------------------------------------------------
   const [totalMonthlyZTRFuelCost, setTotalMonthlyZTRFuelCost] = useState(0);
   const [totalMonthlyZTRMaintenanceCost, setTotalMonthlyZTRMaintenanceCost] =
     useState(0);
   const depreciationInputs = { ...paasCal.depreciationInputs };
-  const totalHoursMowedTCOAnalysis =
-    Math.round(
-      (paasCal.depreciationInputs.typicalOwnershipTimelineZTRs *
-        paasCal.depreciationInputs.typicalHoursMowedPerYear) /
-        1000
-    ) * 1000;
-  const lengthMowingOperationsTCO = (
-    totalHoursMowedTCOAnalysis /
-    (paasCal.mowingMonthly * paasCal.customerInputs.lengthMowingSeason)
-  ).toFixed(2);
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  // const totalHoursMowedTCOAnalysis =
+  //   Math.round(
+  //     (paasCal.depreciationInputs.typicalOwnershipTimelineZTRs *
+  //       paasCal.depreciationInputs.typicalHoursMowedPerYear) /
+  //       1000
+  //   ) * 1000;
+
+  const totalHoursMowedTCOAnalysis = 3000;
+
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+
+  // const lengthMowingOperationsTCO = (
+  //   totalHoursMowedTCOAnalysis /
+  //   (paasCal.mowingMonthly * paasCal.customerInputs.lengthMowingSeason)
+  // ).toFixed(4);
+
+  const [lengthMowingOperationsTCO, setLengthMowingOperationsTCO] =
+    useState(1.978);
+
+  ////////// CHANGE TO lengthMowingOperationsTCO useSTATE
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+
   const paaSPremiumOverFourYearFinancing =
     paasCal.paaSPremiumOverFourYearFinancing;
   const [totalMonthlyPaaSMaintenanceCost, setTotalMonthlyPaaSMaintenanceCost] =
@@ -211,7 +240,7 @@ const PaasCalculator = () => {
         customerInputs.mowingHours *
         customerInputs.daysMowedPerWeek *
         averageWeeksPerMonth
-      ).toFixed(2)
+      ).toFixed(4)
     );
   }, [
     averageWeeksPerMonth,
@@ -337,19 +366,19 @@ const PaasCalculator = () => {
       breakevenOutrightPurchaseNoResale: (
         (totalNGBRCostWith - totalGasZTRPurchasePrice) /
         savingsWithNGBRCashPurchase
-      ).toFixed(1),
+      ).toFixed(4),
       breakevenFPPNoResale: (
         (totalNGBRCostBare - totalGasZTRPurchasePrice) /
         savingsWithFPP
-      ).toFixed(1),
+      ).toFixed(4),
       breakeven3yearFinancingNoResale: (
         (totalNGBRCostBare - totalGasZTRPurchasePrice) /
         savingsWith3yearFinancing
-      ).toFixed(1),
+      ).toFixed(4),
       breakeven4yearFinancingNoResale: (
         (totalNGBRCostBare - totalGasZTRPurchasePrice) /
         savingsWith4yearFinancing
-      ).toFixed(1),
+      ).toFixed(4),
     });
   }, [
     savingsWith3yearFinancing,
@@ -366,7 +395,7 @@ const PaasCalculator = () => {
       (
         totalNGBRCostBare *
         (1 - depreciationInputs.electricZTRDepreciationRate)
-      ).toFixed(2)
+      ).toFixed(4)
     );
   }, [depreciationInputs.electricZTRDepreciationRate, totalNGBRCostBare]);
 
@@ -375,7 +404,7 @@ const PaasCalculator = () => {
       (
         totalNGBRCostWith *
         (1 - depreciationInputs.electricZTRDepreciationRate)
-      ).toFixed(2)
+      ).toFixed(4)
     );
   }, [depreciationInputs.electricZTRDepreciationRate, totalNGBRCostWith]);
 
@@ -384,7 +413,7 @@ const PaasCalculator = () => {
       (
         totalGasZTRPurchasePrice *
         (1 - depreciationInputs.gasZTRDepreciationRate)
-      ).toFixed(2)
+      ).toFixed(4)
     );
   }, [depreciationInputs.gasZTRDepreciationRate, totalGasZTRPurchasePrice]);
 
@@ -515,7 +544,7 @@ const PaasCalculator = () => {
           customerInputs.lengthMowingSeason *
           customerInputs.numberNGBRUnits) /
         averageFrequencyPerZTRServicing
-      ).toFixed(1)
+      ).toFixed(4)
     );
   }, [
     averageFrequencyPerZTRServicing,
@@ -577,7 +606,6 @@ const PaasCalculator = () => {
         ),
       };
     });
-    // console.log(financing);
 
     setPricing({
       totalCashPrice:
@@ -599,6 +627,28 @@ const PaasCalculator = () => {
     pricing.targetPaasMonthlyPrice,
     lengthOffSeason,
   ]);
+
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  useEffect(() => {
+    setLengthMowingOperationsTCO(
+      (
+        totalHoursMowedTCOAnalysis /
+        (mowingMonthly * customerInputs.lengthMowingSeason)
+      ).toFixed(4)
+    );
+  }, [customerInputs.lengthMowingSeason, mowingMonthly]);
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+
   return (
     <>
       {loading === true ? (
@@ -672,49 +722,64 @@ const PaasCalculator = () => {
           <ul>
             <li className="title">Customer-provided inputs for reference</li>
             <li className="green">
-              <label>Geography / location</label>
+              <label>Geography / location (customerInputs.location)</label>
               <input value={customerInputs.location} readOnly />
             </li>
             <li className="green">
-              <label>Days mowed per week</label>
+              <label>
+                Days mowed per week (customerInputs.daysMowedPerWeek)
+              </label>
               <input value={customerInputs.daysMowedPerWeek} readOnly />
             </li>
             <li className="green">
-              <label>Number of NGBR units</label>
+              <label>
+                Number of NGBR units (customerInputs.numberNGBRUnits)
+              </label>
               <input value={customerInputs.numberNGBRUnits} readOnly />
             </li>
             <li className="green">
-              <label>[HELPER] Mowing hours for calculation</label>
+              <label>
+                [HELPER] Mowing hours for calculation
+                (customerInputs.mowingHours)
+              </label>
               <input value={customerInputs.mowingHours} readOnly />
             </li>
             <li>
-              <label>[HELPER] Average weeks per month</label>
+              <label>
+                [HELPER] Average weeks per month (averageWeeksPerMonth)
+              </label>
               <input value={averageWeeksPerMonth} readOnly />
             </li>
             <li>
               <label className="red">
-                Converting mowing frequency to monthly
+                Converting mowing frequency to monthly (mowingMonthly)
               </label>
               <input value={mowingMonthly} readOnly />
             </li>
             <li className="green">
-              <label>Length of mowing season</label>
+              <label>
+                Length of mowing season (customerInputs.lengthMowingSeason)
+              </label>
               <input value={customerInputs.lengthMowingSeason} readOnly />
             </li>
             <li>
-              <label>[HELPER] Length of off-season</label>
+              <label>[HELPER] Length of off-season (lengthOffSeason)</label>
               <input value={lengthOffSeason} readOnly />
             </li>
             <li>
-              <label>Price of gas ZTR</label>
+              <label>Price of gas ZTR (customerInputs.gasZTRPrice)</label>
               <input value={customerInputs.gasZTRPrice} readOnly />
             </li>
             <li>
-              <label>Length of mowing operations for TCO</label>
+              <label>
+                Length of mowing operations for TCO (lengthMowingOperationsTCO)
+              </label>
               <input value={lengthMowingOperationsTCO} readOnly />
             </li>
             <li>
-              <label>Total mowing hours for TCO</label>
+              <label>
+                Total mowing hours for TCO (totalHoursMowedTCOAnalysis)
+              </label>
               <input value={totalHoursMowedTCOAnalysis} readOnly />
             </li>
           </ul>
