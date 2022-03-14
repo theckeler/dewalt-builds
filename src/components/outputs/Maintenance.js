@@ -10,7 +10,9 @@ const Maintenance = ({
       <li>
         <span>Time saved from reduced maintenance</span>
         <span>
-          {numberOfMaintenanceJobsPerYear * averageTotalTimeForServicing}
+          {(
+            numberOfMaintenanceJobsPerYear * averageTotalTimeForServicing
+          ).toFixed(2)}
         </span>
       </li>
     </ul>
