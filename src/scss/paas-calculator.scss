@@ -103,7 +103,14 @@ body.active {
 
   .main {
     display: flex;
-    // flex-wrap: wrap;
+
+    &.enviromental {
+      .column.container-output,
+      .column .outputs {
+        width: 100%;
+        flex-basis: 100%;
+      }
+    }
 
     &.main-output {
       position: fixed;
@@ -172,6 +179,36 @@ body.active {
 
         li {
           padding: em(1px);
+
+          &.svg-icon {
+            flex-wrap: wrap;
+            position: relative;
+            padding: em(22px);
+
+            svg {
+              max-width: em(60px);
+              padding: em(4px);
+              z-index: 0;
+
+              * {
+                fill: #000;
+              }
+            }
+
+            .overlay {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              z-index: 1;
+              background: rgba(#febd17, 0.9);
+              padding: em(10px) em(18px);
+              text-align: center;
+              font-size: rem(18px);
+              text-transform: uppercase;
+              box-shadow: rgba(#000, 0.7);
+            }
+          }
 
           span {
             display: block;
