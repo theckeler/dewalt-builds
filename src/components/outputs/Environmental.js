@@ -7,7 +7,7 @@ const Environmental = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
   const treeNum = (
     poundsOfCO2Avoided /
     enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
-    100
+    10
   ).toFixed(0);
   let treeIcons = [];
   for (let i = 0; i < treeNum; i++) {
