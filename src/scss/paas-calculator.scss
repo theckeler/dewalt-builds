@@ -186,7 +186,7 @@ body.active {
             padding: em(22px);
 
             svg {
-              max-width: em(60px);
+              max-width: em(30px);
               padding: em(4px);
               z-index: 0;
 
@@ -204,9 +204,10 @@ body.active {
               background: rgba(#febd17, 0.9);
               padding: em(10px) em(18px);
               text-align: center;
-              font-size: rem(18px);
+              font-size: rem(15px);
               text-transform: uppercase;
               box-shadow: rgba(#000, 0.7);
+              border-radius: em(4px);
             }
           }
 
@@ -234,9 +235,7 @@ body.active {
       flex-basis: 100%;
       list-style: none;
       margin: em(10px) 0;
-      // padding: em(6px);
       position: relative;
-      // border: em(1px) solid #e4e4e4;
 
       &.inputs,
       &.outputs {

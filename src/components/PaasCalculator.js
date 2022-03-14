@@ -650,14 +650,13 @@ const PaasCalculator = () => {
               pricing,
             }}
           />
-        </li>
-      </ul>
-
-      <ul className="main enviromental" id="outputs">
-        <li className="column container-output">
           <Environmental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />
         </li>
       </ul>
+
+      {/* <ul className="main enviromental" id="outputs">
+        <li className="column container-output"></li>
+      </ul> */}
 
       <form
         id="output"
