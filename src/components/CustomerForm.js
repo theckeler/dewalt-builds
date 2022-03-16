@@ -160,7 +160,7 @@ const CustomerInputsForm = ({
           <ul className="buttons">
             <li>
               <button
-                htmlFor="mowingHours"
+                name="mowingHours"
                 value="3"
                 onClick={(e) => {
                   buttonClick(e);
@@ -172,7 +172,7 @@ const CustomerInputsForm = ({
             </li>
             <li>
               <button
-                htmlFor="mowingHours"
+                name="mowingHours"
                 value="5"
                 onClick={(e) => {
                   buttonClick(e);
@@ -185,7 +185,7 @@ const CustomerInputsForm = ({
             <li>
               <button
                 className="active"
-                htmlFor="mowingHours"
+                name="mowingHours"
                 value="7"
                 onClick={(e) => {
                   buttonClick(e);
@@ -197,7 +197,7 @@ const CustomerInputsForm = ({
             </li>
             <li>
               <button
-                htmlFor="mowingHours"
+                name="mowingHours"
                 value="9"
                 onClick={(e) => {
                   buttonClick(e);
