@@ -1,4 +1,5 @@
 import statesJSON from "../data/states.json";
+import RangeTicks from "./RangeTicks";
 
 const CustomerInputsForm = ({
   setPADDRegion,
@@ -6,6 +7,8 @@ const CustomerInputsForm = ({
   setCustomerInputs,
 }) => {
   const handleChange = (e) => {
+    // e.target.querySelector("#thumb").innerHTML = "sadjajsd";
+
     let inputValue;
     if (isNaN(e.target.value)) {
       inputValue = e.target.value;
@@ -15,7 +18,15 @@ const CustomerInputsForm = ({
 
     setCustomerInputs({
       ...customerInputs,
-      [e.target.getAttribute("for")]: inputValue,
+      [e.target.getAttribute("name")]: inputValue,
+    });
+  };
+
+  const handleClick = (e) => {
+    setCustomerInputs({
+      ...customerInputs,
+      [e.target.parentNode.previousSibling.getAttribute("name")]:
+        e.target.value,
     });
   };
 
@@ -59,11 +70,12 @@ const CustomerInputsForm = ({
       </li>
       <li className="column range">
         <span>
-          <label id="gasZTRPrice">
-            What's the price of a new, commercial-grade gas ZTR?
-          </label>
+          <label>What's the price of a new, commercial-grade gas ZTR?</label>
         </span>
         <span className="input">
+          <output htmlFor="gasZTRPrice" className="slider-output">
+            {customerInputs.gasZTRPrice}
+          </output>
           <input
             type="range"
             min="9000"
@@ -71,16 +83,17 @@ const CustomerInputsForm = ({
             step="1"
             value={customerInputs.gasZTRPrice}
             onChange={handleChange}
-            htmlFor="gasZTRPrice"
+            name="gasZTRPrice"
             list="gasZTRPrice-ticks"
           />
-          <datalist id="gasZTRPrice-ticks">
-            <option value="4"></option>
-            <option value="5"></option>
-            <option value="6"></option>
-            <option value="7"></option>
+          <datalist className="ticks" id="gasZTRPrice-ticks">
+            <option value="9000" onClick={handleClick}>
+              9000
+            </option>
+            <option value="16000" onClick={handleClick}>
+              16000
+            </option>
           </datalist>
-          <span>{customerInputs.gasZTRPrice}</span>
         </span>
       </li>
       <li className="column range">
@@ -90,6 +103,9 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
+          <output className="slider-output">
+            {customerInputs.daysMowedPerWeek}
+          </output>
           <input
             type="range"
             min="4"
@@ -97,16 +113,15 @@ const CustomerInputsForm = ({
             step="1"
             value={customerInputs.daysMowedPerWeek}
             onChange={handleChange}
-            htmlFor="daysMowedPerWeek"
+            name="daysMowedPerWeek"
             list="daysMowedPerWeek-ticks"
           />
-          <datalist id="daysMowedPerWeek-ticks">
-            <option value="4"></option>
-            <option value="5"></option>
-            <option value="6"></option>
-            <option value="7"></option>
-          </datalist>
-          <span>{customerInputs.daysMowedPerWeek}</span>
+          <RangeTicks
+            handleClick={handleClick}
+            sliderID="daysMowedPerWeek"
+            startTick={4}
+            endTick={7}
+          />
         </span>
       </li>
       <li className="column range">
@@ -116,6 +131,9 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
+          <output className="slider-output">
+            {customerInputs.numberNGBRUnits}
+          </output>
           <input
             type="range"
             min="1"
@@ -123,9 +141,15 @@ const CustomerInputsForm = ({
             step="1"
             value={customerInputs.numberNGBRUnits}
             onChange={handleChange}
-            htmlFor="numberNGBRUnits"
+            name="numberNGBRUnits"
+            list="numberNGBRUnits-ticks"
           />
-          <span>{customerInputs.numberNGBRUnits}</span>
+          <RangeTicks
+            handleClick={handleClick}
+            sliderID="numberNGBRUnits"
+            startTick={1}
+            endTick={10}
+          />
         </span>
       </li>
       <li className="column">
@@ -193,6 +217,9 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
+          <output className="slider-output">
+            {customerInputs.lengthMowingSeason}
+          </output>
           <input
             type="range"
             min="6"
@@ -200,9 +227,15 @@ const CustomerInputsForm = ({
             step="1"
             value={customerInputs.lengthMowingSeason}
             onChange={handleChange}
-            htmlFor="lengthMowingSeason"
+            name="lengthMowingSeason"
+            list="lengthMowingSeason-ticks"
           />
-          <span>{customerInputs.lengthMowingSeason}</span>
+          <RangeTicks
+            handleClick={handleClick}
+            sliderID="lengthMowingSeason"
+            startTick={6}
+            endTick={12}
+          />
         </span>
       </li>
     </ul>

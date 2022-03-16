@@ -214,14 +214,9 @@ body.active {
           span {
             display: block;
             padding: em(10px);
-
-            &:nth-child(2) {
-              // background: #e7e7e7;
-            }
           }
 
           &.title {
-            // font-size: rem(13px);
             font-weight: 700;
             background: #febd17;
             padding: em(10px);
@@ -239,12 +234,13 @@ body.active {
 
       &.inputs,
       &.outputs {
-        background: #04040e;
+        background: #f0efef;
         font-weight: 700;
+        padding: em(10px);
       }
 
       &.inputs {
-        color: #fff;
+        // color: #fff;
       }
 
       &.outputs {
@@ -290,15 +286,103 @@ body.active {
         }
 
         &.range {
+          input[type="range"] {
+            // appearance: none;
+            // background: transparent;
+            // height: em(38px);
+            // width: 100%;
+            // padding: 0;
+            //
+            padding: 0;
+
+            @mixin thumb {
+              // margin-top: em(-11px);
+              // box-shadow: 0;
+              // border: 0;
+              // height: em(30px);
+              // width: em(15px);
+              // border-radius: em(5px);
+              // background: #febd17;
+              // cursor: pointer;
+              // -webkit-appearance: none;
+              //
+              cursor: pointer;
+              border: 0;
+            }
+
+            @mixin track {
+              // width: 100%;
+              // height: em(10px);
+              // cursor: pointer;
+              // box-shadow: 0;
+              // background: #afafaf;
+              // border-radius: em(5px);
+              // border: em(1px) solid #000;
+              //
+              // width: 100%;
+              //height: 0;
+              background: #ddd;
+              border: none;
+              border-radius: em(3px);
+            }
+
+            &::-webkit-slider-runnable-track,
+            &:focus::-webkit-slider-runnable-track {
+              @include track;
+            }
+
+            &::-moz-range-track {
+              @include track;
+            }
+
+            &::-webkit-slider-thumb {
+              @include thumb;
+            }
+
+            &::-moz-range-thumb {
+              @include thumb;
+            }
+
+            &:focus {
+              border: none;
+              outline: none;
+            }
+          }
+
           .input {
             display: flex;
+            flex-direction: column;
             align-items: center;
+          }
 
-            span {
-              text-align: center;
-              max-width: em(100px);
-              padding: em(4px);
-              background: #333;
+          output {
+            border-radius: em(3px);
+            padding: em(4px);
+            background: #febd17;
+          }
+
+          .ticks {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            // padding: 0 em(2px);
+            // margin: 0;
+
+            option {
+              position: relative;
+              display: flex;
+              justify-content: center;
+              font-size: rem(13px);
+              //min-width: 100%;
+
+              &:first-child,
+              &:last-child {
+             //   min-width: auto;
+              }
+
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
         }
@@ -331,67 +415,10 @@ body.active {
       }
     }
 
-    input[type="range"] {
-      background: transparent;
-      height: em(38px);
-      -webkit-appearance: none;
-      margin: em(10px) 0;
-      width: 100%;
-
-      &::-webkit-slider-runnable-track,
-      &:focus::-webkit-slider-runnable-track {
-        width: 100%;
-        height: em(10px);
-        cursor: pointer;
-        box-shadow: 0;
-        background: #afafaf;
-        border-radius: em(5px);
-        border: em(1px) solid #000;
-      }
-
-      &::-moz-range-track {
-        width: 100%;
-        height: em(10px);
-        cursor: pointer;
-        box-shadow: 0;
-        background: #afafaf;
-        border-radius: em(5px);
-        border: em(1px) solid #000;
-      }
-
-      &::-webkit-slider-thumb {
-        box-shadow: 0;
-        border: 0;
-        height: em(30px);
-        width: em(15px);
-        border-radius: em(5px);
-        background: #febd17;
-        cursor: pointer;
-        -webkit-appearance: none;
-        margin-top: em(-11px);
-      }
-
-      &::-moz-range-thumb {
-        box-shadow: 0;
-        border: 0;
-        height: em(30px);
-        width: em(15px);
-        border-radius: em(5px);
-        background: #febd17;
-        cursor: pointer;
-        -webkit-appearance: none;
-        margin-top: em(-11px);
-      }
-    }
-
     label {
       display: block;
       padding: 10px;
     }
-  }
-
-  .range__tick {
-    fill: #febd17;
   }
 
   .hide-section {

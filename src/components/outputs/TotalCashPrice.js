@@ -4,6 +4,7 @@ const TotalCashPrice = ({ pricing }) => {
   return (
     <ul className="outputs">
       <li className="title">Pricing</li>
+      {}
       <li>
         <span>Total Cash Price</span>
         <span>{dollarUSLocale.format(pricing.totalCashPrice)}</span>

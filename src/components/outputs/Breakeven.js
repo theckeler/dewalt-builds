@@ -19,7 +19,7 @@ const Breakeven = ({ breakeven, reductionFromNGBRResale }) => {
         <span>Breakeven: Outright purchase - With resale</span>
         <span>{OutrightPurchaseWResale.toFixed(2)}</span>
       </li>
-      {fPPWResale ? (
+      {fPPWResale > 0 ? (
         <li>
           <span>Breakeven: FPP - With resale</span>
           <span>{fPPWResale.toFixed(2)}</span>
@@ -28,7 +28,7 @@ const Breakeven = ({ breakeven, reductionFromNGBRResale }) => {
         ""
       )}
 
-      {financing3YearWResale ? (
+      {financing3YearWResale > 0 ? (
         <li>
           <span>Breakeven: 3-year financing - With resale</span>
           <span>{financing3YearWResale.toFixed(2)}</span>
