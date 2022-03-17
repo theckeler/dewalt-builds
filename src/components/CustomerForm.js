@@ -1,5 +1,6 @@
 import statesJSON from "../data/states.json";
 import RangeTicks from "./RangeTicks";
+import RangeInputs from "./RangeInputs";
 
 const CustomerInputsForm = ({
   setPADDRegion,
@@ -7,13 +8,15 @@ const CustomerInputsForm = ({
   setCustomerInputs,
 }) => {
   const handleChange = (e) => {
-    // e.target.querySelector("#thumb").innerHTML = "sadjajsd";
-
     let inputValue;
     if (isNaN(e.target.value)) {
       inputValue = e.target.value;
     } else {
       inputValue = Number(e.target.value);
+    }
+
+    if (e.target.type === "range") {
+      //console.log("slider", e);
     }
 
     setCustomerInputs({
@@ -23,6 +26,8 @@ const CustomerInputsForm = ({
   };
 
   const handleClick = (e) => {
+    console.log("pos", e.target.offsetLeft);
+
     setCustomerInputs({
       ...customerInputs,
       [e.target.parentNode.previousSibling.getAttribute("name")]:
@@ -57,6 +62,7 @@ const CustomerInputsForm = ({
               );
               setPADDRegion(`PADD${newState.padd}`);
             }}
+            disabled
           >
             {states.map((state) => {
               return (
@@ -76,15 +82,14 @@ const CustomerInputsForm = ({
           <output htmlFor="gasZTRPrice" className="slider-output">
             {customerInputs.gasZTRPrice}
           </output>
-          <input
+          <RangeInputs
             type="range"
             min="9000"
             max="16000"
             step="1"
             value={customerInputs.gasZTRPrice}
-            onChange={handleChange}
+            handleChange={handleChange}
             name="gasZTRPrice"
-            list="gasZTRPrice-ticks"
           />
           <datalist className="ticks" id="gasZTRPrice-ticks">
             <option value="9000" onClick={handleClick}>

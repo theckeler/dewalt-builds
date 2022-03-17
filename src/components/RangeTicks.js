@@ -9,7 +9,7 @@ const RangeTicks = ({ startTick, endTick, sliderID, handleClick }) => {
       {array.map((x) => {
         return (
           <option value={x} onClick={handleClick} key={x}>
-            {x}
+            {x < 10 ? "0"+x : x}
           </option>
         );
       })}
