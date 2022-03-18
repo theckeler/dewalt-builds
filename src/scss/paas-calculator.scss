@@ -295,6 +295,10 @@ body.active {
         }
 
         &.range {
+          &.with-output {
+            padding-bottom: em(40px);
+          }
+
           input[type="range"] {
             appearance: none;
             padding: 0;
@@ -350,13 +354,24 @@ body.active {
             }
           }
 
-          output {
-            //position: absolute;
-
-            z-index: 1;
-            border-radius: em(3px);
+          output,
+          .ticks option {
+            display: flex;
+            justify-content: center;
+            font-size: rem(13px);
             padding: em(4px);
-            background: #febd17;
+            -webkit-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+            font-weight: 700;
+          }
+
+          output {
+            position: absolute;
+            top: 110%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
           }
 
           .ticks {
@@ -366,15 +381,6 @@ body.active {
             padding: 0 em(2.8px);
 
             option {
-              position: relative;
-              display: flex;
-              justify-content: center;
-              font-size: rem(13px);
-              padding: em(4px);
-              -webkit-user-select: none;
-              -o-user-select: none;
-              user-select: none;
-
               &:hover {
                 cursor: pointer;
                 background: #febd17;

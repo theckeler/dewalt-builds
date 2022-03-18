@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import statesJSON from "../../data/states.json";
 import RangeTicks from "../widgets/RangeTicks";
 //import RangeInputs from "../widgets/RangeInputs";
@@ -15,8 +16,16 @@ const CustomerInputsForm = ({
       inputValue = Number(e.target.value);
     }
 
-    if (e.target.type === "range") {
-      //console.log("slider", e);
+    if (
+      e.target.type === "range" &&
+      e.target.previousElementSibling &&
+      e.target.previousElementSibling.type === "output"
+    ) {
+      const placeNum =
+        ((e.target.value - e.target.min) / (e.target.max - e.target.min)) *
+          (e.target.scrollWidth - 12.5 - 12.5) +
+        12.5;
+      setMoveOutput(placeNum);
     }
 
     setCustomerInputs({
@@ -26,8 +35,6 @@ const CustomerInputsForm = ({
   };
 
   const handleClick = (e) => {
-    // console.log("pos", e.target.offsetLeft);
-
     setCustomerInputs({
       ...customerInputs,
       [e.target.parentNode.previousSibling.getAttribute("name")]:
@@ -42,6 +49,8 @@ const CustomerInputsForm = ({
     });
     e.target.classList.add("active");
   };
+
+  const [moveOutput, setMoveOutput] = useState(134.27);
 
   let states = JSON.parse(JSON.stringify(statesJSON));
 
@@ -74,53 +83,28 @@ const CustomerInputsForm = ({
           </select>
         </span>
       </li>
-      <li className="column range">
+      <li className="column range with-output">
         <span>
           <label>What's the price of a new, commercial-grade gas ZTR?</label>
         </span>
         <span className="input">
-          <output htmlFor="gasZTRPrice" className="slider-output">
+          <output
+            htmlFor="gasZTRPrice"
+            className="slider-output"
+            style={{ left: moveOutput + "px" }}
+          >
             {customerInputs.gasZTRPrice}
           </output>
           <input
             type="range"
             min="9000"
             max="16000"
-            step="1"
+            step="10"
             value={customerInputs.gasZTRPrice}
             onChange={handleChange}
             name="gasZTRPrice"
             list="gasZTRPrice-ticks"
           />
-          <datalist className="ticks" id="gasZTRPrice-ticks">
-            <option
-              value="9000"
-              onClick={handleClick}
-              className={
-                Number(customerInputs.gasZTRPrice) === 9000 ? "active" : ""
-              }
-            >
-              9000
-            </option>
-            <option
-              value="12450"
-              onClick={handleClick}
-              className={
-                Number(customerInputs.gasZTRPrice) === 12450 ? "active" : ""
-              }
-            >
-              12450
-            </option>
-            <option
-              value="16000"
-              onClick={handleClick}
-              className={
-                Number(customerInputs.gasZTRPrice) === 16000 ? "active" : ""
-              }
-            >
-              16000
-            </option>
-          </datalist>
         </span>
       </li>
       <li className="column range">
@@ -130,9 +114,6 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
-          {/* <output className="slider-output">
-            {customerInputs.daysMowedPerWeek}
-          </output> */}
           <input
             type="range"
             min="4"
@@ -159,9 +140,6 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
-          {/* <output className="slider-output">
-            {customerInputs.numberNGBRUnits}
-          </output> */}
           <input
             type="range"
             min="1"
@@ -246,9 +224,6 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
-          {/* <output className="slider-output">
-            {customerInputs.lengthMowingSeason}
-          </output> */}
           <input
             type="range"
             min="6"
