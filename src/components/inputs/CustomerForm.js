@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import statesJSON from "../../data/states.json";
 import RangeTicks from "../widgets/RangeTicks";
 //import RangeInputs from "../widgets/RangeInputs";
@@ -21,11 +21,7 @@ const CustomerInputsForm = ({
       e.target.previousElementSibling &&
       e.target.previousElementSibling.type === "output"
     ) {
-      const placeNum =
-        ((e.target.value - e.target.min) / (e.target.max - e.target.min)) *
-          (e.target.scrollWidth - 12.5 - 12.5) +
-        12.5;
-      setMoveOutput(placeNum);
+      setMoveOutput(setLeftPos(e.target));
     }
 
     setCustomerInputs({
@@ -50,7 +46,21 @@ const CustomerInputsForm = ({
     e.target.classList.add("active");
   };
 
-  const [moveOutput, setMoveOutput] = useState(134.27);
+  const setLeftPos = (e) => {
+    return (
+      ((e.value - e.min) / (e.max - e.min)) * (e.scrollWidth - 12.5 - 12.5) +
+      12.5
+    );
+  };
+
+  const [moveOutput, setMoveOutput] = useState(155.64);
+  useEffect(() => {
+    setMoveOutput(setLeftPos(document.querySelector("#gasZTRPrice")));
+  }, [moveOutput]);
+
+  // useEffect(() => {
+  //   window.addEventListener("resize", console.log("resize"));
+  // }, []);
 
   let states = JSON.parse(JSON.stringify(statesJSON));
 
@@ -103,6 +113,7 @@ const CustomerInputsForm = ({
             value={customerInputs.gasZTRPrice}
             onChange={handleChange}
             name="gasZTRPrice"
+            id="gasZTRPrice"
             list="gasZTRPrice-ticks"
           />
         </span>
