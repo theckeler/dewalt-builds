@@ -313,6 +313,8 @@ body.active {
             }
 
             @mixin thumb {
+              position: relative;
+              z-index: 1;
               appearance: none;
               width: em(25px);
               height: em(25px);
@@ -368,10 +370,25 @@ body.active {
 
           output {
             position: absolute;
+            z-index: 10;
             top: 110%;
             transform: translateX(-50%);
             background: #333;
             color: #fff;
+
+            &:before {
+              content: "▲";
+              position: absolute;
+              z-index: 1001;
+              bottom: 102%;
+              left: 50%;
+              /* width: 100px; */
+              /* height: 100px; */
+              font-size: rem(16px);
+              line-height: 0;
+              color: #333;
+              transform: translateX(-50%);
+            }
           }
 
           .ticks {
