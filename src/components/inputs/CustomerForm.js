@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import statesJSON from "../../data/states.json";
 import RangeTicks from "../widgets/RangeTicks";
 //import RangeInputs from "../widgets/RangeInputs";
