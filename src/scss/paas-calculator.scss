@@ -361,9 +361,19 @@ body.active {
               display: flex;
               justify-content: center;
               font-size: rem(13px);
+              padding: em(4px);
+              -webkit-user-select: none;
+              -o-user-select: none;
+              user-select: none;
 
               &:hover {
                 cursor: pointer;
+                background: #febd17;
+              }
+
+              &.active {
+                background: #333;
+                color: #fff;
               }
             }
           }
@@ -386,6 +396,7 @@ body.active {
     select,
     input {
       width: 100%;
+      max-width: 100%;
       padding: em(10px);
       background: #febd17;
     }

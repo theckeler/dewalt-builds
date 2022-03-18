@@ -1,6 +1,6 @@
-import statesJSON from "../data/states.json";
-import RangeTicks from "./RangeTicks";
-import RangeInputs from "./RangeInputs";
+import statesJSON from "../../data/states.json";
+import RangeTicks from "../widgets/RangeTicks";
+//import RangeInputs from "../widgets/RangeInputs";
 
 const CustomerInputsForm = ({
   setPADDRegion,
@@ -26,7 +26,7 @@ const CustomerInputsForm = ({
   };
 
   const handleClick = (e) => {
-    console.log("pos", e.target.offsetLeft);
+    // console.log("pos", e.target.offsetLeft);
 
     setCustomerInputs({
       ...customerInputs,
@@ -46,7 +46,7 @@ const CustomerInputsForm = ({
   let states = JSON.parse(JSON.stringify(statesJSON));
 
   return (
-    <ul className="inputs">
+    <ul className="inputs" id="inputs">
       <li className="column">
         <span>
           <label id="location">Which state do you operate in?</label>
@@ -82,20 +82,42 @@ const CustomerInputsForm = ({
           <output htmlFor="gasZTRPrice" className="slider-output">
             {customerInputs.gasZTRPrice}
           </output>
-          <RangeInputs
+          <input
             type="range"
             min="9000"
             max="16000"
             step="1"
             value={customerInputs.gasZTRPrice}
-            handleChange={handleChange}
+            onChange={handleChange}
             name="gasZTRPrice"
+            list="gasZTRPrice-ticks"
           />
           <datalist className="ticks" id="gasZTRPrice-ticks">
-            <option value="9000" onClick={handleClick}>
+            <option
+              value="9000"
+              onClick={handleClick}
+              className={
+                Number(customerInputs.gasZTRPrice) === 9000 ? "active" : ""
+              }
+            >
               9000
             </option>
-            <option value="16000" onClick={handleClick}>
+            <option
+              value="12450"
+              onClick={handleClick}
+              className={
+                Number(customerInputs.gasZTRPrice) === 12450 ? "active" : ""
+              }
+            >
+              12450
+            </option>
+            <option
+              value="16000"
+              onClick={handleClick}
+              className={
+                Number(customerInputs.gasZTRPrice) === 16000 ? "active" : ""
+              }
+            >
               16000
             </option>
           </datalist>
@@ -108,9 +130,9 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
-          <output className="slider-output">
+          {/* <output className="slider-output">
             {customerInputs.daysMowedPerWeek}
-          </output>
+          </output> */}
           <input
             type="range"
             min="4"
@@ -126,6 +148,7 @@ const CustomerInputsForm = ({
             sliderID="daysMowedPerWeek"
             startTick={4}
             endTick={7}
+            currentTick={customerInputs.daysMowedPerWeek}
           />
         </span>
       </li>
@@ -136,9 +159,9 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
-          <output className="slider-output">
+          {/* <output className="slider-output">
             {customerInputs.numberNGBRUnits}
-          </output>
+          </output> */}
           <input
             type="range"
             min="1"
@@ -153,6 +176,7 @@ const CustomerInputsForm = ({
             handleClick={handleClick}
             sliderID="numberNGBRUnits"
             startTick={1}
+            currentTick={customerInputs.numberNGBRUnits}
             endTick={10}
           />
         </span>
@@ -222,9 +246,9 @@ const CustomerInputsForm = ({
           </label>
         </span>
         <span className="input">
-          <output className="slider-output">
+          {/* <output className="slider-output">
             {customerInputs.lengthMowingSeason}
-          </output>
+          </output> */}
           <input
             type="range"
             min="6"
@@ -240,6 +264,7 @@ const CustomerInputsForm = ({
             sliderID="lengthMowingSeason"
             startTick={6}
             endTick={12}
+            currentTick={customerInputs.lengthMowingSeason}
           />
         </span>
       </li>

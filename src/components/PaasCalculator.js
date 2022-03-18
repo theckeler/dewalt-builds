@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import paasCal from "../data/paas-cal.json";
 import PMT from "../utils/pmt";
-import CustomerForm from "./CustomerForm";
+import CustomerForm from "./inputs/CustomerForm";
 // -----------------> customerOutputs <-----------------
 import TotalCashPrice from "./outputs/TotalCashPrice";
 import OpExCost from "./outputs/OpExCost";
@@ -142,6 +142,7 @@ const PaasCalculator = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setCheckObserve(true);
+          //console.log("in view");
         } else {
           setCheckObserve(false);
           document.querySelectorAll(".tip").forEach((tip) => {
@@ -151,10 +152,10 @@ const PaasCalculator = () => {
       },
       {
         root: null,
-        threshold: 0.7,
+        //threshold: 0.7,
       }
     );
-    observer.observe(document.querySelector("#outputs"));
+    observer.observe(document.querySelector("#inputs"));
   }, [checkObserve]);
 
   // Get Fuel & Electric Prices
