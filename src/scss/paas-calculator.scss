@@ -241,6 +241,15 @@ body.active {
 
       &.inputs {
         // color: #fff;
+
+        .column {
+          padding: em(20px);
+          border-bottom: 1px solid #bebebe;
+
+          &:last-of-type {
+            border-bottom: 0;
+          }
+        }
       }
 
       &.outputs {
