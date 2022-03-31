@@ -496,7 +496,7 @@ body.active {
         font-size: rem(12px);
         flex-basis: 100%;
         padding: em(16px);
-        border-right: em(1px) solid #747474;
+        border-right: em(1px) solid #ccc;
 
         &:last-child {
           border-right: 0;
@@ -507,6 +507,10 @@ body.active {
         }
       }
     }
+  }
+
+  .hide {
+    display: none;
   }
 }
 

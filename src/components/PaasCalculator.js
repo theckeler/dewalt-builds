@@ -657,13 +657,9 @@ const PaasCalculator = () => {
         </li>
       </ul>
 
-      {/* <ul className="main enviromental" id="outputs">
-        <li className="column container-output"></li>
-      </ul> */}
-
       <form
         id="output"
-        className={`main main-output ${checkObserve ? "on-screen" : ""}`}
+        className={`main hide main-output ${checkObserve ? "on-screen" : ""}`}
       >
         <button
           onClick={(e) => {
