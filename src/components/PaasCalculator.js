@@ -614,14 +614,16 @@ const PaasCalculator = () => {
       ) : (
         ""
       )}
-      <ul className="main" id="outputs">
-        <li className="column container-input">
-          <CustomerForm
-            setPADDRegion={setPADDRegion}
-            customerInputs={customerInputs}
-            setCustomerInputs={setCustomerInputs}
-          />
-        </li>
+
+      <div className="main container-inputs">
+        <CustomerForm
+          setPADDRegion={setPADDRegion}
+          customerInputs={customerInputs}
+          setCustomerInputs={setCustomerInputs}
+        />
+      </div>
+
+      <ul className="main">
         <li className="column container-output">
           <TotalCashPrice {...{ pricing }} />
           <OpExCost

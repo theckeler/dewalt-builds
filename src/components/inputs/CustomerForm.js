@@ -76,7 +76,7 @@ const CustomerInputsForm = ({
 
   return (
     <ul className="inputs" id="inputs">
-      <li className="column">
+      <li className="column states">
         <span>
           <label id="location">Which state do you operate in?</label>
         </span>

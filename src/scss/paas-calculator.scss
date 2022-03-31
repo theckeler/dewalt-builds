@@ -11,6 +11,12 @@ $html-font-size: 16px;
   @return #{(math.div(stripUnit($pxValue), stripUnit($html-font-size)) * 1)}em;
 }
 
+body {
+  min-height: 200vh;
+  display: flex;
+  align-items: center;
+}
+
 body.active {
   overflow: hidden;
   margin: 0;
@@ -23,7 +29,7 @@ body.active {
 
 .paas-calculator {
   position: relative;
-  padding: em(10px);
+  //padding: em(10px);
   min-height: em(400px);
   font-size: rem(12px);
 
@@ -102,7 +108,7 @@ body.active {
   }
 
   .main {
-    display: flex;
+    // display: flex;
 
     &.enviromental {
       .column.container-output,
@@ -239,19 +245,6 @@ body.active {
         padding: em(10px);
       }
 
-      &.inputs {
-        // color: #fff;
-
-        .column {
-          padding: em(20px);
-          border-bottom: 1px solid #bebebe;
-
-          &:last-of-type {
-            border-bottom: 0;
-          }
-        }
-      }
-
       &.outputs {
         background: #fff;
         padding: 0 em(6px);
@@ -354,7 +347,7 @@ body.active {
           .ticks option {
             display: flex;
             justify-content: center;
-            font-size: rem(13px);
+            font-size: rem(11px);
             padding: em(4px);
             -webkit-user-select: none;
             -o-user-select: none;
@@ -483,6 +476,38 @@ body.active {
       }
     }
   }
+
+  .container-inputs {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    width: 100%;
+
+    ul.inputs {
+      display: flex;
+      padding: 0 em(30px);
+      width: 100%;
+      margin: 0;
+      border-bottom: em(3px) solid #747474;
+      border-top: em(3px) solid #747474;
+
+      li.column {
+        font-size: rem(12px);
+        flex-basis: 100%;
+        padding: em(16px);
+        border-right: em(1px) solid #747474;
+
+        &:last-child {
+          border-right: 0;
+        }
+
+        &.states {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -516,7 +541,8 @@ body.active {
         }
 
         &.container-output {
-          width: 66.6666667%;
+          // width: 66.6666667%;
+          width: 100%;
         }
         .outputs {
           flex-basis: 50%;
