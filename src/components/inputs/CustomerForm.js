@@ -58,9 +58,19 @@ const CustomerInputsForm = ({
     setMoveOutput(setLeftPos(document.querySelector("#gasZTRPrice")));
   }, [moveOutput]);
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", console.log("resize"));
-  // }, []);
+  const [checkResize, setCheckResize] = useState(false);
+  useEffect(() => {
+    let timeout;
+    const handleResize = () => {
+      clearTimeout(timeout);
+      setCheckResize(true);
+      timeout = setTimeout(() => {
+        document.querySelector(".slider-output").style.left =
+          setLeftPos(document.querySelector("#gasZTRPrice")) + "px";
+      }, 400);
+    };
+    window.addEventListener("resize", handleResize);
+  }, [checkResize]);
 
   let states = JSON.parse(JSON.stringify(statesJSON));
 
