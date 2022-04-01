@@ -29,7 +29,6 @@ body.active {
 
 .paas-calculator {
   position: relative;
-  //padding: em(10px);
   min-height: em(400px);
   font-size: rem(12px);
 
@@ -49,14 +48,18 @@ body.active {
         color: #fff;
         padding: em(10px) em(4px);
         width: 100%;
+        border: 2px solid transparent;
 
         &:hover {
           cursor: pointer;
         }
 
-        &.active {
+        &.active,
+        &:focus {
           background: #febd17;
           color: #000;
+          border: 2px solid #333;
+          outline: 0;
         }
       }
     }
@@ -108,8 +111,6 @@ body.active {
   }
 
   .main {
-    // display: flex;
-
     &.enviromental {
       .column.container-output,
       .column .outputs {
@@ -240,7 +241,8 @@ body.active {
 
       &.inputs,
       &.outputs {
-        background: #f0efef;
+        backdrop-filter: blur(em(2px));
+        background: rgba(#f0efef, 0.85);
         font-weight: 700;
         padding: em(10px);
       }
@@ -287,9 +289,17 @@ body.active {
           }
         }
 
+        &.states {
+          select {
+            margin-top: em(20px);
+          }
+        }
+
         &.range {
           &.with-output {
-            padding-bottom: em(40px);
+            input[type="range"] {
+              margin-top: em(20px);
+            }
           }
 
           input[type="range"] {
@@ -430,7 +440,7 @@ body.active {
 
     label {
       display: block;
-      padding: 10px;
+      // padding: 10px;
     }
   }
 
@@ -481,7 +491,6 @@ body.active {
     position: sticky;
     top: 0;
     z-index: 1001;
-    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     width: 100%;
 
     ul.inputs {
@@ -503,7 +512,7 @@ body.active {
         }
 
         &.states {
-          display: none;
+          //  display: none;
         }
       }
     }
@@ -545,7 +554,6 @@ body.active {
         }
 
         &.container-output {
-          // width: 66.6666667%;
           width: 100%;
         }
         .outputs {
@@ -560,9 +568,7 @@ body.active {
   .paas-calculator {
     .main {
       .column {
-        //flex-basis: 33%;
         .outputs {
-          //flex-basis: 50%;
         }
       }
     }
@@ -573,7 +579,6 @@ body.active {
   .paas-calculator {
     .main {
       .column {
-        // flex-basis: 25%;
       }
     }
   }
