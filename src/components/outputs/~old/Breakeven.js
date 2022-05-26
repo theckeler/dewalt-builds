@@ -1,5 +1,3 @@
-//import dollarUSLocale from "../../utils/dollarUSLocale";
-
 const Breakeven = ({ breakeven, reductionFromNGBRResale }) => {
   const financing3YearWResale =
     breakeven.breakeven3yearFinancingNoResale -

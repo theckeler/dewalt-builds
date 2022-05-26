@@ -11,7 +11,7 @@
     "location": "OH",
     "daysMowedPerWeek": 5,
     "numberNGBRUnits": 1,
-    "mowingHours": 7,
+    "mowingHours": "7",
     "lengthMowingSeason": 10,
     "gasZTRPrice": 11000
   },

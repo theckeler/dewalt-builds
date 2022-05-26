@@ -1,10 +1,8 @@
-import dollarUSLocale from "../../utils/dollarUSLocale";
+import dollarUSLocale from "../../../utils/dollarUSLocale";
 
 const TotalCashPrice = ({ pricing }) => {
   return (
-    <ul className="outputs">
-      <li className="title">Pricing</li>
-      {}
+    <ul>
       <li>
         <span>Total Cash Price</span>
         <span>{dollarUSLocale.format(pricing.totalCashPrice)}</span>

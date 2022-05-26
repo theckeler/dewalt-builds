@@ -1,0 +1,353 @@
+.paas-calculator {
+  position: relative;
+  font-size: 0.75rem;
+}
+.paas-calculator *:focus {
+  outline: none;
+}
+.paas-calculator .bg-yellow {
+  background: #febd17;
+}
+.paas-calculator .bg-yellow * {
+  color: #000 !important;
+}
+.paas-calculator .bg-white {
+  background: #fff;
+}
+.paas-calculator .steps {
+  padding: 5em 0;
+}
+.paas-calculator .steps label {
+  font-size: 1.125rem;
+  margin-bottom: 1.25em;
+}
+.paas-calculator .text-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  min-height: 37.5em;
+  padding: 2.5em 5em;
+}
+.paas-calculator .circle {
+  background: #c4c4c4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875em;
+  height: 1.875em;
+  border-radius: 100%;
+  font-size: 1rem;
+}
+.paas-calculator .go-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+}
+.paas-calculator .buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 1.25em;
+}
+.paas-calculator .buttons > * {
+  flex-basis: 100%;
+}
+.paas-calculator .buttons.input-buttons li {
+  padding: 0.625em;
+}
+.paas-calculator button.step-button {
+  background: #c4c4c4;
+}
+.paas-calculator button.left {
+  margin-right: auto;
+}
+.paas-calculator button.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.paas-calculator button.right {
+  margin-left: auto;
+}
+.paas-calculator button.active {
+  background: #febd17;
+}
+.paas-calculator button.icon {
+  padding: 0.25em;
+  max-width: 1.875em;
+  min-width: 1.875em;
+  min-height: auto;
+  height: 1.875em;
+  margin-left: auto;
+}
+.paas-calculator button.icon svg {
+  width: 100%;
+  height: auto;
+}
+.paas-calculator ul {
+  flex-basis: 100%;
+  list-style: none;
+  position: relative;
+  font-weight: 700;
+}
+.paas-calculator ul li {
+  display: flex;
+}
+.paas-calculator ul li.column {
+  flex-direction: column;
+  padding: 0.25em 0.5em;
+}
+.paas-calculator ul li.align-self-center {
+  align-self: center;
+}
+.paas-calculator ul li.center {
+  align-items: center;
+}
+.paas-calculator ul li.left {
+  align-items: flex-start;
+}
+.paas-calculator ul li .input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  padding: 0.625em 1.25em;
+  border-radius: 0.1875em;
+  border: 0.0625em solid transparent;
+}
+.paas-calculator ul li .input-container label,
+.paas-calculator ul li .input-container .subtitle,
+.paas-calculator ul li .input-container .circle {
+  color: #888;
+}
+.paas-calculator ul li .input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.paas-calculator ul li input,
+.paas-calculator ul li select {
+  min-width: 43.75em;
+}
+.paas-calculator ul li input[type=range] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 0;
+  background: transparent;
+  margin: 1.25em 0;
+  cursor: pointer;
+}
+.paas-calculator ul li input[type=range]::-webkit-slider-runnable-track, .paas-calculator ul li input[type=range]:focus::-webkit-slider-runnable-track {
+  z-index: 0;
+  background: #ddd;
+  border: none;
+  border-radius: 0.1875em;
+  height: 0.625em;
+  position: relative;
+}
+.paas-calculator ul li input[type=range]::-moz-range-track {
+  z-index: 0;
+  background: #ddd;
+  border: none;
+  border-radius: 0.1875em;
+  height: 0.625em;
+  position: relative;
+}
+.paas-calculator ul li input[type=range]::-webkit-slider-thumb {
+  position: relative;
+  z-index: 1;
+  -webkit-appearance: none;
+          appearance: none;
+  width: 1.5625em;
+  height: 1.5625em;
+  border-radius: 50%;
+  background: #febd17;
+  cursor: -webkit-grab;
+  cursor: grab;
+  transform: translateY(-0.5em);
+}
+.paas-calculator ul li input[type=range]::-moz-range-thumb {
+  position: relative;
+  z-index: 1;
+  -moz-appearance: none;
+       appearance: none;
+  width: 1.5625em;
+  height: 1.5625em;
+  border-radius: 50%;
+  background: #febd17;
+  cursor: grab;
+  transform: translateY(-0.5em);
+}
+.paas-calculator ul li input[type=range]:focus {
+  border: none;
+  outline: none;
+}
+.paas-calculator ul li datalist {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 0.175em;
+}
+.paas-calculator ul li datalist option {
+  display: flex;
+  justify-content: center;
+  font-size: 0.6875rem;
+  padding: 0.25em;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  font-weight: 700;
+}
+.paas-calculator ul li datalist option.active {
+  background: #333;
+  color: #fff;
+}
+.paas-calculator ul li datalist option:not(.active):hover {
+  cursor: pointer;
+  background: #febd17;
+}
+.paas-calculator .loading {
+  position: absolute;
+  z-index: 10001;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(254, 189, 23, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.paas-calculator .loading svg {
+  max-width: 15em;
+}
+.paas-calculator .loading.overlay {
+  position: fixed;
+  z-index: 254;
+  display: none;
+}
+.paas-calculator .loading.overlay.active {
+  display: block;
+}
+.paas-calculator .inputs-container {
+  width: 100%;
+}
+.paas-calculator .inputs-container.floating {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  -webkit-backdrop-filter: blur(0.125em);
+          backdrop-filter: blur(0.125em);
+  background: #232323;
+}
+.paas-calculator .inputs-container.floating .input-container label {
+  display: flex;
+  align-items: center;
+  color: #eeeeee;
+  width: 100%;
+  padding-bottom: 0.625em;
+  margin-bottom: 0.625em;
+  border-bottom: 0.0625em solid #eeeeee;
+}
+.paas-calculator .inputs-container.floating .input-container .subtitle {
+  font-size: 2.625rem;
+  line-height: 0.8;
+  color: #febd17;
+}
+.paas-calculator .inputs-container.floating .input-container .slider-output {
+  color: #000;
+}
+.paas-calculator .inputs-container.floating .input-container .input {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 1001;
+  transform: translateX(-50%);
+  -webkit-backdrop-filter: blur(0.125em);
+          backdrop-filter: blur(0.125em);
+  background: #c4c4c4;
+  border-radius: 0.1875em;
+  padding: 0.625em 1.25em;
+  box-shadow: 0 0 0.625em #232323;
+  max-width: 25em;
+}
+.paas-calculator .inputs-container.floating .input-container .input input,
+.paas-calculator .inputs-container.floating .input-container .input select,
+.paas-calculator .inputs-container.floating .input-container .input .buttons {
+  width: 100%;
+  min-width: 16.25em;
+}
+.paas-calculator .inputs-container.floating .input-container .input .buttons {
+  flex-direction: column;
+  margin-top: 0;
+  width: 100%;
+  align-items: stretch;
+}
+.paas-calculator .inputs-container.floating .input-container .input .buttons li {
+  padding: 0 0 0.25em 0;
+}
+.paas-calculator .inputs-container.floating .input-container .input .buttons button {
+  min-width: auto;
+  padding: 0;
+  min-height: auto;
+  width: 100%;
+  background: #333;
+  color: #fff;
+}
+.paas-calculator .inputs-container.floating .input-container .input .buttons button.active {
+  background: #febd17;
+  color: #000;
+}
+.paas-calculator .inputs-container.floating .input-container .input input {
+  margin: 0.25em 0;
+}
+.paas-calculator .inputs-container.floating .input-container .input input[type=range]::-webkit-slider-runnable-track, .paas-calculator .inputs-container.floating .input-container .input input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #fff;
+}
+.paas-calculator .inputs-container.floating .input-container .input input[type=range]::-moz-range-track {
+  background: #fff;
+}
+.paas-calculator .inputs-container.floating .input-container .input input[type=range]::-webkit-slider-thumb {
+  background: #232323;
+}
+.paas-calculator .inputs-container.floating .input-container .input input[type=range]::-moz-range-thumb {
+  background: #232323;
+}
+.paas-calculator .inputs-container.floating .input-container .input datalist option.active {
+  background: #232323;
+  color: #febd17;
+}
+.paas-calculator .inputs-container.static {
+  margin-top: 1.25em;
+  padding-top: 1.25em;
+  border-top: 1px solid #ddd;
+}
+.paas-calculator .inputs-container ul.inputs {
+  display: flex;
+}
+.paas-calculator .inputs-container ul.inputs li.column {
+  flex-basis: 100%;
+}
+.paas-calculator .inputs-container ul.inputs li.column.active .input-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: #797979;
+}
+.paas-calculator .inputs-container ul.inputs li.column.active .input-container .circle {
+  background: #febd17;
+  color: #000;
+}
+.paas-calculator .inputs-container ul.inputs li.column.active .input-container label,
+.paas-calculator .inputs-container ul.inputs li.column.active .input-container .subtitle {
+  color: #000;
+}
+.paas-calculator .inputs-container ul.inputs li.column:last-child {
+  border-right: 0;
+}

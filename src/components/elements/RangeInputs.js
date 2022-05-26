@@ -1,7 +1,4 @@
 const RangeInputs = ({ value, handleChange, name, min, max, step }) => {
-  // const rangeInput = document.createElement("div");
-  // const shadow = rangeInput.attachShadow({ mode: "open" });
-
   return (
     <>
       <input

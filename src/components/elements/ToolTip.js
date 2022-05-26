@@ -1,5 +1,3 @@
-//import React, { useState, useEffect } from "react";
-
 const ToolTip = ({ tip }) => {
   const buttonClick = (e) => {
     e.preventDefault();

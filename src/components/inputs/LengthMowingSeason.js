@@ -1,0 +1,83 @@
+import RangeTicks from "../elements/RangeTicks";
+import ButtonEdit from "../elements/ButtonEdit";
+
+const LengthMowingSeason = ({
+  customerInputs,
+  setCustomerInputs,
+  inStep,
+  whichStep,
+  setWhichStep,
+  editThis,
+  setEditThis,
+}) => {
+  const handleChange = (e) => {
+    setCustomerInputs({
+      ...customerInputs,
+      lengthMowingSeason: e.target.value,
+    });
+  };
+
+  const handleClick = (e) => {
+    setCustomerInputs({
+      ...customerInputs,
+      lengthMowingSeason: e.target.value,
+    });
+  };
+
+  const handleEdit = (e) => {
+    setEditThis({
+      state: false,
+      gasZTRPrice: false,
+      daysMowedPerWeek: false,
+      numberNGBRUnits: false,
+      mowingHours: false,
+      lengthMowingSeason: !editThis.lengthMowingSeason,
+    });
+  };
+
+  return (
+    <>
+      <label id="lengthMowingSeason">
+        {inStep ? "How long is your mowing season per year?" : "Mowing Season"}
+        <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
+      </label>
+      {inStep || editThis.lengthMowingSeason ? (
+        <span className="input">
+          <input
+            type="range"
+            min="6"
+            max="12"
+            step="1"
+            value={customerInputs.lengthMowingSeason}
+            onChange={handleChange}
+            name="lengthMowingSeason"
+            list="lengthMowingSeason-ticks"
+          />
+          <RangeTicks
+            handleClick={handleClick}
+            sliderID="lengthMowingSeason"
+            startTick={6}
+            endTick={12}
+            currentTick={customerInputs.lengthMowingSeason}
+          />
+        </span>
+      ) : (
+        <>
+          <span className="coh-heading subtitle coh-style-h2---display">
+            {customerInputs.lengthMowingSeason}
+          </span>
+          {whichStep !== 8 && (
+            <>
+              <button onClick={(e) => setWhichStep(6)} className="go-button">
+                GO TO STEP 6
+              </button>
+              <span className="circle">6</span>
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+};
+
+export default LengthMowingSeason;

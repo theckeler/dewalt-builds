@@ -1,0 +1,38 @@
+@import "./functions.scss";
+
+.padding20 {
+  padding: em(20);
+}
+
+.padding40 {
+  padding: em(40);
+}
+
+.padding80 {
+  padding: em(80) 0;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.leftMarginMinus {
+ // margin-left: em(-100);
+}
+
+.relative {
+  position: relative;
+}
+
+.versus {
+  position: absolute;
+  left: -50%;
+  top: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  //grid-template-rows: repeat(3, 1fr);
+  grid-gap: em(20);
+}

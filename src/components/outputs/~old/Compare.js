@@ -1,5 +1,4 @@
 import dollarUSLocale from "../../utils/dollarUSLocale";
-//import ToolTip from "./toolTip";
 
 const Compare = ({
   monthlyPaaSPowerCostNGBR,
