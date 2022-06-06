@@ -55,6 +55,7 @@ const Outputs = ({
       <OutputsCTA />
       <OutputsBreakeven {...{ breakeven, reductionFromNGBRResale }} />
       <OutputsEnviromental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />)
+      <OutputsCTA />
     </>
   );
 };
