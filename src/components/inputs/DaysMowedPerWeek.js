@@ -22,6 +22,14 @@ const DaysMowedPerWeek = ({
       ...customerInputs,
       daysMowedPerWeek: e.target.value,
     });
+    setEditThis({
+      state: false,
+      daysMowedPerWeek: false,
+      numberNGBRUnits: false,
+      mowingHours: false,
+      lengthMowingSeason: false,
+      gasZTRPrice: false,
+    });
   };
 
   const handleEdit = (e) => {
@@ -50,6 +58,16 @@ const DaysMowedPerWeek = ({
             step="1"
             value={customerInputs.daysMowedPerWeek}
             onChange={handleChange}
+            onMouseUp={(e) => {
+              setEditThis({
+                state: false,
+                daysMowedPerWeek: false,
+                numberNGBRUnits: false,
+                mowingHours: false,
+                lengthMowingSeason: false,
+                gasZTRPrice: false,
+              });
+            }}
             name="daysMowedPerWeek"
             list="daysMowedPerWeek-ticks"
           />
@@ -60,6 +78,9 @@ const DaysMowedPerWeek = ({
             endTick={7}
             currentTick={customerInputs.daysMowedPerWeek}
           />
+          <output className="slider-output coh-heading subtitle coh-style-h2---display">
+            {customerInputs.daysMowedPerWeek}
+          </output>
         </span>
       ) : (
         <>

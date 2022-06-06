@@ -24,8 +24,173 @@ const Step7 = ({ whichStep, setWhichStep, customerInputs }) => {
               fermentum, nunc massa gravida lectus, quis feugiat nisl justo vel
               sem.
             </p>
+            <div
+              id="block-righthandsideblockform"
+              className="settings-tray-editable"
+              data-drupal-settingstray="editable"
+            >
+              <div>
+                <form
+                  className="webform-submission-form webform-submission-add-form webform-submission-subscribe-newsletter-form webform-submission-subscribe-newsletter-add-form webform-submission-subscribe-newsletter-block_content-41-form webform-submission-subscribe-newsletter-block_content-41-add-form webform-submission-subscribe-newsletter-block-content-41-add-form js-webform-details-toggle webform-details-toggle"
+                  noValidate="novalidate"
+                  data-drupal-selector="webform-submission-subscribe-newsletter-block-content-41-add-form"
+                  action="/"
+                  method="post"
+                  id="webform-submission-subscribe-newsletter-block-content-41-add-form"
+                  acceptCharset="UTF-8"
+                  data-once="form-updated"
+                  data-drupal-form-fields="edit-givenname,edit-familyname,edit-email,edit-country-us,edit-country-ca,edit-actions-submit"
+                >
+                  <div className="webform-required">
+                    <span className="form-required"></span>All fields are
+                    required unless otherwise noted.
+                  </div>
+                  <div className="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-givenname form-item-givenname">
+                    <label
+                      data-icon-left="person"
+                      htmlFor="edit-givenname"
+                      className="js-form-required form-required"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      data-drupal-selector="edit-givenname"
+                      type="text"
+                      id="edit-givenname"
+                      name="givenName"
+                      value=""
+                      size="60"
+                      maxLength="255"
+                      className="form-text required"
+                      required="required"
+                      aria-required="true"
+                      disabled="disabled"
+                    />
+                  </div>
+
+                  <div className="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-familyname form-item-familyname">
+                    <label
+                      htmlFor="edit-familyname"
+                      className="js-form-required form-required"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      data-drupal-selector="edit-familyname"
+                      type="text"
+                      id="edit-familyname"
+                      name="familyName"
+                      value=""
+                      size="60"
+                      maxLength="255"
+                      className="form-text required"
+                      required="required"
+                      aria-required="true"
+                      disabled="disabled"
+                    />
+                  </div>
+
+                  <div className="js-form-item form-item js-form-type-email form-type-email js-form-item-email form-item-email">
+                    <label
+                      htmlFor="edit-email"
+                      className="js-form-required form-required"
+                    >
+                      Email Address
+                    </label>
+                    <input
+                      pattern="[a-zA-Z0-9_-]+[a-zA-Z0-9_.-]*@[a-zA-Z0-9_-]+[a-zA-Z0-9_.-]*\.[a-zA-Z]*"
+                      data-webform-pattern-error="Please enter a valid Email Address"
+                      data-drupal-selector="edit-email"
+                      type="email"
+                      id="edit-email"
+                      name="email"
+                      value=""
+                      size="60"
+                      maxLength="254"
+                      placeholder="eg. joe@dewalt.com"
+                      className="form-email required"
+                      required="required"
+                      aria-required="true"
+                      disabled="disabled"
+                    />
+                  </div>
+
+                  <fieldset
+                    className="country-res radios--wrapper fieldgroup form-composite webform-composite-visible-title required js-webform-type-radios webform-type-radios js-form-item form-item js-form-wrapper form-wrapper"
+                    data-drupal-selector="edit-country"
+                    id="edit-country--wrapper"
+                    aria-required="true"
+                    role="radiogroup"
+                    aria-labelledby="edit-country--wrapper-legend"
+                  >
+                    <legend id="edit-country--wrapper-legend">
+                      <span className="fieldset-legend js-form-required form-required">
+                        Country of Residence
+                      </span>
+                    </legend>
+                    <div className="fieldset-wrapper">
+                      <div
+                        id="edit-country"
+                        className="js-webform-radios webform-options-display-two-columns"
+                      >
+                        <div className="js-form-item form-item js-form-type-radio form-type-radio js-form-item-country form-item-country">
+                          <input
+                            className="country-res form-radio"
+                            required="required"
+                            data-drupal-selector="edit-country-us"
+                            type="radio"
+                            id="edit-country-us"
+                            name="country"
+                            value="US"
+                            disabled="disabled"
+                          />
+
+                          <label htmlFor="edit-country-us" className="option">
+                            United States
+                          </label>
+                        </div>
+
+                        <div className="js-form-item form-item js-form-type-radio form-type-radio js-form-item-country form-item-country">
+                          <input
+                            className="country-res form-radio"
+                            required="required"
+                            data-drupal-selector="edit-country-ca"
+                            type="radio"
+                            id="edit-country-ca"
+                            name="country"
+                            value="CA"
+                            disabled="disabled"
+                          />
+
+                          <label htmlFor="edit-country-ca" className="option">
+                            Canada
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div
+                    data-drupal-selector="edit-actions"
+                    className="form-actions webform-actions js-form-wrapper form-wrapper"
+                    id="edit-actions--3"
+                  >
+                    <input
+                      className="webform-button--submit button button--primary js-form-submit form-submit"
+                      data-drupal-selector="edit-actions-submit"
+                      type="submit"
+                      id="edit-actions-submit"
+                      name="op"
+                      value="Save"
+                      disabled="disabled"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
+
           <Buttons {...{ whichStep, setWhichStep }} />
+          
           <Inputs
             {...{
               whichStep,

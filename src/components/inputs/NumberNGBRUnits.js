@@ -22,6 +22,14 @@ const NumberNGBRUnits = ({
       ...customerInputs,
       numberNGBRUnits: e.target.value,
     });
+    setEditThis({
+      state: false,
+      daysMowedPerWeek: false,
+      numberNGBRUnits: false,
+      mowingHours: false,
+      lengthMowingSeason: false,
+      gasZTRPrice: false,
+    });
   };
 
   const handleEdit = (e) => {
@@ -38,7 +46,7 @@ const NumberNGBRUnits = ({
   return (
     <>
       <label id="numberNGBRUnits">
-        {inStep ? "How many NGBRs do you plan to operate?" : "Number of NGBRs"}
+        {inStep ? "How many NGBRs do you plan to operate?" : "Num of NGBR"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
       {inStep || editThis.numberNGBRUnits ? (
@@ -50,6 +58,16 @@ const NumberNGBRUnits = ({
             step="1"
             value={customerInputs.numberNGBRUnits}
             onChange={handleChange}
+            onMouseUp={(e) => {
+              setEditThis({
+                state: false,
+                daysMowedPerWeek: false,
+                numberNGBRUnits: false,
+                mowingHours: false,
+                lengthMowingSeason: false,
+                gasZTRPrice: false,
+              });
+            }}
             name="numberNGBRUnits"
             list="numberNGBRUnits-ticks"
           />
@@ -60,6 +78,9 @@ const NumberNGBRUnits = ({
             currentTick={customerInputs.numberNGBRUnits}
             endTick={10}
           />
+          <output className="slider-output coh-heading subtitle coh-style-h2---display">
+            {customerInputs.numberNGBRUnits}
+          </output>
         </span>
       ) : (
         <>

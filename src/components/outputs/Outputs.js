@@ -6,6 +6,7 @@ import OutputsMaintenance from "./OutputsMaintenance";
 import OutputsTCO from "./OutputsTCO";
 import OutputsBreakeven from "./OutputsBreakeven";
 import OutputsEnviromental from "./OutputsEnviromental";
+import OutputsCTA from "./OutputsCTA";
 
 const Outputs = ({
   pricing,
@@ -31,6 +32,7 @@ const Outputs = ({
   return (
     <>
       <OutputsPricing {...{ pricing, requiredEquipment }} />
+      <OutputsCTA />
       <OutputsVersus
         {...{
           monthlyPaaSPowerCostNGBR,
@@ -50,6 +52,7 @@ const Outputs = ({
         }}
       />
       <OutputsTCO {...{ gasZTR, cashPurchase, NGBRWithFlexiblePowerProgram }} />
+      <OutputsCTA />
       <OutputsBreakeven {...{ breakeven, reductionFromNGBRResale }} />
       <OutputsEnviromental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />)
     </>

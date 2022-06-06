@@ -22,6 +22,14 @@ const LengthMowingSeason = ({
       ...customerInputs,
       lengthMowingSeason: e.target.value,
     });
+    setEditThis({
+      state: false,
+      daysMowedPerWeek: false,
+      numberNGBRUnits: false,
+      mowingHours: false,
+      lengthMowingSeason: false,
+      gasZTRPrice: false,
+    });
   };
 
   const handleEdit = (e) => {
@@ -38,7 +46,7 @@ const LengthMowingSeason = ({
   return (
     <>
       <label id="lengthMowingSeason">
-        {inStep ? "How long is your mowing season per year?" : "Mowing Season"}
+        {inStep ? "How long is your mowing season per year?" : "Season"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
       {inStep || editThis.lengthMowingSeason ? (
@@ -50,6 +58,16 @@ const LengthMowingSeason = ({
             step="1"
             value={customerInputs.lengthMowingSeason}
             onChange={handleChange}
+            onMouseUp={(e) => {
+              setEditThis({
+                state: false,
+                daysMowedPerWeek: false,
+                numberNGBRUnits: false,
+                mowingHours: false,
+                lengthMowingSeason: false,
+                gasZTRPrice: false,
+              });
+            }}
             name="lengthMowingSeason"
             list="lengthMowingSeason-ticks"
           />
@@ -60,6 +78,9 @@ const LengthMowingSeason = ({
             endTick={12}
             currentTick={customerInputs.lengthMowingSeason}
           />
+          <output className="slider-output coh-heading subtitle coh-style-h2---display">
+            {customerInputs.lengthMowingSeason}
+          </output>
         </span>
       ) : (
         <>

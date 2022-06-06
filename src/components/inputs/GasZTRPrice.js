@@ -55,6 +55,16 @@ const GasZTRPrice = ({
             onChange={(e) => {
               handleChange(e);
             }}
+            onMouseUp={(e) => {
+              setEditThis({
+                state: false,
+                daysMowedPerWeek: false,
+                numberNGBRUnits: false,
+                mowingHours: false,
+                lengthMowingSeason: false,
+                gasZTRPrice: false,
+              });
+            }}
             name="gasZTRPrice"
             id="gasZTRPrice"
             list="gasZTRPrice-ticks"

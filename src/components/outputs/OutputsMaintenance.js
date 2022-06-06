@@ -1,5 +1,4 @@
 import dollarUSLocaleNoDigits from "../../utils/dollarUSLocaleNoDigits";
-import outputCSS from "../../scss/output.module.css";
 
 const OutputsMaintenance = ({
   numberOfMaintenanceJobsPerYear,
@@ -8,64 +7,85 @@ const OutputsMaintenance = ({
   totalMonthlyPaaSPowerCost,
 }) => {
   return (
-    <div className="outputs pricing coh-style-grid-container">
-      <ul className="coh-row-inner">
-        <li className="coh-column coh-col-xl-6">
-          <div className="coh-container media-main-container">
-            <div className="coh-container ssa-component coh-component media-container bynder-media-container">
-              <img
-                src="https://bynder.sbdinc.com/m/367cd4cb0e9e3d44/Drupal_Small-DXGZ260P_A2.jpg"
-                alt=""
-                className="coh-image coh-image-responsive-xl coh-lazy-loaded"
-                loading="lazy"
-              />
+    <section
+      className="output-maintenance coh-container ssa-component coh-component coh-style-feature-block coh-style-margin-bottom-none"
+      data-content-order="image-first"
+      data-bg-align=""
+    >
+      <div className="coh-container ssa-component coh-component">
+        <div
+          className="coh-container section coh-style-section"
+          data-gs-background-color="light-grey"
+          data-gs-foreground-color="light"
+        >
+          <div className="coh-container section-inner">
+            <div className="coh-container coh-container-boxed">
+              <div
+                className="coh-row coh-row-xl coh-row-visible-xl"
+                data-coh-row-match-heights='{"xl":{"target":"none"}}'
+              >
+                <div className="coh-row-inner">
+                  <div className="coh-column coh-visible-sm coh-col-sm-12 coh-visible-xl coh-col-xl-4">
+                    <div className="coh-container media-main-container">
+                      <div className="coh-container ssa-component coh-component media-container bynder-media-container">
+                        <img
+                          src="https://bynder.sbdinc.com/m/41e4c82978cd612c/Web_Large-DCB407_A1.jpg"
+                          alt=""
+                          className="coh-image coh-image-responsive-xl coh-lazy-loaded"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="coh-column coh-visible-ps coh-col-ps-12 coh-col-ps-push-0 coh-col-ps-pull-0 coh-col-ps-offset-0 coh-visible-sm coh-col-sm-10 coh-visible-xl coh-col-xl-8">
+                    <div
+                      className="coh-container text-main-container"
+                      data-margin-padding="md"
+                    >
+                      <ul className="grid two output-maintenance-inner">
+                        <li className="r1">
+                          Time saved from reduced maintenance
+                        </li>
+                        <li className="r2">
+                          <div className="coh-heading subtitle coh-style-h3---display">
+                            {(
+                              numberOfMaintenanceJobsPerYear *
+                              averageTotalTimeForServicing
+                            ).toFixed(2)}
+                          </div>
+                        </li>
+
+                        <li className="r1">
+                          Total monthly PaaS maintenance cost
+                        </li>
+                        <li className="r2">
+                          <div className="coh-heading subtitle coh-style-h3---display">
+                            {dollarUSLocaleNoDigits.format(
+                              totalMonthlyPaaSMaintenanceCost
+                            )}
+                          </div>
+                        </li>
+
+                        <li className="r1 last">
+                          Total monthly PaaS power cost
+                        </li>
+                        <li className="r2 last">
+                          <div className="coh-heading subtitle coh-style-h3---display">
+                            {dollarUSLocaleNoDigits.format(
+                              totalMonthlyPaaSPowerCost
+                            )}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </li>
-        <li className={`coh-column coh-col-xl-6`}>
-          <div
-            className={`${outputCSS.padding80} bg-white`}
-            data-gs-background-color="light"
-            data-select-theme="light"
-            data-margin-padding="md"
-          >
-            <ul
-              className={`${outputCSS.width100} ${outputCSS.leftMarginMinus} coh-row-inner`}
-            >
-              <li
-                className={`${outputCSS.padding20} align-self-center coh-col-ps-12 coh-col-xl-6`}
-              >
-                <ul>
-                  <li>
-                    <span>Time saved from reduced maintenance</span>
-                    <span>
-                      {(
-                        numberOfMaintenanceJobsPerYear *
-                        averageTotalTimeForServicing
-                      ).toFixed(2)}
-                    </span>
-                  </li>
-                  <li>
-                    <span>Total monthly PaaS maintenance cost</span>
-                    <span>
-                      {dollarUSLocaleNoDigits.format(
-                        totalMonthlyPaaSMaintenanceCost
-                      )}
-                    </span>
-                  </li>
-                  <li>
-                    <span>Total monthly PaaS power cost</span>
-                    <span>
-                      {dollarUSLocaleNoDigits.format(totalMonthlyPaaSPowerCost)}
-                    </span>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

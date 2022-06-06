@@ -4,7 +4,7 @@ const Buttons = ({ whichStep, setWhichStep }) => {
   return (
     <ul className="buttons">
       <li>
-        {whichStep > 1 ? (
+        {whichStep > 1 && (
           <Button
             {...{
               setWhichStep,
@@ -13,7 +13,7 @@ const Buttons = ({ whichStep, setWhichStep }) => {
               addClass: "coh-style-branded-button left",
             }}
           />
-        ) : null}
+        )}
       </li>
       <li>
         <Button
@@ -26,14 +26,16 @@ const Buttons = ({ whichStep, setWhichStep }) => {
         />
       </li>
       <li>
-        <Button
-          {...{
-            setWhichStep,
-            buttonText: "Next ›",
-            whichStep: whichStep + 1,
-            addClass: "coh-style-branded-button  right",
-          }}
-        />
+        {whichStep !== 7 && (
+          <Button
+            {...{
+              setWhichStep,
+              buttonText: "Next ›",
+              whichStep: whichStep + 1,
+              addClass: "coh-style-branded-button  right",
+            }}
+          />
+        )}
       </li>
     </ul>
   );
