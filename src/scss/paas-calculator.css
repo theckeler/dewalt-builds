@@ -397,11 +397,14 @@
 .paas-calculator .output-pricing .output-pricing-inner {
   padding: 1.875em;
 }
-.paas-calculator .output-pricing .output-pricing-inner li {
+.paas-calculator .output-pricing .output-pricing-inner ul {
+  text-align: center;
+}
+.paas-calculator .output-pricing .output-pricing-inner ul li {
   padding: 0.75em 0;
   border-bottom: 1px solid #434343;
 }
-.paas-calculator .output-pricing .output-pricing-inner li:last-child {
+.paas-calculator .output-pricing .output-pricing-inner ul li:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
@@ -518,6 +521,13 @@
   background: #febd17;
   align-items: center;
 }
+.paas-calculator .output-tco.coh-style-feature-block .coh-row .coh-row-inner .media-main-container .media-container {
+  width: 100vw;
+  margin-left: -50vw;
+}
+.paas-calculator .output-tco.coh-style-feature-block .coh-row .coh-row-inner .media-main-container .media-container img {
+  width: 100%;
+}
 .paas-calculator .output-tco .output-tco-text {
   position: relative;
   z-index: 1;
@@ -530,6 +540,7 @@
 .paas-calculator .output-tco .output-tco-inner ul {
   margin-bottom: 1.25em;
   grid-template-columns: 1fr 8.75em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 .paas-calculator .output-tco .output-tco-inner ul:last-of-type {
   margin-bottom: 0;
@@ -570,6 +581,7 @@
 .paas-calculator .output-breakeven .output-breakeven-inner ul {
   margin-bottom: 1.25em;
   grid-template-columns: 1fr 8.75em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 .paas-calculator .output-breakeven .output-breakeven-inner ul:last-of-type {
   margin-bottom: 0;
