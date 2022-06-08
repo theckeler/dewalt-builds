@@ -54,6 +54,15 @@
 .paas-calculator .steps {
   padding: 0.625em 0;
 }
+.paas-calculator .steps .step {
+  margin-top: 0.375em;
+  background: #fff;
+  border-radius: 0.1875em;
+}
+.paas-calculator .steps h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.25em;
+}
 .paas-calculator .steps label {
   font-size: 1.125rem;
   margin-bottom: 1.25em;
@@ -233,14 +242,19 @@
 .paas-calculator ul li datalist option {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 0.6875rem;
   padding: 0.25em;
+  width: 2.125em;
+  height: 2.125em;
   -webkit-user-select: none;
   -o-user-select: none;
   -moz-user-select: none;
    -ms-user-select: none;
        user-select: none;
   font-weight: 700;
+  border-radius: 100%;
+  background: #ddd;
 }
 .paas-calculator ul li datalist option.active {
   background: #333;
@@ -317,7 +331,7 @@
   border-bottom: 0.0625em solid #eeeeee;
 }
 .paas-calculator .inputs-container.floating .input-container .subtitle {
-  font-size: 2.625rem;
+  font-size: 1.625rem;
   line-height: 0.8;
   color: #febd17;
 }
@@ -379,6 +393,9 @@
 }
 .paas-calculator .inputs-container.floating .input-container .input input[type=range]::-moz-range-thumb {
   background: #232323;
+}
+.paas-calculator .inputs-container.floating .input-container .input datalist option {
+  background: transparent;
 }
 .paas-calculator .inputs-container.floating .input-container .input datalist option.active {
   background: #232323;
@@ -659,6 +676,7 @@
   justify-content: flex-start;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid {
+  width: 100%;
   gap: 1.875em;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li {
@@ -666,10 +684,18 @@
   flex-direction: column;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  position: relative;
+  min-height: 25em;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  max-height: 80%;
+  transform: translateX(-50%);
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg #tree-2 {
+  display: none;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-output {
   margin-top: auto;

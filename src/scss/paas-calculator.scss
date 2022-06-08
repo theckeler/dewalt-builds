@@ -80,6 +80,17 @@
   .steps {
     padding: em(10) 0;
 
+    .step {
+      margin-top: em(6);
+      background: #fff;
+      border-radius: em(3);
+    }
+
+    h2 {
+      font-size: rem(36);
+      margin-bottom: em(20);
+    }
+
     label {
       font-size: rem(18);
       margin-bottom: em(20);
@@ -291,12 +302,17 @@
         option {
           display: flex;
           justify-content: center;
-          font-size: rem(11px);
-          padding: em(4px);
+          align-items: center;
+          font-size: rem(11);
+          padding: em(4);
+          width: em(34);
+          height: em(34);
           -webkit-user-select: none;
           -o-user-select: none;
           user-select: none;
           font-weight: 700;
+          border-radius: 100%;
+          background: #ddd;
 
           &.active {
             background: #333;
@@ -374,7 +390,7 @@
       top: 0;
       z-index: 1001;
       backdrop-filter: blur(em(2px));
-      background: rgba(#232323, 1);
+      background: #232323;
 
       .input-container {
         label {
@@ -388,7 +404,7 @@
         }
 
         .subtitle {
-          font-size: rem(42);
+          font-size: rem(26);
           line-height: 0.8;
           color: #febd17;
         }
@@ -407,7 +423,7 @@
           background: #c4c4c4;
           border-radius: em(3);
           padding: em(10) em(20);
-          box-shadow: 0 0 em(10) rgba(#232323, 1);
+          box-shadow: 0 0 em(10) #232323;
           max-width: em(400);
 
           input,
@@ -466,9 +482,13 @@
             }
           }
 
-          datalist option.active {
-            background: #232323;
-            color: #febd17;
+          datalist option {
+            background: transparent;
+
+            &.active {
+              background: #232323;
+              color: #febd17;
+            }
           }
         }
 
@@ -855,6 +875,7 @@
     }
 
     .output-enviromental-grid {
+      width: 100%;
       gap: em(30);
 
       li {
@@ -862,10 +883,25 @@
         flex-direction: column;
 
         .output-enviromental-icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
+          position: relative;
+          min-height: em(400);
+
+          svg {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            max-height: 80%;
+            transform: translateX(-50%);
+
+            #tree-2 {
+              display: none;
+            }
+          }
+
+          // display: flex;
+          // justify-content: center;
+          // align-items: center;
+          // height: 100%;
         }
 
         .output-enviromental-output {

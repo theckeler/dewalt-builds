@@ -1,8 +1,29 @@
-import { ReactComponent as IconTrees } from "../../images/icon-trees.svg";
+import { ReactComponent as IconTrees } from "../../images/trees.svg";
 import { ReactComponent as IconCar } from "../../images/icon-car.svg";
 import { ReactComponent as IconCo2 } from "../../images/icon-co2.svg";
 
 const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
+  const treeNum = (
+    poundsOfCO2Avoided /
+    enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
+    10
+  ).toFixed(0);
+  let treeIcons = [];
+  for (let i = 0; i < treeNum; i++) {
+    treeIcons.push(
+      <IconTrees
+        style={{
+          left: Math.floor(Math.random() * 100) + 1 + "%",
+          bottom: Math.floor(Math.random() * 20) + "px",
+          height: Math.floor(Math.random() * 100) + 1 + "%",
+          //opacity: "." + Math.floor(Math.random() * 100) / 100,
+          fill: "#" + Math.floor(Math.random() * 16777215).toString(16),
+        }}
+        key={i}
+      />
+    );
+  }
+
   return (
     <div
       className="output-enviromental coh-container ssa-component coh-component bg-container coh-style-margin-bottom-none coh-style-page-header"
@@ -53,10 +74,11 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                           aliquam, faucibus lacus et, viverra odio.
                         </p>
 
-                        <ul className="outputs grid three output-enviromental-grid">
+                        {/* <ul className="outputs grid three output-enviromental-grid"> */}
+                        <ul className="outputs output-enviromental-grid">
                           <li className="svg-icon">
                             <div className="output-enviromental-icon">
-                              <IconTrees />
+                              {treeIcons}
                             </div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h4---display">
