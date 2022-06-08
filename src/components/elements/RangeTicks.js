@@ -15,10 +15,20 @@ const RangeTicks = ({
     <datalist className="ticks" id={`${sliderID}-ticks`}>
       {skipTicks ? (
         <>
-          <option value={startTick} onClick={handleClick} key={startTick}>
+          <option
+            className="no-circle"
+            value={startTick}
+            onClick={handleClick}
+            key={startTick}
+          >
             {startTick}
           </option>
-          <option value={endTick} onClick={handleClick} key={endTick}>
+          <option
+            className="no-circle"
+            value={endTick}
+            onClick={handleClick}
+            key={endTick}
+          >
             {endTick}
           </option>
         </>

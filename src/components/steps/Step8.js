@@ -68,7 +68,7 @@ const Step8 = ({
           monthlyMaintenanceCostPerZTR,
           enviromentalBenefits,
           poundsOfCO2Avoided,
-          whichStep,
+          setEditThis,
         }}
       />
     </>

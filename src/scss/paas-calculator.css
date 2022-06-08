@@ -256,6 +256,10 @@
   border-radius: 100%;
   background: #ddd;
 }
+.paas-calculator ul li datalist option.no-circle {
+  border-radius: 0;
+  width: auto;
+}
 .paas-calculator ul li datalist option.active {
   background: #333;
   color: #fff;

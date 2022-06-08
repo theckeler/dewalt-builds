@@ -314,6 +314,11 @@
           border-radius: 100%;
           background: #ddd;
 
+          &.no-circle {
+            border-radius: 0;
+            width: auto;
+          }
+
           &.active {
             background: #333;
             color: #fff;

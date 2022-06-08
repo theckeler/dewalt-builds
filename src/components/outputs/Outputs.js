@@ -27,10 +27,21 @@ const Outputs = ({
   monthlyMaintenanceCostPerZTR,
   enviromentalBenefits,
   poundsOfCO2Avoided,
-  whichStep,
+  setEditThis,
 }) => {
   return (
-    <>
+    <div
+      onClick={() => {
+        setEditThis({
+          state: false,
+          daysMowedPerWeek: false,
+          numberNGBRUnits: false,
+          mowingHours: false,
+          lengthMowingSeason: false,
+          gasZTRPrice: false,
+        });
+      }}
+    >
       <OutputsPricing {...{ pricing, requiredEquipment }} />
       <OutputsCTA />
       <OutputsVersus
@@ -55,7 +66,7 @@ const Outputs = ({
       <OutputsCTA />
       <OutputsBreakeven {...{ breakeven, reductionFromNGBRResale }} />
       <OutputsEnviromental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />)
-    </>
+    </div>
   );
 };
 
