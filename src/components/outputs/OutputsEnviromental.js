@@ -38,7 +38,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                         className="coh-container text-main-container output-enviromental-inner"
                         data-text-align="center"
                       >
-                        <p class="coh-heading subtitle coh-style-h3---display">
+                        <p className="coh-heading subtitle coh-style-h3---display">
                           Environmental Benefits
                         </p>
                         <p>
@@ -59,7 +59,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                               <IconTrees />
                             </div>
                             <div className="output-enviromental-output">
-                              <h2 class="coh-heading subtitle coh-style-h4---display">
+                              <h2 className="coh-heading subtitle coh-style-h4---display">
                                 {(
                                   poundsOfCO2Avoided /
                                   enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted
@@ -73,7 +73,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                               <IconCar />
                             </div>
                             <div className="output-enviromental-output">
-                              <h2 class="coh-heading subtitle coh-style-h4---display">
+                              <h2 className="coh-heading subtitle coh-style-h4---display">
                                 {(
                                   enviromentalBenefits.poundsCO2EmittedPerMileDrivenInACar *
                                   poundsOfCO2Avoided
@@ -87,7 +87,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                               <IconCo2 />
                             </div>
                             <div className="output-enviromental-output">
-                              <h2 class="coh-heading subtitle coh-style-h4---display">
+                              <h2 className="coh-heading subtitle coh-style-h4---display">
                                 {poundsOfCO2Avoided.toFixed(2)}
                               </h2>
                               <p>Pounds of CO2 avoided</p>

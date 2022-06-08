@@ -92,6 +92,7 @@
   "fuelConsumptionRate": 1.9,
   "electricMaintenanceCostGas": 0.06585,
   "PADDRegion": "PADD2",
+  "duoarea": "R20",
   "monthlyPaaSPowerCostNGBR": 76,
   "latestFuelWeeklyPrice": 3.108,
   "latestAvgPowerPrice": 0.1004,

@@ -1,7 +1,4 @@
-import Buttons from "../elements/Buttons";
-import Inputs from "../inputs/Inputs";
-
-const Step7 = ({ whichStep, setWhichStep, customerInputs }) => {
+const Step7 = ({ whichStep, setWhichStep }) => {
   return (
     <section
       className="coh-container section coh-style-section"
@@ -31,15 +28,15 @@ const Step7 = ({ whichStep, setWhichStep, customerInputs }) => {
             >
               <div>
                 <form
-                  className="webform-submission-form webform-submission-add-form webform-submission-subscribe-newsletter-form webform-submission-subscribe-newsletter-add-form webform-submission-subscribe-newsletter-block_content-41-form webform-submission-subscribe-newsletter-block_content-41-add-form webform-submission-subscribe-newsletter-block-content-41-add-form js-webform-details-toggle webform-details-toggle"
-                  noValidate="novalidate"
-                  data-drupal-selector="webform-submission-subscribe-newsletter-block-content-41-add-form"
-                  action="/"
-                  method="post"
-                  id="webform-submission-subscribe-newsletter-block-content-41-add-form"
-                  acceptCharset="UTF-8"
-                  data-once="form-updated"
-                  data-drupal-form-fields="edit-givenname,edit-familyname,edit-email,edit-country-us,edit-country-ca,edit-actions-submit"
+                  className="webform-submission-form webform-submission-add-form webform-submission-subscribe-newsletter-form webform-submission-subscribe-newsletter-add-form js-webform-details-toggle webform-details-toggle"
+                  // noValidate="novalidate"
+                  // data-drupal-selector="webform-submission-subscribe-newsletter-block-content-41-add-form"
+                  // action="/"
+                  // method="post"
+                  // id="webform-submission-subscribe-newsletter-block-content-41-add-form"
+                  // acceptCharset="UTF-8"
+                  // data-once="form-updated"
+                  // data-drupal-form-fields="edit-givenname,edit-familyname,edit-email,edit-country-us,edit-country-ca,edit-actions-submit"
                 >
                   <div className="webform-required">
                     <span className="form-required"></span>All fields are
@@ -175,29 +172,21 @@ const Step7 = ({ whichStep, setWhichStep, customerInputs }) => {
                     id="edit-actions--3"
                   >
                     <input
-                      className="webform-button--submit button button--primary js-form-submit form-submit"
+                      className=" button button--primary js-form-submit form-submit bg-yellow"
                       data-drupal-selector="edit-actions-submit"
                       type="submit"
                       id="edit-actions-submit"
                       name="op"
                       value="Save"
-                      disabled="disabled"
+                      onClick={() => {
+                        setWhichStep(8);
+                      }}
                     />
                   </div>
                 </form>
               </div>
             </div>
           </div>
-
-          <Buttons {...{ whichStep, setWhichStep }} />
-          
-          <Inputs
-            {...{
-              whichStep,
-              setWhichStep,
-              customerInputs,
-            }}
-          />
         </div>
       </div>
     </section>

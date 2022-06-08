@@ -79,7 +79,7 @@ const LengthMowingSeason = ({
             currentTick={customerInputs.lengthMowingSeason}
           />
           <output className="slider-output coh-heading subtitle coh-style-h2---display">
-            {customerInputs.lengthMowingSeason}
+            {editThis.lengthMowingSeason && customerInputs.lengthMowingSeason}
           </output>
         </span>
       ) : (

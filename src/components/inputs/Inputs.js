@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
 
 import State from "./State";
 import GasZTRPrice from "./GasZTRPrice";
@@ -9,20 +9,17 @@ import LengthMowingSeason from "./LengthMowingSeason";
 
 const Inputs = ({
   setCustomerInputs,
-  setPADDRegion,
+  setDuoarea,
   customerInputs,
   whichStep,
   setWhichStep,
+  editThis,
+  setEditThis,
+  latestAvgPowerPrice,
+  setLatestAvgPowerPrice,
+  latestFuelWeeklyPrice,
+  setLatestFuelWeeklyPrice,
 }) => {
-  const [editThis, setEditThis] = useState({
-    state: false,
-    gasZTRPrice: false,
-    daysMowedPerWeek: false,
-    numberNGBRUnits: false,
-    mowingHours: false,
-    lengthMowingSeason: false,
-  });
-
   return (
     <div
       className={`inputs-container ${whichStep === 8 ? "floating" : "static"}`}
@@ -32,14 +29,18 @@ const Inputs = ({
           <div className="input-container">
             <State
               {...{
+                setDuoarea,
                 customerInputs,
                 setCustomerInputs,
-                setPADDRegion,
                 inStep: false,
                 whichStep,
                 setWhichStep,
                 editThis,
                 setEditThis,
+                latestAvgPowerPrice,
+                setLatestAvgPowerPrice,
+                latestFuelWeeklyPrice,
+                setLatestFuelWeeklyPrice,
               }}
             />
           </div>

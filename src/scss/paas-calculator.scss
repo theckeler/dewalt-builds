@@ -1,7 +1,7 @@
 @import "./functions.scss";
 
 .paas-calculator {
-  //position: relative;
+  position: relative;
   //font-size: rem(12px);
   //overflow: hidden;
 
@@ -50,6 +50,10 @@
     width: 100%;
   }
 
+  .input-button-container {
+    padding-bottom: em(40);
+  }
+
   .grid {
     display: grid;
     //grid-template-rows: repeat(3, 1fr);
@@ -74,7 +78,7 @@
   }
 
   .steps {
-    padding: em(80) 0;
+    padding: em(10) 0;
 
     label {
       font-size: rem(18);
@@ -89,7 +93,7 @@
     align-items: center;
     //background: #fff;
     min-height: em(600);
-    padding: em(40) em(80);
+    padding: em(10) em(80);
   }
 
   .circle {
@@ -335,6 +339,33 @@
     }
   }
 
+  .state-refine-container {
+    margin-top: em(30);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+
+    &.active {
+      max-height: em(500);
+    }
+
+    .state-refine {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: em(20);
+      border-radius: em(3);
+    }
+
+    label {
+      margin-bottom: em(4);
+
+      &:nth-child(2) {
+        margin-top: em(10);
+      }
+    }
+  }
+
   .inputs-container {
     width: 100%;
 
@@ -438,6 +469,25 @@
           datalist option.active {
             background: #232323;
             color: #febd17;
+          }
+        }
+
+        .state-refine-container {
+          margin-top: em(10);
+
+          label,
+          .state-refine {
+            color: #000;
+          }
+
+          .state-refine {
+            border: em(1) solid #7f7e7e;
+            max-width: em(280);
+            background: transparent;
+            padding: em(10);
+            margin-bottom: em(10);
+            text-align: center;
+            font-size: rem(14);
           }
         }
       }

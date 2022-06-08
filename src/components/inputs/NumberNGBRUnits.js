@@ -79,7 +79,7 @@ const NumberNGBRUnits = ({
             endTick={10}
           />
           <output className="slider-output coh-heading subtitle coh-style-h2---display">
-            {customerInputs.numberNGBRUnits}
+            {editThis.numberNGBRUnits && customerInputs.numberNGBRUnits}
           </output>
         </span>
       ) : (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import paasCal from "../data/paas-cal.json";
 import PMT from "../utils/pmt";
-
 import Loading from "./loading/Loading";
 import Steps from "./steps/Steps";
 
@@ -9,9 +8,7 @@ import "../scss/paas-calculator.scss";
 
 const PaasCalculator = () => {
   //#region PRE-CALCULATIONS
-  // -----------------> SETUP <-----------------
   const [loading, setLoading] = useState(true);
-  //const [checkObserve, setCheckObserve] = useState(false);
   const averageWeeksPerMonth = Number(
     paasCal.averageWeeksPerMonth / 12
   ).toFixed(4);
@@ -30,7 +27,7 @@ const PaasCalculator = () => {
   const averageHourlyMaintenanceCost = paasCal.averageHourlyMaintenanceCost;
   const fuelConsumptionRate = paasCal.fuelConsumptionRate;
   const electricMaintenanceCostGas = paasCal.electricMaintenanceCostGas;
-  const [PADDRegion, setPADDRegion] = useState(paasCal.PADDRegion);
+  const [duoarea, setDuoarea] = useState(paasCal.duoarea);
   const [pricing, setPricing] = useState({ ...paasCal.pricing });
   const [monthlyPaaSPowerCostNGBR, setMonthlyPaaSPowerCostNGBR] = useState(
     paasCal.monthlyPaaSPowerCostNGBR
@@ -43,14 +40,7 @@ const PaasCalculator = () => {
   const [monthlyFuelCostPerZTR, setMonthlyFuelCostPerZTR] = useState(0);
   const [monthlyMaintenanceCostPerNGBR, setMonthlyMaintenanceCostPerNGBR] =
     useState(0);
-  // --------------------------------------------------------
-  // UNCOMMENT TO TURN ON API:
-  // const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(paasCal.latestFuelWeeklyPrice);
-  // const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(paasCal.latestAvgPowerPrice);
-  // COMMENT TO TURN ON API:
-  const latestFuelWeeklyPrice = paasCal.latestFuelWeeklyPrice;
-  const latestAvgPowerPrice = paasCal.latestAvgPowerPrice;
-  // --------------------------------------------------------
+
   const [totalMonthlyZTRFuelCost, setTotalMonthlyZTRFuelCost] = useState(0);
   const [totalMonthlyZTRMaintenanceCost, setTotalMonthlyZTRMaintenanceCost] =
     useState(0);
@@ -127,8 +117,18 @@ const PaasCalculator = () => {
     ...paasCal.reductionFromNGBRResale,
   });
 
-  // -----------------> useEffects <-----------------
+  const [editThis, setEditThis] = useState({
+    state: false,
+    gasZTRPrice: false,
+    daysMowedPerWeek: false,
+    numberNGBRUnits: false,
+    mowingHours: false,
+    lengthMowingSeason: false,
+  });
+  //#endregion PRE-CALCULATIONS
 
+  //#region useEffects
+  //const [checkObserve, setCheckObserve] = useState(false);
   // OBSERVER:
   // useEffect(() => {
   //   const observer = new IntersectionObserver(
@@ -151,47 +151,59 @@ const PaasCalculator = () => {
   //   observer.observe(document.querySelector("#inputs"));
   // }, [checkObserve]);
 
-  // Get Fuel & Electric Prices
+  const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(
+    paasCal.latestFuelWeeklyPrice
+  );
+  const [latestAvgPowerPrice, setLatestAvgPowerPrice] = useState(
+    paasCal.latestAvgPowerPrice
+  );
+
   useEffect(() => {
-    /// REMOVE setLoading
-    setLoading(false);
-    // UNCOMMENT:
-    // const padds = {
-    //   PADD1: "PET.EMM_EPMRU_PTE_R10_DPG.W", // PET.EMM_EPMRU_PTE_R10_DPG.W - PADD1
-    //   PADD2: "PET.EMM_EPMRU_PTE_R20_DPG.W", // PET.EMM_EPMRU_PTE_R20_DPG.W - PADD2
-    //   PADD3: "PET.EMM_EPMRU_PTE_R30_DPG.W", // PET.EMM_EPMRU_PTE_R30_DPG.W - PADD3
-    //   PADD4: "PET.EMM_EPMRU_PTE_R40_DPG.W", // PET.EMM_EPMRU_PTE_R40_DPG.W - PADD4
-    //   PADD5: "PET.EMM_EPMRU_PTE_R50_DPG.W", // PET.EMM_EPMRU_PTE_R50_DPG.W - PADD5
-    // };
-    // const eiaKey = process.env.REACT_APP_EIA_KEY;
-    // const fetchData = async (updateWhat, url) => {
-    //   await fetch(url)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       updateWhat === "fuel"
-    //         ? setLatestFuelWeeklyPrice(data.series[0].data[0][1])
-    //         : setLatestAvgPowerPrice(data.series[0].data[0][1] / 100);
-    //       setLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       setLoading(false);
-    //       console.error("There has been an error:", error);
-    //     });
-    // };
-    // fetchData(
-    //   "fuel",
-    //   `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=${padds[PADDRegion]}`
-    // );
-    // fetchData(
-    //   "power",
-    //   `https://api.eia.gov/series/?api_key=${eiaKey}&series_id=ELEC.PRICE.${customerInputs.location}-ALL.M`
-    // );
-  }, [
-    latestFuelWeeklyPrice,
-    latestAvgPowerPrice,
-    PADDRegion,
-    customerInputs.location,
-  ]);
+    const resetInError = (type) => {
+      if (type === "petroleum") {
+        setLatestFuelWeeklyPrice(paasCal.latestFuelWeeklyPrice);
+      } else {
+        setLatestAvgPowerPrice(paasCal.latestAvgPowerPrice);
+      }
+    };
+
+    const fetchLatestPrices = async (url, type) => {
+      setLoading(true);
+      await fetch(url)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            resetInError(type);
+            throw new Error("Something went wrong");
+          }
+        })
+        .then((data) => {
+          if (type === "petroleum") {
+            setLatestFuelWeeklyPrice(data.response.data[0].value);
+          } else {
+            setLatestAvgPowerPrice(data.response.data[0].price / 100);
+          }
+        })
+        .catch(() => {
+          resetInError(type);
+        });
+    };
+
+    Promise.allSettled([
+      fetchLatestPrices(
+        `https://api.eia.gov/v2/petroleum/pri/gnd/data/?frequency=weekly&data[0]=value&facets[product][]=EPMRU&facets[duoarea][]=${duoarea}&sort[0][column]=period&sort[0][direction]=desc&length=1&api_key=${process.env.REACT_APP_EIA_KEY}`,
+        "petroleum"
+      ),
+
+      fetchLatestPrices(
+        `https://api.eia.gov/v2/electricity/retail-sales/data/?frequency=monthly&data[0]=price&facets[sectorid][]=RES&facets[stateid][]=${customerInputs.location}&sort[0][column]=period&sort[0][direction]=desc&length=1&api_key=${process.env.REACT_APP_EIA_KEY}`,
+        "electricity"
+      ),
+    ]).then(() => {
+      setLoading(false);
+    });
+  }, [customerInputs.location, duoarea]);
 
   useEffect(() => {
     setMowingMonthly(
@@ -595,7 +607,7 @@ const PaasCalculator = () => {
       ).toFixed(4)
     );
   }, [customerInputs.lengthMowingSeason, mowingMonthly]);
-  //#endregion PRE-CALCULATIONS
+  //#endregion
 
   // STEPS COMFIGURATION:
   const [whichStep, setWhichStep] = useState(1);
@@ -608,7 +620,7 @@ const PaasCalculator = () => {
           whichStep,
           setWhichStep,
           customerInputs,
-          setPADDRegion,
+          setDuoarea,
           setCustomerInputs,
           pricing,
           requiredEquipment,
@@ -627,6 +639,12 @@ const PaasCalculator = () => {
           monthlyMaintenanceCostPerZTR,
           enviromentalBenefits,
           poundsOfCO2Avoided,
+          editThis,
+          setEditThis,
+          latestAvgPowerPrice,
+          setLatestAvgPowerPrice,
+          latestFuelWeeklyPrice,
+          setLatestFuelWeeklyPrice,
         }}
       />
     </>

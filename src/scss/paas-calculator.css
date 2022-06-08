@@ -1,3 +1,6 @@
+.paas-calculator {
+  position: relative;
+}
 .paas-calculator *:focus {
   outline: none;
 }
@@ -29,6 +32,9 @@
 .paas-calculator .coh-container {
   width: 100%;
 }
+.paas-calculator .input-button-container {
+  padding-bottom: 2.5em;
+}
 .paas-calculator .grid {
   display: grid;
   width: 100%;
@@ -46,7 +52,7 @@
   align-items: flex-end;
 }
 .paas-calculator .steps {
-  padding: 5em 0;
+  padding: 0.625em 0;
 }
 .paas-calculator .steps label {
   font-size: 1.125rem;
@@ -58,7 +64,7 @@
   justify-content: center;
   align-items: center;
   min-height: 37.5em;
-  padding: 2.5em 5em;
+  padding: 0.625em 5em;
 }
 .paas-calculator .circle {
   background: #c4c4c4;
@@ -267,6 +273,28 @@
 .paas-calculator .loading.overlay.active {
   display: block;
 }
+.paas-calculator .state-refine-container {
+  margin-top: 1.875em;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+.paas-calculator .state-refine-container.active {
+  max-height: 31.25em;
+}
+.paas-calculator .state-refine-container .state-refine {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 1.25em;
+  border-radius: 0.1875em;
+}
+.paas-calculator .state-refine-container label {
+  margin-bottom: 0.25em;
+}
+.paas-calculator .state-refine-container label:nth-child(2) {
+  margin-top: 0.625em;
+}
 .paas-calculator .inputs-container {
   width: 100%;
 }
@@ -355,6 +383,22 @@
 .paas-calculator .inputs-container.floating .input-container .input datalist option.active {
   background: #232323;
   color: #febd17;
+}
+.paas-calculator .inputs-container.floating .input-container .state-refine-container {
+  margin-top: 0.625em;
+}
+.paas-calculator .inputs-container.floating .input-container .state-refine-container label,
+.paas-calculator .inputs-container.floating .input-container .state-refine-container .state-refine {
+  color: #000;
+}
+.paas-calculator .inputs-container.floating .input-container .state-refine-container .state-refine {
+  border: 0.0625em solid #7f7e7e;
+  max-width: 17.5em;
+  background: transparent;
+  padding: 0.625em;
+  margin-bottom: 0.625em;
+  text-align: center;
+  font-size: 0.875rem;
 }
 .paas-calculator .inputs-container.static {
   margin-top: 1.25em;

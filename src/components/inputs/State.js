@@ -1,24 +1,22 @@
 import statesJSON from "../../data/states.json";
 import ButtonEdit from "../elements/ButtonEdit";
+import RangeTicks from "../elements/RangeTicks";
 
 const State = ({
+  setDuoarea,
   customerInputs,
-  //setCustomerInputs,
-  setPADDRegion,
+  setCustomerInputs,
   inStep,
   whichStep,
   setWhichStep,
   editThis,
   setEditThis,
+  latestAvgPowerPrice,
+  setLatestAvgPowerPrice,
+  latestFuelWeeklyPrice,
+  setLatestFuelWeeklyPrice,
 }) => {
   let states = JSON.parse(JSON.stringify(statesJSON));
-
-  const handleChange = (e) => {
-    //  setCustomerInputs({
-    //    ...customerInputs,
-    //    gasZTRPrice: e.target.value,
-    //  });
-  };
 
   const handleEdit = (e) => {
     setEditThis({
@@ -30,36 +28,137 @@ const State = ({
       state: !editThis.state,
     });
   };
-
   return (
     <>
       <label id="location">
-        {inStep ? "Which state do you operate in? (disabled)" : "State"}
-        {/* <ButtonEdit {...{ whichStep, setEditThis }} /> */}
+        {inStep ? "Which state do you operate in?" : "State"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
       {inStep || editThis.state ? (
         <span className="input">
           <select
-            htmlFor="location"
+            name="location"
+            id="location"
             value={customerInputs.location}
             onChange={(e) => {
-              handleChange(e);
+              setCustomerInputs({
+                ...customerInputs,
+                location: e.target.value,
+              });
               const newState = states.find(
                 (state) => state.abbr === e.target.value
               );
-              setPADDRegion(`PADD${newState.padd}`);
+              setDuoarea(newState.duoarea);
+              setEditThis({
+                gasZTRPrice: false,
+                daysMowedPerWeek: false,
+                numberNGBRUnits: false,
+                mowingHours: false,
+                lengthMowingSeason: false,
+                state: false,
+              });
             }}
-            disabled
           >
             {states.map((state) => {
               return (
                 <option key={state.abbr} value={state.abbr}>
-                  {state.name} - PADD {state.padd}
+                  {state.name} ({state.duoarea})
                 </option>
               );
             })}
           </select>
+
+          <button
+            className="coh-link coh-style-button-action center"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#state-refine").classList.toggle("active");
+            }}
+          >
+            Refine Prices »
+          </button>
+
+          <div className="state-refine-container" id="state-refine">
+            <div className="state-refine">
+              <label>Current Electricity Price</label>
+              <input
+                type="range"
+                min="0"
+                max="3"
+                step=".01"
+                value={latestAvgPowerPrice}
+                onChange={(e) => {
+                  setLatestAvgPowerPrice(e.target.value);
+                }}
+                // onMouseUp={(e) => {
+                //   setEditThis({
+                //     state: false,
+                //     daysMowedPerWeek: false,
+                //     numberNGBRUnits: false,
+                //     mowingHours: false,
+                //     lengthMowingSeason: false,
+                //     gasZTRPrice: false,
+                //   });
+                // }}
+                name="latestAvgPowerPrice"
+                id="latestAvgPowerPrice"
+                list="latestAvgPowerPrice-ticks"
+              />
+              <RangeTicks
+                // handleClick={handleClick}
+                sliderID="latestAvgPowerPrice"
+                startTick={0}
+                endTick={3}
+                currentTick={latestAvgPowerPrice}
+                skipTicks={false}
+              />
+              <output>${Number(latestAvgPowerPrice).toFixed(2)} per KWh</output>
+
+              <label
+                style={{
+                  paddingTop: "20px",
+                  marginTop: "20px",
+                  borderTop: "1px solid #888888",
+                }}
+              >
+                Current Fuel Price
+              </label>
+              <input
+                type="range"
+                min="4"
+                max="10"
+                step=".01"
+                value={latestFuelWeeklyPrice}
+                onChange={(e) => {
+                  setLatestFuelWeeklyPrice(e.target.value);
+                }}
+                // onMouseUp={(e) => {
+                //   setEditThis({
+                //     state: false,
+                //     daysMowedPerWeek: false,
+                //     numberNGBRUnits: false,
+                //     mowingHours: false,
+                //     lengthMowingSeason: false,
+                //     gasZTRPrice: false,
+                //   });
+                // }}
+                name="latestFuelWeeklyPrice"
+                id="latestFuelWeeklyPrice"
+                list="latestFuelWeeklyPrice-ticks"
+              />
+              <RangeTicks
+                // handleClick={handleClick}
+                sliderID="latestFuelWeeklyPrice"
+                startTick={4}
+                endTick={10}
+                currentTick={latestFuelWeeklyPrice}
+                skipTicks={false}
+              />
+              <output>
+                ${Number(latestFuelWeeklyPrice).toFixed(2)} per GAL
+              </output>
+            </div>
+          </div>
         </span>
       ) : (
         <>

@@ -79,7 +79,7 @@ const DaysMowedPerWeek = ({
             currentTick={customerInputs.daysMowedPerWeek}
           />
           <output className="slider-output coh-heading subtitle coh-style-h2---display">
-            {customerInputs.daysMowedPerWeek}
+            {editThis.daysMowedPerWeek && customerInputs.daysMowedPerWeek}
           </output>
         </span>
       ) : (

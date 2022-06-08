@@ -7,11 +7,15 @@ import Step6 from "./Step6";
 import Step7 from "./Step7";
 import Step8 from "./Step8";
 
+import Buttons from "../elements/Buttons";
+import Inputs from "../inputs/Inputs";
+import OutputsPricing from "../outputs/OutputsPricing";
+
 const Steps = ({
   whichStep,
   setWhichStep,
   customerInputs,
-  setPADDRegion,
+  setDuoarea,
   setCustomerInputs,
   pricing,
   requiredEquipment,
@@ -30,6 +34,12 @@ const Steps = ({
   monthlyMaintenanceCostPerZTR,
   enviromentalBenefits,
   poundsOfCO2Avoided,
+  editThis,
+  setEditThis,
+  latestAvgPowerPrice,
+  setLatestAvgPowerPrice,
+  latestFuelWeeklyPrice,
+  setLatestFuelWeeklyPrice,
 }) => {
   return (
     <>
@@ -39,13 +49,12 @@ const Steps = ({
             return (
               <Step2
                 {...{
+                  customerInputs,
+                  setCustomerInputs,
                   whichStep,
                   setWhichStep,
-                  customerInputs,
-                  setPADDRegion,
-                  setCustomerInputs,
-                  pricing,
-                  requiredEquipment,
+                  editThis,
+                  setEditThis,
                 }}
               />
             );
@@ -53,13 +62,12 @@ const Steps = ({
             return (
               <Step3
                 {...{
+                  customerInputs,
+                  setCustomerInputs,
                   whichStep,
                   setWhichStep,
-                  customerInputs,
-                  setPADDRegion,
-                  setCustomerInputs,
-                  pricing,
-                  requiredEquipment,
+                  editThis,
+                  setEditThis,
                 }}
               />
             );
@@ -68,12 +76,11 @@ const Steps = ({
               <Step4
                 {...{
                   whichStep,
-                  setWhichStep,
                   customerInputs,
-                  setPADDRegion,
+                  setDuoarea,
                   setCustomerInputs,
-                  pricing,
-                  requiredEquipment,
+                  editThis,
+                  setEditThis,
                 }}
               />
             );
@@ -82,12 +89,10 @@ const Steps = ({
               <Step5
                 {...{
                   whichStep,
-                  setWhichStep,
                   setCustomerInputs,
-                  setPADDRegion,
                   customerInputs,
-                  pricing,
-                  requiredEquipment,
+                  editThis,
+                  setEditThis,
                 }}
               />
             );
@@ -96,12 +101,10 @@ const Steps = ({
               <Step6
                 {...{
                   whichStep,
-                  setWhichStep,
                   customerInputs,
-                  setPADDRegion,
                   setCustomerInputs,
-                  pricing,
-                  requiredEquipment,
+                  editThis,
+                  setEditThis,
                 }}
               />
             );
@@ -113,7 +116,7 @@ const Steps = ({
                 {...{
                   customerInputs,
                   whichStep,
-                  setPADDRegion,
+                  setDuoarea,
                   setCustomerInputs,
                   pricing,
                   totalMonthlyPaaSPowerCost,
@@ -132,6 +135,12 @@ const Steps = ({
                   monthlyMaintenanceCostPerZTR,
                   enviromentalBenefits,
                   poundsOfCO2Avoided,
+                  editThis,
+                  setEditThis,
+                  latestAvgPowerPrice,
+                  setLatestAvgPowerPrice,
+                  latestFuelWeeklyPrice,
+                  setLatestFuelWeeklyPrice,
                 }}
               />
             );
@@ -143,15 +152,51 @@ const Steps = ({
                   whichStep,
                   setWhichStep,
                   customerInputs,
-                  setPADDRegion,
+                  setDuoarea,
                   setCustomerInputs,
-                  pricing,
-                  requiredEquipment,
+                  editThis,
+                  setEditThis,
+                  latestAvgPowerPrice,
+                  setLatestAvgPowerPrice,
+                  latestFuelWeeklyPrice,
+                  setLatestFuelWeeklyPrice,
                 }}
               />
             );
         }
       })()}
+      {whichStep !== 8 && (
+        <>
+          <section
+            className="coh-container section coh-style-section input-button-container"
+            data-gs-background-color="light-grey"
+          >
+            <div className="section-inner">
+              <div className="step coh-container-boxed">
+                <Buttons {...{ whichStep, setWhichStep }} />
+                <Inputs
+                  {...{
+                    setDuoarea,
+                    customerInputs,
+                    setCustomerInputs,
+                    whichStep,
+                    setWhichStep,
+                    editThis,
+                    setEditThis,
+                    latestAvgPowerPrice,
+                    setLatestAvgPowerPrice,
+                    latestFuelWeeklyPrice,
+                    setLatestFuelWeeklyPrice,
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+          <section className="container-outputs">
+            <OutputsPricing {...{ pricing, requiredEquipment }} />
+          </section>
+        </>
+      )}
     </>
   );
 };

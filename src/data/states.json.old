@@ -2,256 +2,256 @@
   {
     "name": "Alabama",
     "abbr": "AL",
-    "duoarea": "R30"
+    "padd": 3
   },
   {
     "name": "Alaska",
     "abbr": "AK",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "Arizona",
     "abbr": "AZ",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "Arkansas",
     "abbr": "AR",
-    "duoarea": "R30"
+    "padd": 3
   },
   {
     "name": "California",
     "abbr": "CA",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "Colorado",
     "abbr": "CO",
-    "duoarea": "R40"
+    "padd": 4
   },
   {
     "name": "Connecticut",
     "abbr": "CT",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Delaware",
     "abbr": "DE",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "District Of Columbia",
     "abbr": "DC",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Florida",
     "abbr": "FL",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Georgia",
     "abbr": "GA",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Hawaii",
     "abbr": "HI",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "Idaho",
     "abbr": "ID",
-    "duoarea": "R40"
+    "padd": 4
   },
   {
     "name": "Illinois",
     "abbr": "IL",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Indiana",
     "abbr": "IN",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Iowa",
     "abbr": "IA",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Kansas",
     "abbr": "KS",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Kentucky",
     "abbr": "KY",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Louisiana",
     "abbr": "LA",
-    "duoarea": "R30"
+    "padd": 3
   },
   {
     "name": "Maine",
     "abbr": "ME",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Maryland",
     "abbr": "MD",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Massachusetts",
     "abbr": "MA",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Michigan",
     "abbr": "MI",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Minnesota",
     "abbr": "MN",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Mississippi",
     "abbr": "MS",
-    "duoarea": "R30"
+    "padd": 3
   },
   {
     "name": "Missouri",
     "abbr": "MO",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Montana",
     "abbr": "MT",
-    "duoarea": "R40"
+    "padd": 4
   },
   {
     "name": "Nebraska",
     "abbr": "NE",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Nevada",
     "abbr": "NV",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "New Hampshire",
     "abbr": "NH",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "New Jersey",
     "abbr": "NJ",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "New Mexico",
     "abbr": "NM",
-    "duoarea": "R30"
+    "padd": 3
   },
   {
     "name": "New York",
     "abbr": "NY",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "North Carolina",
     "abbr": "NC",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "North Dakota",
     "abbr": "ND",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Ohio",
     "abbr": "OH",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Oklahoma",
     "abbr": "OK",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Oregon",
     "abbr": "OR",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "Pennsylvania",
     "abbr": "PA",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Rhode Island",
     "abbr": "RI",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "South Carolina",
     "abbr": "SC",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "South Dakota",
     "abbr": "SD",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Tennessee",
     "abbr": "TN",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Texas",
     "abbr": "TX",
-    "duoarea": "R30"
+    "padd": 3
   },
   {
     "name": "Utah",
     "abbr": "UT",
-    "duoarea": "R40"
+    "padd": 4
   },
   {
     "name": "Vermont",
     "abbr": "VT",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Virginia",
     "abbr": "VA",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Washington",
     "abbr": "WA",
-    "duoarea": "R50"
+    "padd": 5
   },
   {
     "name": "West Virginia",
     "abbr": "WV",
-    "duoarea": "R10"
+    "padd": 1
   },
   {
     "name": "Wisconsin",
     "abbr": "WI",
-    "duoarea": "R20"
+    "padd": 2
   },
   {
     "name": "Wyoming",
     "abbr": "WY",
-    "duoarea": "R40"
+    "padd": 4
   }
 ]

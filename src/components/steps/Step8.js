@@ -5,7 +5,7 @@ import Outputs from "../outputs/Outputs";
 const Step8 = ({
   customerInputs,
   whichStep,
-  setPADDRegion,
+  setDuoarea,
   setCustomerInputs,
   pricing,
   totalMonthlyPaaSPowerCost,
@@ -24,11 +24,28 @@ const Step8 = ({
   monthlyMaintenanceCostPerZTR,
   enviromentalBenefits,
   poundsOfCO2Avoided,
+  editThis,
+  setEditThis,
+  latestAvgPowerPrice,
+  setLatestAvgPowerPrice,
+  latestFuelWeeklyPrice,
+  setLatestFuelWeeklyPrice,
 }) => {
   return (
     <>
       <Inputs
-        {...{ setPADDRegion, customerInputs, setCustomerInputs, whichStep }}
+        {...{
+          setDuoarea,
+          customerInputs,
+          setCustomerInputs,
+          whichStep,
+          editThis,
+          setEditThis,
+          latestAvgPowerPrice,
+          setLatestAvgPowerPrice,
+          latestFuelWeeklyPrice,
+          setLatestFuelWeeklyPrice,
+        }}
       />
 
       <Outputs

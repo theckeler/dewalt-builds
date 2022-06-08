@@ -77,10 +77,7 @@ const GasZTRPrice = ({
             currentTick={customerInputs.daysMowedPerWeek}
             skipTicks={true}
           />
-          <output
-            htmlFor="gasZTRPrice"
-            className="slider-output coh-heading subtitle coh-style-h2---display"
-          >
+          <output className="slider-output coh-heading subtitle coh-style-h2---display">
             {dollarUSLocale.format(customerInputs.gasZTRPrice)}
           </output>
         </span>

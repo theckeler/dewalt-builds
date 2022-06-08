@@ -31,7 +31,7 @@ const RangeTicks = ({
               key={x}
               className={Number(currentTick) === x ? "active" : ""}
             >
-              {x < 10 ? "0" + x : x}
+              {x < 10 ? "" + x : x}
             </option>
           );
         })
