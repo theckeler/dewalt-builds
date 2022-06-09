@@ -128,29 +128,6 @@ const PaasCalculator = () => {
   //#endregion PRE-CALCULATIONS
 
   //#region useEffects
-  //const [checkObserve, setCheckObserve] = useState(false);
-  // OBSERVER:
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (entry.isIntersecting) {
-  //         setCheckObserve(true);
-  //         //console.log("in view");
-  //       } else {
-  //         setCheckObserve(false);
-  //         document.querySelectorAll(".tip").forEach((tip) => {
-  //           tip.classList.remove("active");
-  //         });
-  //       }
-  //     },
-  //     {
-  //       root: null,
-  //       //threshold: 0.7,
-  //     }
-  //   );
-  //   observer.observe(document.querySelector("#inputs"));
-  // }, [checkObserve]);
-
   const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(
     paasCal.latestFuelWeeklyPrice
   );

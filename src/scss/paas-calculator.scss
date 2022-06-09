@@ -392,10 +392,20 @@
 
     &.floating {
       position: sticky;
-      top: 0;
+      top: -1px;
       z-index: 1001;
       backdrop-filter: blur(em(2px));
-      background: #232323;
+      background-color: #232323;
+      //transition: background-color 0.3s ease-in-out;
+
+      &.pinned {
+        box-shadow: 0 0 em(8) rgba(0, 0, 0, 0.9);
+        background-color: #000;
+
+        .subtitle {
+          // font-size: rem(26);
+        }
+      }
 
       .input-container {
         label {

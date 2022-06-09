@@ -19,10 +19,14 @@ const Inputs = ({
   setLatestAvgPowerPrice,
   latestFuelWeeklyPrice,
   setLatestFuelWeeklyPrice,
+  checkObserve,
 }) => {
   return (
     <div
-      className={`inputs-container ${whichStep === 8 ? "floating" : "static"}`}
+      className={`inputs-container ${whichStep === 8 ? "floating" : "static"} ${
+        checkObserve ? "not-pinned" : "pinned"
+      }`}
+      id={`paas-inputs-${whichStep === 8 ? "floating" : "static"}`}
     >
       <ul className="coh-container-boxed inputs" id="inputs">
         <li className={`column center ${whichStep === 1 ? "active" : ""}`}>

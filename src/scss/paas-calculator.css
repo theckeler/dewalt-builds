@@ -319,11 +319,15 @@
 .paas-calculator .inputs-container.floating {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 1001;
   -webkit-backdrop-filter: blur(0.125em);
           backdrop-filter: blur(0.125em);
-  background: #232323;
+  background-color: #232323;
+}
+.paas-calculator .inputs-container.floating.pinned {
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.9);
+  background-color: #000;
 }
 .paas-calculator .inputs-container.floating .input-container label {
   display: flex;

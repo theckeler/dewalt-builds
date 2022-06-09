@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Inputs from "../inputs/Inputs";
 import Outputs from "../outputs/Outputs";
 
@@ -31,6 +31,27 @@ const Step8 = ({
   latestFuelWeeklyPrice,
   setLatestFuelWeeklyPrice,
 }) => {
+  const [checkObserve, setCheckObserve] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCheckObserve(true);
+          console.log("in view");
+        } else {
+          setCheckObserve(false);
+          console.log("out of view");
+        }
+      },
+      {
+        threshold: 1,
+      }
+    );
+    if (document.querySelector("#paas-inputs-floating")) {
+      console.log("observing");
+      observer.observe(document.querySelector("#paas-inputs-floating"));
+    }
+  }, [checkObserve]);
   return (
     <>
       <Inputs
@@ -45,6 +66,7 @@ const Step8 = ({
           setLatestAvgPowerPrice,
           latestFuelWeeklyPrice,
           setLatestFuelWeeklyPrice,
+          checkObserve,
         }}
       />
 
