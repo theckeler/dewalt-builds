@@ -305,8 +305,8 @@
           align-items: center;
           font-size: rem(11);
           padding: em(4);
-          width: em(34);
-          height: em(34);
+          width: em(50);
+          height: em(50);
           -webkit-user-select: none;
           -o-user-select: none;
           user-select: none;
@@ -426,6 +426,11 @@
 
         .slider-output {
           color: #000;
+          border-top: em(1) solid #eeeeee;
+          width: 100%;
+          padding-top: em(6);
+          margin-top: em(4);
+          text-align: center;
         }
 
         .input {
@@ -499,10 +504,14 @@
 
           datalist option {
             background: transparent;
+            width: em(30);
+            height: em(30);
+            border-radius: 0;
+            color: #848484;
 
             &.active {
-              background: #232323;
-              color: #febd17;
+              background: transparent;
+              color: #000;
             }
           }
         }
@@ -904,12 +913,90 @@
           svg {
             position: absolute;
             bottom: 0;
-            left: 50%;
-            max-height: 80%;
-            transform: translateX(-50%);
 
+            &#mountain {
+              left: 0;
+              z-index: 0;
+              width: 100%;
+              max-height: 100%;
+              opacity: 0.6;
+            }
+
+            &:not(#mountain) {
+              left: 50%;
+              max-height: 80%;
+              min-height: 60%;
+              max-width: em(200);
+              transform: translateX(-50%);
+              z-index: 1;
+            }
+
+            #tree-1,
             #tree-2 {
               display: none;
+            }
+
+            &.show-1 {
+              #tree-1 {
+                display: block;
+              }
+            }
+
+            &.show-2 {
+              #tree-2 {
+                display: block;
+              }
+            }
+
+            &.color-1 {
+              * {
+                fill: #333;
+              }
+            }
+            &.color-2 {
+              * {
+                fill: #7b7b7b;
+              }
+            }
+            &.color-3 {
+              * {
+                fill: #3b3b3b;
+              }
+            }
+            &.color-4 {
+              * {
+                fill: #343434;
+              }
+            }
+            &.color-5 {
+              * {
+                fill: #757575;
+              }
+            }
+            &.color-6 {
+              * {
+                fill: #686868;
+              }
+            }
+            &.color-7 {
+              * {
+                fill: #fdbd16;
+              }
+            }
+            &.color-8 {
+              * {
+                fill: #4b4b4b;
+              }
+            }
+            &.color-9 {
+              * {
+                fill: #656565;
+              }
+            }
+            &.color-10 {
+              * {
+                fill: #fdbd16;
+              }
             }
           }
 

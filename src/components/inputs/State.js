@@ -72,7 +72,9 @@ const State = ({
             className="coh-link coh-style-button-action center"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector("#state-refine").classList.toggle("active");
+              document
+                .querySelector("#state-refine")
+                .classList.toggle("active");
             }}
           >
             Refine Prices »
@@ -80,7 +82,10 @@ const State = ({
 
           <div className="state-refine-container" id="state-refine">
             <div className="state-refine">
-              <label>Current Electricity Price</label>
+              <label>
+                Current Electricity Price: $
+                {Number(latestAvgPowerPrice).toFixed(2)} per KWh
+              </label>
               <input
                 type="range"
                 min="0"
@@ -104,15 +109,15 @@ const State = ({
                 id="latestAvgPowerPrice"
                 list="latestAvgPowerPrice-ticks"
               />
-              <RangeTicks
+              {/* <RangeTicks
                 // handleClick={handleClick}
                 sliderID="latestAvgPowerPrice"
                 startTick={0}
                 endTick={3}
                 currentTick={latestAvgPowerPrice}
                 skipTicks={false}
-              />
-              <output>${Number(latestAvgPowerPrice).toFixed(2)} per KWh</output>
+              /> */}
+              {/* <output>${Number(latestAvgPowerPrice).toFixed(2)} per KWh</output> */}
 
               <label
                 style={{
@@ -121,7 +126,8 @@ const State = ({
                   borderTop: "1px solid #888888",
                 }}
               >
-                Current Fuel Price
+                Current Fuel Price: ${Number(latestFuelWeeklyPrice).toFixed(2)}{" "}
+                per GAL
               </label>
               <input
                 type="range"
@@ -146,17 +152,17 @@ const State = ({
                 id="latestFuelWeeklyPrice"
                 list="latestFuelWeeklyPrice-ticks"
               />
-              <RangeTicks
+              {/* <RangeTicks
                 // handleClick={handleClick}
                 sliderID="latestFuelWeeklyPrice"
                 startTick={4}
                 endTick={10}
                 currentTick={latestFuelWeeklyPrice}
                 skipTicks={false}
-              />
-              <output>
+              /> */}
+              {/* <output>
                 ${Number(latestFuelWeeklyPrice).toFixed(2)} per GAL
-              </output>
+              </output> */}
             </div>
           </div>
         </span>

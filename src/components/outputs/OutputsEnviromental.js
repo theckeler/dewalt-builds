@@ -1,12 +1,13 @@
 import { ReactComponent as IconTrees } from "../../images/trees.svg";
 import { ReactComponent as IconCar } from "../../images/icon-car.svg";
 import { ReactComponent as IconCo2 } from "../../images/icon-co2.svg";
+import { ReactComponent as Mountain } from "../../images/mountain.svg";
 
 const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
   const treeNum = (
     poundsOfCO2Avoided /
     enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
-    10
+    100
   ).toFixed(0);
   let treeIcons = [];
   for (let i = 0; i < treeNum; i++) {
@@ -14,11 +15,14 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
       <IconTrees
         style={{
           left: Math.floor(Math.random() * 100) + 1 + "%",
-          bottom: Math.floor(Math.random() * 20) + "px",
+          //  bottom: Math.floor(Math.random() * 10) + "px",
           height: Math.floor(Math.random() * 100) + 1 + "%",
-          //opacity: "." + Math.floor(Math.random() * 100) / 100,
-          fill: "#" + Math.floor(Math.random() * 16777215).toString(16),
+          // opacity: Math.floor(Math.random() * 100) / 100,
+          //fill: "#" + Math.floor(Math.random() * 16777215).toString(16),
         }}
+        className={`show-${Math.floor(Math.random() * 2) + 1} color-${
+          Math.floor(Math.random() * 10) + 1
+        }`}
         key={i}
       />
     );
@@ -44,10 +48,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
           className="coh-container section coh-style-section"
           data-gs-background-color="default"
           data-gs-spacing="none"
-          data-gs-min-height=""
-          data-gs-overlay=""
           data-gs-foreground-color="dark"
-          data-gs-remove-spacing=""
         >
           <div className="coh-container section-inner">
             <div className="coh-container coh-container-boxed">
@@ -59,7 +60,10 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                         className="coh-container text-main-container output-enviromental-inner"
                         data-text-align="center"
                       >
-                        <p className="coh-heading subtitle coh-style-h3---display">
+                        <p
+                          className="coh-heading subtitle coh-style-h3---display"
+                          style={{ paddingTop: "30px" }}
+                        >
                           Environmental Benefits
                         </p>
                         <p>
@@ -79,9 +83,10 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                           <li className="svg-icon">
                             <div className="output-enviromental-icon">
                               {treeIcons}
+                              <Mountain />
                             </div>
                             <div className="output-enviromental-output">
-                              <h2 className="coh-heading subtitle coh-style-h4---display">
+                              <h2 className="coh-heading subtitle coh-style-h2---display">
                                 {(
                                   poundsOfCO2Avoided /
                                   enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted
@@ -95,7 +100,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                               <IconCar />
                             </div>
                             <div className="output-enviromental-output">
-                              <h2 className="coh-heading subtitle coh-style-h4---display">
+                              <h2 className="coh-heading subtitle coh-style-h2---display">
                                 {(
                                   enviromentalBenefits.poundsCO2EmittedPerMileDrivenInACar *
                                   poundsOfCO2Avoided
@@ -109,7 +114,7 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                               <IconCo2 />
                             </div>
                             <div className="output-enviromental-output">
-                              <h2 className="coh-heading subtitle coh-style-h4---display">
+                              <h2 className="coh-heading subtitle coh-style-h2---display">
                                 {poundsOfCO2Avoided.toFixed(2)}
                               </h2>
                               <p>Pounds of CO2 avoided</p>

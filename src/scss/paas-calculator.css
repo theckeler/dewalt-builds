@@ -245,8 +245,8 @@
   align-items: center;
   font-size: 0.6875rem;
   padding: 0.25em;
-  width: 2.125em;
-  height: 2.125em;
+  width: 3.125em;
+  height: 3.125em;
   -webkit-user-select: none;
   -o-user-select: none;
   -moz-user-select: none;
@@ -345,6 +345,11 @@
 }
 .paas-calculator .inputs-container.floating .input-container .slider-output {
   color: #000;
+  border-top: 0.0625em solid #eeeeee;
+  width: 100%;
+  padding-top: 0.375em;
+  margin-top: 0.25em;
+  text-align: center;
 }
 .paas-calculator .inputs-container.floating .input-container .input {
   position: absolute;
@@ -404,10 +409,14 @@
 }
 .paas-calculator .inputs-container.floating .input-container .input datalist option {
   background: transparent;
+  width: 1.875em;
+  height: 1.875em;
+  border-radius: 0;
+  color: #848484;
 }
 .paas-calculator .inputs-container.floating .input-container .input datalist option.active {
-  background: #232323;
-  color: #febd17;
+  background: transparent;
+  color: #000;
 }
 .paas-calculator .inputs-container.floating .input-container .state-refine-container {
   margin-top: 0.625em;
@@ -698,12 +707,61 @@
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg {
   position: absolute;
   bottom: 0;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg#mountain {
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  max-height: 100%;
+  opacity: 0.6;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg:not(#mountain) {
   left: 50%;
   max-height: 80%;
+  min-height: 60%;
+  max-width: 12.5em;
   transform: translateX(-50%);
+  z-index: 1;
 }
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg #tree-1,
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg #tree-2 {
   display: none;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.show-1 #tree-1 {
+  display: block;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.show-2 #tree-2 {
+  display: block;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-1 * {
+  fill: #333;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-2 * {
+  fill: #7b7b7b;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-3 * {
+  fill: #3b3b3b;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-4 * {
+  fill: #343434;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-5 * {
+  fill: #757575;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-6 * {
+  fill: #686868;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-7 * {
+  fill: #fdbd16;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-8 * {
+  fill: #4b4b4b;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-9 * {
+  fill: #656565;
+}
+.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-10 * {
+  fill: #fdbd16;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-output {
   margin-top: auto;
