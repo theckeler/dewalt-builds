@@ -587,7 +587,7 @@ const PaasCalculator = () => {
   //#endregion
 
   // STEPS COMFIGURATION:
-  const [whichStep, setWhichStep] = useState(8);
+  const [whichStep, setWhichStep] = useState(1);
 
   return (
     <>
