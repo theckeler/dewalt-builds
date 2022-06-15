@@ -1,6 +1,6 @@
 import statesJSON from "../../data/states.json";
 import ButtonEdit from "../elements/ButtonEdit";
-import RangeTicks from "../elements/RangeTicks";
+//import RangeTicks from "../elements/RangeTicks";
 
 const State = ({
   setDuoarea,

@@ -128,6 +128,47 @@ const PaasCalculator = () => {
   //#endregion PRE-CALCULATIONS
 
   //#region useEffects
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(
+      (loc) => {
+        const { latitude, longitude } = loc.coords;
+        fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=locality&key=${process.env.REACT_APP_GEOCODING_API_KEY}`
+        )
+          .then((response) => response.json())
+          .then((pos) => {
+            pos.results[0].address_components.forEach((component) => {
+              console.log(pos);
+
+              if (component.short_name === "US") {
+                // console.log(
+                //   "US:",
+                //   pos.results[0].address_components[2].short_name
+                // );
+
+                setCustomerInputs({
+                  ...customerInputs,
+                  location: pos.results[0].address_components[2].short_name,
+                });
+              }
+            });
+
+            // if (pos.results[0].address_components[6].short_name === "US") {
+            //   console.log("US");
+            // } else {
+            //   console.log("not US");
+            // }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      () => {
+        //fail
+      }
+    );
+  }, []);
+
   const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(
     paasCal.latestFuelWeeklyPrice
   );
