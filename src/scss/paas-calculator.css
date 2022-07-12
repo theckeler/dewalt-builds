@@ -1,6 +1,12 @@
 .paas-calculator {
   position: relative;
 }
+.paas-calculator input[type=password] {
+  background: #fff;
+  color: #000 !important;
+  padding: 1.25em;
+  font-size: 1.25rem;
+}
 .paas-calculator *:focus {
   outline: none;
 }
@@ -132,6 +138,9 @@
   width: 100%;
   height: auto;
 }
+.paas-calculator button.icon span {
+  display: none;
+}
 .paas-calculator ul {
   flex-basis: 100%;
   list-style: none;
@@ -250,7 +259,6 @@
   -webkit-user-select: none;
   -o-user-select: none;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   font-weight: 700;
   border-radius: 100%;
@@ -702,68 +710,43 @@
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon {
   position: relative;
-  min-height: 25em;
+  min-height: 12.5em;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg {
-  position: absolute;
-  bottom: 0;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg#mountain {
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  max-height: 100%;
-  opacity: 0.6;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg:not(#mountain) {
-  left: 50%;
-  max-height: 80%;
-  min-height: 60%;
-  max-width: 12.5em;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg #tree-1,
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg #tree-2 {
-  display: none;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.show-1 #tree-1 {
-  display: block;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.show-2 #tree-2 {
-  display: block;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-1 * {
-  fill: #333;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-2 * {
-  fill: #7b7b7b;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-3 * {
-  fill: #3b3b3b;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-4 * {
-  fill: #343434;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-5 * {
-  fill: #757575;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-6 * {
-  fill: #686868;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-7 * {
-  fill: #fdbd16;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-8 * {
-  fill: #4b4b4b;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-9 * {
-  fill: #656565;
-}
-.paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg.color-10 * {
-  fill: #fdbd16;
+  height: 100%;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-output {
   margin-top: auto;
   padding-top: 2.5em;
+}
+
+@media only screen and (max-width: 1023px) {
+  .coh-container-boxed {
+    max-width: 100%;
+  }
+  .paas-calculator ul li .input-container {
+    padding: 0.625em;
+  }
+  .paas-calculator .inputs-container.floating {
+    transition: all 0.3s ease-in-out;
+    -webkit-backdrop-filter: initial;
+            backdrop-filter: initial;
+    pointer-events: none;
+  }
+  .paas-calculator .inputs-container.floating .input-container label {
+    flex-direction: column;
+  }
+  .paas-calculator .inputs-container.floating button.icon {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .paas-calculator .inputs-container.pinned, .paas-calculator .inputs-container.floating.pinned {
+    box-shadow: initial;
+    background: transparent;
+  }
+  .paas-calculator .inputs-container.pinned ul.inputs, .paas-calculator .inputs-container.floating.pinned ul.inputs {
+    transform: translateX(-90vw);
+  }
 }

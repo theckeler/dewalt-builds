@@ -3,12 +3,15 @@ import paasCal from "../data/paas-cal.json";
 import PMT from "../utils/pmt";
 import Loading from "./loading/Loading";
 import Steps from "./steps/Steps";
+import Password from "./password/Password";
 
 import "../scss/paas-calculator.scss";
 
 const PaasCalculator = () => {
   //#region PRE-CALCULATIONS
   const [loading, setLoading] = useState(true);
+  const [geolocated, setGeolocated] = useState(false);
+
   const averageWeeksPerMonth = Number(
     paasCal.averageWeeksPerMonth / 12
   ).toFixed(4);
@@ -129,45 +132,39 @@ const PaasCalculator = () => {
 
   //#region useEffects
   useEffect(() => {
-    window.navigator.geolocation.getCurrentPosition(
-      (loc) => {
-        const { latitude, longitude } = loc.coords;
-        fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=locality&key=${process.env.REACT_APP_GEOCODING_API_KEY}`
-        )
-          .then((response) => response.json())
-          .then((pos) => {
-            pos.results[0].address_components.forEach((component) => {
-              console.log(pos);
-
-              if (component.short_name === "US") {
-                // console.log(
-                //   "US:",
-                //   pos.results[0].address_components[2].short_name
-                // );
-
-                setCustomerInputs({
-                  ...customerInputs,
-                  location: pos.results[0].address_components[2].short_name,
+    if (!geolocated) {
+      window.navigator.geolocation.getCurrentPosition(
+        (loc) => {
+          const { latitude, longitude } = loc.coords;
+          fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=locality&key=${process.env.REACT_APP_GEOCODING_API_KEY}`
+          )
+            .then((response) => response.json())
+            .then((pos) => {
+              if (pos.results.length > 0) {
+                pos.results[0].address_components.forEach((component) => {
+                  if (component.short_name === "US") {
+                    setCustomerInputs({
+                      ...customerInputs,
+                      location: pos.results[0].address_components[2].short_name,
+                    });
+                  }
                 });
               }
+            })
+            .catch(function (error) {
+              console.error(error);
             });
-
-            // if (pos.results[0].address_components[6].short_name === "US") {
-            //   console.log("US");
-            // } else {
-            //   console.log("not US");
-            // }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
-      () => {
-        //fail
-      }
-    );
-  }, []);
+          //console.log("located");
+          setGeolocated(true);
+        },
+        (error) => {
+          setGeolocated(true);
+          console.error("Unable to retrieve your location", error);
+        }
+      );
+    }
+  });
 
   const [latestFuelWeeklyPrice, setLatestFuelWeeklyPrice] = useState(
     paasCal.latestFuelWeeklyPrice
@@ -629,42 +626,51 @@ const PaasCalculator = () => {
 
   // STEPS COMFIGURATION:
   const [whichStep, setWhichStep] = useState(1);
+  const [password, setPassword] = useState(false);
+  // useEffect(() => {
+  //   console.log("password:", password);
+  //   console.log("process.env.REACT_PASSWORD:", process.env.REACT_APP_PASSWORD);
+  // }, [password]);
 
   return (
     <>
       {loading === true && <Loading {...{ loading }} />}
-      <Steps
-        {...{
-          whichStep,
-          setWhichStep,
-          customerInputs,
-          setDuoarea,
-          setCustomerInputs,
-          pricing,
-          requiredEquipment,
-          totalMonthlyPaaSPowerCost,
-          totalMonthlyPaaSMaintenanceCost,
-          breakeven,
-          reductionFromNGBRResale,
-          gasZTR,
-          cashPurchase,
-          NGBRWithFlexiblePowerProgram,
-          numberOfMaintenanceJobsPerYear,
-          averageTotalTimeForServicing,
-          monthlyPaaSPowerCostNGBR,
-          monthlyFuelCostPerZTR,
-          monthlyMaintenanceCostPerNGBR,
-          monthlyMaintenanceCostPerZTR,
-          enviromentalBenefits,
-          poundsOfCO2Avoided,
-          editThis,
-          setEditThis,
-          latestAvgPowerPrice,
-          setLatestAvgPowerPrice,
-          latestFuelWeeklyPrice,
-          setLatestFuelWeeklyPrice,
-        }}
-      />
+      {password === process.env.REACT_APP_PASSWORD ? (
+        <Steps
+          {...{
+            whichStep,
+            setWhichStep,
+            customerInputs,
+            setDuoarea,
+            setCustomerInputs,
+            pricing,
+            requiredEquipment,
+            totalMonthlyPaaSPowerCost,
+            totalMonthlyPaaSMaintenanceCost,
+            breakeven,
+            reductionFromNGBRResale,
+            gasZTR,
+            cashPurchase,
+            NGBRWithFlexiblePowerProgram,
+            numberOfMaintenanceJobsPerYear,
+            averageTotalTimeForServicing,
+            monthlyPaaSPowerCostNGBR,
+            monthlyFuelCostPerZTR,
+            monthlyMaintenanceCostPerNGBR,
+            monthlyMaintenanceCostPerZTR,
+            enviromentalBenefits,
+            poundsOfCO2Avoided,
+            editThis,
+            setEditThis,
+            latestAvgPowerPrice,
+            setLatestAvgPowerPrice,
+            latestFuelWeeklyPrice,
+            setLatestFuelWeeklyPrice,
+          }}
+        />
+      ) : (
+        <Password {...{ setPassword, password }} />
+      )}
     </>
   );
 };

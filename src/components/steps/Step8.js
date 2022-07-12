@@ -37,10 +37,8 @@ const Step8 = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           setCheckObserve(true);
-          console.log("in view");
         } else {
           setCheckObserve(false);
-          console.log("out of view");
         }
       },
       {
@@ -48,7 +46,6 @@ const Step8 = ({
       }
     );
     if (document.querySelector("#paas-inputs-floating")) {
-      console.log("observing");
       observer.observe(document.querySelector("#paas-inputs-floating"));
     }
   }, [checkObserve]);
@@ -90,6 +87,7 @@ const Step8 = ({
           monthlyMaintenanceCostPerZTR,
           enviromentalBenefits,
           poundsOfCO2Avoided,
+          editThis,
           setEditThis,
         }}
       />

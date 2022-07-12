@@ -27,19 +27,29 @@ const Outputs = ({
   monthlyMaintenanceCostPerZTR,
   enviromentalBenefits,
   poundsOfCO2Avoided,
+  editThis,
   setEditThis,
 }) => {
   return (
     <div
       onClick={() => {
-        setEditThis({
-          state: false,
-          daysMowedPerWeek: false,
-          numberNGBRUnits: false,
-          mowingHours: false,
-          lengthMowingSeason: false,
-          gasZTRPrice: false,
-        });
+        if (
+          editThis.state ||
+          editThis.daysMowedPerWeek ||
+          editThis.numberNGBRUnits ||
+          editThis.mowingHours ||
+          editThis.lengthMowingSeason ||
+          editThis.gasZTRPrice
+        ) {
+          setEditThis({
+            state: false,
+            daysMowedPerWeek: false,
+            numberNGBRUnits: false,
+            mowingHours: false,
+            lengthMowingSeason: false,
+            gasZTRPrice: false,
+          });
+        }
       }}
     >
       <OutputsPricing {...{ pricing, requiredEquipment }} />

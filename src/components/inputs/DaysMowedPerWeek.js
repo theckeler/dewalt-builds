@@ -32,7 +32,7 @@ const DaysMowedPerWeek = ({
     });
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = () => {
     setEditThis({
       state: false,
       gasZTRPrice: false,

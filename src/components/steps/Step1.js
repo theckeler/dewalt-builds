@@ -1,5 +1,3 @@
-//import React, { useState } from "react";
-
 import State from "../inputs/State";
 
 const Step1 = ({

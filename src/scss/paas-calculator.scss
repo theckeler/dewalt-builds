@@ -5,6 +5,13 @@
   //font-size: rem(12px);
   //overflow: hidden;
 
+  input[type="password"] {
+    background: #fff;
+    color: #000 !important;
+    padding: em(20);
+    font-size: rem(20);
+  }
+
   *:focus {
     outline: none;
   }
@@ -176,6 +183,10 @@
       svg {
         width: 100%;
         height: auto;
+      }
+
+      span {
+        display: none;
       }
     }
   }
@@ -908,102 +919,11 @@
 
         .output-enviromental-icon {
           position: relative;
-          min-height: em(400);
+          min-height: em(200);
 
           svg {
-            position: absolute;
-            bottom: 0;
-
-            &#mountain {
-              left: 0;
-              z-index: 0;
-              width: 100%;
-              max-height: 100%;
-              opacity: 0.6;
-            }
-
-            &:not(#mountain) {
-              left: 50%;
-              max-height: 80%;
-              min-height: 60%;
-              max-width: em(200);
-              transform: translateX(-50%);
-              z-index: 1;
-            }
-
-            #tree-1,
-            #tree-2 {
-              display: none;
-            }
-
-            &.show-1 {
-              #tree-1 {
-                display: block;
-              }
-            }
-
-            &.show-2 {
-              #tree-2 {
-                display: block;
-              }
-            }
-
-            &.color-1 {
-              * {
-                fill: #333;
-              }
-            }
-            &.color-2 {
-              * {
-                fill: #7b7b7b;
-              }
-            }
-            &.color-3 {
-              * {
-                fill: #3b3b3b;
-              }
-            }
-            &.color-4 {
-              * {
-                fill: #343434;
-              }
-            }
-            &.color-5 {
-              * {
-                fill: #757575;
-              }
-            }
-            &.color-6 {
-              * {
-                fill: #686868;
-              }
-            }
-            &.color-7 {
-              * {
-                fill: #fdbd16;
-              }
-            }
-            &.color-8 {
-              * {
-                fill: #4b4b4b;
-              }
-            }
-            &.color-9 {
-              * {
-                fill: #656565;
-              }
-            }
-            &.color-10 {
-              * {
-                fill: #fdbd16;
-              }
-            }
+            height: 100%;
           }
-
-          // display: flex;
-          // justify-content: center;
-          // align-items: center;
-          // height: 100%;
         }
 
         .output-enviromental-output {
@@ -1031,4 +951,60 @@
 }
 
 @media only screen and (min-width: 1600px) {
+}
+
+@media only screen and (max-width: 1023px) {
+  .coh-container-boxed {
+    max-width: 100%;
+  }
+
+  .paas-calculator {
+    ul {
+      li .input-container {
+        padding: em(10);
+      }
+    }
+
+    .inputs-container {
+      // transform: translateX(0);
+
+      &.floating {
+        transition: all 0.3s ease-in-out;
+        backdrop-filter: initial;
+        pointer-events: none;
+
+        .input-container label {
+          flex-direction: column;
+
+          svg {
+            // display: none;
+          }
+
+          span {
+            // display: block;
+          }
+        }
+
+        button.icon {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      &.pinned,
+      &.floating.pinned {
+        box-shadow: initial;
+        background: transparent;
+
+        ul.inputs {
+          transform: translateX(-90vw);
+        }
+      }
+
+      ul.inputs {
+      }
+    }
+  }
 }

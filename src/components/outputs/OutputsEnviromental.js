@@ -1,32 +1,23 @@
+//import React, { useState, useEffect } from "react";
+
 import { ReactComponent as IconTrees } from "../../images/trees.svg";
 import { ReactComponent as IconCar } from "../../images/icon-car.svg";
 import { ReactComponent as IconCo2 } from "../../images/icon-co2.svg";
-import { ReactComponent as Mountain } from "../../images/mountain.svg";
+//import { ReactComponent as Mountain } from "../../images/mountain.svg";
 
-const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
-  const treeNum = (
-    poundsOfCO2Avoided /
-    enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
-    100
-  ).toFixed(0);
-  let treeIcons = [];
-  for (let i = 0; i < treeNum; i++) {
-    treeIcons.push(
-      <IconTrees
-        style={{
-          left: Math.floor(Math.random() * 100) + 1 + "%",
-          //  bottom: Math.floor(Math.random() * 10) + "px",
-          height: Math.floor(Math.random() * 100) + 1 + "%",
-          // opacity: Math.floor(Math.random() * 100) / 100,
-          //fill: "#" + Math.floor(Math.random() * 16777215).toString(16),
-        }}
-        className={`show-${Math.floor(Math.random() * 2) + 1} color-${
-          Math.floor(Math.random() * 10) + 1
-        }`}
-        key={i}
-      />
-    );
-  }
+const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
+  // const [treeNum, setTreeNum] = useState(
+  //   (
+  //     poundsOfCO2Avoided /
+  //     enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
+  //     10
+  //   ).toFixed(0)
+  // );
+  // // const treeNum = (
+  // //   poundsOfCO2Avoided /
+  // //   enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
+  // //   100
+  // // ).toFixed(0);
 
   return (
     <div
@@ -78,12 +69,29 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                           aliquam, faucibus lacus et, viverra odio.
                         </p>
 
-                        {/* <ul className="outputs grid three output-enviromental-grid"> */}
-                        <ul className="outputs output-enviromental-grid">
+                        <ul className="outputs grid three output-enviromental-grid">
+                          {/* <ul className="outputs output-enviromental-grid"> */}
                           <li className="svg-icon">
                             <div className="output-enviromental-icon">
-                              {treeIcons}
-                              <Mountain />
+                              {/* {treeNum &&
+                                Array.apply(null, { length: treeNum }).map(
+                                  function (object, i) {
+                                    return (
+                                      <IconTrees
+                                        key={i}
+                                        style={{
+                                          left: (i * 100) / treeNum + "%",
+                                        }}
+                                        className={`show-${
+                                          Math.floor(Math.random() * 2) + 1
+                                        } color-${
+                                          Math.floor(Math.random() * 10) + 1
+                                        }`}
+                                      />
+                                    );
+                                  }
+                                )} */}
+                                <IconTrees className="show-1" />
                             </div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
@@ -134,4 +142,4 @@ const OutputsTCO = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
   );
 };
 
-export default OutputsTCO;
+export default OutputsEnviro;
