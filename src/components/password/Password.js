@@ -1,7 +1,7 @@
 const Password = ({ setPassword, password }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("handleSubmit:", e.target.children[0].value);
+    console.log("handleSubmit");
     setPassword(e.target.children[0].value);
   };
 
