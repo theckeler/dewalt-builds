@@ -150,6 +150,8 @@ const PaasCalculator = () => {
                     });
                   }
                 });
+              } else {
+                console.error("Error fetching data");
               }
             })
             .catch(function (error) {
@@ -625,7 +627,7 @@ const PaasCalculator = () => {
   //#endregion
 
   // STEPS COMFIGURATION:
-  const [whichStep, setWhichStep] = useState(1);
+  const [whichStep, setWhichStep] = useState(8);
   const [password, setPassword] = useState(false);
   // useEffect(() => {
   //   console.log("password:", password);
@@ -635,7 +637,8 @@ const PaasCalculator = () => {
   return (
     <>
       {loading === true && <Loading {...{ loading }} />}
-      {password === process.env.REACT_APP_PASSWORD ? (
+      {password === process.env.REACT_APP_PASSWORD ||
+      document.location.hostname === "localhost" ? (
         <Steps
           {...{
             whichStep,

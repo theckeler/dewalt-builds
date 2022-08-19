@@ -31,7 +31,7 @@ const OutputsVersus = ({
                 data-coh-row-match-heights='{"xl":{"target":"none"}}'
               >
                 <div className="coh-row-inner coh-ce-cpt_feature_block-528ef8c4">
-                  <div className="coh-column coh-visible-sm coh-col-sm-12 coh-visible-xl coh-col-xl-3">
+                  <div className="coh-column coh-visible-sm coh-col-sm-12 coh-visible-xl coh-col-xl-3 hide-mobile">
                     <div className="coh-container media-main-container">
                       <div className="coh-container ssa-component coh-component media-container bynder-media-container">
                         <img

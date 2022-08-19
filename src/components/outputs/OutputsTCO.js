@@ -101,7 +101,7 @@ const OutputsTCO = ({ gasZTR, cashPurchase, NGBRWithFlexiblePowerProgram }) => {
                           </li>
                         </ul>
                       </div>
-                      <div className="coh-container media-main-container">
+                      <div className="coh-container media-main-container hide-mobile">
                         <div
                           className="coh-container ssa-component coh-component media-container bynder-media-container"
                           style={{ zIndex: 0 }}

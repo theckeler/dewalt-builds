@@ -1,6 +1,6 @@
 const OutputsCTA = ({ cta }) => {
   return (
-    <section className="output-cta coh-container ssa-component coh-component split-background coh-style-feature-block coh-style-margin-bottom-none">
+    <section className="output-cta coh-container ssa-component coh-component split-background coh-style-feature-block coh-style-margin-bottom-none hide-mobile">
       <div
         className="coh-container section coh-style-section"
         //data-gs-background-color="dark-grey"

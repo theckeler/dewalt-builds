@@ -91,7 +91,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                                     );
                                   }
                                 )} */}
-                                <IconTrees className="show-1" />
+                              <IconTrees className="show-1" />
                             </div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
