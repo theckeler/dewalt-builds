@@ -629,10 +629,6 @@ const PaasCalculator = () => {
   // STEPS COMFIGURATION:
   const [whichStep, setWhichStep] = useState(8);
   const [password, setPassword] = useState(false);
-  // useEffect(() => {
-  //   console.log("password:", password);
-  //   console.log("process.env.REACT_APP_PASSWORD:", process.env.REACT_APP_PASSWORD);
-  // }, [password]);
 
   return (
     <>

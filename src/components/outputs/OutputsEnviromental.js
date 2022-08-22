@@ -1,24 +1,4 @@
-//import React, { useState, useEffect } from "react";
-
-// import { ReactComponent as IconTrees } from "../../images/trees.svg";
-// import { ReactComponent as IconCar } from "../../images/icon-car.svg";
-// import { ReactComponent as IconCo2 } from "../../images/icon-co2.svg";
-//import { ReactComponent as Mountain } from "../../images/mountain.svg";
-
 const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
-  // const [treeNum, setTreeNum] = useState(
-  //   (
-  //     poundsOfCO2Avoided /
-  //     enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
-  //     10
-  //   ).toFixed(0)
-  // );
-  // // const treeNum = (
-  // //   poundsOfCO2Avoided /
-  // //   enviromentalBenefits.poundsCO2SequesteredPerUrbanTreePlanted /
-  // //   100
-  // // ).toFixed(0);
-
   return (
     <div
       className="output-enviromental coh-container ssa-component coh-component bg-container coh-style-margin-bottom-none coh-style-page-header"
@@ -70,29 +50,8 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                         </p>
 
                         <ul className="outputs grid three output-enviromental-grid">
-                          {/* <ul className="outputs output-enviromental-grid"> */}
                           <li className="svg-icon">
-                            <div className="output-enviromental-icon">
-                              {/* {treeNum &&
-                                Array.apply(null, { length: treeNum }).map(
-                                  function (object, i) {
-                                    return (
-                                      <IconTrees
-                                        key={i}
-                                        style={{
-                                          left: (i * 100) / treeNum + "%",
-                                        }}
-                                        className={`show-${
-                                          Math.floor(Math.random() * 2) + 1
-                                        } color-${
-                                          Math.floor(Math.random() * 10) + 1
-                                        }`}
-                                      />
-                                    );
-                                  }
-                                )} */}
-                              {/* <IconTrees className="show-1" /> */}
-                            </div>
+                            <div className="output-enviromental-icon"></div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
                                 {(
@@ -104,9 +63,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                             </div>
                           </li>
                           <li className="svg-icon">
-                            <div className="output-enviromental-icon">
-                              {/* <IconCar /> */}
-                            </div>
+                            <div className="output-enviromental-icon"></div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
                                 {(
@@ -118,9 +75,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                             </div>
                           </li>
                           <li className="svg-icon">
-                            <div className="output-enviromental-icon">
-                              {/* <IconCo2 /> */}
-                            </div>
+                            <div className="output-enviromental-icon"></div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
                                 {poundsOfCO2Avoided.toFixed(2)}

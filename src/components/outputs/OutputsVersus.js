@@ -17,7 +17,6 @@ const OutputsVersus = ({
       <div className="coh-container ssa-component coh-component">
         <div
           className="coh-container section coh-style-section"
-          //data-gs-background-color="dark-grey"
           data-gs-spacing="none"
           data-gs-min-height=""
           data-gs-overlay=""

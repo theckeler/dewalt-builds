@@ -27,17 +27,7 @@ const Step7 = ({ whichStep, setWhichStep }) => {
               data-drupal-settingstray="editable"
             >
               <div>
-                <form
-                  className="webform-submission-form webform-submission-add-form webform-submission-subscribe-newsletter-form webform-submission-subscribe-newsletter-add-form js-webform-details-toggle webform-details-toggle"
-                  // noValidate="novalidate"
-                  // data-drupal-selector="webform-submission-subscribe-newsletter-block-content-41-add-form"
-                  // action="/"
-                  // method="post"
-                  // id="webform-submission-subscribe-newsletter-block-content-41-add-form"
-                  // acceptCharset="UTF-8"
-                  // data-once="form-updated"
-                  // data-drupal-form-fields="edit-givenname,edit-familyname,edit-email,edit-country-us,edit-country-ca,edit-actions-submit"
-                >
+                <form className="webform-submission-form webform-submission-add-form webform-submission-subscribe-newsletter-form webform-submission-subscribe-newsletter-add-form js-webform-details-toggle webform-details-toggle">
                   <div className="webform-required">
                     <span className="form-required"></span>All fields are
                     required unless otherwise noted.

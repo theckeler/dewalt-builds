@@ -3,7 +3,6 @@ const OutputsCTA = ({ cta }) => {
     <section className="output-cta coh-container ssa-component coh-component split-background coh-style-feature-block coh-style-margin-bottom-none hide-mobile">
       <div
         className="coh-container section coh-style-section"
-        //data-gs-background-color="dark-grey"
         data-gs-spacing="none"
         data-gs-min-height=""
         data-gs-overlay=""

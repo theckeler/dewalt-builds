@@ -1,4 +1,3 @@
-//import dollarUSLocaleNoDigits from "../../utils/dollarUSLocaleNoDigits";
 import dollarUSLocale from "../../utils/dollarUSLocale";
 
 const OutputsTCO = ({ gasZTR, cashPurchase, NGBRWithFlexiblePowerProgram }) => {

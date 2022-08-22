@@ -846,6 +846,8 @@ body.active {
        -moz-user-select: none;
             user-select: none;
     box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.8);
+    border-top-left-radius: 0.1875em;
+    border-bottom-left-radius: 0.1875em;
   }
   .paas-calculator .inputs-container.floating .inputs {
     width: 50%;
@@ -875,6 +877,11 @@ body.active {
   }
   .paas-calculator .menu-back.active {
     width: 100vw;
+  }
+  .paas-calculator button.icon {
+    max-width: 2.75em;
+    min-width: 2.75em;
+    height: 2.75em;
   }
   .paas-calculator .hide-mobile {
     display: none;

@@ -1,6 +1,5 @@
 import statesJSON from "../../data/states.json";
 import ButtonEdit from "../elements/ButtonEdit";
-//import RangeTicks from "../elements/RangeTicks";
 
 const State = ({
   setDuoarea,
@@ -95,29 +94,10 @@ const State = ({
                 onChange={(e) => {
                   setLatestAvgPowerPrice(e.target.value);
                 }}
-                // onMouseUp={(e) => {
-                //   setEditThis({
-                //     state: false,
-                //     daysMowedPerWeek: false,
-                //     numberNGBRUnits: false,
-                //     mowingHours: false,
-                //     lengthMowingSeason: false,
-                //     gasZTRPrice: false,
-                //   });
-                // }}
                 name="latestAvgPowerPrice"
                 id="latestAvgPowerPrice"
                 list="latestAvgPowerPrice-ticks"
               />
-              {/* <RangeTicks
-                // handleClick={handleClick}
-                sliderID="latestAvgPowerPrice"
-                startTick={0}
-                endTick={3}
-                currentTick={latestAvgPowerPrice}
-                skipTicks={false}
-              /> */}
-              {/* <output>${Number(latestAvgPowerPrice).toFixed(2)} per KWh</output> */}
 
               <label
                 style={{
@@ -138,31 +118,10 @@ const State = ({
                 onChange={(e) => {
                   setLatestFuelWeeklyPrice(e.target.value);
                 }}
-                // onMouseUp={(e) => {
-                //   setEditThis({
-                //     state: false,
-                //     daysMowedPerWeek: false,
-                //     numberNGBRUnits: false,
-                //     mowingHours: false,
-                //     lengthMowingSeason: false,
-                //     gasZTRPrice: false,
-                //   });
-                // }}
                 name="latestFuelWeeklyPrice"
                 id="latestFuelWeeklyPrice"
                 list="latestFuelWeeklyPrice-ticks"
               />
-              {/* <RangeTicks
-                // handleClick={handleClick}
-                sliderID="latestFuelWeeklyPrice"
-                startTick={4}
-                endTick={10}
-                currentTick={latestFuelWeeklyPrice}
-                skipTicks={false}
-              /> */}
-              {/* <output>
-                ${Number(latestFuelWeeklyPrice).toFixed(2)} per GAL
-              </output> */}
             </div>
           </div>
         </span>
