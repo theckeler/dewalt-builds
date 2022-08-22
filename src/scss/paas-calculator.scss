@@ -1,5 +1,11 @@
 @import "./functions.scss";
 
+body {
+  &.active {
+    overflow: hidden;
+  }
+}
+
 .paas-calculator {
   position: relative;
   //font-size: rem(12px);
@@ -358,6 +364,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(em(3));
 
     svg {
       max-width: em(240px);
@@ -914,7 +921,8 @@
 
     .output-enviromental-grid {
       width: 100%;
-      gap: em(30);
+      gap: em(20);
+      align-items: start;
 
       li {
         display: flex;
@@ -922,7 +930,7 @@
 
         .output-enviromental-icon {
           position: relative;
-          min-height: em(200);
+          // min-height: em(200);
 
           svg {
             width: 100%;
@@ -931,7 +939,7 @@
 
         .output-enviromental-output {
           margin-top: auto;
-          padding-top: em(40);
+          //  padding-top: em(40);
         }
       }
     }
@@ -1097,9 +1105,18 @@
       background-color: transparent;
       display: flex;
       transform: translateX(100%);
+      z-index: 101;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 
       &.active {
         transform: translateX(0);
+        box-shadow: 0 0 em(10) rgba(0, 0, 0, 0.75);
+
+        .menu-button {
+          svg {
+            transform: rotate(180deg);
+          }
+        }
       }
 
       .menu-button {
@@ -1132,8 +1149,25 @@
       }
     }
 
+    .menu-back {
+      position: fixed;
+      z-index: 100;
+      width: 0;
+      height: 100vh;
+      background: rgba(#febd17, 0.4);
+      backdrop-filter: blur(em(3));
+
+      &.active {
+        width: 100vw;
+      }
+    }
+
     .hide-mobile {
       display: none;
+    }
+
+    .hide-desktop {
+      display: block;
     }
   }
 }

@@ -1,4 +1,4 @@
-const CustomerOutputs = ({}) => {
+const CustomerOutputs = () => {
   return (
     <form
       id="output"

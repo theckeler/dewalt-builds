@@ -1,3 +1,7 @@
+body.active {
+  overflow: hidden;
+}
+
 .paas-calculator {
   position: relative;
 }
@@ -290,6 +294,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-backdrop-filter: blur(0.1875em);
+          backdrop-filter: blur(0.1875em);
 }
 .paas-calculator .loading svg {
   max-width: 15em;
@@ -703,7 +709,8 @@
 }
 .paas-calculator .output-enviromental .output-enviromental-grid {
   width: 100%;
-  gap: 1.875em;
+  gap: 1.25em;
+  align-items: start;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li {
   display: flex;
@@ -711,14 +718,12 @@
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon {
   position: relative;
-  min-height: 12.5em;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-icon svg {
   width: 100%;
 }
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-output {
   margin-top: auto;
-  padding-top: 2.5em;
 }
 .paas-calculator .hide-desktop {
   display: none;
@@ -821,9 +826,15 @@
     background-color: transparent;
     display: flex;
     transform: translateX(100%);
+    z-index: 101;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
   .paas-calculator .inputs-container.floating.active {
     transform: translateX(0);
+    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.75);
+  }
+  .paas-calculator .inputs-container.floating.active .menu-button svg {
+    transform: rotate(180deg);
   }
   .paas-calculator .inputs-container.floating .menu-button {
     position: absolute;
@@ -853,7 +864,22 @@
     left: 0;
     transform: initial;
   }
+  .paas-calculator .menu-back {
+    position: fixed;
+    z-index: 100;
+    width: 0;
+    height: 100vh;
+    background: rgba(254, 189, 23, 0.4);
+    -webkit-backdrop-filter: blur(0.1875em);
+            backdrop-filter: blur(0.1875em);
+  }
+  .paas-calculator .menu-back.active {
+    width: 100vw;
+  }
   .paas-calculator .hide-mobile {
     display: none;
+  }
+  .paas-calculator .hide-desktop {
+    display: block;
   }
 }

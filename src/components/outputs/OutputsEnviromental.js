@@ -1,8 +1,8 @@
 //import React, { useState, useEffect } from "react";
 
-import { ReactComponent as IconTrees } from "../../images/trees.svg";
-import { ReactComponent as IconCar } from "../../images/icon-car.svg";
-import { ReactComponent as IconCo2 } from "../../images/icon-co2.svg";
+// import { ReactComponent as IconTrees } from "../../images/trees.svg";
+// import { ReactComponent as IconCar } from "../../images/icon-car.svg";
+// import { ReactComponent as IconCo2 } from "../../images/icon-co2.svg";
 //import { ReactComponent as Mountain } from "../../images/mountain.svg";
 
 const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
@@ -91,7 +91,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                                     );
                                   }
                                 )} */}
-                              <IconTrees className="show-1" />
+                              {/* <IconTrees className="show-1" /> */}
                             </div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
@@ -105,7 +105,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                           </li>
                           <li className="svg-icon">
                             <div className="output-enviromental-icon">
-                              <IconCar />
+                              {/* <IconCar /> */}
                             </div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
@@ -119,7 +119,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                           </li>
                           <li className="svg-icon">
                             <div className="output-enviromental-icon">
-                              <IconCo2 />
+                              {/* <IconCo2 /> */}
                             </div>
                             <div className="output-enviromental-output">
                               <h2 className="coh-heading subtitle coh-style-h2---display">
