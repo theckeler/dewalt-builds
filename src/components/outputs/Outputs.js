@@ -75,7 +75,7 @@ const Outputs = ({
       <OutputsTCO {...{ gasZTR, cashPurchase, NGBRWithFlexiblePowerProgram }} />
       <OutputsCTA />
       <OutputsBreakeven {...{ breakeven, reductionFromNGBRResale }} />
-      <OutputsEnviromental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />)
+      <OutputsEnviromental {...{ enviromentalBenefits, poundsOfCO2Avoided }} />
     </div>
   );
 };

@@ -889,4 +889,31 @@ body.active {
   .paas-calculator .hide-desktop {
     display: block;
   }
+  .paas-calculator .inputs-container .hide-desktop {
+    display: none;
+  }
+  .paas-calculator .inputs-container.floating .hide-desktop {
+    display: block;
+  }
+}
+@media only screen and (max-width: 767px) {
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .paas-calculator .coh-row-xl > .coh-row-inner,
+.paas-calculator .coh-row-inner {
+    flex-direction: column;
+  }
+  .paas-calculator .output-pricing .output-pricing-inner {
+    padding: 0.625em;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .paas-calculator .coh-container-boxed {
+    margin: 0;
+  }
 }
