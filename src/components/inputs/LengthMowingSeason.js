@@ -9,6 +9,7 @@ const LengthMowingSeason = ({
   setWhichStep,
   editThis,
   setEditThis,
+  onStepClick,
 }) => {
   const handleChange = (e) => {
     setCustomerInputs({
@@ -89,7 +90,14 @@ const LengthMowingSeason = ({
           </span>
           {whichStep !== 8 && (
             <>
-              <button onClick={(e) => setWhichStep(6)} className="go-button">
+              <button
+                onClick={(e) => {
+                  setWhichStep(6);
+                  onStepClick(6);
+                }}
+                id="go-button-6"
+                className="go-button"
+              >
                 GO TO STEP 6
               </button>
               <span className="circle">6</span>

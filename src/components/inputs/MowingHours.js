@@ -8,6 +8,7 @@ const MowingHours = ({
   setWhichStep,
   editThis,
   setEditThis,
+  onStepClick,
 }) => {
   const handleChange = (e) => {
     setCustomerInputs({
@@ -125,7 +126,14 @@ const MowingHours = ({
           </span>
           {whichStep !== 8 && (
             <>
-              <button onClick={(e) => setWhichStep(5)} className="go-button">
+              <button
+                onClick={(e) => {
+                  setWhichStep(5);
+                  onStepClick(5);
+                }}
+                id="go-button-5"
+                className="go-button"
+              >
                 GO TO STEP 5
               </button>
               <span className="circle">5</span>

@@ -937,7 +937,7 @@ body {
         .input {
           select {
             min-width: initial;
-            max-width: 100%;
+            max-width: 90%;
           }
         }
       }
@@ -1025,6 +1025,10 @@ body {
         padding-left: 0;
         padding-right: 0;
       }
+    }
+
+    .text-main-container {
+      padding: em(20);
     }
 
     .coh-style-feature-block
@@ -1152,6 +1156,10 @@ body {
         }
       }
     }
+
+    .coh-style-branded-button {
+      min-width: initial;
+    }
   }
 }
 
@@ -1172,6 +1180,46 @@ body {
   }
 
   .paas-calculator {
+    ul {
+      width: 100%;
+
+      li {
+        input,
+        select {
+          width: 90%;
+          max-width: initial;
+          min-width: initial;
+        }
+
+        .input {
+          width: 100%;
+        }
+      }
+    }
+
+    .inputs-container.floating,
+    .inputs-container.floating .inputs {
+      width: 100%;
+      max-width: 100vw;
+      flex-direction: column;
+
+      &.active {
+        .menu-button {
+          position: relative;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+
+    .state-refine-container {
+      width: 100%;
+
+      .state-refine {
+        align-items: center;
+      }
+    }
+
     .coh-row-xl > .coh-row-inner,
     .coh-row-inner {
       flex-direction: column;
@@ -1185,6 +1233,55 @@ body {
 
     .coh-container-boxed {
       margin: 0;
+    }
+
+    .inputs-container.static {
+      ul.inputs {
+        overflow-x: scroll;
+        padding-bottom: em(20);
+
+        &::-webkit-scrollbar {
+          height: em(3);
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #333;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #fdbd16;
+        }
+
+        li.column {
+          min-width: em(160);
+        }
+      }
+    }
+
+    .grid.three.output-enviromental-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .output-versus .output-versus-inner .r1,
+    .output-versus .output-versus-inner .r2,
+    .output-versus .output-versus-inner .r3 {
+      padding: em(10);
+      font-size: rem(13);
+
+      &.first {
+        font-size: rem(15);
+      }
+    }
+
+    .output-versus .output-versus-inner .r2.first {
+      padding-right: em(30);
+    }
+
+    .output-versus .output-versus-inner .r3.first {
+      padding-left: em(30);
+    }
+
+    .inputs-container.floating {
     }
   }
 }

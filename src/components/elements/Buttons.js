@@ -1,6 +1,6 @@
 import Button from "../elements/Button";
 
-const Buttons = ({ whichStep, setWhichStep }) => {
+const Buttons = ({ whichStep, setWhichStep, onStepClick }) => {
   return (
     <ul className="buttons">
       <li>
@@ -11,6 +11,7 @@ const Buttons = ({ whichStep, setWhichStep }) => {
               buttonText: "‹ Previous",
               whichStep: whichStep - 1,
               addClass: "coh-style-branded-button left",
+              onStepClick,
             }}
           />
         )}
@@ -22,6 +23,7 @@ const Buttons = ({ whichStep, setWhichStep }) => {
             buttonText: "Skip to results »",
             whichStep: 8,
             addClass: "center",
+            onStepClick,
           }}
         />
       </li>
@@ -33,6 +35,7 @@ const Buttons = ({ whichStep, setWhichStep }) => {
               buttonText: "Next ›",
               whichStep: whichStep + 1,
               addClass: "coh-style-branded-button  right",
+              onStepClick,
             }}
           />
         )}

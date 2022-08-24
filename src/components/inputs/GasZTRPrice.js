@@ -10,6 +10,7 @@ const GasZTRPrice = ({
   setWhichStep,
   editThis,
   setEditThis,
+  onStepClick,
 }) => {
   const handleChange = (e) => {
     setCustomerInputs({
@@ -88,7 +89,14 @@ const GasZTRPrice = ({
           </span>
           {whichStep !== 8 && (
             <>
-              <button onClick={(e) => setWhichStep(2)} className="go-button">
+              <button
+                onClick={(e) => {
+                  setWhichStep(2);
+                  onStepClick(2);
+                }}
+                className="go-button"
+                id="go-button-2"
+              >
                 GO TO STEP 2
               </button>
               <span className="circle">2</span>

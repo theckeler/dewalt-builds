@@ -41,6 +41,24 @@ const Steps = ({
   latestFuelWeeklyPrice,
   setLatestFuelWeeklyPrice,
 }) => {
+  const onStepClick = (step) => {
+    if (step < 7) {
+      document.querySelector("#go-button-" + step).scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+
+    //
+    // e.target.scrollIntoView({
+    //   behavior: "smooth",
+    //   block: "nearest",
+    //   inline: "center",
+    // });
+    //
+  };
+
   return (
     <>
       {(() => {
@@ -173,7 +191,7 @@ const Steps = ({
           >
             <div className="section-inner">
               <div className="step coh-container-boxed">
-                <Buttons {...{ whichStep, setWhichStep }} />
+                <Buttons {...{ whichStep, setWhichStep, onStepClick }} />
                 <Inputs
                   {...{
                     setDuoarea,
@@ -187,6 +205,7 @@ const Steps = ({
                     setLatestAvgPowerPrice,
                     latestFuelWeeklyPrice,
                     setLatestFuelWeeklyPrice,
+                    onStepClick,
                   }}
                 />
               </div>

@@ -735,7 +735,7 @@ body.active {
   }
   .paas-calculator ul li.center .input select {
     min-width: initial;
-    max-width: 100%;
+    max-width: 90%;
   }
   .paas-calculator ul li.column {
     padding: 0.25em;
@@ -796,6 +796,9 @@ body.active {
     max-width: 100%;
     padding-left: 0;
     padding-right: 0;
+  }
+  .paas-calculator .text-main-container {
+    padding: 1.25em;
   }
   .paas-calculator .coh-style-feature-block .text-main-container[data-margin-padding][data-margin-padding=md] {
     margin-top: 0;
@@ -895,6 +898,9 @@ body.active {
   .paas-calculator .inputs-container.floating .hide-desktop {
     display: block;
   }
+  .paas-calculator .coh-style-branded-button {
+    min-width: initial;
+  }
 }
 @media only screen and (max-width: 767px) {
   body::-webkit-scrollbar {
@@ -903,6 +909,36 @@ body.active {
   body {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  .paas-calculator ul {
+    width: 100%;
+  }
+  .paas-calculator ul li input,
+.paas-calculator ul li select {
+    width: 90%;
+    max-width: initial;
+    min-width: initial;
+  }
+  .paas-calculator ul li .input {
+    width: 100%;
+  }
+  .paas-calculator .inputs-container.floating,
+.paas-calculator .inputs-container.floating .inputs {
+    width: 100%;
+    max-width: 100vw;
+    flex-direction: column;
+  }
+  .paas-calculator .inputs-container.floating.active .menu-button,
+.paas-calculator .inputs-container.floating .inputs.active .menu-button {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+  .paas-calculator .state-refine-container {
+    width: 100%;
+  }
+  .paas-calculator .state-refine-container .state-refine {
+    align-items: center;
   }
   .paas-calculator .coh-row-xl > .coh-row-inner,
 .paas-calculator .coh-row-inner {
@@ -915,5 +951,41 @@ body.active {
   }
   .paas-calculator .coh-container-boxed {
     margin: 0;
+  }
+  .paas-calculator .inputs-container.static ul.inputs {
+    overflow-x: scroll;
+    padding-bottom: 1.25em;
+  }
+  .paas-calculator .inputs-container.static ul.inputs::-webkit-scrollbar {
+    height: 0.1875em;
+  }
+  .paas-calculator .inputs-container.static ul.inputs::-webkit-scrollbar-track {
+    background: #333;
+  }
+  .paas-calculator .inputs-container.static ul.inputs::-webkit-scrollbar-thumb {
+    background-color: #fdbd16;
+  }
+  .paas-calculator .inputs-container.static ul.inputs li.column {
+    min-width: 10em;
+  }
+  .paas-calculator .grid.three.output-enviromental-grid {
+    grid-template-columns: 1fr;
+  }
+  .paas-calculator .output-versus .output-versus-inner .r1,
+.paas-calculator .output-versus .output-versus-inner .r2,
+.paas-calculator .output-versus .output-versus-inner .r3 {
+    padding: 0.625em;
+    font-size: 0.8125rem;
+  }
+  .paas-calculator .output-versus .output-versus-inner .r1.first,
+.paas-calculator .output-versus .output-versus-inner .r2.first,
+.paas-calculator .output-versus .output-versus-inner .r3.first {
+    font-size: 0.9375rem;
+  }
+  .paas-calculator .output-versus .output-versus-inner .r2.first {
+    padding-right: 1.875em;
+  }
+  .paas-calculator .output-versus .output-versus-inner .r3.first {
+    padding-left: 1.875em;
   }
 }

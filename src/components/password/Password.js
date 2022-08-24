@@ -1,8 +1,10 @@
 const Password = ({ setPassword, password }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit", e.target.children[0].value);
     setPassword(e.target.children[0].value);
+    if (e.target.children[0].value === process.env.REACT_APP_PASSWORD) {
+      document.cookie = "loggedIn=1";
+    }
   };
 
   return (

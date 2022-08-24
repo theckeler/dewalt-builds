@@ -9,6 +9,7 @@ const NumberNGBRUnits = ({
   setWhichStep,
   editThis,
   setEditThis,
+  onStepClick,
 }) => {
   const handleChange = (e) => {
     setCustomerInputs({
@@ -89,7 +90,14 @@ const NumberNGBRUnits = ({
           </span>
           {whichStep !== 8 && (
             <>
-              <button onClick={(e) => setWhichStep(4)} className="go-button">
+              <button
+                onClick={(e) => {
+                  setWhichStep(4);
+                  onStepClick(4);
+                }}
+                id="go-button-4"
+                className="go-button"
+              >
                 GO TO STEP 4
               </button>
               <span className="circle">4</span>

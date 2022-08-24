@@ -9,6 +9,7 @@ const DaysMowedPerWeek = ({
   setWhichStep,
   editThis,
   setEditThis,
+  onStepClick,
 }) => {
   const handleChange = (e) => {
     setCustomerInputs({
@@ -89,7 +90,14 @@ const DaysMowedPerWeek = ({
           </span>
           {whichStep !== 8 && (
             <>
-              <button onClick={(e) => setWhichStep(3)} className="go-button">
+              <button
+                onClick={(e) => {
+                  setWhichStep(3);
+                  onStepClick(3);
+                }}
+                className="go-button"
+                id="go-button-3"
+              >
                 GO TO STEP 3
               </button>
               <span className="circle">3</span>

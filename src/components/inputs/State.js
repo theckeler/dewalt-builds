@@ -14,6 +14,7 @@ const State = ({
   setLatestAvgPowerPrice,
   latestFuelWeeklyPrice,
   setLatestFuelWeeklyPrice,
+  onStepClick,
 }) => {
   let states = JSON.parse(JSON.stringify(statesJSON));
 
@@ -132,7 +133,14 @@ const State = ({
           </span>
           {whichStep !== 8 && (
             <>
-              <button onClick={(e) => setWhichStep(1)} className="go-button">
+              <button
+                onClick={(e) => {
+                  setWhichStep(1);
+                  onStepClick(1);
+                }}
+                id="go-button-1"
+                className="go-button"
+              >
                 GO TO STEP 1
               </button>
               <span className="circle">1</span>

@@ -4,6 +4,7 @@ import PMT from "../utils/pmt";
 import Loading from "./loading/Loading";
 import Steps from "./steps/Steps";
 import Password from "./password/Password";
+import getCookies from "../utils/getCookies";
 
 import "../scss/paas-calculator.scss";
 
@@ -633,8 +634,7 @@ const PaasCalculator = () => {
   return (
     <>
       {loading === true && <Loading {...{ loading }} />}
-      {password === process.env.REACT_APP_PASSWORD ||
-      document.location.hostname === "localhost" ? (
+      {getCookies("loggedIn") ? (
         <Steps
           {...{
             whichStep,

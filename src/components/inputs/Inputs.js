@@ -20,6 +20,7 @@ const Inputs = ({
   latestFuelWeeklyPrice,
   setLatestFuelWeeklyPrice,
   checkObserve,
+  onStepClick,
 }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -48,6 +49,16 @@ const Inputs = ({
         }`}
         id={`paas-inputs-${whichStep === 8 ? "floating" : "static"}`}
       >
+        <button
+          className="menu-button hide-desktop"
+          onClick={(e) => {
+            onClick(e);
+          }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+            <path d="M6 36v-3h26v3Zm33.9-2.6-9.45-9.45 9.4-9.4L42 16.7l-7.25 7.25 7.3 7.3ZM6 25.4v-3h20v3ZM6 15v-3h26v3Z" />
+          </svg>
+        </button>
         <ul className="coh-container-boxed inputs" id="inputs">
           <li className={`column center ${whichStep === 1 ? "active" : ""}`}>
             <div className="input-container">
@@ -65,6 +76,7 @@ const Inputs = ({
                   setLatestAvgPowerPrice,
                   latestFuelWeeklyPrice,
                   setLatestFuelWeeklyPrice,
+                  onStepClick,
                 }}
               />
             </div>
@@ -80,6 +92,7 @@ const Inputs = ({
                   setWhichStep,
                   editThis,
                   setEditThis,
+                  onStepClick,
                 }}
               />
             </div>
@@ -95,6 +108,7 @@ const Inputs = ({
                   setWhichStep,
                   editThis,
                   setEditThis,
+                  onStepClick,
                 }}
               />
             </div>
@@ -110,6 +124,7 @@ const Inputs = ({
                   setWhichStep,
                   editThis,
                   setEditThis,
+                  onStepClick,
                 }}
               />
             </div>
@@ -125,6 +140,7 @@ const Inputs = ({
                   setWhichStep,
                   editThis,
                   setEditThis,
+                  onStepClick,
                 }}
               />
             </div>
@@ -140,21 +156,12 @@ const Inputs = ({
                   setWhichStep,
                   editThis,
                   setEditThis,
+                  onStepClick,
                 }}
               />
             </div>
           </li>
         </ul>
-        <button
-          className="menu-button hide-desktop"
-          onClick={(e) => {
-            onClick(e);
-          }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-            <path d="M6 36v-3h26v3Zm33.9-2.6-9.45-9.45 9.4-9.4L42 16.7l-7.25 7.25 7.3 7.3ZM6 25.4v-3h20v3ZM6 15v-3h26v3Z" />
-          </svg>
-        </button>
       </div>
       <div
         className="menu-back hide-desktop"

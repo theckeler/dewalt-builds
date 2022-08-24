@@ -1,9 +1,16 @@
-const Button = ({ whichStep, setWhichStep, buttonText, addClass }) => {
+const Button = ({
+  whichStep,
+  setWhichStep,
+  buttonText,
+  addClass,
+  onStepClick,
+}) => {
   return (
     <button
       className={`coh-link coh-style-button-action ${addClass}`}
-      onClick={() => {
+      onClick={(e) => {
         setWhichStep(whichStep);
+        onStepClick(whichStep);
       }}
     >
       {buttonText}
