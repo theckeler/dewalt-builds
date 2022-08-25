@@ -20,7 +20,7 @@ const Buttons = ({ whichStep, setWhichStep, onStepClick }) => {
         <Button
           {...{
             setWhichStep,
-            buttonText: "Skip <span>to results</span> »",
+            buttonText: "Skip<span>&nbsp;to Results&nbsp;</span> »",
             whichStep: 8,
             addClass: "center",
             onStepClick,

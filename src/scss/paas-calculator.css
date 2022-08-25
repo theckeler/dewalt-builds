@@ -725,9 +725,6 @@ body.active {
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-output {
   margin-top: auto;
 }
-.paas-calculator .buttons button span {
-  margin: 0.625em;
-}
 .paas-calculator .hide-desktop {
   display: none;
 }
