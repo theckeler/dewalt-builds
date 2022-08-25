@@ -12,9 +12,8 @@ const Button = ({
         setWhichStep(whichStep);
         onStepClick(whichStep);
       }}
-    >
-      {buttonText}
-    </button>
+      dangerouslySetInnerHTML={{ __html: buttonText }}
+    />
   );
 };
 

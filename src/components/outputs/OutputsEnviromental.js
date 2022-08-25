@@ -6,7 +6,7 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
       data-select-theme="light"
       data-force-uppercase="1"
     >
-      <div className="coh-container ssa-component coh-component media-container bynder-media-container">
+      <div className="coh-container ssa-component coh-component media-container bynder-media-container hide-mobile">
         <img
           src="https://bynder.sbdinc.com/m/3db0112e1fc93b45/Drupal_Large-DCM575X2_A3.jpg"
           alt=""
@@ -31,12 +31,12 @@ const OutputsEnviro = ({ enviromentalBenefits, poundsOfCO2Avoided }) => {
                         className="coh-container text-main-container output-enviromental-inner"
                         data-text-align="center"
                       >
-                        <p
+                        <h3
                           className="coh-heading subtitle coh-style-h3---display"
                           style={{ paddingTop: "30px" }}
                         >
                           Environmental Benefits
-                        </p>
+                        </h3>
                         <p>
                           Nullam consequat eros velit, ut imperdiet nibh
                           imperdiet a. Interdum et malesuada fames ac ante ipsum

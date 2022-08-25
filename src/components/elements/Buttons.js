@@ -8,7 +8,7 @@ const Buttons = ({ whichStep, setWhichStep, onStepClick }) => {
           <Button
             {...{
               setWhichStep,
-              buttonText: "‹ Previous",
+              buttonText: "‹ <span>Previous</span>",
               whichStep: whichStep - 1,
               addClass: "coh-style-branded-button left",
               onStepClick,
@@ -20,7 +20,7 @@ const Buttons = ({ whichStep, setWhichStep, onStepClick }) => {
         <Button
           {...{
             setWhichStep,
-            buttonText: "Skip to results »",
+            buttonText: "Skip <span>to results</span> »",
             whichStep: 8,
             addClass: "center",
             onStepClick,
@@ -32,7 +32,7 @@ const Buttons = ({ whichStep, setWhichStep, onStepClick }) => {
           <Button
             {...{
               setWhichStep,
-              buttonText: "Next ›",
+              buttonText: "<span>Next</span> ›",
               whichStep: whichStep + 1,
               addClass: "coh-style-branded-button  right",
               onStepClick,

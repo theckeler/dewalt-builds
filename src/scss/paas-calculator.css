@@ -725,6 +725,9 @@ body.active {
 .paas-calculator .output-enviromental .output-enviromental-grid li .output-enviromental-output {
   margin-top: auto;
 }
+.paas-calculator .buttons button span {
+  margin: 0.625em;
+}
 .paas-calculator .hide-desktop {
   display: none;
 }
@@ -901,6 +904,9 @@ body.active {
   .paas-calculator .coh-style-branded-button {
     min-width: initial;
   }
+  .paas-calculator .output-enviromental {
+    padding: 3.75em 0;
+  }
 }
 @media only screen and (max-width: 767px) {
   body::-webkit-scrollbar {
@@ -915,7 +921,7 @@ body.active {
   }
   .paas-calculator ul li input,
 .paas-calculator ul li select {
-    width: 90%;
+    width: 100%;
     max-width: initial;
     min-width: initial;
   }
@@ -987,5 +993,54 @@ body.active {
   }
   .paas-calculator .output-versus .output-versus-inner .r3.first {
     padding-left: 1.875em;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .paas-calculator .coh-style-section > .section-inner > .coh-container-boxed {
+    margin: 0;
+  }
+  .paas-calculator ul li datalist option {
+    background: transparent;
+    border-radius: 0;
+  }
+  .paas-calculator .steps h2 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  .paas-calculator .steps label {
+    margin-bottom: 0.375em;
+    text-align: center;
+  }
+  .paas-calculator p {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  .paas-calculator .state-refine-container .state-refine {
+    padding: 0;
+  }
+  .paas-calculator .state-refine-container .state-refine label {
+    font-size: 1rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+  .paas-calculator .buttons button span {
+    display: none;
+  }
+  .paas-calculator .buttons.input-buttons {
+    flex-direction: column;
+  }
+  .paas-calculator .buttons.input-buttons li {
+    padding: 0 0 0.625em 0;
+  }
+  .paas-calculator .buttons.input-buttons li,
+.paas-calculator .buttons.input-buttons li button {
+    width: 100%;
+    max-width: 100%;
+  }
+  .paas-calculator .output-maintenance .output-maintenance-inner li {
+    padding: 0.625em;
+  }
+  .paas-calculator .text-main-container {
+    padding: 0;
   }
 }
