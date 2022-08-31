@@ -46,7 +46,7 @@ const DaysMowedPerWeek = ({
 
   return (
     <>
-      <label id="daysMowedPerWeek">
+      <label for="daysMowedPerWeek">
         {inStep ? "How many days do you mow per week?" : "Days Mowed"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
@@ -70,6 +70,7 @@ const DaysMowedPerWeek = ({
               });
             }}
             name="daysMowedPerWeek"
+            id="daysMowedPerWeek"
             list="daysMowedPerWeek-ticks"
           />
           <RangeTicks

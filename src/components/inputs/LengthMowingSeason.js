@@ -46,7 +46,7 @@ const LengthMowingSeason = ({
 
   return (
     <>
-      <label id="lengthMowingSeason">
+      <label for="lengthMowingSeason">
         {inStep ? "How long is your mowing season per year?" : "Season"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
@@ -70,6 +70,7 @@ const LengthMowingSeason = ({
               });
             }}
             name="lengthMowingSeason"
+            id="lengthMowingSeason"
             list="lengthMowingSeason-ticks"
           />
           <RangeTicks

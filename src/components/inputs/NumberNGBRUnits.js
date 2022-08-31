@@ -46,7 +46,7 @@ const NumberNGBRUnits = ({
 
   return (
     <>
-      <label id="numberNGBRUnits">
+      <label for="numberNGBRUnits">
         {inStep ? "How many NGBRs do you plan to operate?" : "Num of NGBR"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
@@ -70,6 +70,7 @@ const NumberNGBRUnits = ({
               });
             }}
             name="numberNGBRUnits"
+            id="numberNGBRUnits"
             list="numberNGBRUnits-ticks"
           />
           <RangeTicks

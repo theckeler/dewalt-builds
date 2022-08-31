@@ -39,7 +39,7 @@ const GasZTRPrice = ({
 
   return (
     <>
-      <label>
+      <label for="gasZTRPrice">
         {inStep
           ? "What's the price of a new, commercial-grade gas ZTR?"
           : "ZTR Price"}

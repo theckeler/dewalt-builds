@@ -30,7 +30,7 @@ const State = ({
   };
   return (
     <>
-      <label id="location">
+      <label for="location">
         {inStep ? "Which state do you operate in?" : "State"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
@@ -82,7 +82,7 @@ const State = ({
 
           <div className="state-refine-container" id="state-refine">
             <div className="state-refine">
-              <label>
+              <label for="latestAvgPowerPrice">
                 Current Electricity Price: $
                 {Number(latestAvgPowerPrice).toFixed(2)} per KWh
               </label>
@@ -101,6 +101,7 @@ const State = ({
               />
 
               <label
+                for="latestFuelWeeklyPrice"
                 style={{
                   paddingTop: "20px",
                   marginTop: "20px",

@@ -40,7 +40,7 @@ const MowingHours = ({
 
   return (
     <>
-      <label id="mowingHours">
+      <label for="mowingHours">
         {inStep ? "How many hours do you mow per day?" : "Mowing Hours"}
         <ButtonEdit {...{ whichStep }} onClick={handleEdit} />
       </label>
