@@ -6,6 +6,14 @@ body {
   }
 }
 
+.ssa-component-instance-*
+  > .coh-container.coh-style-section
+  > .coh-container.section-inner
+  > .coh-container-boxed {
+  //margin: 0 auto;
+  max-width: 100%;
+}
+
 .paas-calculator {
   position: relative;
 
@@ -1368,7 +1376,8 @@ body {
       padding: 0;
     }
 
-    form, p {
+    form,
+    p {
       padding: em(10);
     }
   }

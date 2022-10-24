@@ -1,4 +1,4 @@
-const Password = ({ setPassword, password }) => {
+const Password = ({ setPassword }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setPassword(e.target.children[0].value);

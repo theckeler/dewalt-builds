@@ -3,8 +3,8 @@ import paasCal from "../data/paas-cal.json";
 import PMT from "../utils/pmt";
 import Loading from "./loading/Loading";
 import Steps from "./steps/Steps";
-import Password from "./password/Password";
-import getCookies from "../utils/getCookies";
+//import Password from "./password/Password";
+//import getCookies from "../utils/getCookies";
 
 import "../scss/paas-calculator.scss";
 
@@ -629,47 +629,47 @@ const PaasCalculator = () => {
 
   // STEPS COMFIGURATION:
   const [whichStep, setWhichStep] = useState(1);
-  const [password, setPassword] = useState(false);
+  //const [password, setPassword] = useState(false);
 
   return (
     <>
       {loading === true && <Loading {...{ loading }} />}
-      {getCookies("loggedIn") ? (
-        <Steps
-          {...{
-            whichStep,
-            setWhichStep,
-            customerInputs,
-            setDuoarea,
-            setCustomerInputs,
-            pricing,
-            requiredEquipment,
-            totalMonthlyPaaSPowerCost,
-            totalMonthlyPaaSMaintenanceCost,
-            breakeven,
-            reductionFromNGBRResale,
-            gasZTR,
-            cashPurchase,
-            NGBRWithFlexiblePowerProgram,
-            numberOfMaintenanceJobsPerYear,
-            averageTotalTimeForServicing,
-            monthlyPaaSPowerCostNGBR,
-            monthlyFuelCostPerZTR,
-            monthlyMaintenanceCostPerNGBR,
-            monthlyMaintenanceCostPerZTR,
-            enviromentalBenefits,
-            poundsOfCO2Avoided,
-            editThis,
-            setEditThis,
-            latestAvgPowerPrice,
-            setLatestAvgPowerPrice,
-            latestFuelWeeklyPrice,
-            setLatestFuelWeeklyPrice,
-          }}
-        />
-      ) : (
+      {/* {getCookies("loggedIn") ? ( */}
+      <Steps
+        {...{
+          whichStep,
+          setWhichStep,
+          customerInputs,
+          setDuoarea,
+          setCustomerInputs,
+          pricing,
+          requiredEquipment,
+          totalMonthlyPaaSPowerCost,
+          totalMonthlyPaaSMaintenanceCost,
+          breakeven,
+          reductionFromNGBRResale,
+          gasZTR,
+          cashPurchase,
+          NGBRWithFlexiblePowerProgram,
+          numberOfMaintenanceJobsPerYear,
+          averageTotalTimeForServicing,
+          monthlyPaaSPowerCostNGBR,
+          monthlyFuelCostPerZTR,
+          monthlyMaintenanceCostPerNGBR,
+          monthlyMaintenanceCostPerZTR,
+          enviromentalBenefits,
+          poundsOfCO2Avoided,
+          editThis,
+          setEditThis,
+          latestAvgPowerPrice,
+          setLatestAvgPowerPrice,
+          latestFuelWeeklyPrice,
+          setLatestFuelWeeklyPrice,
+        }}
+      />
+      {/* ) : (
         <Password {...{ setPassword, password }} />
-      )}
+      )} */}
     </>
   );
 };
