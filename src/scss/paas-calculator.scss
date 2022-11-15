@@ -473,8 +473,8 @@ body {
           select,
           .buttons {
             width: 100%;
-            min-width: em(260);
-            //  max-width: 100%;
+            min-width: auto;
+            //max-width: 100%;
           }
 
           .buttons {

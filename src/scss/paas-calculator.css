@@ -395,7 +395,7 @@ body.active {
 .paas-calculator .inputs-container.floating .input-container .input select,
 .paas-calculator .inputs-container.floating .input-container .input .buttons {
   width: 100%;
-  min-width: 16.25em;
+  min-width: auto;
 }
 .paas-calculator .inputs-container.floating .input-container .input .buttons {
   flex-direction: column;
