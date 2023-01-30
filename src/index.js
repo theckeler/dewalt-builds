@@ -1,5 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PaasCalculator from "./components/PaasCalculator";
+import { BrowserRouter as Routers } from "react-router-dom";
+import Index from "./Home/Index";
+import Header from "./templates/Header";
+import Footer from "./templates/Footer";
 
-ReactDOM.render(<PaasCalculator />, document.getElementById("paas-calculator"));
+const App = () => {
+  return (
+    <>
+      <Header />
+      <main className="coh-container">
+        <Routers>
+          <Index />
+        </Routers>
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("app"));

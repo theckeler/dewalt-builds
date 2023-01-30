@@ -1,4 +1,4 @@
-import Button from "../elements/Button";
+import Button from "./Button";
 
 const Buttons = ({ whichStep, setWhichStep, onStepClick }) => {
   return (

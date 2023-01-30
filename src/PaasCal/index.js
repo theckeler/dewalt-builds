@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import paasCal from "../data/paas-cal.json";
-import PMT from "../utils/pmt";
-import Loading from "./loading/Loading";
-import Steps from "./steps/Steps";
+import paasCal from "./data/paas-cal.json";
+import PMT from "./utils/pmt";
+import Loading from "./components/loading/Loading";
+import Steps from "./components/steps/Steps";
 //import Password from "./password/Password";
 //import getCookies from "../utils/getCookies";
 
-import "../scss/paas-calculator.scss";
+import "./scss/paas-calculator.scss";
 
 const PaasCalculator = () => {
   //#region PRE-CALCULATIONS
@@ -632,7 +632,7 @@ const PaasCalculator = () => {
   //const [password, setPassword] = useState(false);
 
   return (
-    <>
+    <div className="paas-calculator">
       {loading === true && <Loading {...{ loading }} />}
       {/* {getCookies("loggedIn") ? ( */}
       <Steps
@@ -670,7 +670,7 @@ const PaasCalculator = () => {
       {/* ) : (
         <Password {...{ setPassword, password }} />
       )} */}
-    </>
+    </div>
   );
 };
 
