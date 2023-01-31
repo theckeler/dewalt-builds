@@ -91,10 +91,10 @@ function Header() {
             <div className="coh-container utility-menu">
               <ul className="menu">
                 <li className="menu-item">
-                  <a href="#top">Find a Retailer</a>
+                  <a href="#top">Donec</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#top">Product Registration</a>
+                  <a href="#top">Suspendisse elementum</a>
                 </li>
               </ul>
             </div>
