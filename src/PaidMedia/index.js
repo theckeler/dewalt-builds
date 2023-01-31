@@ -503,7 +503,7 @@ const PaidMedia = () => {
                     class="coh-style-h4---display text-align-center"
                     style={{ marginBottom: "30px" }}
                   >
-                    Explore Lawn & Garden
+                    The DeWALT Dealer Advantage
                   </h2>
                   <div class="coh-container ssa-component coh-component coh-style-columns">
                     <div class="coh-row coh-row-xl coh-row-visible-xl">
