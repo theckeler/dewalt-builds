@@ -3,17 +3,17 @@ import "./scss/paid-media.scss";
 const PaidMedia = () => {
   const exploreData = [
     {
-      img: "https://www.dewalt.com/NAG/PRODUCT/IMAGES/HIRES/DCCS670X1/DCCS670X1_1.jpg?resize=530x530",
+      img: "https://i.ibb.co/gdrmvkc/chainsaw.png",
       title: "60V Chainsaws",
       copy: "The FLEXVOLT 60V MAX* Chainsaw features tool-free chain tensioning and combination tooled/toolless bar retention knob to enable proper bar clamping force. It also features a high-efficiency brushless motor to help maximize run time and motor life and auto-oiling for continuous lubrication.",
     },
     {
-      img: "https://www.dewalt.com/NAG/PRODUCT/IMAGES/HIRES/DWPW2400/DWPW2400_1.jpg?resize=530x530",
+      img: "https://i.ibb.co/vjDrBfk/washer.png",
       title: "2400 PSI Pressure Washers",
       copy: "You can rely on the durable, mobile, and powerful DEWALT 2400 psi Pressure Washer, delivering enough power to handle your outdoor cleaning tasks. Be prepared to tackle just about any job or wash your vehicle with the accessories you need.",
     },
     {
-      img: "https://www.dewalt.com/NAG/PRODUCT/IMAGES/HIRES/DCED472X1/DCED472X1_1.jpg?resize=530x530",
+      img: "https://i.ibb.co/1zGzXWx/edge.png",
       title: "Edgers",
       copy: "Get the versatility and cutting power needed to finish the job with the DEWALT 60V MAX* Attachment Capable Edger. The high-efficiency brushless motor maximizes runtime and product life while consistently providing the capacity to tackle tough overgrowth edging and withstand heavy-duty use.",
     },
@@ -23,17 +23,17 @@ const PaidMedia = () => {
     {
       img: "https://www.cubcadet.com/on/demandware.static/-/Sites-cubcadet-Library/default/dwd1b761f5/CC_ExtWarranty_Shield_Logo318x180.jpg",
       title: "DeWalt Extended Warranty",
-      copy: "After the manufacturer's warranty expires, the Cub Cadet Extended Warranty adds another 2 years of coverage. Should your product need repair, this plan will help keep you covered.",
+      copy: "After the manufacturer's warranty expires, the DeWalt Extended Warranty adds another 2 years of coverage. Should your product need repair, this plan will help keep you covered.",
     },
     {
       img: "https://bynder.sbdinc.com/m/3e82a3b027e97d63/Drupal_Medium-DW_ToolConnect_A3.jpg",
       title: "Independent Dealer Advantage",
-      copy: "Cub Cadet dealers put heart into everything - from their lineups to relationships with customers like you. Cub Cadet Independent Dealers work hard to exceed all expectations.",
+      copy: "DeWalt dealers put heart into everything - from their lineups to relationships with customers like you. DeWalt Independent Dealers work hard to exceed all expectations.",
     },
     {
       img: "https://bynder.sbdinc.com/m/450a8156102c87fa/webimage-DW_connected-products-callout1_toolconnect_GEC1-jpg.jpg?resize=530x530",
       title: "Genuine Advantage",
-      copy: "Cub Cadet Genuine Parts are specifically designed for an precise fit and optimal performance.",
+      copy: "DeWalt Genuine Parts are specifically designed for an precise fit and optimal performance.",
     },
   ];
 
@@ -72,7 +72,7 @@ const PaidMedia = () => {
         <div class="coh-container ssa-component coh-component ssa-component-instance-84b1769d-fcb6-4795-8ccc-bc379d1819e9 coh-component-instance-84b1769d-fcb6-4795-8ccc-bc379d1819e9 media-container bynder-media-container">
           <picture>
             <img
-              src="https://bynder.sbdinc.com/m/242b2caf7ab1aaf4/Drupal_Large-DW_20V-Power-tools-Only_G1.jpg"
+              src="https://i.ibb.co/0h2qLZD/DEWALT-Family-1-18x12-RGBHR.jpg"
               alt="Threaded Rod Cutter being used by worker on an underground pipe"
               class="coh-image coh-image-responsive-xl coh-lazy-loaded coh-lazy-loading"
               loading="lazy"
@@ -113,6 +113,14 @@ const PaidMedia = () => {
                               </h1>
                               <div class="coh-container">
                                 <div class="coh-wysiwyg">
+                                  <img
+                                    src="https://published-assets.ari-build.com/Content/Published/Site/24960/images/logo__v3.png"
+                                    alt=""
+                                    style={{
+                                      margin: "10px auto 20px auto",
+                                      fontSize: "1.3rem",
+                                    }}
+                                  />
                                   <p
                                     style={{
                                       marginBottom: "4px",
@@ -178,7 +186,7 @@ const PaidMedia = () => {
         class="coh-container ssa-component coh-component ssa-component-instance-a5db2769-2c2e-4f03-aa49-a2b00fb01b0e coh-component-instance-a5db2769-2c2e-4f03-aa49-a2b00fb01b0e split-background coh-style-margin-bottom-none coh-style-grid-container ssa-instance-a5db2769-2c2e-4f03-aa49-a2b00fb01b0e coh-ce-cpt_grid_container-a806e8a9"
         data-gs-background-color="split"
         data-gs-spacing="none"
-        style={{ backgroundColor: "#000" }}
+        style={{ backgroundColor: "#1a1a1a" }}
       >
         <div class="coh-container ssa-component coh-component ssa-component-instance-baf0c89e-a290-4908-9d43-180bf63887c0 coh-component-instance-baf0c89e-a290-4908-9d43-180bf63887c0 section-container-wrapper  coh-ce-cpt_section-a177ea9c">
           <section
@@ -392,7 +400,7 @@ const PaidMedia = () => {
                         <div class="coh-container ssa-component coh-component ssa-component-instance-8db4403e-9935-4bfa-8983-021d9bf46bdb coh-component-instance-8db4403e-9935-4bfa-8983-021d9bf46bdb media-container bynder-media-container">
                           <picture>
                             <img
-                              src="https://bynder.sbdinc.com/m/52350189b746307b/Drupal_Small-DW_ServiceCentersCOVID-EN-thumb_GEC1.jpg"
+                              src="https://i.ibb.co/HpxW6R5/DEWALT-Lifestyle-1.jpg"
                               alt=""
                               class="coh-image coh-image-responsive-xl coh-lazy-loaded"
                               loading="lazy"
@@ -595,7 +603,7 @@ const PaidMedia = () => {
                                 style={{ marginBottom: "20px" }}
                               >
                                 <span class="coh-style-h4---display">
-                                  Exceptional Financing Offers<sup>*</sup>.
+                                  In-Store Dealer Financing<sup>*</sup>.
                                 </span>
                               </h2>
                               <p
@@ -605,11 +613,10 @@ const PaidMedia = () => {
                                   marginBottom: "14px",
                                 }}
                               >
-                                *Cub Cadet financing is available at
-                                participating Cub Cadet Independent Dealers
-                                only. Qualifying product purchases subject to
-                                credit approval. Please see your local dealer
-                                for details.
+                                *DeWalt financing is available at participating
+                                DeWalt Independent Dealers only. Qualifying
+                                product purchases subject to credit approval.
+                                Please see your local dealer for details.
                               </p>
                             </div>
                           </div>
