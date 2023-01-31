@@ -73,62 +73,17 @@ function Header() {
               className="coh-menu-list-container coh-unordered-list"
               role="menu"
             >
-              <li
-                className="coh-menu-list-item level-1-menu-item js-coh-menu-item has-children is-collapsed"
-                role="presentation"
-                data-coh-settings='{"xl":"hidden"}'
-              >
-                <span
-                  data-coh-settings='{ "xl":{"link_interaction":"click-through-to-link"},"sm":{"link_interaction":"no-interaction"} }'
-                  className="coh-link js-coh-menu-item-link"
-                  role="menuitem"
-                  tabIndex="0"
-                >
-                  Products
-                </span>
+              <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
+                <span>Products</span>
               </li>
-              <li
-                className="coh-menu-list-item level-1-menu-item js-coh-menu-item has-children is-collapsed"
-                role="presentation"
-                data-coh-settings='{"xl":"hidden"}'
-              >
-                <span
-                  data-coh-settings='{ "xl":{"link_interaction":"click-through-to-link"},"sm":{"link_interaction":"no-interaction"} }'
-                  className="coh-link js-coh-menu-item-link"
-                  role="menuitem"
-                  tabIndex="0"
-                >
-                  Systems
-                </span>
+              <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
+                <span>Systems</span>
               </li>
-              <li
-                className="coh-menu-list-item level-1-menu-item js-coh-menu-item has-children in-active-trail is-collapsed"
-                role="presentation"
-                data-coh-settings='{"xl":"hidden"}'
-                data-menu-levels-shown="0"
-              >
-                <span
-                  data-coh-settings='{ "xl":{"link_interaction":"click-through-to-link"},"sm":{"link_interaction":"no-interaction"} }'
-                  className="coh-link js-coh-menu-item-link"
-                  role="menuitem"
-                  tabIndex="0"
-                >
-                  Support
-                </span>
+              <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
+                <span>Support</span>
               </li>
-              <li
-                className="coh-menu-list-item level-1-menu-item js-coh-menu-item has-children is-collapsed"
-                role="presentation"
-                data-coh-settings='{"xl":"hidden"}'
-              >
-                <a
-                  href="#top"
-                  data-coh-settings='{ "xl":{"link_interaction":"click-through-to-link"},"sm":{"link_interaction":"no-interaction"} }'
-                  className="coh-link js-coh-menu-item-link"
-                  role="menuitem"
-                >
-                  Trade Solutions
-                </a>
+              <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
+                <span>Trade Solutions</span>
               </li>
             </ul>
           </div>
@@ -136,34 +91,20 @@ function Header() {
             <div className="coh-container utility-menu">
               <ul className="menu">
                 <li className="menu-item">
-                  <a href="#top" data-drupal-link-system-path="find-retailer">
-                    Find a Retailer
-                  </a>
+                  <a href="#top">Find a Retailer</a>
                 </li>
                 <li className="menu-item">
-                  <a
-                    href="#top"
-                    data-drupal-link-query='{"destination":"\/node\/631"}'
-                    data-drupal-link-system-path="account-login"
-                  >
-                    Product Registration
-                  </a>
+                  <a href="#top">Product Registration</a>
                 </li>
               </ul>
             </div>
             <div className="coh-container language-switcher">
               <div className="coh-block">
-                <div
-                  className="language-switcher-language-url settings-tray-editable"
-                  id="block-languageswitcher"
-                  data-drupal-settingstray="editable"
-                >
-                  <nav id="lnav" role="navigation" aria-label="Language menu">
+                <div className="language-switcher-language-url settings-tray-editable">
+                  <nav>
                     <ul className="lang-nav">
                       <li>
-                        <a href="#top">
-                          <span> US | EN </span>
-                        </a>
+                        <span href="#top">US | EN</span>
                       </li>
                     </ul>
                   </nav>
@@ -173,14 +114,14 @@ function Header() {
             <div className="coh-container user-account">
               <div className="coh-block">
                 <div className="usr-dropdown">
-                  <a
+                  <span
                     href="#top"
                     className="header-nav-utility aic-user-nav"
                     title="User menu"
                     aria-label="User menu"
                   >
                     <i className="t-icon t-icon-cart-xs-2"></i>
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>
