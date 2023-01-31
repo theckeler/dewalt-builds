@@ -419,7 +419,7 @@ const PaidMedia = () => {
                             Lorem ipsum dolor sit
                           </p>
                           <h2 class="coh-heading subtitle coh-style-h4---display">
-                            Nam vel enim ut eros aliquet congue sit amet ut nun
+                            Nam vel enim ut eros aliquet congue sit amet ut
                           </h2>
                           <div class="coh-container ssa-component coh-component ssa-component-instance-7e2a9262-deb3-4d3a-8927-581f26a0948e coh-component-instance-7e2a9262-deb3-4d3a-8927-581f26a0948e text-container coh-style-text">
                             <div
