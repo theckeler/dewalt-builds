@@ -5,17 +5,12 @@ function Footer() {
       <div
         className="coh-container ssa-component coh-component ssa-component-instance-c20fe9a0-6267-4067-b7d2-b58c68453935 coh-component-instance-c20fe9a0-6267-4067-b7d2-b58c68453935 coh-style-footer"
         id="footer"
-        data-menu-width=""
         data-select-theme="light-grey"
       >
         <div className="coh-container tagline-bar">
           <div className="coh-container coh-container-boxed">
             <div className="coh-block">
-              <div
-                id="block-taglinebarimageinfooter"
-                className="settings-tray-editable"
-                data-drupal-settingstray="editable"
-              >
+              <div className="settings-tray-editable">
                 <div>
                   <img
                     loading="lazy"
@@ -23,7 +18,6 @@ function Footer() {
                     width="327"
                     height="23"
                     alt="DEWALT GUARANTEED TOUGH"
-                    typeof="foaf:Image"
                   />
                 </div>
               </div>
@@ -33,10 +27,7 @@ function Footer() {
         <div className="coh-container footer-main">
           <div className="coh-container coh-container-boxed">
             <div className="coh-container menu-form-container">
-              <div
-                className="coh-row coh-row-xl coh-row-visible-xl"
-                data-coh-row-match-heights='{"xl":{"target":"none"}}'
-              >
+              <div className="coh-row coh-row-xl coh-row-visible-xl">
                 <div className="coh-row-inner coh-ce-a0192b1b-5cbe1723">
                   <div className="coh-column coh-hidden-sm coh-visible-xl coh-col-xl-6">
                     <div
@@ -45,227 +36,36 @@ function Footer() {
                     >
                       <ul className="menu">
                         <li className="menu-item menu-item--expanded">
-                          <span title="Products">Products</span>
+                          <span title="Products">Pellentesque consectetur</span>
                           <ul className="menu">
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Power Tools"
-                                data-drupal-link-system-path="taxonomy/term/576846"
-                              >
-                                Power Tools
-                              </a>
+                              <a href="#top">Morbi pretium</a>
                             </li>
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Hand Tools"
-                                data-drupal-link-system-path="taxonomy/term/575686"
-                              >
-                                Hand Tools
-                              </a>
+                              <a href="#top">Proin ante</a>
                             </li>
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="taxonomy/term/575706"
-                              >
-                                Accessories
-                              </a>
+                              <a href="#top">Proin semper</a>
                             </li>
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Outdoor"
-                                data-drupal-link-system-path="taxonomy/term/577041"
-                              >
-                                Outdoor
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="taxonomy/term/577101"
-                              >
-                                Workspace
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="taxonomy/term/576756"
-                              >
-                                Storage
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#top" target="_blank" rel="noopener">
-                                Anchors
-                              </a>
+                              <a href="#top">Sed pretium</a>
                             </li>
                           </ul>
                         </li>
                         <li className="menu-item menu-item--expanded">
-                          <span title="Systems">Systems</span>
+                          <span title="Systems">Proin semper</span>
                           <ul className="menu">
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/876"
-                              >
-                                Cordless Platforms
-                              </a>
+                              <a href="#top">Morbi pretium</a>
                             </li>
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Perform &amp; Protect"
-                                data-drupal-link-system-path="node/766"
-                              >
-                                Perform &amp; Protect
-                              </a>
+                              <a href="#top">Proin ante</a>
                             </li>
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Tool Connect"
-                                data-drupal-link-system-path="node/901"
-                              >
-                                Tool Connect
-                              </a>
+                              <a href="#top">Proin semper</a>
                             </li>
                             <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="See DEWALT Tough System"
-                                data-drupal-link-system-path="node/796"
-                              >
-                                ToughSystem® Storage
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#top" target="_blank" rel="noopener">
-                                Jobsite WiFi System
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#top" target="_blank" rel="noopener">
-                                MOBILELOCK™
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="menu-item menu-item--expanded menu-item--active-trail">
-                          <span title="Support">Support</span>
-                          <ul className="menu">
-                            <li className="menu-item menu-item--expanded menu-item--active-trail">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/736"
-                                className="is-active"
-                              >
-                                Support Information
-                              </a>
-                              <ul className="menu">
-                                <li className="menu-item">
-                                  <a
-                                    href="#top"
-                                    target="_blank"
-                                    data-drupal-link-system-path="node/59681"
-                                  >
-                                    Contact Us
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Find a Retailer"
-                                data-drupal-link-system-path="find-retailer"
-                              >
-                                Find a Retailer
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="service-center"
-                              >
-                                Service Centers
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="Product Registration"
-                                data-drupal-link-query='{"destination":"\/node\/631"}'
-                                data-drupal-link-system-path="account-login"
-                              >
-                                Product Registration
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/2306"
-                              >
-                                Warranty Information
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="menu-item menu-item--expanded">
-                          <span title="DEWALT">About</span>
-                          <ul className="menu">
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                title="About Us"
-                                data-drupal-link-system-path="node/811"
-                              >
-                                Why DEWALT
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/871"
-                              >
-                                Events
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/2601"
-                              >
-                                Awards
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/891"
-                              >
-                                Featured Articles
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/2641"
-                              >
-                                News &amp; Press
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a
-                                href="#top"
-                                data-drupal-link-system-path="node/2316"
-                              >
-                                The Tough Get Tougher
-                              </a>
+                              <a href="#top">Sed pretium</a>
                             </li>
                           </ul>
                         </li>
