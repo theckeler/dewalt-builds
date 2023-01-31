@@ -236,7 +236,14 @@ const PaidMedia = () => {
                                             >
                                               Contact a dealer in your area.
                                             </h2>
-                                            <p style={{ textAlign: "center" }}>
+                                            <p
+                                              style={{
+                                                textAlign: "center",
+                                                maxWidth: "600px",
+                                                marginLeft: "auto",
+                                                marginRight: "auto",
+                                              }}
+                                            >
                                               There are two options available to
                                               you on dewalt.com in order to
                                               provide seamless access of DeWalt
