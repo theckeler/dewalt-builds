@@ -15,7 +15,7 @@ function Header() {
           ></button>
           <div className="coh-container header-main-logo">
             <div className="coh-block">
-              <a href="#top">
+              <a href="/">
                 <img
                   src="https://www.dewalt.com/sites/g/files/xnuzat961/files/dewalt_black%402x.png"
                   alt="Home"
