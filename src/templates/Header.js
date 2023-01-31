@@ -74,16 +74,16 @@ function Header() {
               role="menu"
             >
               <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
-                <span>Products</span>
+                <span>Curabitur</span>
               </li>
               <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
-                <span>Systems</span>
+                <span>Nunc gravida</span>
               </li>
               <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
-                <span>Support</span>
+                <span>Duis mattis</span>
               </li>
               <li className="coh-menu-list-item level-1-menu-item js-coh-menu-item">
-                <span>Trade Solutions</span>
+                <span>Suspendisse</span>
               </li>
             </ul>
           </div>
