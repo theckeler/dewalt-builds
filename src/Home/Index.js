@@ -10,7 +10,6 @@ const HomeIndex = () => {
   return (
     <Routes>
       <Route index path="/" element={<Home />} />
-      <Route index path="/paas-cal" element={<PaasCal />} />
       <Route index path="/paid-media" element={<PaidMedia />} />
     </Routes>
   );
